@@ -1,0 +1,227 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/@generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Organization {
+  id Int @id @default(1)
+  name String
+  description String?
+  image String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model User {
+  id            String    @id
+  name          String
+  email         String
+  emailVerified Boolean   @default(false)
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  sessions      Session[]
+  accounts      Account[]
+
+  assignments        Assignment[]
+  assignmentStatuses AssignmentStatus[]
+
+  reportedLogs    FundContributionLog[] @relation("ReporterLogs")
+  contributedLogs FundContributionLog[] @relation("ContributorLogs")
+
+  galleryPosts     GalleryPost[]
+  galleryReactions GalleryPostReaction[]
+
+  phoneNumber         String?
+  phoneNumberVerified Boolean?
+  role                String?
+  banned              Boolean?  @default(false)
+  banReason           String?
+  banExpires          DateTime?
+  birthday            DateTime?
+
+  @@unique([email])
+  @@map("user")
+  @@unique([phoneNumber])
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  impersonatedBy String?
+
+  @@unique([token])
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
+}
+
+model Subject {
+  id   String @id @default(cuid())
+  name String
+
+  // schedules SubjectSchedule[]
+  assignments Assignment[]
+  createdAt   DateTime     @default(now())
+  @@unique([name])
+}
+
+model SubjectSchedule {
+  id String @id @default(cuid())
+  // i'll add this later
+}
+
+model Assignment {
+  id        String @id @default(cuid())
+  subjectId String
+  createdBy String
+
+  user    User    @relation(fields: [createdBy], references: [id], onDelete: Cascade)
+  subject Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  assignmentStatuses AssignmentStatus[]
+
+  title       String
+  description String?
+  dueDate     DateTime
+  createdAt   DateTime @default(now())
+}
+
+model AssignmentStatus {
+  id           String @id @default(uuid())
+  userId       String
+  assignmentId String
+
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  assignment Assignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  done       Boolean    @default(false)
+  createdAt  DateTime   @default(now())
+
+  @@unique([assignmentId, userId])
+}
+
+model Fund {
+  id               Int                   @id @default(1)
+  totalAmount      Float                 @default(0)
+  currency         String               @default("idr")
+  contributionLogs FundContributionLog[]
+}
+
+model FundContributionLog {
+  id            String @id @default(uuid())
+  reporterId    String
+  contributorId String
+  fundId        Int    @default(1)
+  fund          Fund   @relation(fields: [fundId], references: [id], onDelete: Cascade)
+  reporter      User   @relation("ReporterLogs", fields: [reporterId], references: [id], onDelete: Cascade)
+  contributor   User   @relation("ContributorLogs", fields: [contributorId], references: [id], onDelete: Cascade)
+
+  currency String @default("idr")
+  amount    Float
+  note      String?
+  createdAt DateTime @default(now())
+}
+
+enum MediaType {
+  video
+  image
+}
+
+model GalleryPost {
+  id          String @id @default(cuid())
+  userId String
+  createdBy   User   @relation(fields: [userId], references: [id])
+
+  reactions GalleryPostReaction[]
+  
+  mediaKey String @unique
+
+  type      MediaType
+  
+  createdAt DateTime  @default(now())
+  @@index([createdAt])
+}
+
+
+model GalleryPostReaction {
+  id        String   @id @default(cuid())
+  post     GalleryPost  @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId   String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  emoji     String
+  createdAt DateTime @default(now())
+  @@unique([postId, userId])
+  @@index([postId])
+}
+
+model Duty {
+  id    String @id @default(cuid())
+  title String
+  // i'll add this later
+
+  createdAt DateTime @default(now())
+}
+
+model DutySchedule {
+  id String @id @default(cuid())
+}
+
+model Settings {
+  id Int @id @default(1)
+
+  ENABLE_WHATSAPP_BOT_FUND_REPORT               Boolean @default(true)
+  ENABLE_WHATSAPP_BOT_DUTY_REPORT               Boolean @default(true)
+  ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER Boolean @default(true)
+  ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER         Boolean @default(true)
+}

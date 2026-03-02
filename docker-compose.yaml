@@ -1,0 +1,35 @@
+services:
+  redis:
+    image: redis:7.2
+    container_name: redis
+    command: >
+      redis-server
+      --bind 0.0.0.0
+      --port 6379
+      --maxmemory 1gb
+      --maxmemory-policy noeviction
+    ports:
+      - "6379:6379"
+  minio:
+    image: minio/minio
+    environment:
+      - MINIO_ROOT_USER=minioAccessKey
+      - MINIO_ROOT_PASSWORD=minioSecretKey
+    command: [ "server", "--console-address", ":9001", "/data" ]
+    volumes:
+      - ./data/minio:/data:z
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+
+  createbuckets:
+    image: minio/mc
+    depends_on:
+      - minio
+    entrypoint: >
+      /bin/sh -c "
+      sleep 5;
+      /usr/bin/mc alias set dockerminio http://minio:9000 minioAccessKey minioSecretKey;
+      /usr/bin/mc mb dockerminio/rotom-development || true;
+      exit 0;
+      "
