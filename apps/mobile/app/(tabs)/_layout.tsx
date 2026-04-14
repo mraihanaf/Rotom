@@ -1,82 +1,144 @@
-import { Tabs } from 'expo-router';
-import { LayoutDashboard, Calendar, Wallet, ListTodo, Image as ImageIcon } from 'lucide-react-native';
-import { useUniwind } from 'uniwind';
-import { NAV_THEME } from '@/lib/theme';
-import { Image } from 'react-native';
+import { Tabs, usePathname, useNavigation } from 'expo-router';
+import {
+  Calendar,
+  ClipboardList,
+  Image,
+  LayoutGrid,
+  User,
+  Wallet,
+} from 'lucide-react-native';
+import { View } from 'react-native';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+import { runOnJS } from 'react-native-reanimated';
+import { TabAnimationProvider, useTabAnimation } from '@/lib/animation/TabAnimationContext';
 
-export default function TabsLayout() {
-  const { theme } = useUniwind();
-  const colors = NAV_THEME[theme ?? 'light'].colors;
+const TAB_ORDER = ['index', 'assignments', 'schedule', 'funds', 'gallery', 'profile'];
+
+function useSwipeNavigation() {
+  const pathname = usePathname();
+  const navigation = useNavigation();
+  const { triggerNavigation } = useTabAnimation();
+
+  const navigateToTab = (direction: 'next' | 'prev') => {
+    const currentTab = pathname.split('/').pop() || 'index';
+    const currentIndex = TAB_ORDER.indexOf(currentTab);
+
+    if (currentIndex === -1) return;
+
+    const newIndex = direction === 'next'
+      ? Math.min(currentIndex + 1, TAB_ORDER.length - 1)
+      : Math.max(currentIndex - 1, 0);
+
+    if (newIndex !== currentIndex) {
+      const targetTab = TAB_ORDER[newIndex];
+      triggerNavigation(direction, () => {
+        (navigation as any).navigate('(tabs)', { screen: targetTab });
+      });
+    }
+  };
+
+  const swipeGesture = Gesture.Pan()
+    .activeOffsetX([-20, 20])
+    .activeOffsetY([-100, 100])
+    .onEnd((event) => {
+      const { translationX, velocityX } = event;
+
+      // Swipe left (negative X) -> go to NEXT tab
+      if (translationX < -50 || velocityX < -500) {
+        runOnJS(navigateToTab)('next');
+      }
+      // Swipe right (positive X) -> go to PREVIOUS tab
+      else if (translationX > 50 || velocityX > 500) {
+        runOnJS(navigateToTab)('prev');
+      }
+    });
+
+  return swipeGesture;
+}
+
+function TabsLayoutContent() {
+  const swipeGesture = useSwipeNavigation();
 
   return (
-    <Tabs
-      screenOptions={{
-        headerShown: false,
-        tabBarActiveTintColor: colors.primary,
-        tabBarInactiveTintColor: colors.text,
-        tabBarStyle: {
-          backgroundColor: colors.background,
-          borderTopColor: colors.border,
-          height: 60,
-          paddingBottom: 8,
-          paddingTop: 4,
-        },
-        tabBarLabelStyle: {
-          fontSize: 10,
-          fontWeight: '500',
-        },
-        tabBarIconStyle: {
-          marginBottom: -2,
-        },
-      }}
-    >
+    <GestureDetector gesture={swipeGesture}>
+      <View style={{ flex: 1 }}>
+        <Tabs
+          initialRouteName="index"
+          screenOptions={{
+            headerShown: false,
+            tabBarActiveTintColor: '#0fae43',
+            tabBarInactiveTintColor: '#9ca3af',
+            tabBarStyle: {
+              backgroundColor: '#ffffff',
+              borderTopWidth: 1,
+              borderTopColor: '#e5e7eb',
+            },
+          }}
+        >
       <Tabs.Screen
         name="index"
         options={{
           title: 'Utama',
-          tabBarIcon: ({ color }) => <LayoutDashboard size={22} color={color} />,
+          tabBarIcon: ({ color, size }: { color: string; size: number }) => (
+            <LayoutGrid size={size} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
         name="assignments"
         options={{
           title: 'Tugas',
-          tabBarIcon: ({ color }) => <ListTodo size={22} color={color} />,
+          tabBarIcon: ({ color, size }: { color: string; size: number }) => (
+            <ClipboardList size={size} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
         name="schedule"
         options={{
           title: 'Jadwal',
-          tabBarIcon: ({ color }) => <Calendar size={22} color={color} />,
+          tabBarIcon: ({ color, size }: { color: string; size: number }) => (
+            <Calendar size={size} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
         name="funds"
         options={{
           title: 'Kas',
-          tabBarIcon: ({ color }) => <Wallet size={22} color={color} />,
+          tabBarIcon: ({ color, size }: { color: string; size: number }) => (
+            <Wallet size={size} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
         name="gallery"
         options={{
           title: 'Gallery',
-          tabBarIcon: ({ color }) => <ImageIcon size={22} color={color} />,
+          tabBarIcon: ({ color, size }: { color: string; size: number }) => (
+            <Image size={size} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
         name="profile"
         options={{
           title: 'Profil',
-          tabBarIcon: ({ color, focused }) => (
-            <Image
-              source={{ uri: 'https://i.pravatar.cc/100?u=profil' }}
-              style={{ width: 24, height: 24, borderRadius: 12, borderWidth: focused ? 2 : 0, borderColor: color }}
-            />
+          tabBarIcon: ({ color, size }: { color: string; size: number }) => (
+            <User size={size} color={color} />
           ),
         }}
       />
-    </Tabs>
+        </Tabs>
+      </View>
+    </GestureDetector>
+  );
+}
+
+export default function TabsLayout() {
+  return (
+    <TabAnimationProvider>
+      <TabsLayoutContent />
+    </TabAnimationProvider>
   );
 }

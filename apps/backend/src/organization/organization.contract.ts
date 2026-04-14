@@ -1,7 +1,7 @@
 import { oc } from '@orpc/contract';
 import {
   getOrganizationSchema,
-  updateOrganizationINputSchema,
+  updateOrganizationInputSchema,
   updateOrganizationLogoInputSchema,
 } from './organization.schema';
 
@@ -19,7 +19,7 @@ const updateOrganization = oc
     method: 'PUT',
     tags: ['Organization'],
   })
-  .input(updateOrganizationINputSchema);
+  .input(updateOrganizationInputSchema);
 
 const updateOrganizationLogo = oc
   .route({

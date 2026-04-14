@@ -1,5 +1,5 @@
 import { oc } from '@orpc/contract';
-import { profileSchema } from './profile.schema';
+import { completeProfileInputSchema, profileSchema, updateProfileInputSchema } from './profile.schema';
 
 const getMe = oc
   .route({
@@ -9,6 +9,25 @@ const getMe = oc
   })
   .output(profileSchema);
 
-export const profilesContract = oc.router({
+const completeProfile = oc
+  .route({
+    path: '/profiles/complete',
+    method: 'POST',
+    tags: ['Profile'],
+  })
+  .input(completeProfileInputSchema);
+
+const updateProfile = oc
+  .route({
+    path: '/profiles/update',
+    method: 'PUT',
+    tags: ['Profile'],
+  })
+  .input(updateProfileInputSchema)
+  .output(profileSchema);
+
+export const profilesContract = {
   getMe,
-});
+  completeProfile,
+  updateProfile,
+};

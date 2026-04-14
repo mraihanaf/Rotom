@@ -5,6 +5,7 @@ import { contract } from 'src/contract';
 import { role } from 'src/common/middleware/role';
 import { ROLES } from 'src/common/enum';
 import { protectedRoute } from 'src/common/middleware/protectedRoute';
+import { requireCompleteProfile } from 'src/common/middleware/requireCompleteProfile';
 
 @Controller()
 export class DutiesController {
@@ -14,6 +15,7 @@ export class DutiesController {
   createDuty() {
     return implement(contract.duty.createDuty)
       .use(role([ROLES.ADMIN]))
+      .use(requireCompleteProfile)
       .handler(async ({ input }) => {
         await this.dutiesService.createDuty(input);
       });
@@ -23,6 +25,7 @@ export class DutiesController {
   updateDuty() {
     return implement(contract.duty.updateDuty)
       .use(role([ROLES.ADMIN]))
+      .use(requireCompleteProfile)
       .handler(async ({ input }) => {
         await this.dutiesService.updateDuty(input);
       });
@@ -32,6 +35,7 @@ export class DutiesController {
   deleteDutyById() {
     return implement(contract.duty.deleteDutyById)
       .use(role([ROLES.ADMIN]))
+      .use(requireCompleteProfile)
       .handler(async ({ input }) => {
         await this.dutiesService.deleteDutyById(input.id);
       });
@@ -41,6 +45,7 @@ export class DutiesController {
   getAllDuties() {
     return implement(contract.duty.getAllDuties)
       .use(protectedRoute)
+      .use(requireCompleteProfile)
       .handler(async () => {
         const duties = await this.dutiesService.getAllDuties();
         return duties;

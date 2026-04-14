@@ -4,6 +4,7 @@ import { role } from 'src/common/middleware/role';
 import { contract } from 'src/contract';
 import { FundsService } from './funds.service';
 import { protectedRoute } from 'src/common/middleware/protectedRoute';
+import { requireCompleteProfile } from 'src/common/middleware/requireCompleteProfile';
 import { ROLES } from 'src/common/enum';
 
 @Controller()
@@ -14,6 +15,7 @@ export class FundsController {
   getFund() {
     return implement(contract.funds.getFund)
       .use(protectedRoute)
+      .use(requireCompleteProfile)
       .handler(async () => {
         const { totalAmount, currency } = await this.fundsService.getFund();
         return {
@@ -27,12 +29,14 @@ export class FundsController {
   createContribution() {
     return implement(contract.funds.createContribution)
       .use(role([ROLES.MAINTAINER, ROLES.ADMIN]))
+      .use(requireCompleteProfile)
       .handler(async ({ input, context }) => {
         await this.fundsService.createContribution({
           userContributorId: input.userContributorId,
           userReporterId: context.session?.user.id ?? '',
           amount: input.amount,
           note: input.note,
+          type: input.type,
         });
       });
   }
@@ -41,6 +45,7 @@ export class FundsController {
   deleteContributionById() {
     return implement(contract.funds.deleteContributionById)
       .use(role([ROLES.MAINTAINER, ROLES.ADMIN]))
+      .use(requireCompleteProfile)
       .handler(async ({ input }) => {
         await this.fundsService.deleteContributionById(input.id);
       });
@@ -50,6 +55,7 @@ export class FundsController {
   getContributions() {
     return implement(contract.funds.getAllContributions)
       .use(protectedRoute)
+      .use(requireCompleteProfile)
       .handler(async ({ input }) => {
         const contributions =
           await this.fundsService.getAllContributions(input);

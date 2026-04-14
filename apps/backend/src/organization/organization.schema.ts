@@ -10,7 +10,7 @@ export const OrganizationSchema = z.object({
 
 export const getOrganizationSchema = OrganizationSchema;
 
-export const updateOrganizationINputSchema = z.object({
+export const updateOrganizationInputSchema = z.object({
   name: z.string().nullable().optional(),
   description: z.string().nullable().optional(),
 });

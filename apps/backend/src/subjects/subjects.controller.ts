@@ -2,6 +2,7 @@ import { Controller } from '@nestjs/common';
 import { Implement, implement } from '@orpc/nest';
 import { ROLES } from 'src/common/enum';
 import { protectedRoute } from 'src/common/middleware/protectedRoute';
+import { requireCompleteProfile } from 'src/common/middleware/requireCompleteProfile';
 import { role } from 'src/common/middleware/role';
 import { contract } from 'src/contract';
 import { SubjectsService } from './subjects.service';
@@ -14,6 +15,7 @@ export class SubjectsController {
   getAll() {
     return implement(contract.subjectMaterials.getAll)
       .use(protectedRoute)
+      .use(requireCompleteProfile)
       .handler(async ({ input }) => {
         return await this.subjectsService.getAllSubjects(input);
       });
@@ -23,6 +25,7 @@ export class SubjectsController {
   updateById() {
     return implement(contract.subjectMaterials.updateById)
       .use(role([ROLES.ADMIN]))
+      .use(requireCompleteProfile)
       .handler(async ({ input }) => {
         await this.subjectsService.updateSubjectById(input);
       });
@@ -32,6 +35,7 @@ export class SubjectsController {
   create() {
     return implement(contract.subjectMaterials.create)
       .use(role([ROLES.ADMIN]))
+      .use(requireCompleteProfile)
       .handler(async ({ input }) => {
         await this.subjectsService.createSubject(input.name);
       });
@@ -41,6 +45,7 @@ export class SubjectsController {
   deleteById() {
     return implement(contract.subjectMaterials.deleteById)
       .use(role([ROLES.ADMIN]))
+      .use(requireCompleteProfile)
       .handler(async ({ input }) => {
         await this.subjectsService.deleteSubjectById(input.id);
       });

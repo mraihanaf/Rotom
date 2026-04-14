@@ -1,11 +1,11 @@
 import { ORPCGlobalContext } from '@orpc/nest';
 import { ORPCError, os } from '@orpc/server';
-import { auth } from 'src/auth/auth';
+import { getAuthInstance } from 'src/auth/auth';
 
 export const protectedRoute = os
   .$context<ORPCGlobalContext>()
   .middleware(async ({ context, next }) => {
-    const session = await auth.api.getSession({
+    const session = await getAuthInstance().api.getSession({
       headers: context.request.headers,
     });
     if (!session) throw new ORPCError('UNAUTHORIZED');

@@ -46,6 +46,7 @@ model User {
   phoneNumber         String?
   phoneNumberVerified Boolean?
   role                String?
+  isProfileComplete   Boolean   @default(false)
   banned              Boolean?  @default(false)
   banReason           String?
   banExpires          DateTime?
@@ -110,15 +111,27 @@ model Subject {
   id   String @id @default(cuid())
   name String
 
-  // schedules SubjectSchedule[]
+  schedules   SubjectSchedule[]
   assignments Assignment[]
   createdAt   DateTime     @default(now())
   @@unique([name])
 }
 
 model SubjectSchedule {
-  id String @id @default(cuid())
-  // i'll add this later
+  id        String  @id @default(cuid())
+  subjectId String
+  subject   Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  dayOfWeek Int     // 0=Sunday .. 6=Saturday
+  startTime String  // "08:00"
+  endTime   String  // "09:30"
+  room      String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([subjectId])
+  @@index([dayOfWeek])
 }
 
 model Assignment {
@@ -135,6 +148,9 @@ model Assignment {
   description String?
   dueDate     DateTime
   createdAt   DateTime @default(now())
+
+  @@index([subjectId])
+  @@index([createdBy])
 }
 
 model AssignmentStatus {
@@ -158,18 +174,28 @@ model Fund {
 }
 
 model FundContributionLog {
-  id            String @id @default(uuid())
+  id            String  @id @default(uuid())
   reporterId    String
-  contributorId String
-  fundId        Int    @default(1)
-  fund          Fund   @relation(fields: [fundId], references: [id], onDelete: Cascade)
-  reporter      User   @relation("ReporterLogs", fields: [reporterId], references: [id], onDelete: Cascade)
-  contributor   User   @relation("ContributorLogs", fields: [contributorId], references: [id], onDelete: Cascade)
+  contributorId String?
+  fundId        Int     @default(1)
+  fund          Fund    @relation(fields: [fundId], references: [id], onDelete: Cascade)
+  reporter      User    @relation("ReporterLogs", fields: [reporterId], references: [id], onDelete: Cascade)
+  contributor   User?   @relation("ContributorLogs", fields: [contributorId], references: [id], onDelete: Cascade)
 
-  currency String @default("idr")
-  amount    Float
-  note      String?
-  createdAt DateTime @default(now())
+  currency String              @default("idr")
+  amount   Float
+  note     String?
+  type     FundTransactionType @default(INCOME)
+  createdAt DateTime            @default(now())
+
+  @@index([reporterId])
+  @@index([contributorId])
+  @@index([type])
+}
+
+enum FundTransactionType {
+  INCOME
+  EXPENSE
 }
 
 enum MediaType {
@@ -189,6 +215,7 @@ model GalleryPost {
   type      MediaType
   
   createdAt DateTime  @default(now())
+  @@index([userId])
   @@index([createdAt])
 }
 

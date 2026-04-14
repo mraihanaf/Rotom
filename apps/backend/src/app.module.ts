@@ -1,7 +1,5 @@
-import { Module } from '@nestjs/common';
-import { ReferenceController } from './reference/reference.controller';
+import { Logger, Module } from '@nestjs/common';
 import { AuthController } from './auth/auth.controller';
-import { ReferenceService } from './reference/reference.service';
 import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './auth/auth.module';
 import { ReferenceModule } from './reference/reference.module';
@@ -19,10 +17,12 @@ import { GalleryModule } from './gallery/gallery.module';
 import { DutiesModule } from './duties/duties.module';
 import { FundsModule } from './funds/funds.module';
 import { AssignmentsModule } from './assignments/assignments.module';
-import { auth } from './auth/auth';
+import type { AuthInstance } from './auth/auth';
 import { StorageModule } from './storage/storage.module';
 import { BullModule } from '@nestjs/bullmq';
 import { OrganizationModule } from './organization/organization.module';
+import { SchedulesModule } from './schedules/schedules.module';
+import { UsersModule } from './users/users.module';
 
 declare module '@orpc/nest' {
   /**
@@ -30,7 +30,7 @@ declare module '@orpc/nest' {
    */
   interface ORPCGlobalContext {
     request: Request;
-    session?: Awaited<ReturnType<typeof auth.api.getSession>>;
+    session?: Awaited<ReturnType<AuthInstance['api']['getSession']>>;
   }
 }
 
@@ -48,7 +48,7 @@ declare module '@orpc/nest' {
       useFactory: (request: Request) => ({
         interceptors: [
           onError((error) => {
-            console.error(error);
+            new Logger('oRPC').error(error);
           }),
         ],
         context: {
@@ -93,13 +93,14 @@ declare module '@orpc/nest' {
     StorageModule,
 
     OrganizationModule,
+
+    SchedulesModule,
+
+    UsersModule,
   ],
   controllers: [
-    ...(process.env.NODE_ENV === 'development' ? [ReferenceController] : []),
     AuthController,
   ],
-  providers: [
-    ReferenceService,
-  ],
+  providers: [],
 })
 export class AppModule {}

@@ -3,6 +3,7 @@ import { Implement, implement, ORPCError } from '@orpc/nest';
 import { contract } from 'src/contract';
 import { AssignmentsService } from './assignments.service';
 import { protectedRoute } from 'src/common/middleware/protectedRoute';
+import { requireCompleteProfile } from 'src/common/middleware/requireCompleteProfile';
 import { role } from 'src/common/middleware/role';
 import { ROLES } from 'src/common/enum';
 
@@ -14,6 +15,7 @@ export class AssignmentsController {
   markAssignment() {
     return implement(contract.assignments.markAssignment)
       .use(protectedRoute)
+      .use(requireCompleteProfile)
       .handler(async ({ input, context }) => {
         await this.assignmentsService.markAssignment({
           assignmentId: input.id,
@@ -26,6 +28,7 @@ export class AssignmentsController {
   unmarkAssignment() {
     return implement(contract.assignments.unmarkAssignment)
       .use(protectedRoute)
+      .use(requireCompleteProfile)
       .handler(async ({ input, context }) => {
         await this.assignmentsService.unmarkAssignment({
           assignmentId: input.id,
@@ -38,6 +41,7 @@ export class AssignmentsController {
   createAssignment() {
     return implement(contract.assignments.createAssignment)
       .use(role([ROLES.MENTOR, ROLES.ADMIN]))
+      .use(requireCompleteProfile)
       .handler(async ({ input, context }) => {
         await this.assignmentsService.createAssignment({
           ...input,
@@ -50,6 +54,7 @@ export class AssignmentsController {
   deleteAssignment() {
     return implement(contract.assignments.deleteAssignment)
       .use(role([ROLES.MENTOR, ROLES.ADMIN]))
+      .use(requireCompleteProfile)
       .handler(async ({ input, context }) => {
         const assignment = await this.assignmentsService.getAssignmentById(
           input.id,
@@ -70,6 +75,7 @@ export class AssignmentsController {
   updateAssignment() {
     return implement(contract.assignments.updateAssignment)
       .use(role([ROLES.ADMIN, ROLES.MAINTAINER]))
+      .use(requireCompleteProfile)
       .handler(async ({ input, context }) => {
         const assignment = await this.assignmentsService.getAssignmentById(
           input.id,
@@ -90,6 +96,7 @@ export class AssignmentsController {
   getAllAssignments() {
     return implement(contract.assignments.getAllAssignments)
       .use(protectedRoute)
+      .use(requireCompleteProfile)
       .handler(async ({ input, context }) => {
         const assignments = await this.assignmentsService.getAllAssignments({
           ...input,

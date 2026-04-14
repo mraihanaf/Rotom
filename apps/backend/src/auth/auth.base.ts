@@ -27,6 +27,10 @@ export function createAuthBaseConfig(overrides?: AuthBaseOverrides) {
         birthday: {
           type: 'date',
         },
+        isProfileComplete: {
+          type: 'boolean',
+          defaultValue: false,
+        },
       },
     },
 

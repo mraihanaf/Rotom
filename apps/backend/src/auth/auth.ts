@@ -1,12 +1,19 @@
 import { betterAuth } from 'better-auth';
-import { prismaAdapter, PrismaConfig } from 'better-auth/adapters/prisma';
-import { PrismaService } from '../prisma/prisma.service';
 import { createAuthBaseConfig } from './auth.base';
 
-const prisma = new PrismaService();
-const baseConfig = createAuthBaseConfig();
+type AuthConfig = ReturnType<typeof createAuthBaseConfig>;
 
-export const auth = betterAuth({
-  ...baseConfig,
-  database: prismaAdapter(prisma, baseConfig.database as PrismaConfig),
-});
+export type AuthInstance = ReturnType<typeof betterAuth<AuthConfig>>;
+
+let _auth: AuthInstance | null = null;
+
+export function setAuthInstance(instance: AuthInstance) {
+  _auth = instance;
+}
+
+export function getAuthInstance(): AuthInstance {
+  if (!_auth) {
+    throw new Error('Auth instance not initialized. Ensure AuthModule has been loaded.');
+  }
+  return _auth;
+}

@@ -1,23 +1,38 @@
-import { Text } from '@/components/ui/text';
 import { authClient } from '@/lib/auth-client';
-import { Redirect } from 'expo-router';
+import { router } from 'expo-router';
+import { useEffect, useRef } from 'react';
 import { View, ActivityIndicator } from 'react-native';
 
 export default function IndexScreen() {
-  // const { data: session, isPending } = authClient.useSession();
+  const { data: session, isPending } = authClient.useSession();
+  const hasNavigated = useRef(false);
 
-  // if (isPending) {
-  //   return (
-  //     <View className="flex-1 items-center justify-center bg-[#f6f8f6]">
-  //       <ActivityIndicator size="large" color="#13ec5b" />
-  //       <Text className="text-sm text-slate-500 mt-3">Loading...</Text>
-  //     </View>
-  //   );
-  // }
+  useEffect(() => {
+    console.log('[Index] Session state:', { isPending, hasSession: !!session, isProfileComplete: session?.user?.isProfileComplete });
 
-  // if (session) {
-  //   return <Redirect href="/(tabs)" />;
-  // }
+    if (isPending) return;
+    if (hasNavigated.current) return;
 
-  return <Redirect href="/auth/login" />;
+    if (session) {
+      hasNavigated.current = true;
+      if (!session.user.isProfileComplete) {
+        console.log('[Index] Navigating to complete-profile');
+        router.replace('/auth/complete-profile' as import('expo-router').Href);
+      } else {
+        console.log('[Index] Navigating to tabs');
+        router.replace('/(tabs)' as import('expo-router').Href);
+      }
+    } else {
+      hasNavigated.current = true;
+      console.log('[Index] Navigating to login');
+      router.replace('/auth/login' as import('expo-router').Href);
+    }
+  }, [session, isPending]);
+
+  // Always render a loading spinner — navigation happens imperatively above
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#f6f8f6' }}>
+      <ActivityIndicator size="large" color="#13ec5b" />
+    </View>
+  );
 }

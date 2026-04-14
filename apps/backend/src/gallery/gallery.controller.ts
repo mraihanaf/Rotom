@@ -1,6 +1,7 @@
 import { Controller } from '@nestjs/common';
 import { Implement, implement } from '@orpc/nest';
 import { protectedRoute } from 'src/common/middleware/protectedRoute';
+import { requireCompleteProfile } from 'src/common/middleware/requireCompleteProfile';
 import { contract } from 'src/contract';
 import { GalleryService } from './gallery.service';
 import { ROLES } from 'src/common/enum';
@@ -13,6 +14,7 @@ export class GalleryController {
   getAllPosts() {
     return implement(contract.gallery.getAllPosts)
       .use(protectedRoute)
+      .use(requireCompleteProfile)
       .handler(async ({ input, context }) => {
         return await this.galleryService.getAllPosts({
           ...input,
@@ -25,6 +27,7 @@ export class GalleryController {
   getPostUserReaction() {
     return implement(contract.gallery.getPostUserReactions)
       .use(protectedRoute)
+      .use(requireCompleteProfile)
       .handler(async ({ input }) => {
         return await this.galleryService.getPostUserReactions(input);
       });
@@ -34,6 +37,7 @@ export class GalleryController {
   createPost() {
     return implement(contract.gallery.createPost)
       .use(protectedRoute)
+      .use(requireCompleteProfile)
       .handler(async ({ input, context }) => {
         await this.galleryService.createPost({
           file: input,
@@ -46,6 +50,7 @@ export class GalleryController {
   reactPostById() {
     return implement(contract.gallery.reactPostById)
       .use(protectedRoute)
+      .use(requireCompleteProfile)
       .handler(async ({ input, context }) => {
         await this.galleryService.upsertPostReaction({
           ...input,
@@ -58,6 +63,7 @@ export class GalleryController {
   deleteReactionByPostId() {
     return implement(contract.gallery.deleteReactionByPostId)
       .use(protectedRoute)
+      .use(requireCompleteProfile)
       .handler(async ({ input, context }) => {
         await this.galleryService.deletePostReaction({
           ...input,
@@ -70,6 +76,7 @@ export class GalleryController {
   deletePostById() {
     return implement(contract.gallery.deletePostById)
       .use(protectedRoute)
+      .use(requireCompleteProfile)
       .handler(async ({ input, context }) => {
         await this.galleryService.deletePostById({
           ...input,

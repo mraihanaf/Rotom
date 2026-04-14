@@ -7,10 +7,11 @@ import {
 import { PrismaService } from 'src/prisma/prisma.service';
 
 interface IAddFundContribution {
-  userContributorId: string;
+  userContributorId: string | null | undefined;
   userReporterId: string;
   amount: number;
   note: string | null;
+  type: 'INCOME' | 'EXPENSE';
 }
 
 @Injectable()
@@ -19,8 +20,8 @@ export class FundsService {
 
   async createContribution(input: IAddFundContribution) {
     return this.prismaService.$transaction(async (tx) => {
-      const contributorId =
-        input.userContributorId?.trim() || input.userReporterId;
+      // For EXPENSE, if no contributor provided, use the reporter
+      const contributorId = input.userContributorId?.trim() || input.userReporterId;
 
       const reporterExists = await tx.user.count({
         where: { id: input.userReporterId },
@@ -32,7 +33,8 @@ export class FundsService {
         });
       }
 
-      if (contributorId !== input.userReporterId) {
+      // Validate contributor exists (skip if null - will use reporter as fallback)
+      if (contributorId && contributorId !== input.userReporterId) {
         const contributorExists = await tx.user.count({
           where: { id: contributorId },
         });
@@ -61,14 +63,16 @@ export class FundsService {
           reporterId: input.userReporterId,
           note: input.note,
           currency: fund.currency,
+          type: input.type,
         },
       });
 
+      const amountChange = input.type === 'INCOME' ? input.amount : -input.amount;
       await tx.fund.update({
         where: { id: 1 },
         data: {
           totalAmount: {
-            increment: input.amount,
+            increment: amountChange,
           },
         },
       });
@@ -115,6 +119,7 @@ export class FundsService {
       currency: contribution.currency,
       amount: contribution.amount,
       note: contribution.note,
+      type: contribution.type,
       createdAt: contribution.createdAt,
       contributor: contribution.contributor,
       reporter: contribution.reporter,
@@ -144,11 +149,12 @@ export class FundsService {
         throw new ORPCError('NOT_FOUND');
       }
 
+      const amountChange = contribution.type === 'INCOME' ? -contribution.amount : contribution.amount;
       await tx.fund.update({
         where: { id: 1 },
         data: {
           totalAmount: {
-            decrement: contribution.amount,
+            increment: amountChange,
           },
         },
       });

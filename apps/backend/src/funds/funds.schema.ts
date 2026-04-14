@@ -1,14 +1,17 @@
 import z from 'zod';
 
+export const transactionTypeSchema = z.enum(['INCOME', 'EXPENSE']);
+
 export const fundSchema = z.object({
   totalAmount: z.number(),
   currency: z.string(),
 });
 
 export const createFundContributionInputSchema = z.object({
-  userContributorId: z.string(),
+  userContributorId: z.string().nullable().optional(),
   amount: z.number(),
   note: z.string().nullable(),
+  type: transactionTypeSchema.default('INCOME'),
 });
 
 export const contributionSchema = z.object({
@@ -17,7 +20,7 @@ export const contributionSchema = z.object({
     id: z.string(),
     name: z.string(),
     image: z.string().nullable(),
-  }),
+  }).nullable(),
   reporter: z.object({
     id: z.string(),
     name: z.string(),
@@ -25,6 +28,7 @@ export const contributionSchema = z.object({
   }),
   amount: z.number(),
   note: z.string().nullable(),
+  type: transactionTypeSchema,
   currency: z.string(),
   createdAt: z.date(),
 });

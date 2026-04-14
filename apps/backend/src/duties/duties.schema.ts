@@ -18,7 +18,3 @@ export const updateDutyInputSchema = z.object({
 export const deleteDutyByIdInputSchema = z.object({
   id: z.cuid(),
 });
-
-export const deleteDutyInputSchema = z.object({
-  id: z.cuid(),
-});

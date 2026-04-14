@@ -7,11 +7,12 @@ import type { PrismaConfig } from 'better-auth/adapters/prisma';
 import { PhoneNumberOptions } from 'better-auth/plugins';
 import { InjectQueue } from '@nestjs/bullmq';
 import { Queue } from 'bullmq';
+import { setAuthInstance, type AuthInstance } from './auth';
 
 @Injectable()
 export class AuthService implements OnModuleInit {
   private readonly logger = new Logger(AuthService.name);
-  private readonly _instance: ReturnType<typeof betterAuth<any>>;
+  private readonly _instance: AuthInstance;
 
   constructor(
     private readonly prismaService: PrismaService,
@@ -36,7 +37,7 @@ export class AuthService implements OnModuleInit {
         this.prismaService,
         baseConfig.database as PrismaConfig,
       ),
-    });
+    }) as unknown as AuthInstance;
   }
 
   get instance() {
@@ -48,6 +49,7 @@ export class AuthService implements OnModuleInit {
   }
 
   onModuleInit() {
+    setAuthInstance(this._instance);
     this.logger.log('Auth Service Started');
     this.logger.log(
       `Plugins loaded: ${this._instance.options.plugins?.map((p: BetterAuthPlugin) => p.id).join(', ')}`,

@@ -1,6 +1,8 @@
+import { AnimatedTabScreen } from '@/components/AnimatedTabScreen';
 import { Button } from '@/components/ui/button';
+import { ErrorView } from '@/components/ui/error-view';
 import { Text } from '@/components/ui/text';
-import { Stack } from 'expo-router';
+import { Stack, router } from 'expo-router';
 import {
   ArrowLeft,
   Badge,
@@ -9,139 +11,265 @@ import {
   Edit,
   LogOut,
   Mail,
+  Phone,
   Save,
   School,
 } from 'lucide-react-native';
 import * as React from 'react';
-import { Image, Pressable, ScrollView, TextInput, View } from 'react-native';
+import { Image } from 'expo-image';
+import { ActivityIndicator, Alert, Pressable, RefreshControl, ScrollView, TextInput, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { orpc } from '@/lib/api';
+import { authClient } from '@/lib/auth-client';
 
 export default function ProfileScreen() {
-  const [username, setUsername] = React.useState('@alexrivera_99');
-  const [birthday, setBirthday] = React.useState('2005-11-15');
+  const queryClient = useQueryClient();
+  const { data: session } = authClient.useSession();
+  const { data: profile, isPending, isError, refetch } = useQuery(orpc.profiles.getMe.queryOptions());
+
+  const [refreshing, setRefreshing] = React.useState(false);
+  const onRefresh = React.useCallback(async () => {
+    setRefreshing(true);
+    await refetch();
+    setRefreshing(false);
+  }, [refetch]);
+
+  const [name, setName] = React.useState('');
+  const [birthday, setBirthday] = React.useState('');
+  const [dirty, setDirty] = React.useState(false);
+
+  React.useEffect(() => {
+    if (profile) {
+      setName(profile.name);
+      if (profile.birthday) {
+        const date = new Date(profile.birthday);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        setBirthday(`${year}-${month}-${day}`);
+      }
+    }
+  }, [profile]);
+
+  const saveMutation = useMutation({
+    ...orpc.profiles.updateProfile.mutationOptions(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: orpc.profiles.getMe.queryOptions().queryKey });
+      setDirty(false);
+      Alert.alert('Success', 'Profile updated successfully.');
+    },
+    onError: (err) => {
+      Alert.alert('Error', err.message ?? 'Failed to save profile.');
+    },
+  });
+
+  const handleSave = () => {
+    if (!name.trim()) {
+      Alert.alert('Error', 'Name is required.');
+      return;
+    }
+    saveMutation.mutate({
+      name: name.trim(),
+      birthday: birthday ? new Date(birthday).toISOString() : new Date().toISOString(),
+    });
+  };
+
+  const handleSignOut = async () => {
+    await authClient.signOut();
+    router.replace('/auth/login' as import('expo-router').Href);
+  };
+
+  const handleFieldChange = (setter: (v: string) => void) => (value: string) => {
+    setter(value);
+    setDirty(true);
+  };
+
+  if (isPending) {
+    return (
+      <SafeAreaView className="flex-1 bg-white items-center justify-center" style={{ flex: 1 }} edges={['top']}>
+        <ActivityIndicator size="large" color="#13ec5b" />
+      </SafeAreaView>
+    );
+  }
+
+  if (isError) {
+    return (
+      <SafeAreaView className="flex-1 bg-white" style={{ flex: 1 }} edges={['top']}>
+        <ErrorView onRetry={() => refetch()} />
+      </SafeAreaView>
+    );
+  }
+
+  const displayRole = profile?.role
+    ? profile.role.charAt(0).toUpperCase() + profile.role.slice(1)
+    : 'Member';
 
   return (
-    <>
-      <Stack.Screen options={{ headerShown: false }} />
+    <AnimatedTabScreen>
+      <>
+        <Stack.Screen options={{ headerShown: false }} />
 
-      <View className="flex-row items-center justify-between border-b border-gray-200 px-4 py-3">
-        <Pressable className="h-10 w-10 items-center justify-center rounded-full">
-          <ArrowLeft size={24} color="#111827" />
-        </Pressable>
-        <Text className="text-lg font-bold text-foreground">My Profile</Text>
-        <Pressable className="h-10 w-10 items-center justify-center rounded-full">
-          <Check size={24} color="#13ec5b" />
-        </Pressable>
-      </View>
-
-      <ScrollView
-        className="flex-1"
-        contentContainerStyle={{ paddingBottom: 100 }}
-        showsVerticalScrollIndicator={false}
-      >
-        <View className="px-4 pt-6">
-          <View className="mb-8 items-center">
-            <Pressable className="relative mb-4">
-              <Image
-                source={{ uri: 'https://i.pravatar.cc/200?u=alex' }}
-                className="h-28 w-28 rounded-full border-4 border-white bg-gray-200 shadow-xl"
-              />
-              <View className="absolute bottom-0 right-0 items-center justify-center rounded-full border-[3px] border-[#f6f8f6] bg-primary p-2">
-                <Edit size={14} color="#000" />
-              </View>
-            </Pressable>
-            <Text className="text-2xl font-bold tracking-tight text-foreground">Alex Rivera</Text>
-            <View className="mt-2 rounded-full border border-primary/30 bg-primary/20 px-3 py-1">
-              <Text className="text-xs font-bold uppercase tracking-wider text-primary">
-                Class President
-              </Text>
-            </View>
-          </View>
-
-          <View className="mb-8">
-            <Text className="mb-3 px-1 text-sm font-semibold uppercase tracking-wider text-gray-500">
-              Edit Profile
-            </Text>
-            <View className="gap-4">
-              <View>
-                <Text className="mb-2 ml-1 text-sm font-medium text-foreground">Username</Text>
-                <View className="h-14 flex-row items-center rounded-xl border border-gray-200 bg-white px-4">
-                  <TextInput
-                    className="flex-1 text-base text-foreground"
-                    value={username}
-                    onChangeText={setUsername}
-                    placeholder="@username"
-                    placeholderTextColor="#9ca3af"
-                  />
-                  <Edit size={20} color="#13ec5b" />
-                </View>
-              </View>
-              <View>
-                <Text className="mb-2 ml-1 text-sm font-medium text-foreground">Birthday</Text>
-                <View className="h-14 flex-row items-center rounded-xl border border-gray-200 bg-white px-4">
-                  <TextInput
-                    className="flex-1 text-base text-foreground"
-                    value={birthday}
-                    onChangeText={setBirthday}
-                    placeholder="YYYY-MM-DD"
-                    placeholderTextColor="#9ca3af"
-                  />
-                  <Calendar size={20} color="#13ec5b" />
-                </View>
-              </View>
-            </View>
-          </View>
-
-          <View className="mb-8">
-            <Text className="mb-3 px-1 text-sm font-semibold uppercase tracking-wider text-gray-500">
-              Student Info
-            </Text>
-            <View className="overflow-hidden rounded-xl border border-gray-200 bg-white">
-              <View className="flex-row items-center justify-between border-b border-gray-200 p-4">
-                <View className="flex-row items-center gap-3">
-                  <View className="h-8 w-8 items-center justify-center rounded-lg bg-blue-500/20">
-                    <Badge size={18} color="#3b82f6" />
-                  </View>
-                  <Text className="text-sm font-medium text-foreground">Student ID</Text>
-                </View>
-                <Text className="font-mono text-sm font-semibold text-gray-500">2023001</Text>
-              </View>
-              <View className="flex-row items-center justify-between border-b border-gray-200 p-4">
-                <View className="flex-row items-center gap-3">
-                  <View className="h-8 w-8 items-center justify-center rounded-lg bg-purple-500/20">
-                    <School size={18} color="#a855f7" />
-                  </View>
-                  <Text className="text-sm font-medium text-foreground">Class Section</Text>
-                </View>
-                <Text className="text-sm font-semibold text-gray-500">3-A</Text>
-              </View>
-              <View className="flex-row items-center justify-between p-4">
-                <View className="flex-row items-center gap-3">
-                  <View className="h-8 w-8 items-center justify-center rounded-lg bg-orange-500/20">
-                    <Mail size={18} color="#f97316" />
-                  </View>
-                  <Text className="text-sm font-medium text-foreground">Email</Text>
-                </View>
-                <Text className="text-sm font-semibold text-gray-500">alex.r@school.edu</Text>
-              </View>
-            </View>
-          </View>
-
-          <View className="gap-4">
-            <Button className="h-14 w-full rounded-xl">
-              <Save size={20} color="#000" />
-              <Text className="font-bold text-black">Save Changes</Text>
-            </Button>
-            <Button
-              variant="outline"
-              className="h-12 w-full rounded-xl border-red-200 bg-transparent"
-            >
-              <LogOut size={20} color="#ef4444" />
-              <Text className="font-bold text-red-500">Sign Out</Text>
-            </Button>
-            <Text className="pt-4 text-center text-xs text-gray-400">Rotom App v2.4.1</Text>
-          </View>
+        <SafeAreaView className="flex-1 bg-white" style={{ flex: 1 }} edges={['top']}>
+        <View className="flex-row items-center justify-between border-b border-gray-200 px-4 py-3">
+          <Pressable className="h-10 w-10 items-center justify-center rounded-full">
+            <ArrowLeft size={24} color="#111827" />
+          </Pressable>
+          <Text className="text-lg font-bold text-foreground">My Profile</Text>
+          <Pressable
+            className="h-10 w-10 items-center justify-center rounded-full"
+            onPress={handleSave}
+            disabled={!dirty || saveMutation.isPending}
+          >
+            <Check size={24} color={dirty ? '#13ec5b' : '#d1d5db'} />
+          </Pressable>
         </View>
-      </ScrollView>
-    </>
+
+        <ScrollView
+          className="flex-1"
+          contentContainerStyle={{ paddingBottom: 100 }}
+          showsVerticalScrollIndicator={false}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+              colors={['#13ec5b']}
+              tintColor="#13ec5b"
+            />
+          }
+        >
+          <View className="px-4 pt-6">
+            <View className="mb-8 items-center">
+              <Pressable className="relative mb-4">
+                <Image
+                  source={{ uri: profile?.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(profile?.name ?? '')}&size=200&background=13ec5b&color=112217` }}
+                  style={{ width: 112, height: 112, borderRadius: 999 }}
+                  contentFit="cover"
+                  transition={200}
+                />
+                <View className="absolute bottom-0 right-0 items-center justify-center rounded-full border-[3px] border-[#f6f8f6] bg-primary p-2">
+                  <Edit size={14} color="#000" />
+                </View>
+              </Pressable>
+              <Text className="text-2xl font-bold tracking-tight text-foreground">{profile?.name ?? ''}</Text>
+              <View className="mt-2 rounded-full border border-primary/30 bg-primary/20 px-3 py-1">
+                <Text className="text-xs font-bold uppercase tracking-wider text-primary">
+                  {displayRole}
+                </Text>
+              </View>
+            </View>
+
+            <View className="mb-8">
+              <Text className="mb-3 px-1 text-sm font-semibold uppercase tracking-wider text-gray-500">
+                Edit Profile
+              </Text>
+              <View className="gap-4">
+                <View>
+                  <Text className="mb-2 ml-1 text-sm font-medium text-foreground">Name</Text>
+                  <View className="h-14 flex-row items-center rounded-xl border border-gray-200 bg-white px-4">
+                    <TextInput
+                      className="flex-1 text-base text-foreground"
+                      value={name}
+                      onChangeText={handleFieldChange(setName)}
+                      placeholder="Your name"
+                      placeholderTextColor="#9ca3af"
+                    />
+                    <Edit size={20} color="#13ec5b" />
+                  </View>
+                </View>
+                <View>
+                  <Text className="mb-2 ml-1 text-sm font-medium text-foreground">Birthday</Text>
+                  <View className="h-14 flex-row items-center rounded-xl border border-gray-200 bg-white px-4">
+                    <TextInput
+                      className="flex-1 text-base text-foreground"
+                      value={birthday}
+                      onChangeText={handleFieldChange(setBirthday)}
+                      placeholder="YYYY-MM-DD"
+                      placeholderTextColor="#9ca3af"
+                      inputMode="tel"
+                      keyboardType="numeric"
+                    />
+                    <Calendar size={20} color="#13ec5b" />
+                  </View>
+                </View>
+              </View>
+            </View>
+
+            <View className="mb-8">
+              <Text className="mb-3 px-1 text-sm font-semibold uppercase tracking-wider text-gray-500">
+                Account Info
+              </Text>
+              <View className="overflow-hidden rounded-xl border border-gray-200 bg-white">
+                <View className="flex-row items-center justify-between border-b border-gray-200 p-4">
+                  <View className="flex-row items-center gap-3">
+                    <View className="h-8 w-8 items-center justify-center rounded-lg bg-blue-500/20">
+                      <Badge size={18} color="#3b82f6" />
+                    </View>
+                    <Text className="text-sm font-medium text-foreground">User ID</Text>
+                  </View>
+                  <Text className="font-mono text-sm font-semibold text-gray-500" numberOfLines={1}>
+                    {profile?.id ? profile.id.slice(0, 8) + '...' : '—'}
+                  </Text>
+                </View>
+                <View className="flex-row items-center justify-between border-b border-gray-200 p-4">
+                  <View className="flex-row items-center gap-3">
+                    <View className="h-8 w-8 items-center justify-center rounded-lg bg-purple-500/20">
+                      <School size={18} color="#a855f7" />
+                    </View>
+                    <Text className="text-sm font-medium text-foreground">Role</Text>
+                  </View>
+                  <Text className="text-sm font-semibold text-gray-500">{displayRole}</Text>
+                </View>
+                <View className="flex-row items-center justify-between border-b border-gray-200 p-4">
+                  <View className="flex-row items-center gap-3">
+                    <View className="h-8 w-8 items-center justify-center rounded-lg bg-green-500/20">
+                      <Phone size={18} color="#22c55e" />
+                    </View>
+                    <Text className="text-sm font-medium text-foreground">Phone</Text>
+                  </View>
+                  <Text className="text-sm font-semibold text-gray-500">{profile?.phoneNumber || '—'}</Text>
+                </View>
+                <View className="flex-row items-center justify-between p-4">
+                  <View className="flex-row items-center gap-3">
+                    <View className="h-8 w-8 items-center justify-center rounded-lg bg-orange-500/20">
+                      <Mail size={18} color="#f97316" />
+                    </View>
+                    <Text className="text-sm font-medium text-foreground">Email</Text>
+                  </View>
+                  <Text className="text-sm font-semibold text-gray-500">{session?.user?.email ?? '—'}</Text>
+                </View>
+              </View>
+            </View>
+
+            <View className="gap-4">
+              <Button
+                className="h-14 w-full rounded-xl"
+                onPress={handleSave}
+                disabled={!dirty || saveMutation.isPending}
+              >
+                {saveMutation.isPending ? (
+                  <ActivityIndicator size="small" color="#000" />
+                ) : (
+                  <Save size={20} color="#000" />
+                )}
+                <Text className="font-bold text-black">
+                  {saveMutation.isPending ? 'Saving...' : 'Save Changes'}
+                </Text>
+              </Button>
+              <Button
+                variant="outline"
+                className="h-12 w-full rounded-xl border-red-200 bg-transparent"
+                onPress={handleSignOut}
+              >
+                <LogOut size={20} color="#ef4444" />
+                <Text className="font-bold text-red-500">Sign Out</Text>
+              </Button>
+              <Text className="pt-4 text-center text-xs text-gray-400">Rotom App v2.4.1</Text>
+            </View>
+          </View>
+        </ScrollView>
+        </SafeAreaView>
+      </>
+    </AnimatedTabScreen>
   );
 }

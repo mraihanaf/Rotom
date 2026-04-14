@@ -68,4 +68,4 @@ export const deleteReactionByPostIdInputSchema = z.object({
   postId: z.cuid(),
 });
 
-export const createPostInputSchema = z.file();
+export const createPostInputSchema = z.instanceof(File).or(z.any());
