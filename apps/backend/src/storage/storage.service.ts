@@ -11,6 +11,7 @@ import { Readable } from 'stream';
 @Injectable()
 export class StorageService {
   private readonly s3: S3Client;
+  private readonly s3Public: S3Client;
   private readonly bucket: string;
 
   constructor() {
@@ -24,6 +25,17 @@ export class StorageService {
       },
       forcePathStyle: true,
     });
+    this.s3Public = process.env.S3_PUBLIC_ENDPOINT
+      ? new S3Client({
+          region: process.env.S3_REGION,
+          endpoint: process.env.S3_PUBLIC_ENDPOINT,
+          credentials: {
+            accessKeyId: process.env.S3_ACCESS_KEY!,
+            secretAccessKey: process.env.S3_SECRET_KEY!,
+          },
+          forcePathStyle: true,
+        })
+      : this.s3;
   }
 
   async uploadStreamFileToS3({
@@ -50,13 +62,13 @@ export class StorageService {
 
   async getPresignedDownloadUrl({
     key,
-    expiresIn = 60,
+    expiresIn = 3600,
   }: {
     key: string;
     expiresIn?: number;
   }) {
     return await getSignedUrl(
-      this.s3,
+      this.s3Public,
       new GetObjectCommand({
         Key: key,
         Bucket: this.bucket,

@@ -213,7 +213,7 @@ export type SubjectScheduleGroupByOutputType = {
   _max: SubjectScheduleMaxAggregateOutputType | null
 }
 
-type GetSubjectScheduleGroupByPayload<T extends SubjectScheduleGroupByArgs> = Prisma.PrismaPromise<
+export type GetSubjectScheduleGroupByPayload<T extends SubjectScheduleGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<SubjectScheduleGroupByOutputType, T['by']> &
       {
@@ -1270,6 +1270,11 @@ export type SubjectScheduleFindManyArgs<ExtArgs extends runtime.Types.Extensions
    * Skip the first `n` SubjectSchedules.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of SubjectSchedules.
+   */
   distinct?: Prisma.SubjectScheduleScalarFieldEnum | Prisma.SubjectScheduleScalarFieldEnum[]
 }
 

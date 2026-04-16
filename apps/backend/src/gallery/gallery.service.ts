@@ -222,28 +222,52 @@ export class GalleryService {
   }
 
   async createPost({ file, userId }: { file: File; userId: string }) {
-    if (!file.type.startsWith('image/')) {
-      throw new ORPCError('BAD_REQUEST');
+    const isImage = file.type.startsWith('image/');
+    const isVideo = file.type.startsWith('video/');
+
+    if (!isImage && !isVideo) {
+      throw new ORPCError('BAD_REQUEST', {
+        message: 'File must be an image or video',
+      });
     }
 
-    const mediaKey = `posts/${userId}/${createId()}.webp`;
+    // Validate file size
+    const maxSize = isVideo ? 50 * 1024 * 1024 : 10 * 1024 * 1024; // 50MB video, 10MB image
+    if (file.size > maxSize) {
+      throw new ORPCError('BAD_REQUEST', {
+        message: `File too large. Max size: ${isVideo ? '50MB' : '10MB'}`,
+      });
+    }
+
+    const mediaType: 'image' | 'video' = isVideo ? 'video' : 'image';
+    const extension = isVideo ? 'mp4' : 'webp';
+    const mediaKey = `posts/${userId}/${createId()}.${extension}`;
 
     const webStream =
       file.stream() as unknown as import('stream/web').ReadableStream;
-
     const nodeStream = Readable.fromWeb(webStream);
 
-    const webpStream = nodeStream.pipe(sharp().rotate().webp());
+    let uploadStream: Readable;
+    let contentType: string;
+
+    if (isImage) {
+      uploadStream = nodeStream.pipe(sharp().rotate().webp());
+      contentType = 'image/webp';
+    } else {
+      // For video, upload as-is (client should have compressed it)
+      uploadStream = nodeStream;
+      contentType = file.type === 'video/quicktime' ? 'video/mp4' : file.type;
+    }
 
     await this.storageService.uploadStreamFileToS3({
       key: mediaKey,
-      body: webpStream,
-      contentType: 'image/webp',
+      body: uploadStream,
+      contentType,
     });
 
     await this.prismaService.galleryPost.create({
       data: {
-        type: 'image',
+        type: mediaType,
         userId,
         mediaKey,
       },

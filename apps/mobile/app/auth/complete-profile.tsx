@@ -1,8 +1,10 @@
 import { Button } from '@/components/ui/button';
 import { Text } from '@/components/ui/text';
-import { orpc } from '@/lib/api';
+import { orpc, uploadProfilePicture } from '@/lib/api';
 import { Stack, router } from 'expo-router';
-import { ArrowRight, Calendar, ChevronDown, User } from 'lucide-react-native';
+import { ArrowRight, Calendar, ChevronDown, User, Camera } from 'lucide-react-native';
+import { Image } from 'expo-image';
+import * as ImagePicker from 'expo-image-picker';
 import * as React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {
@@ -11,11 +13,9 @@ import {
   KeyboardAvoidingView,
   Modal,
   Platform,
-  Pressable,
-  ScrollView,
-  TextInput,
-  View,
 } from 'react-native';
+import { View, Pressable, ScrollView, TextInput } from '@/tw';
+import { useQueryClient } from '@tanstack/react-query';
 
 const MONTHS = [
   'January', 'February', 'March', 'April', 'May', 'June',
@@ -38,12 +38,14 @@ function generateYears() {
 type PickerField = 'month' | 'day' | 'year';
 
 export default function CompleteProfileScreen() {
+  const queryClient = useQueryClient();
   const [name, setName] = React.useState('');
   const [month, setMonth] = React.useState<number | null>(null);
   const [day, setDay] = React.useState<number | null>(null);
   const [year, setYear] = React.useState<number | null>(null);
   const [activePicker, setActivePicker] = React.useState<PickerField | null>(null);
   const [submitting, setSubmitting] = React.useState(false);
+  const [profileImage, setProfileImage] = React.useState<string | null>(null);
 
   const maxDay = month && year ? getDaysInMonth(month, year) : 31;
   const adjustedDay = day && day > maxDay ? maxDay : day;
@@ -77,15 +79,52 @@ export default function CompleteProfileScreen() {
     setActivePicker(null);
   };
 
+  const handleSelectProfilePicture = async () => {
+    const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (!permission.granted) {
+      Alert.alert('Permission required', 'Permission to access the media library is required.');
+      return;
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ['images'],
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 0.8,
+    });
+
+    if (result.canceled || !result.assets[0]) return;
+    setProfileImage(result.assets[0].uri);
+  };
+
   const handleSubmit = async () => {
     if (!isValid || submitting || !birthday) return;
 
     setSubmitting(true);
     try {
+      // Complete profile first
       await orpc.profiles.completeProfile.call({
         name: name.trim(),
         birthday: birthday.toISOString(),
       });
+
+      // Upload profile picture if selected (optional)
+      if (profileImage) {
+        try {
+          await uploadProfilePicture({
+            uri: profileImage,
+            type: 'image/jpeg',
+            fileName: 'profile.jpg',
+          });
+        } catch (uploadError: any) {
+          // Don't block on upload error, just log it
+          console.log('Profile picture upload failed:', uploadError?.message);
+        }
+      }
+
+      // Invalidate dashboard to reflect profile changes
+      queryClient.invalidateQueries({ queryKey: orpc.dashboard.getDashboardSummary.queryOptions().queryKey });
+
       router.replace('/(tabs)' as import('expo-router').Href);
     } catch (error: any) {
       Alert.alert(
@@ -100,6 +139,7 @@ export default function CompleteProfileScreen() {
   return (
     <>
       <Stack.Screen options={{ title: 'Complete Profile', headerShown: false }} />
+      <SafeAreaView className="flex-1 bg-[#f6f8f6]" style={{ flex: 1 }}>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         className="flex-1"
@@ -108,7 +148,7 @@ export default function CompleteProfileScreen() {
           contentContainerClassName="flex-grow"
           keyboardShouldPersistTaps="handled"
         >
-          <View className="flex-1 w-full max-w-md self-center">
+          <View className="w-full max-w-md self-center">
             <View className="px-6 pt-8">
               <Text className="text-3xl font-extrabold tracking-tight leading-tight text-[#111827] mb-3">
                 Almost there!
@@ -119,6 +159,26 @@ export default function CompleteProfileScreen() {
             </View>
 
             <View className="px-6 pt-8 gap-6">
+              {/* Profile Picture - Optional */}
+              <View className="items-center gap-2">
+                <Pressable
+                  onPress={handleSelectProfilePicture}
+                  disabled={submitting}
+                  className="relative"
+                >
+                  <Image
+                    source={{ uri: profileImage || `https://ui-avatars.com/api/?name=${encodeURIComponent(name || 'User')}&size=200&background=13ec5b&color=112217` }}
+                    style={{ width: 120, height: 120, borderRadius: 60 }}
+                    contentFit="cover"
+                    transition={200}
+                  />
+                  <View className="absolute bottom-0 right-0 bg-primary rounded-full p-2 border-2 border-white">
+                    <Camera size={20} color="#000" />
+                  </View>
+                </Pressable>
+                <Text className="text-xs text-slate-500">Tap to add profile picture (optional)</Text>
+              </View>
+
               <View className="gap-1">
                 <Text className="text-sm font-semibold text-[#111827] ml-1">
                   Full Name
@@ -198,24 +258,25 @@ export default function CompleteProfileScreen() {
               </View>
             </View>
 
-            <View className="px-6 pb-8 pt-auto mt-auto">
-              <Button
-                onPress={handleSubmit}
-                disabled={!isValid || submitting}
-                className="w-full h-14 rounded-xl flex-row items-center justify-center gap-2"
-              >
-                <Text
-                  className="text-lg font-bold tracking-tight"
-                  style={{ color: '#0a2e16' }}
-                >
-                  {submitting ? 'Saving...' : 'Complete Setup'}
-                </Text>
-                {!submitting && <ArrowRight size={20} color="#0a2e16" />}
-              </Button>
-            </View>
           </View>
         </ScrollView>
+        <View className="px-6 pb-6 pt-4 w-full max-w-md self-center">
+          <Button
+            onPress={handleSubmit}
+            disabled={!isValid || submitting}
+            className="w-full h-14 rounded-xl flex-row items-center justify-center gap-2"
+          >
+            <Text
+              className="text-lg font-bold tracking-tight"
+              style={{ color: '#0a2e16' }}
+            >
+              {submitting ? 'Saving...' : 'Complete Setup'}
+            </Text>
+            {!submitting && <ArrowRight size={20} color="#0a2e16" />}
+          </Button>
+        </View>
       </KeyboardAvoidingView>
+      </SafeAreaView>
 
       {/* Picker Modal */}
       <Modal

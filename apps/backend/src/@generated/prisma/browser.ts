@@ -83,10 +83,10 @@ export type GalleryPost = Prisma.GalleryPostModel
  */
 export type GalleryPostReaction = Prisma.GalleryPostReactionModel
 /**
- * Model Duty
+ * Model DutyType
  * 
  */
-export type Duty = Prisma.DutyModel
+export type DutyType = Prisma.DutyTypeModel
 /**
  * Model DutySchedule
  * 

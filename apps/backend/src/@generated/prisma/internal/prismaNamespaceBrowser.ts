@@ -64,7 +64,7 @@ export const ModelName = {
   FundContributionLog: 'FundContributionLog',
   GalleryPost: 'GalleryPost',
   GalleryPostReaction: 'GalleryPostReaction',
-  Duty: 'Duty',
+  DutyType: 'DutyType',
   DutySchedule: 'DutySchedule',
   Settings: 'Settings'
 } as const
@@ -75,9 +75,9 @@ export type ModelName = (typeof ModelName)[keyof typeof ModelName]
  * Enums
  */
 
-export const TransactionIsolationLevel = {
+export const TransactionIsolationLevel = runtime.makeStrictEnum({
   Serializable: 'Serializable'
-} as const
+} as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
@@ -254,17 +254,26 @@ export const GalleryPostReactionScalarFieldEnum = {
 export type GalleryPostReactionScalarFieldEnum = (typeof GalleryPostReactionScalarFieldEnum)[keyof typeof GalleryPostReactionScalarFieldEnum]
 
 
-export const DutyScalarFieldEnum = {
+export const DutyTypeScalarFieldEnum = {
   id: 'id',
-  title: 'title',
-  createdAt: 'createdAt'
+  name: 'name',
+  category: 'category',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
-export type DutyScalarFieldEnum = (typeof DutyScalarFieldEnum)[keyof typeof DutyScalarFieldEnum]
+export type DutyTypeScalarFieldEnum = (typeof DutyTypeScalarFieldEnum)[keyof typeof DutyTypeScalarFieldEnum]
 
 
 export const DutyScheduleScalarFieldEnum = {
-  id: 'id'
+  id: 'id',
+  dutyTypeId: 'dutyTypeId',
+  userId: 'userId',
+  dayOfWeek: 'dayOfWeek',
+  status: 'status',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type DutyScheduleScalarFieldEnum = (typeof DutyScheduleScalarFieldEnum)[keyof typeof DutyScheduleScalarFieldEnum]

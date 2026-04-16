@@ -158,7 +158,7 @@ export type GalleryPostReactionGroupByOutputType = {
   _max: GalleryPostReactionMaxAggregateOutputType | null
 }
 
-type GetGalleryPostReactionGroupByPayload<T extends GalleryPostReactionGroupByArgs> = Prisma.PrismaPromise<
+export type GetGalleryPostReactionGroupByPayload<T extends GalleryPostReactionGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<GalleryPostReactionGroupByOutputType, T['by']> &
       {
@@ -1246,6 +1246,11 @@ export type GalleryPostReactionFindManyArgs<ExtArgs extends runtime.Types.Extens
    * Skip the first `n` GalleryPostReactions.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of GalleryPostReactions.
+   */
   distinct?: Prisma.GalleryPostReactionScalarFieldEnum | Prisma.GalleryPostReactionScalarFieldEnum[]
 }
 

@@ -4,9 +4,16 @@ export const ALLOWED_CONTENT_FILETYPES = z.enum([
   'image/jpeg',
   'image/png',
   'image/webp',
+  'video/mp4',
+  'video/quicktime',
+  'video/mov',
 ]);
 
 export const MEDIA_TYPE = z.enum(['video', 'image']);
+
+export const MAX_VIDEO_DURATION_SECONDS = 30;
+export const MAX_VIDEO_FILE_SIZE_MB = 50;
+export const MAX_IMAGE_FILE_SIZE_MB = 10;
 
 export const GalleryPostSchema = z.object({
   id: z.cuid(),
@@ -68,4 +75,10 @@ export const deleteReactionByPostIdInputSchema = z.object({
   postId: z.cuid(),
 });
 
-export const createPostInputSchema = z.instanceof(File).or(z.any());
+export const createPostInputSchema = z.object({
+  file: z.instanceof(File),
+});
+
+// Validation helper for file size (in bytes)
+export const MAX_VIDEO_FILE_SIZE_BYTES = MAX_VIDEO_FILE_SIZE_MB * 1024 * 1024;
+export const MAX_IMAGE_FILE_SIZE_BYTES = MAX_IMAGE_FILE_SIZE_MB * 1024 * 1024;

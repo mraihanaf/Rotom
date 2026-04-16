@@ -40,7 +40,7 @@ export class AssignmentsController {
   @Implement(contract.assignments.createAssignment)
   createAssignment() {
     return implement(contract.assignments.createAssignment)
-      .use(role([ROLES.MENTOR, ROLES.ADMIN]))
+      .use(role([ROLES.MENTOR, ROLES.ADMIN, ROLES.MAINTAINER]))
       .use(requireCompleteProfile)
       .handler(async ({ input, context }) => {
         await this.assignmentsService.createAssignment({
@@ -53,7 +53,7 @@ export class AssignmentsController {
   @Implement(contract.assignments.deleteAssignment)
   deleteAssignment() {
     return implement(contract.assignments.deleteAssignment)
-      .use(role([ROLES.MENTOR, ROLES.ADMIN]))
+      .use(role([ROLES.MENTOR, ROLES.ADMIN, ROLES.MAINTAINER]))
       .use(requireCompleteProfile)
       .handler(async ({ input, context }) => {
         const assignment = await this.assignmentsService.getAssignmentById(

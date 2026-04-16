@@ -1,0 +1,39 @@
+{
+  "name": "mobile",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/mobile",
+  "projectType": "application",
+  "tags": ["type:app", "scope:mobile"],
+  "targets": {
+    "dev": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "dev"
+      }
+    },
+    "android": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "android"
+      }
+    },
+    "ios": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "ios"
+      }
+    },
+    "web": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "web"
+      }
+    },
+    "clean": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "clean"
+      }
+    }
+  }
+}

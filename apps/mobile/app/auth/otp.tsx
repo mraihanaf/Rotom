@@ -9,16 +9,14 @@ import {
   Alert,
   KeyboardAvoidingView,
   Platform,
-  Pressable,
-  ScrollView,
-  TextInput,
-  View,
+  TextInput as RNTextInput,
 } from 'react-native';
+import { View, Pressable, ScrollView, TextInput } from '@/tw';
 
 export default function OTPScreen() {
   const { phone } = useLocalSearchParams<{ phone: string }>();
   const [otp, setOtp] = React.useState(['', '', '', '', '', '']);
-  const inputRefs = React.useRef<(TextInput | null)[]>([]);
+  const inputRefs = React.useRef<(RNTextInput | null)[]>([]);
   const [timer, setTimer] = React.useState(30);
   const [canResend, setCanResend] = React.useState(false);
   const [verifying, setVerifying] = React.useState(false);
@@ -113,7 +111,7 @@ export default function OTPScreen() {
             contentContainerClassName="flex-grow"
             keyboardShouldPersistTaps="handled"
           >
-            <View className="flex-1 w-full max-w-md self-center">
+            <View className="w-full max-w-md self-center">
               <View className="flex-row items-center p-4 pb-2">
                 <Pressable
                   onPress={() => router.back()}
@@ -148,12 +146,12 @@ export default function OTPScreen() {
               <View className="px-6 pt-8">
                 <View className="flex-row justify-between gap-2">
                   {[0, 1, 2, 3, 4, 5].map((i) => (
-                    <TextInput
+                    <RNTextInput
                       key={i}
                       ref={(el) => {
                         inputRefs.current[i] = el;
                       }}
-                      className="flex-1 max-w-14 aspect-3/4 rounded-lg border border-slate-200 bg-white text-center text-2xl font-bold text-[#111827]"
+                      style={{ flex: 1, maxWidth: 56, aspectRatio: 3/4, borderRadius: 8, borderWidth: 1, borderColor: '#e2e8f0', backgroundColor: '#fff', textAlign: 'center', fontSize: 24, fontWeight: 'bold', color: '#111827' }}
                       keyboardType="number-pad"
                       maxLength={1}
                       value={otp[i]}
@@ -191,23 +189,23 @@ export default function OTPScreen() {
                 </Pressable>
               </View>
 
-              <View className="px-6 pb-8 pt-auto mt-auto">
-                <Button
-                  onPress={handleVerify}
-                  disabled={otp.join('').length < 6 || verifying}
-                  className="w-full h-14 rounded-xl flex-row items-center justify-center gap-2"
-                >
-                  <Text
-                    className="text-lg font-bold tracking-tight"
-                    style={{ color: '#0a2e16' }}
-                  >
-                    {verifying ? 'Verifying...' : 'Verify Account'}
-                  </Text>
-                  {!verifying && <ArrowRight size={20} color="#0a2e16" />}
-                </Button>
-              </View>
             </View>
           </ScrollView>
+          <View className="px-6 pb-6 pt-4 w-full max-w-md self-center">
+            <Button
+              onPress={handleVerify}
+              disabled={otp.join('').length < 6 || verifying}
+              className="w-full h-14 rounded-xl flex-row items-center justify-center gap-2"
+            >
+              <Text
+                className="text-lg font-bold tracking-tight"
+                style={{ color: '#0a2e16' }}
+              >
+                {verifying ? 'Verifying...' : 'Verify Account'}
+              </Text>
+              {!verifying && <ArrowRight size={20} color="#0a2e16" />}
+            </Button>
+          </View>
         </KeyboardAvoidingView>
       </SafeAreaView>
     </>

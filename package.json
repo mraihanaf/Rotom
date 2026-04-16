@@ -1,20 +1,28 @@
 {
   "name": "Rotom",
   "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint",
+    "build": "nx run-many -t build",
+    "dev": "nx run-many -t dev",
+    "lint": "nx run-many -t lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "check-types": "turbo run check-types"
+    "check-types": "nx run-many -t check-types",
+    "postinstall": "rm -rf node_modules/@expo/metro-config/node_modules/lightningcss || true"
   },
   "devDependencies": {
+    "nx": "^21.0.3",
     "prettier": "^3.7.4",
-    "turbo": "^2.7.2",
     "typescript": "5.9.2"
   },
-  "packageManager": "pnpm@9.0.0",
+  "packageManager": "yarn@1.22.22",
+  "resolutionOverrides": {
+    "lightningcss": "1.30.1"
+  },
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   }
 }

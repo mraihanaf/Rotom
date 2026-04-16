@@ -4,7 +4,6 @@ import { ErrorView } from '@/components/ui/error-view';
 import { Text } from '@/components/ui/text';
 import { Stack, router } from 'expo-router';
 import {
-  Check,
   CheckCircle,
   History,
   MapPin,
@@ -13,18 +12,37 @@ import {
 } from 'lucide-react-native';
 import { useCallback, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import {
-  ActivityIndicator,
-  Pressable,
-  RefreshControl,
-  ScrollView,
-  View,
-} from 'react-native';
+import { RefreshControl } from 'react-native';
+import { View, Pressable, ScrollView } from '@/tw';
 import { Image } from 'expo-image';
 import { useQuery } from '@tanstack/react-query';
 import { orpc } from '@/lib/api';
 import { authClient } from '@/lib/auth-client';
 import { useUserRole } from '@/lib/hooks/useUserRole';
+import { SkeletonBox } from '@/components/ui/skeleton';
+
+function DashboardSkeleton() {
+  return (
+    <View style={{ paddingHorizontal: 16, paddingTop: 16, gap: 24 }}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+        <View style={{ gap: 8 }}>
+          <SkeletonBox width={100} height={12} borderRadius={6} />
+          <SkeletonBox width={200} height={28} borderRadius={8} />
+        </View>
+        <SkeletonBox width={48} height={48} borderRadius={24} />
+      </View>
+      <SkeletonBox height={130} borderRadius={16} />
+      <SkeletonBox width={140} height={18} borderRadius={6} />
+      {[0, 1, 2].map((i) => (
+        <SkeletonBox key={i} height={72} borderRadius={12} />
+      ))}
+      <SkeletonBox width={100} height={18} borderRadius={6} />
+      {[0, 1, 2].map((i) => (
+        <SkeletonBox key={i} height={56} borderRadius={12} />
+      ))}
+    </View>
+  );
+}
 
 function formatCurrency(amount: number) {
   return `Rp ${amount.toLocaleString('id-ID')}`;
@@ -46,66 +64,29 @@ export default function DashboardScreen() {
     console.log('[Dashboard] useSession succeeded, session:', !!session);
 
     const {
-      data: profile,
-      isPending: profileLoading,
-      isError: profileError,
-      refetch: refetchProfile,
-    } = useQuery(orpc.profiles.getMe.queryOptions());
-
-    const {
-      data: fund,
-      isPending: fundLoading,
-      isError: fundError,
-      refetch: refetchFund,
-    } = useQuery(orpc.funds.getFund.queryOptions());
-
-    const todayDow = new Date().getDay();
-    const {
-      data: schedule,
-      isPending: scheduleLoading,
-      isError: scheduleError,
-      refetch: refetchSchedule,
-    } = useQuery(
-      orpc.schedules.getByDay.queryOptions({ input: { dayOfWeek: todayDow } }),
-    );
-
-    const {
-      data: assignmentsData,
-      isPending: assignmentsLoading,
-      isError: assignmentsError,
-      refetch: refetchAssignments,
-    } = useQuery(
-      orpc.assignments.getAllAssignments.queryOptions({ input: { limit: 5 } }),
-    );
-
-    const isPending =
-      profileLoading || fundLoading || scheduleLoading || assignmentsLoading;
-    const isError =
-      profileError || fundError || scheduleError || assignmentsError;
+      data: dashboard,
+      isPending,
+      isError,
+      refetch: refetchDashboard,
+    } = useQuery(orpc.dashboard.getDashboardSummary.queryOptions());
 
   const [refreshing, setRefreshing] = useState(false);
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
-    await Promise.all([
-      refetchProfile(),
-      refetchFund(),
-      refetchSchedule(),
-      refetchAssignments(),
-    ]);
+    await refetchDashboard();
     setRefreshing(false);
-  }, [refetchProfile, refetchFund, refetchSchedule, refetchAssignments]);
+  }, [refetchDashboard]);
 
-  const scheduleItems = schedule ?? [];
-  const assignments = assignmentsData?.items ?? [];
-  const pendingTasks = assignments.filter((a) => !a.done);
+  const scheduleItems = dashboard?.todaySchedule ?? [];
+  const pendingTasks = dashboard?.pendingAssignments ?? [];
 
   const userName =
-    profile?.name?.split(' ')[0] ??
+    dashboard?.user?.name?.split(' ')[0] ??
     session?.user?.name?.split(' ')[0] ??
     'Student';
   const avatarUrl =
-    profile?.image ||
-    `https://ui-avatars.com/api/?name=${encodeURIComponent(profile?.name ?? '')}&size=100&background=13ec5b&color=112217`;
+    dashboard?.user?.image ||
+    `https://ui-avatars.com/api/?name=${encodeURIComponent(dashboard?.user?.name ?? '')}&size=100&background=13ec5b&color=112217`;
 
   const dateStr = new Date().toLocaleDateString('id-ID', {
     weekday: 'long',
@@ -123,9 +104,7 @@ export default function DashboardScreen() {
           edges={['top']}
         >
           {isPending ? (
-            <View className="flex-1 items-center justify-center">
-              <ActivityIndicator size="large" color="#13ec5b" />
-            </View>
+            <DashboardSkeleton />
           ) : isError ? (
             <ErrorView onRetry={onRefresh} />
           ) : (
@@ -190,7 +169,7 @@ export default function DashboardScreen() {
 
                 <View className="mt-4">
                   <Text className="text-3xl font-bold tracking-tight">
-                    {formatCurrency(fund?.totalAmount ?? 0)}
+                    {formatCurrency(dashboard?.fund?.totalAmount ?? 0)}
                   </Text>
                   <Text className="text-gray-500 text-xs mt-1">
                     Saldo terkini per hari ini
@@ -245,7 +224,11 @@ export default function DashboardScreen() {
               </Pressable>
             </View>
 
-            {scheduleItems.length === 0 ? (
+            {isError ? (
+              <View className="bg-gray-50 border border-gray-200 rounded-xl p-4 mb-3 items-center">
+                <Text className="text-sm text-slate-400">Gagal memuat jadwal.</Text>
+              </View>
+            ) : scheduleItems.length === 0 ? (
               <View className="bg-gray-50 border border-gray-200 rounded-xl p-4 mb-3 items-center">
                 <Text className="text-sm text-slate-400">
                   Tidak ada jadwal hari ini.
@@ -294,62 +277,43 @@ export default function DashboardScreen() {
             )}
 
             {/* Tugasmu */}
-            <View className="mt-5 mb-4">
+            <View className="flex-row items-center justify-between mt-5 mb-4">
               <Text className="text-lg font-bold">Tugasmu</Text>
+              <Pressable
+                onPress={() =>
+                  router.push('/(tabs)/assignments' as import('expo-router').Href)
+                }
+              >
+                <Text className="text-emerald-600 text-sm font-semibold">
+                  Lihat Semua
+                </Text>
+              </Pressable>
             </View>
 
-            {pendingTasks.length === 0 && assignments.length === 0 ? (
+            {pendingTasks.length === 0 ? (
               <View className="bg-gray-50 border border-gray-200 rounded-xl p-4 mb-3 items-center">
                 <Text className="text-sm text-slate-400">
-                  Tidak ada tugas.
+                  {'Tidak ada tugas yang belum selesai. 🎉'}
                 </Text>
               </View>
             ) : (
-              assignments.slice(0, 5).map((t) => (
+              pendingTasks.map((t) => (
                 <View
                   key={t.id}
-                  className={
-                    t.done
-                      ? 'flex-row items-center gap-3 rounded-xl p-3 bg-gray-50 border border-gray-200 mb-3'
-                      : 'flex-row items-center gap-3 rounded-xl p-3 bg-white border border-gray-200 mb-3'
-                  }
-                  style={t.done ? { opacity: 0.6 } : undefined}
+                  className="flex-row items-center gap-3 rounded-xl p-3 bg-white border border-gray-200 mb-3"
                 >
-                  <View
-                    className={`w-10 h-10 rounded-full items-center justify-center ${
-                      t.done ? 'bg-primary' : 'bg-gray-100'
-                    }`}
-                  >
-                    {t.done ? (
-                      <Check size={20} color="#112217" strokeWidth={2.5} />
-                    ) : (
-                      <CheckCircle size={20} color="#9ca3af" />
-                    )}
+                  <View className="w-10 h-10 rounded-full items-center justify-center bg-gray-100">
+                    <CheckCircle size={20} color="#9ca3af" />
                   </View>
                   <View className="flex-1">
-                    <Text
-                      className={`text-sm font-semibold ${t.done ? 'line-through' : ''}`}
-                      style={
-                        t.done
-                          ? { textDecorationColor: '#6b7280' }
-                          : undefined
-                      }
-                    >
+                    <Text className="text-sm font-semibold">
                       {t.title}
                     </Text>
-                    <Text
-                      className={
-                        t.done
-                          ? 'text-xs text-gray-500'
-                          : 'text-xs text-slate-500'
-                      }
-                    >
-                      {t.done ? 'Selesai' : t.subject.name}
+                    <Text className="text-xs text-slate-500">
+                      {t.subject.name}
                     </Text>
                   </View>
-                  {!t.done && (
-                    <View className="h-2 w-2 rounded-full bg-red-500" />
-                  )}
+                  <View className="h-2 w-2 rounded-full bg-red-500" />
                 </View>
               ))
             )}

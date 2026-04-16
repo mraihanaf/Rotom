@@ -210,7 +210,7 @@ export type FundContributionLogGroupByArgs<ExtArgs extends runtime.Types.Extensi
 export type FundContributionLogGroupByOutputType = {
   id: string
   reporterId: string
-  contributorId: string
+  contributorId: string | null
   fundId: number
   currency: string
   amount: number
@@ -224,7 +224,7 @@ export type FundContributionLogGroupByOutputType = {
   _max: FundContributionLogMaxAggregateOutputType | null
 }
 
-type GetFundContributionLogGroupByPayload<T extends FundContributionLogGroupByArgs> = Prisma.PrismaPromise<
+export type GetFundContributionLogGroupByPayload<T extends FundContributionLogGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<FundContributionLogGroupByOutputType, T['by']> &
       {
@@ -245,7 +245,7 @@ export type FundContributionLogWhereInput = {
   NOT?: Prisma.FundContributionLogWhereInput | Prisma.FundContributionLogWhereInput[]
   id?: Prisma.StringFilter<"FundContributionLog"> | string
   reporterId?: Prisma.StringFilter<"FundContributionLog"> | string
-  contributorId?: Prisma.StringFilter<"FundContributionLog"> | string
+  contributorId?: Prisma.StringNullableFilter<"FundContributionLog"> | string | null
   fundId?: Prisma.IntFilter<"FundContributionLog"> | number
   currency?: Prisma.StringFilter<"FundContributionLog"> | string
   amount?: Prisma.FloatFilter<"FundContributionLog"> | number
@@ -254,13 +254,13 @@ export type FundContributionLogWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"FundContributionLog"> | Date | string
   fund?: Prisma.XOR<Prisma.FundScalarRelationFilter, Prisma.FundWhereInput>
   reporter?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  contributor?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  contributor?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type FundContributionLogOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   reporterId?: Prisma.SortOrder
-  contributorId?: Prisma.SortOrder
+  contributorId?: Prisma.SortOrderInput | Prisma.SortOrder
   fundId?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   amount?: Prisma.SortOrder
@@ -278,7 +278,7 @@ export type FundContributionLogWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.FundContributionLogWhereInput[]
   NOT?: Prisma.FundContributionLogWhereInput | Prisma.FundContributionLogWhereInput[]
   reporterId?: Prisma.StringFilter<"FundContributionLog"> | string
-  contributorId?: Prisma.StringFilter<"FundContributionLog"> | string
+  contributorId?: Prisma.StringNullableFilter<"FundContributionLog"> | string | null
   fundId?: Prisma.IntFilter<"FundContributionLog"> | number
   currency?: Prisma.StringFilter<"FundContributionLog"> | string
   amount?: Prisma.FloatFilter<"FundContributionLog"> | number
@@ -287,13 +287,13 @@ export type FundContributionLogWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"FundContributionLog"> | Date | string
   fund?: Prisma.XOR<Prisma.FundScalarRelationFilter, Prisma.FundWhereInput>
   reporter?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  contributor?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  contributor?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id">
 
 export type FundContributionLogOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   reporterId?: Prisma.SortOrder
-  contributorId?: Prisma.SortOrder
+  contributorId?: Prisma.SortOrderInput | Prisma.SortOrder
   fundId?: Prisma.SortOrder
   currency?: Prisma.SortOrder
   amount?: Prisma.SortOrder
@@ -313,7 +313,7 @@ export type FundContributionLogScalarWhereWithAggregatesInput = {
   NOT?: Prisma.FundContributionLogScalarWhereWithAggregatesInput | Prisma.FundContributionLogScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"FundContributionLog"> | string
   reporterId?: Prisma.StringWithAggregatesFilter<"FundContributionLog"> | string
-  contributorId?: Prisma.StringWithAggregatesFilter<"FundContributionLog"> | string
+  contributorId?: Prisma.StringNullableWithAggregatesFilter<"FundContributionLog"> | string | null
   fundId?: Prisma.IntWithAggregatesFilter<"FundContributionLog"> | number
   currency?: Prisma.StringWithAggregatesFilter<"FundContributionLog"> | string
   amount?: Prisma.FloatWithAggregatesFilter<"FundContributionLog"> | number
@@ -331,13 +331,13 @@ export type FundContributionLogCreateInput = {
   createdAt?: Date | string
   fund?: Prisma.FundCreateNestedOneWithoutContributionLogsInput
   reporter: Prisma.UserCreateNestedOneWithoutReportedLogsInput
-  contributor: Prisma.UserCreateNestedOneWithoutContributedLogsInput
+  contributor?: Prisma.UserCreateNestedOneWithoutContributedLogsInput
 }
 
 export type FundContributionLogUncheckedCreateInput = {
   id?: string
   reporterId: string
-  contributorId: string
+  contributorId?: string | null
   fundId?: number
   currency?: string
   amount: number
@@ -355,13 +355,13 @@ export type FundContributionLogUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fund?: Prisma.FundUpdateOneRequiredWithoutContributionLogsNestedInput
   reporter?: Prisma.UserUpdateOneRequiredWithoutReportedLogsNestedInput
-  contributor?: Prisma.UserUpdateOneRequiredWithoutContributedLogsNestedInput
+  contributor?: Prisma.UserUpdateOneWithoutContributedLogsNestedInput
 }
 
 export type FundContributionLogUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   reporterId?: Prisma.StringFieldUpdateOperationsInput | string
-  contributorId?: Prisma.StringFieldUpdateOperationsInput | string
+  contributorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fundId?: Prisma.IntFieldUpdateOperationsInput | number
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -373,7 +373,7 @@ export type FundContributionLogUncheckedUpdateInput = {
 export type FundContributionLogCreateManyInput = {
   id?: string
   reporterId: string
-  contributorId: string
+  contributorId?: string | null
   fundId?: number
   currency?: string
   amount: number
@@ -394,7 +394,7 @@ export type FundContributionLogUpdateManyMutationInput = {
 export type FundContributionLogUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   reporterId?: Prisma.StringFieldUpdateOperationsInput | string
-  contributorId?: Prisma.StringFieldUpdateOperationsInput | string
+  contributorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fundId?: Prisma.IntFieldUpdateOperationsInput | number
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -597,12 +597,12 @@ export type FundContributionLogCreateWithoutReporterInput = {
   type?: $Enums.FundTransactionType
   createdAt?: Date | string
   fund?: Prisma.FundCreateNestedOneWithoutContributionLogsInput
-  contributor: Prisma.UserCreateNestedOneWithoutContributedLogsInput
+  contributor?: Prisma.UserCreateNestedOneWithoutContributedLogsInput
 }
 
 export type FundContributionLogUncheckedCreateWithoutReporterInput = {
   id?: string
-  contributorId: string
+  contributorId?: string | null
   fundId?: number
   currency?: string
   amount: number
@@ -673,7 +673,7 @@ export type FundContributionLogScalarWhereInput = {
   NOT?: Prisma.FundContributionLogScalarWhereInput | Prisma.FundContributionLogScalarWhereInput[]
   id?: Prisma.StringFilter<"FundContributionLog"> | string
   reporterId?: Prisma.StringFilter<"FundContributionLog"> | string
-  contributorId?: Prisma.StringFilter<"FundContributionLog"> | string
+  contributorId?: Prisma.StringNullableFilter<"FundContributionLog"> | string | null
   fundId?: Prisma.IntFilter<"FundContributionLog"> | number
   currency?: Prisma.StringFilter<"FundContributionLog"> | string
   amount?: Prisma.FloatFilter<"FundContributionLog"> | number
@@ -706,13 +706,13 @@ export type FundContributionLogCreateWithoutFundInput = {
   type?: $Enums.FundTransactionType
   createdAt?: Date | string
   reporter: Prisma.UserCreateNestedOneWithoutReportedLogsInput
-  contributor: Prisma.UserCreateNestedOneWithoutContributedLogsInput
+  contributor?: Prisma.UserCreateNestedOneWithoutContributedLogsInput
 }
 
 export type FundContributionLogUncheckedCreateWithoutFundInput = {
   id?: string
   reporterId: string
-  contributorId: string
+  contributorId?: string | null
   currency?: string
   amount: number
   note?: string | null
@@ -747,7 +747,7 @@ export type FundContributionLogUpdateManyWithWhereWithoutFundInput = {
 
 export type FundContributionLogCreateManyReporterInput = {
   id?: string
-  contributorId: string
+  contributorId?: string | null
   fundId?: number
   currency?: string
   amount: number
@@ -775,12 +775,12 @@ export type FundContributionLogUpdateWithoutReporterInput = {
   type?: Prisma.EnumFundTransactionTypeFieldUpdateOperationsInput | $Enums.FundTransactionType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fund?: Prisma.FundUpdateOneRequiredWithoutContributionLogsNestedInput
-  contributor?: Prisma.UserUpdateOneRequiredWithoutContributedLogsNestedInput
+  contributor?: Prisma.UserUpdateOneWithoutContributedLogsNestedInput
 }
 
 export type FundContributionLogUncheckedUpdateWithoutReporterInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  contributorId?: Prisma.StringFieldUpdateOperationsInput | string
+  contributorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fundId?: Prisma.IntFieldUpdateOperationsInput | number
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -791,7 +791,7 @@ export type FundContributionLogUncheckedUpdateWithoutReporterInput = {
 
 export type FundContributionLogUncheckedUpdateManyWithoutReporterInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  contributorId?: Prisma.StringFieldUpdateOperationsInput | string
+  contributorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   fundId?: Prisma.IntFieldUpdateOperationsInput | number
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -836,7 +836,7 @@ export type FundContributionLogUncheckedUpdateManyWithoutContributorInput = {
 export type FundContributionLogCreateManyFundInput = {
   id?: string
   reporterId: string
-  contributorId: string
+  contributorId?: string | null
   currency?: string
   amount: number
   note?: string | null
@@ -852,13 +852,13 @@ export type FundContributionLogUpdateWithoutFundInput = {
   type?: Prisma.EnumFundTransactionTypeFieldUpdateOperationsInput | $Enums.FundTransactionType
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   reporter?: Prisma.UserUpdateOneRequiredWithoutReportedLogsNestedInput
-  contributor?: Prisma.UserUpdateOneRequiredWithoutContributedLogsNestedInput
+  contributor?: Prisma.UserUpdateOneWithoutContributedLogsNestedInput
 }
 
 export type FundContributionLogUncheckedUpdateWithoutFundInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   reporterId?: Prisma.StringFieldUpdateOperationsInput | string
-  contributorId?: Prisma.StringFieldUpdateOperationsInput | string
+  contributorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -869,7 +869,7 @@ export type FundContributionLogUncheckedUpdateWithoutFundInput = {
 export type FundContributionLogUncheckedUpdateManyWithoutFundInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   reporterId?: Prisma.StringFieldUpdateOperationsInput | string
-  contributorId?: Prisma.StringFieldUpdateOperationsInput | string
+  contributorId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   currency?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   note?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -891,7 +891,7 @@ export type FundContributionLogSelect<ExtArgs extends runtime.Types.Extensions.I
   createdAt?: boolean
   fund?: boolean | Prisma.FundDefaultArgs<ExtArgs>
   reporter?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  contributor?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  contributor?: boolean | Prisma.FundContributionLog$contributorArgs<ExtArgs>
 }, ExtArgs["result"]["fundContributionLog"]>
 
 export type FundContributionLogSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -906,7 +906,7 @@ export type FundContributionLogSelectCreateManyAndReturn<ExtArgs extends runtime
   createdAt?: boolean
   fund?: boolean | Prisma.FundDefaultArgs<ExtArgs>
   reporter?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  contributor?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  contributor?: boolean | Prisma.FundContributionLog$contributorArgs<ExtArgs>
 }, ExtArgs["result"]["fundContributionLog"]>
 
 export type FundContributionLogSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -921,7 +921,7 @@ export type FundContributionLogSelectUpdateManyAndReturn<ExtArgs extends runtime
   createdAt?: boolean
   fund?: boolean | Prisma.FundDefaultArgs<ExtArgs>
   reporter?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  contributor?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  contributor?: boolean | Prisma.FundContributionLog$contributorArgs<ExtArgs>
 }, ExtArgs["result"]["fundContributionLog"]>
 
 export type FundContributionLogSelectScalar = {
@@ -940,17 +940,17 @@ export type FundContributionLogOmit<ExtArgs extends runtime.Types.Extensions.Int
 export type FundContributionLogInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   fund?: boolean | Prisma.FundDefaultArgs<ExtArgs>
   reporter?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  contributor?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  contributor?: boolean | Prisma.FundContributionLog$contributorArgs<ExtArgs>
 }
 export type FundContributionLogIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   fund?: boolean | Prisma.FundDefaultArgs<ExtArgs>
   reporter?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  contributor?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  contributor?: boolean | Prisma.FundContributionLog$contributorArgs<ExtArgs>
 }
 export type FundContributionLogIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   fund?: boolean | Prisma.FundDefaultArgs<ExtArgs>
   reporter?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  contributor?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  contributor?: boolean | Prisma.FundContributionLog$contributorArgs<ExtArgs>
 }
 
 export type $FundContributionLogPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -958,12 +958,12 @@ export type $FundContributionLogPayload<ExtArgs extends runtime.Types.Extensions
   objects: {
     fund: Prisma.$FundPayload<ExtArgs>
     reporter: Prisma.$UserPayload<ExtArgs>
-    contributor: Prisma.$UserPayload<ExtArgs>
+    contributor: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     reporterId: string
-    contributorId: string
+    contributorId: string | null
     fundId: number
     currency: string
     amount: number
@@ -1366,7 +1366,7 @@ export interface Prisma__FundContributionLogClient<T, Null = never, ExtArgs exte
   readonly [Symbol.toStringTag]: "PrismaPromise"
   fund<T extends Prisma.FundDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FundDefaultArgs<ExtArgs>>): Prisma.Prisma__FundClient<runtime.Types.Result.GetResult<Prisma.$FundPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   reporter<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  contributor<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  contributor<T extends Prisma.FundContributionLog$contributorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FundContributionLog$contributorArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1601,6 +1601,11 @@ export type FundContributionLogFindManyArgs<ExtArgs extends runtime.Types.Extens
    * Skip the first `n` FundContributionLogs.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of FundContributionLogs.
+   */
   distinct?: Prisma.FundContributionLogScalarFieldEnum | Prisma.FundContributionLogScalarFieldEnum[]
 }
 
@@ -1796,6 +1801,25 @@ export type FundContributionLogDeleteManyArgs<ExtArgs extends runtime.Types.Exte
    * Limit how many FundContributionLogs to delete.
    */
   limit?: number
+}
+
+/**
+ * FundContributionLog.contributor
+ */
+export type FundContributionLog$contributorArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

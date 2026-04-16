@@ -10,10 +10,10 @@ export const ROLES = {
 type Role = (typeof ROLES)[keyof typeof ROLES];
 
 const WRITE_PERMISSIONS: Record<string, Role[]> = {
-  assignments: [ROLES.MENTOR, ROLES.ADMIN],
+  assignments: [ROLES.MENTOR, ROLES.ADMIN, ROLES.MAINTAINER],
   'assignments:update': [ROLES.ADMIN, ROLES.MAINTAINER],
   funds: [ROLES.MAINTAINER, ROLES.ADMIN],
-  duties: [ROLES.ADMIN],
+  duties: [ROLES.ADMIN, ROLES.MAINTAINER], // Both can manage piket
   subjects: [ROLES.ADMIN],
   schedule: [ROLES.ADMIN, ROLES.MAINTAINER],
   gallery: [], // ownership check handled separately

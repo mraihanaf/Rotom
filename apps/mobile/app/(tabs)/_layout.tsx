@@ -9,7 +9,7 @@ import {
 } from 'lucide-react-native';
 import { View } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
-import { runOnJS } from 'react-native-reanimated';
+import { runOnJS, withSpring } from 'react-native-reanimated';
 import { TabAnimationProvider, useTabAnimation } from '@/lib/animation/TabAnimationContext';
 
 const TAB_ORDER = ['index', 'assignments', 'schedule', 'funds', 'gallery', 'profile'];
@@ -17,7 +17,7 @@ const TAB_ORDER = ['index', 'assignments', 'schedule', 'funds', 'gallery', 'prof
 function useSwipeNavigation() {
   const pathname = usePathname();
   const navigation = useNavigation();
-  const { triggerNavigation } = useTabAnimation();
+  const { triggerNavigation, translateX } = useTabAnimation();
 
   const navigateToTab = (direction: 'next' | 'prev') => {
     const currentTab = pathname.split('/').pop() || 'index';
@@ -34,23 +34,34 @@ function useSwipeNavigation() {
       triggerNavigation(direction, () => {
         (navigation as any).navigate('(tabs)', { screen: targetTab });
       });
+    } else {
+      translateX.value = withSpring(0, { damping: 20, stiffness: 200 });
     }
   };
 
+  const springBack = () => {
+    translateX.value = withSpring(0, { damping: 20, stiffness: 200 });
+  };
+
   const swipeGesture = Gesture.Pan()
-    .activeOffsetX([-20, 20])
-    .activeOffsetY([-100, 100])
+    .activeOffsetX([-12, 12])
+    .failOffsetY([-20, 20])
+    .onUpdate((event) => {
+      translateX.value = event.translationX * 0.4;
+    })
     .onEnd((event) => {
       const { translationX, velocityX } = event;
 
-      // Swipe left (negative X) -> go to NEXT tab
       if (translationX < -50 || velocityX < -500) {
         runOnJS(navigateToTab)('next');
-      }
-      // Swipe right (positive X) -> go to PREVIOUS tab
-      else if (translationX > 50 || velocityX > 500) {
+      } else if (translationX > 50 || velocityX > 500) {
         runOnJS(navigateToTab)('prev');
+      } else {
+        runOnJS(springBack)();
       }
+    })
+    .onFinalize(() => {
+      translateX.value = withSpring(0, { damping: 20, stiffness: 200 });
     });
 
   return swipeGesture;

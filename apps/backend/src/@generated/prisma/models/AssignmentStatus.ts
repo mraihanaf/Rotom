@@ -158,7 +158,7 @@ export type AssignmentStatusGroupByOutputType = {
   _max: AssignmentStatusMaxAggregateOutputType | null
 }
 
-type GetAssignmentStatusGroupByPayload<T extends AssignmentStatusGroupByArgs> = Prisma.PrismaPromise<
+export type GetAssignmentStatusGroupByPayload<T extends AssignmentStatusGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<AssignmentStatusGroupByOutputType, T['by']> &
       {
@@ -1246,6 +1246,11 @@ export type AssignmentStatusFindManyArgs<ExtArgs extends runtime.Types.Extension
    * Skip the first `n` AssignmentStatuses.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of AssignmentStatuses.
+   */
   distinct?: Prisma.AssignmentStatusScalarFieldEnum | Prisma.AssignmentStatusScalarFieldEnum[]
 }
 

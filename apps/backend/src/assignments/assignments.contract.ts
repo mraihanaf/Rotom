@@ -6,6 +6,7 @@ import {
   getAllAssignmentsOutputSchema,
   updateAssignmentInputSchema,
 } from './assignments.schema';
+import { assignmentsCompletionContract } from './assignments-completion.contract';
 
 const markAssignment = oc
   .route({
@@ -63,4 +64,5 @@ export const assignmentsContract = {
   createAssignment,
   deleteAssignment,
   getAllAssignments,
+  ...assignmentsCompletionContract,
 };

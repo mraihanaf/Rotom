@@ -1,0 +1,8 @@
+# Ignore monorepo siblings — EAS only needs the mobile app
+../../apps/backend
+../../apps/*/node_modules
+../../packages
+node_modules
+.expo
+android
+ios

@@ -8,8 +8,8 @@ import { PortalHost } from '@rn-primitives/portal';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useState, useEffect } from 'react';
-import { useColorScheme } from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
 
 export {
@@ -18,7 +18,7 @@ export {
 } from 'expo-router';
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme() ?? 'light';
+  const colorScheme = 'light';
   const [queryClient] = useState(() => createQueryClient());
 
   useEffect(() => {
@@ -30,14 +30,16 @@ export default function RootLayout() {
   }, []);
 
   return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
     <SafeAreaProvider>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider value={NAV_THEME[colorScheme]}>
-          <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+          <StatusBar style="dark" />
           <Stack screenOptions={{ headerShown: false }} />
           <PortalHost />
         </ThemeProvider>
       </QueryClientProvider>
     </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 }

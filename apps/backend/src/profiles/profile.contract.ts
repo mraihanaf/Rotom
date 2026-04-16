@@ -1,4 +1,5 @@
 import { oc } from '@orpc/contract';
+import z from 'zod';
 import { completeProfileInputSchema, profileSchema, updateProfileInputSchema } from './profile.schema';
 
 const getMe = oc
@@ -26,8 +27,17 @@ const updateProfile = oc
   .input(updateProfileInputSchema)
   .output(profileSchema);
 
+const updateProfileImage = oc
+  .route({
+    path: '/profiles/image',
+    method: 'POST',
+    tags: ['Profile'],
+  })
+  .input(z.object({ file: z.instanceof(File) }));
+
 export const profilesContract = {
   getMe,
   completeProfile,
   updateProfile,
+  updateProfileImage,
 };

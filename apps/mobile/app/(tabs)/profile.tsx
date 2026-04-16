@@ -17,11 +17,38 @@ import {
 } from 'lucide-react-native';
 import * as React from 'react';
 import { Image } from 'expo-image';
-import { ActivityIndicator, Alert, Pressable, RefreshControl, ScrollView, TextInput, View } from 'react-native';
+import { ActivityIndicator, Alert, RefreshControl } from 'react-native';
+import { View, Pressable, ScrollView, TextInput } from '@/tw';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { orpc } from '@/lib/api';
+import { SkeletonBox } from '@/components/ui/skeleton';
+
+function ProfileSkeleton() {
+  return (
+    <SafeAreaView className="flex-1 bg-white" style={{ flex: 1 }} edges={['top']}>
+      <View style={{ paddingHorizontal: 16, paddingTop: 24, gap: 20, alignItems: 'center' }}>
+        {/* Avatar */}
+        <SkeletonBox width={96} height={96} borderRadius={48} />
+        {/* Name + role */}
+        <View style={{ alignItems: 'center', gap: 8 }}>
+          <SkeletonBox width={160} height={22} borderRadius={8} />
+          <SkeletonBox width={100} height={14} borderRadius={6} />
+        </View>
+      </View>
+      <View style={{ paddingHorizontal: 16, paddingTop: 32, gap: 16 }}>
+        {/* Info fields */}
+        {[0, 1, 2, 3].map((i) => (
+          <SkeletonBox key={i} height={56} borderRadius={12} />
+        ))}
+        {/* Save button */}
+        <SkeletonBox height={48} borderRadius={12} />
+      </View>
+    </SafeAreaView>
+  );
+}
+import { orpc, uploadProfilePicture } from '@/lib/api';
 import { authClient } from '@/lib/auth-client';
+import * as ImagePicker from 'expo-image-picker';
 
 export default function ProfileScreen() {
   const queryClient = useQueryClient();
@@ -80,17 +107,45 @@ export default function ProfileScreen() {
     router.replace('/auth/login' as import('expo-router').Href);
   };
 
+  const handleChangeProfilePicture = async () => {
+    const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (!permission.granted) {
+      Alert.alert('Permission required', 'Permission to access the media library is required.');
+      return;
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ['images'],
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 0.8,
+    });
+
+    if (result.canceled || !result.assets[0]) return;
+
+    const asset = result.assets[0];
+    try {
+      await uploadProfilePicture({
+        uri: asset.uri,
+        type: asset.mimeType,
+        fileName: asset.fileName,
+      });
+      queryClient.invalidateQueries({ queryKey: orpc.profiles.getMe.queryOptions().queryKey });
+      queryClient.invalidateQueries({ queryKey: orpc.dashboard.getDashboardSummary.queryOptions().queryKey });
+      Alert.alert('Success', 'Profile picture updated successfully.');
+    } catch (err: any) {
+      Alert.alert('Error', err?.message ?? 'Failed to upload profile picture.');
+    }
+  };
+
   const handleFieldChange = (setter: (v: string) => void) => (value: string) => {
     setter(value);
     setDirty(true);
   };
 
+
   if (isPending) {
-    return (
-      <SafeAreaView className="flex-1 bg-white items-center justify-center" style={{ flex: 1 }} edges={['top']}>
-        <ActivityIndicator size="large" color="#13ec5b" />
-      </SafeAreaView>
-    );
+    return <ProfileSkeleton />;
   }
 
   if (isError) {
@@ -140,7 +195,7 @@ export default function ProfileScreen() {
         >
           <View className="px-4 pt-6">
             <View className="mb-8 items-center">
-              <Pressable className="relative mb-4">
+              <Pressable className="relative mb-4" onPress={handleChangeProfilePicture}>
                 <Image
                   source={{ uri: profile?.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(profile?.name ?? '')}&size=200&background=13ec5b&color=112217` }}
                   style={{ width: 112, height: 112, borderRadius: 999 }}

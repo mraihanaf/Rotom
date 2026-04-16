@@ -80,12 +80,12 @@ export type PrismaVersion = {
 }
 
 /**
- * Prisma Client JS version: 7.2.0
- * Query Engine version: 0c8ef2ce45c83248ab3df073180d5eda9e8be7a3
+ * Prisma Client JS version: 7.7.0
+ * Query Engine version: 75cbdc1eb7150937890ad5465d861175c6624711
  */
 export const prismaVersion: PrismaVersion = {
-  client: "7.2.0",
-  engine: "0c8ef2ce45c83248ab3df073180d5eda9e8be7a3"
+  client: "7.7.0",
+  engine: "75cbdc1eb7150937890ad5465d861175c6624711"
 }
 
 /**
@@ -397,7 +397,7 @@ export const ModelName = {
   FundContributionLog: 'FundContributionLog',
   GalleryPost: 'GalleryPost',
   GalleryPostReaction: 'GalleryPostReaction',
-  Duty: 'Duty',
+  DutyType: 'DutyType',
   DutySchedule: 'DutySchedule',
   Settings: 'Settings'
 } as const
@@ -415,7 +415,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "organization" | "user" | "session" | "account" | "verification" | "subject" | "subjectSchedule" | "assignment" | "assignmentStatus" | "fund" | "fundContributionLog" | "galleryPost" | "galleryPostReaction" | "duty" | "dutySchedule" | "settings"
+    modelProps: "organization" | "user" | "session" | "account" | "verification" | "subject" | "subjectSchedule" | "assignment" | "assignmentStatus" | "fund" | "fundContributionLog" | "galleryPost" | "galleryPostReaction" | "dutyType" | "dutySchedule" | "settings"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1381,77 +1381,77 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    Duty: {
-      payload: Prisma.$DutyPayload<ExtArgs>
-      fields: Prisma.DutyFieldRefs
+    DutyType: {
+      payload: Prisma.$DutyTypePayload<ExtArgs>
+      fields: Prisma.DutyTypeFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.DutyFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DutyPayload> | null
+          args: Prisma.DutyTypeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DutyTypePayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.DutyFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DutyPayload>
+          args: Prisma.DutyTypeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DutyTypePayload>
         }
         findFirst: {
-          args: Prisma.DutyFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DutyPayload> | null
+          args: Prisma.DutyTypeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DutyTypePayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.DutyFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DutyPayload>
+          args: Prisma.DutyTypeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DutyTypePayload>
         }
         findMany: {
-          args: Prisma.DutyFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DutyPayload>[]
+          args: Prisma.DutyTypeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DutyTypePayload>[]
         }
         create: {
-          args: Prisma.DutyCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DutyPayload>
+          args: Prisma.DutyTypeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DutyTypePayload>
         }
         createMany: {
-          args: Prisma.DutyCreateManyArgs<ExtArgs>
+          args: Prisma.DutyTypeCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.DutyCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DutyPayload>[]
+          args: Prisma.DutyTypeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DutyTypePayload>[]
         }
         delete: {
-          args: Prisma.DutyDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DutyPayload>
+          args: Prisma.DutyTypeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DutyTypePayload>
         }
         update: {
-          args: Prisma.DutyUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DutyPayload>
+          args: Prisma.DutyTypeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DutyTypePayload>
         }
         deleteMany: {
-          args: Prisma.DutyDeleteManyArgs<ExtArgs>
+          args: Prisma.DutyTypeDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.DutyUpdateManyArgs<ExtArgs>
+          args: Prisma.DutyTypeUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.DutyUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DutyPayload>[]
+          args: Prisma.DutyTypeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DutyTypePayload>[]
         }
         upsert: {
-          args: Prisma.DutyUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$DutyPayload>
+          args: Prisma.DutyTypeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DutyTypePayload>
         }
         aggregate: {
-          args: Prisma.DutyAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateDuty>
+          args: Prisma.DutyTypeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDutyType>
         }
         groupBy: {
-          args: Prisma.DutyGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.DutyGroupByOutputType>[]
+          args: Prisma.DutyTypeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DutyTypeGroupByOutputType>[]
         }
         count: {
-          args: Prisma.DutyCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.DutyCountAggregateOutputType> | number
+          args: Prisma.DutyTypeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DutyTypeCountAggregateOutputType> | number
         }
       }
     }
@@ -1811,17 +1811,26 @@ export const GalleryPostReactionScalarFieldEnum = {
 export type GalleryPostReactionScalarFieldEnum = (typeof GalleryPostReactionScalarFieldEnum)[keyof typeof GalleryPostReactionScalarFieldEnum]
 
 
-export const DutyScalarFieldEnum = {
+export const DutyTypeScalarFieldEnum = {
   id: 'id',
-  title: 'title',
-  createdAt: 'createdAt'
+  name: 'name',
+  category: 'category',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
-export type DutyScalarFieldEnum = (typeof DutyScalarFieldEnum)[keyof typeof DutyScalarFieldEnum]
+export type DutyTypeScalarFieldEnum = (typeof DutyTypeScalarFieldEnum)[keyof typeof DutyTypeScalarFieldEnum]
 
 
 export const DutyScheduleScalarFieldEnum = {
-  id: 'id'
+  id: 'id',
+  dutyTypeId: 'dutyTypeId',
+  userId: 'userId',
+  dayOfWeek: 'dayOfWeek',
+  status: 'status',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type DutyScheduleScalarFieldEnum = (typeof DutyScheduleScalarFieldEnum)[keyof typeof DutyScheduleScalarFieldEnum]
@@ -2016,7 +2025,7 @@ export type GlobalOmitConfig = {
   fundContributionLog?: Prisma.FundContributionLogOmit
   galleryPost?: Prisma.GalleryPostOmit
   galleryPostReaction?: Prisma.GalleryPostReactionOmit
-  duty?: Prisma.DutyOmit
+  dutyType?: Prisma.DutyTypeOmit
   dutySchedule?: Prisma.DutyScheduleOmit
   settings?: Prisma.SettingsOmit
 }

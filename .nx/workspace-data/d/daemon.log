@@ -1,0 +1,97 @@
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:34:30.695Z - Started listening on: /tmp/d8073dd07756ee2da859/d.sock
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:34:30.703Z - [WATCHER]: Subscribed to changes within: /home/rai/Documents/programming-stuff/Rotom (native)
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:34:30.708Z - Established a connection. Number of open connections: 1
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:34:30.710Z - Established a connection. Number of open connections: 2
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:34:30.715Z - Closed a connection. Number of open connections: 1
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:34:30.718Z - [REQUEST]: Client Request for Project Graph Received
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:34:30.755Z - Time taken for 'loadSpecifiedNxPlugins' 3.4136009999999715ms
+Time for 'plugin worker 16227 code loading' 33.60125199999999
+Time for 'plugin worker 16224 code loading' 33.98551900000001
+Time for 'plugin worker 16225 code loading' 32.44374699999997
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:34:31.331Z - Time taken for 'Load Nx Plugin: /home/rai/Documents/programming-stuff/Rotom/node_modules/nx/src/plugins/project-json/build-nodes/project-json' 606.435164ms
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:34:31.399Z - Time taken for 'Load Nx Plugin: /home/rai/Documents/programming-stuff/Rotom/node_modules/nx/src/plugins/js' 677.693229ms
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:34:31.453Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:34:31.453Z - [REQUEST]: 
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:34:31.453Z - [REQUEST]: 
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:34:31.456Z - No files changed, but no in-memory cached project graph found. Recomputing it...
+Time for 'nx/core/project-json:createNodes' 1.1029829999999947
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:34:31.477Z - Time taken for 'loadDefaultNxPlugins' 730.055175ms
+Time for 'nx/core/package-json:createNodes' 13.626425999999924
+Time for 'nx/js/dependencies-and-lockfile:createNodes' 410.5762420000001
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:34:31.929Z - Time taken for 'build-project-configs' 440.83621300000004ms
+Time for 'build typescript dependencies' 101.07248300000015
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:34:32.127Z - [SYNC]: collect registered sync generators
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:34:32.140Z - Wrote project graph cache to /home/rai/Documents/programming-stuff/Rotom/.nx/workspace-data/project-graph.json
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:34:32.141Z - [REQUEST]: Responding to the client. project-graph
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:34:32.143Z - Time taken for 'total for creating and serializing project graph' 1422.241352ms
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:34:32.151Z - Done responding to the client project-graph
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:34:32.151Z - Handled REQUEST_PROJECT_GRAPH. Handling time: 1423. Response time: 10.
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:34:32.193Z - Closed a connection. Number of open connections: 0
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:35:47.364Z - [WATCHER]: Processing file changes in outputs
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:35:48.644Z - [WATCHER]: Processing file changes in outputs
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:39:00.137Z - [WATCHER]: Processing file changes in outputs
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:39:01.178Z - [WATCHER]: Processing file changes in outputs
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:40:47.180Z - [WATCHER]: Processing file changes in outputs
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:40:47.186Z - [WATCHER]: package.json was modified
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:40:47.294Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:40:47.294Z - [REQUEST]: package.json
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:40:47.295Z - [REQUEST]: 
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:40:47.318Z - Time taken for 'hash changed files from watcher' 3.234679000044707ms
+Time for 'nx/core/project-json:createNodes' 15.58739300002344
+Time for 'nx/js/dependencies-and-lockfile:createNodes' 86.8290960000013
+Time for 'nx/core/package-json:createNodes' 85.4873170000501
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:40:47.486Z - Time taken for 'build-project-configs' 150.46838400000706ms
+Time for 'build typescript dependencies' 0.1967970000114292
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:40:47.571Z - [SYNC]: collect registered sync generators
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:40:47.572Z - [SYNC]: project graph hash is the same, not collecting task sync generators
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:40:47.572Z - [SYNC]: nx.json hash is the same, not collecting global sync generators
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:40:47.572Z - Time taken for 'total execution time for createProjectGraph()' 103.18644800002221ms
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:41:00.018Z - [WATCHER]: Processing file changes in outputs
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:41:00.020Z - [WATCHER]: .yarn/install-state.gz was modified
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:41:00.224Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:41:00.224Z - [REQUEST]: .yarn/install-state.gz
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:41:00.224Z - [REQUEST]: 
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:41:00.234Z - Time taken for 'hash changed files from watcher' 3.3778590000001714ms
+Time for 'nx/core/project-json:createNodes' 1.55998899997212
+Time for 'nx/core/package-json:createNodes' 5.636828999966383
+Time for 'nx/js/dependencies-and-lockfile:createNodes' 22.344591000000946
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:41:00.288Z - Time taken for 'build-project-configs' 40.214584000001196ms
+Time for 'build typescript dependencies' 0.04792500002076849
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:41:00.340Z - [SYNC]: collect registered sync generators
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:41:00.341Z - [SYNC]: project graph hash is the same, not collecting task sync generators
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:41:00.341Z - [SYNC]: nx.json hash is the same, not collecting global sync generators
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:41:00.341Z - Time taken for 'total execution time for createProjectGraph()' 64.70211399998516ms
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:41:47.872Z - [WATCHER]: Processing file changes in outputs
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:41:47.874Z - [WATCHER]: apps/mobile/package.json was modified
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:41:48.276Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:41:48.277Z - [REQUEST]: apps/mobile/package.json
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:41:48.277Z - [REQUEST]: 
+Time for 'nx/core/project-json:createNodes' 0.9407409999985248
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:41:48.288Z - Time taken for 'hash changed files from watcher' 1.074443000019528ms
+Time for 'nx/core/package-json:createNodes' 7.294224000012036
+Time for 'nx/js/dependencies-and-lockfile:createNodes' 20.342390000005253
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:41:48.372Z - Time taken for 'build-project-configs' 49.83352600003127ms
+Time for 'build typescript dependencies' 27.11894499999471
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:41:48.498Z - [SYNC]: collect registered sync generators
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:41:48.500Z - [SYNC]: project graph hash is the same, not collecting task sync generators
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:41:48.500Z - [SYNC]: nx.json hash is the same, not collecting global sync generators
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:41:48.500Z - Time taken for 'total execution time for createProjectGraph()' 152.92666599998483ms
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:41:54.903Z - [WATCHER]: package.json was modified
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:41:54.903Z - [WATCHER]: Processing file changes in outputs
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:41:55.705Z - [REQUEST]: Updated workspace context based on watched changes, recomputing project graph...
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:41:55.705Z - [REQUEST]: package.json
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:41:55.705Z - [REQUEST]: 
+Time for 'nx/core/project-json:createNodes' 0.9840279999771155
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:41:55.717Z - Time taken for 'hash changed files from watcher' 1.182037999969907ms
+Time for 'nx/core/package-json:createNodes' 7.690210999979172
+Time for 'nx/js/dependencies-and-lockfile:createNodes' 24.21154099999694
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:41:55.763Z - Time taken for 'build-project-configs' 41.310528000001796ms
+Time for 'build typescript dependencies' 0.05322400003205985
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:41:55.837Z - [SYNC]: collect registered sync generators
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:41:55.839Z - [SYNC]: project graph hash is the same, not collecting task sync generators
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:41:55.839Z - [SYNC]: nx.json hash is the same, not collecting global sync generators
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:41:55.839Z - Time taken for 'total execution time for createProjectGraph()' 75.50522600003751ms
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:42:05.771Z - [WATCHER]: Processing file changes in outputs
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:42:05.774Z - [WATCHER]: Stopping the watcher for /home/rai/Documents/programming-stuff/Rotom (sources)
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:42:05.775Z - [WATCHER]: Stopping the watcher for /home/rai/Documents/programming-stuff/Rotom (outputs)
+[NX v21.6.10 Daemon Server] - 2026-04-14T02:42:05.777Z - Server stopped because: "LOCK_FILES_CHANGED"

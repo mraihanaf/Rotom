@@ -1,5 +1,5 @@
 import { AlertTriangle, RefreshCw } from 'lucide-react-native';
-import { Pressable, View } from 'react-native';
+import { View, Pressable } from '@/tw';
 import { Text } from '@/components/ui/text';
 
 interface ErrorViewProps {

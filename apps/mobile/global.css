@@ -1,73 +1,123 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css";
 
 :root {
-  --radius: 0.625rem;
-  --background: 100 9% 97%;
-  --foreground: 220 43% 11%;
-  --card: 0 0% 100%;
-  --card-foreground: 220 43% 11%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 220 43% 11%;
-  --primary: 145 85% 50%;
-  --primary-foreground: 144 70% 10%;
-  --secondary: 220 14% 91%;
-  --secondary-foreground: 220 43% 11%;
-  --muted: 220 14% 96%;
-  --muted-foreground: 220 9% 46%;
-  --accent: 220 14% 96%;
-  --accent-foreground: 220 43% 11%;
-  --destructive: 0 84% 60%;
-  --border: 220 13% 91%;
-  --input: 220 13% 91%;
-  --ring: 145 85% 50%;
-  --chart-1: 145 85% 50%;
-  --chart-2: 143 27% 68%;
-  --chart-3: 145 85% 41%;
-  --chart-4: 145 84% 43%;
-  --chart-5: 150 42% 9%;
-  --sidebar: 0 0% 100%;
-  --sidebar-foreground: 220 43% 11%;
-  --sidebar-primary: 145 85% 50%;
-  --sidebar-primary-foreground: 144 70% 10%;
-  --sidebar-accent: 220 14% 96%;
-  --sidebar-accent-foreground: 220 43% 11%;
-  --sidebar-border: 220 13% 91%;
-  --sidebar-ring: 145 85% 50%;
+  --font-sans: system-ui;
+  --font-serif: ui-serif;
+  --font-mono: ui-monospace;
+  --font-rounded: ui-rounded;
+}
+
+@media android {
+  :root {
+    --font-sans: sans-serif;
+    --font-serif: serif;
+    --font-mono: monospace;
+    --font-rounded: sans-serif;
+  }
+}
+
+@media ios {
+  :root {
+    --font-sans: system-ui;
+    --font-serif: ui-serif;
+    --font-mono: ui-monospace;
+    --font-rounded: ui-rounded;
+  }
+}
+
+@layer theme {
+  @theme {
+    --radius-sm: calc(0.625rem - 4px);
+    --radius-md: calc(0.625rem - 2px);
+    --radius-lg: 0.625rem;
+
+    --text-xs--line-height: calc(1em / 0.75);
+    --text-sm--line-height: calc(1.25em / 0.875);
+    --text-base--line-height: calc(1.5em / 1);
+    --text-lg--line-height: calc(1.75em / 1.125);
+    --text-xl--line-height: calc(1.75em / 1.25);
+    --text-2xl--line-height: calc(2em / 1.5);
+    --text-3xl--line-height: calc(2.25em / 1.875);
+    --text-4xl--line-height: calc(2.5em / 2.25);
+    --text-5xl--line-height: 1em;
+    --text-6xl--line-height: 1em;
+    --text-7xl--line-height: 1em;
+    --text-8xl--line-height: 1em;
+    --text-9xl--line-height: 1em;
+
+    --leading-none: 1em;
+    --leading-tight: 1.25em;
+    --leading-snug: 1.375em;
+    --leading-normal: 1.5em;
+    --leading-relaxed: 1.625em;
+    --leading-loose: 2em;
+
+    --color-background: hsl(100 9% 97%);
+    --color-foreground: hsl(220 43% 11%);
+    --color-card: hsl(0 0% 100%);
+    --color-card-foreground: hsl(220 43% 11%);
+    --color-popover: hsl(0 0% 100%);
+    --color-popover-foreground: hsl(220 43% 11%);
+    --color-primary: hsl(145 85% 50%);
+    --color-primary-foreground: hsl(144 70% 10%);
+    --color-secondary: hsl(220 14% 91%);
+    --color-secondary-foreground: hsl(220 43% 11%);
+    --color-muted: hsl(220 14% 96%);
+    --color-muted-foreground: hsl(220 9% 46%);
+    --color-accent: hsl(220 14% 96%);
+    --color-accent-foreground: hsl(220 43% 11%);
+    --color-destructive: hsl(0 84% 60%);
+    --color-border: hsl(220 13% 91%);
+    --color-input: hsl(220 13% 91%);
+    --color-ring: hsl(145 85% 50%);
+    --color-chart-1: hsl(145 85% 50%);
+    --color-chart-2: hsl(143 27% 68%);
+    --color-chart-3: hsl(145 85% 41%);
+    --color-chart-4: hsl(145 84% 43%);
+    --color-chart-5: hsl(150 42% 9%);
+    --color-sidebar: hsl(0 0% 100%);
+    --color-sidebar-foreground: hsl(220 43% 11%);
+    --color-sidebar-primary: hsl(145 85% 50%);
+    --color-sidebar-primary-foreground: hsl(144 70% 10%);
+    --color-sidebar-accent: hsl(220 14% 96%);
+    --color-sidebar-accent-foreground: hsl(220 43% 11%);
+    --color-sidebar-border: hsl(220 13% 91%);
+    --color-sidebar-ring: hsl(145 85% 50%);
+  }
 }
 
 .dark {
-  --background: 150 42% 9%;
-  --foreground: 210 20% 98%;
-  --card: 145 25% 17%;
-  --card-foreground: 210 20% 98%;
-  --popover: 147 28% 16%;
-  --popover-foreground: 210 20% 98%;
-  --primary: 145 85% 50%;
-  --primary-foreground: 144 70% 10%;
-  --secondary: 150 30% 13%;
-  --secondary-foreground: 210 20% 98%;
-  --muted: 150 30% 13%;
-  --muted-foreground: 220 9% 64%;
-  --accent: 147 28% 16%;
-  --accent-foreground: 210 20% 98%;
-  --destructive: 0 84% 60%;
-  --border: 0 0% 100% / 0.1;
-  --input: 0 0% 100% / 0.15;
-  --ring: 145 85% 50%;
-  --chart-1: 145 85% 50%;
-  --chart-2: 143 27% 68%;
-  --chart-3: 145 85% 41%;
-  --chart-4: 145 84% 43%;
-  --chart-5: 150 42% 9%;
-  --sidebar: 145 25% 17%;
-  --sidebar-foreground: 210 20% 98%;
-  --sidebar-primary: 145 85% 50%;
-  --sidebar-primary-foreground: 144 70% 10%;
-  --sidebar-accent: 147 28% 16%;
-  --sidebar-accent-foreground: 210 20% 98%;
-  --sidebar-border: 0 0% 100% / 0.1;
-  --sidebar-ring: 145 85% 50%;
+  --color-background: hsl(150 42% 9%);
+  --color-foreground: hsl(210 20% 98%);
+  --color-card: hsl(145 25% 17%);
+  --color-card-foreground: hsl(210 20% 98%);
+  --color-popover: hsl(147 28% 16%);
+  --color-popover-foreground: hsl(210 20% 98%);
+  --color-primary: hsl(145 85% 50%);
+  --color-primary-foreground: hsl(144 70% 10%);
+  --color-secondary: hsl(150 30% 13%);
+  --color-secondary-foreground: hsl(210 20% 98%);
+  --color-muted: hsl(150 30% 13%);
+  --color-muted-foreground: hsl(220 9% 64%);
+  --color-accent: hsl(147 28% 16%);
+  --color-accent-foreground: hsl(210 20% 98%);
+  --color-destructive: hsl(0 84% 60%);
+  --color-border: hsl(0 0% 100% / 0.1);
+  --color-input: hsl(0 0% 100% / 0.15);
+  --color-ring: hsl(145 85% 50%);
+  --color-chart-1: hsl(145 85% 50%);
+  --color-chart-2: hsl(143 27% 68%);
+  --color-chart-3: hsl(145 85% 41%);
+  --color-chart-4: hsl(145 84% 43%);
+  --color-chart-5: hsl(150 42% 9%);
+  --color-sidebar: hsl(145 25% 17%);
+  --color-sidebar-foreground: hsl(210 20% 98%);
+  --color-sidebar-primary: hsl(145 85% 50%);
+  --color-sidebar-primary-foreground: hsl(144 70% 10%);
+  --color-sidebar-accent: hsl(147 28% 16%);
+  --color-sidebar-accent-foreground: hsl(210 20% 98%);
+  --color-sidebar-border: hsl(0 0% 100% / 0.1);
+  --color-sidebar-ring: hsl(145 85% 50%);
 }
 

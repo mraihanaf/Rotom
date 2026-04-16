@@ -40,7 +40,7 @@ export class GalleryController {
       .use(requireCompleteProfile)
       .handler(async ({ input, context }) => {
         await this.galleryService.createPost({
-          file: input,
+          file: input.file,
           userId: context.session?.user.id ?? '',
         });
       });

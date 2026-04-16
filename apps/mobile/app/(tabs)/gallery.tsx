@@ -1,30 +1,114 @@
 import { AnimatedTabScreen } from '@/components/AnimatedTabScreen';
 import { Text } from '@/components/ui/text';
 import { ErrorView } from '@/components/ui/error-view';
-import { Stack, router } from 'expo-router';
-import {
-  Heart,
-  MoreHorizontal,
-  Play,
-  Plus,
-  Search,
-  Smile,
-  ThumbsUp,
-  Trash2,
-  Video,
-} from 'lucide-react-native';
+import { Stack } from 'expo-router';
+import { Heart, Play, Plus, Search, Trash2 } from 'lucide-react-native';
 import * as React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ActivityIndicator, Dimensions, Image, Pressable, RefreshControl, ScrollView, View, Alert } from 'react-native';
+import { ActivityIndicator, Dimensions, RefreshControl, Alert, Image as RNImage } from 'react-native';
+import { Image } from 'expo-image';
+import { View, Pressable, ScrollView } from '@/tw';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { orpc } from '@/lib/api';
+import { orpc, uploadGalleryMedia } from '@/lib/api';
 import { useUserRole } from '@/lib/hooks/useUserRole';
+import { useGalleryCache } from '@/lib/hooks/useGalleryCache';
 import * as ImagePicker from 'expo-image-picker';
+import { SkeletonBox } from '@/components/ui/skeleton';
+import { VideoView, useVideoPlayer } from 'expo-video';
+
+// Video player component using expo-video API
+function VideoPlayer({ uri }: { uri: string }) {
+  const player = useVideoPlayer(uri);
+
+  React.useEffect(() => {
+    player.loop = true;
+    player.muted = true;
+    player.play();
+  }, [player]);
+
+  return (
+    <View style={{ flex: 1, overflow: 'hidden', backgroundColor: '#111' }}>
+      <VideoView
+        player={player}
+        style={{ width: '100%', height: '100%' }}
+        contentFit="cover"
+        nativeControls={true}
+        surfaceType='textureView'
+      />
+    </View>
+  );
+}
+
+function GallerySkeleton() {
+  const leftHeights = [160, 120, 180, 100];
+  const rightHeights = [130, 170, 110, 150];
+  return (
+    <View style={{ paddingHorizontal: GRID_PADDING, paddingTop: 8, flexDirection: 'row', gap: GRID_GAP }}>
+      <View style={{ flex: 1, gap: GRID_GAP }}>
+        {leftHeights.map((h, i) => (
+          <SkeletonBox key={i} height={h} borderRadius={14} />
+        ))}
+      </View>
+      <View style={{ flex: 1, gap: GRID_GAP }}>
+        {rightHeights.map((h, i) => (
+          <SkeletonBox key={i} height={h} borderRadius={14} />
+        ))}
+      </View>
+    </View>
+  );
+}
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
-const GRID_GAP = 12;
-const GRID_PADDING = 16;
+const GRID_GAP = 8;
+const GRID_PADDING = 12;
 const ITEM_WIDTH = (SCREEN_WIDTH - GRID_PADDING * 2 - GRID_GAP) / 2;
+
+type PostItem = {
+  id: string;
+  url: string;
+  type: string;
+  createdAt: string | Date;
+  createdBy: { userId: string; name: string; image: string | null };
+  reactions: Record<string, number>;
+  myReaction: string | null;
+};
+
+function useMasonryColumns(posts: PostItem[]) {
+  const [heights, setHeights] = React.useState<Record<string, number>>({});
+
+  React.useEffect(() => {
+    posts.forEach((post) => {
+      if (heights[post.id] !== undefined) return;
+      RNImage.getSize(
+        post.url,
+        (w: number, h: number) => {
+          const ratio = h / w;
+          setHeights((prev) => ({ ...prev, [post.id]: ITEM_WIDTH * ratio }));
+        },
+        () => {
+          setHeights((prev) => ({ ...prev, [post.id]: ITEM_WIDTH * 1.25 }));
+        },
+      );
+    });
+  }, [posts]);
+
+  const left: PostItem[] = [];
+  const right: PostItem[] = [];
+  let leftH = 0;
+  let rightH = 0;
+
+  for (const post of posts) {
+    if (leftH <= rightH) {
+      left.push(post);
+      leftH += heights[post.id] ?? ITEM_WIDTH * 1.25;
+    } else {
+      right.push(post);
+      rightH += heights[post.id] ?? ITEM_WIDTH * 1.25;
+    }
+  }
+
+  return { left, right, heights };
+}
 
 function formatTimeAgo(dateStr: string | Date) {
   const d = new Date(dateStr);
@@ -42,19 +126,138 @@ function getTotalReactions(reactions: Record<string, number>) {
   return Object.values(reactions).reduce((s, n) => s + n, 0);
 }
 
+function MasonryCard({
+  post,
+  height,
+  isAdmin,
+  isOwner,
+  onReact,
+  onDelete,
+  getCachedUrl,
+}: {
+  post: PostItem;
+  height: number | undefined;
+  isAdmin: boolean;
+  isOwner: (userId: string) => boolean;
+  onReact: (postId: string, myReaction: string | null, emoji: string) => void;
+  onDelete: (id: string) => void;
+  getCachedUrl: (id: string, originalUrl: string) => string;
+}) {
+  const totalReactions = getTotalReactions(post.reactions);
+  const displayHeight = height ?? ITEM_WIDTH * 1.25;
+  const cachedUrl = getCachedUrl(post.id, post.url);
+
+  return (
+    <View style={{ borderRadius: 14, overflow: 'hidden', backgroundColor: '#e5e7eb' }}>
+      {/* Media */}
+      <View style={{ height: displayHeight, backgroundColor: '#d1d5db', overflow: 'hidden' }}>
+        {post.type === 'video' ? (
+          <VideoPlayer uri={cachedUrl} />
+        ) : (
+          <Image
+            source={{ uri: cachedUrl }}
+            style={{ width: '100%', height: '100%' }}
+            contentFit="cover"
+          />
+        )}
+        {(isAdmin || isOwner(post.createdBy.userId)) && (
+          <Pressable
+            style={{ position: 'absolute', top: 6, right: 6, width: 28, height: 28, borderRadius: 14, backgroundColor: 'rgba(0,0,0,0.45)', alignItems: 'center', justifyContent: 'center' }}
+            onPress={() => onDelete(post.id)}
+          >
+            <Trash2 size={13} color="#fff" />
+          </Pressable>
+        )}
+      </View>
+
+      {/* Footer */}
+      <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 8, paddingVertical: 6, backgroundColor: '#fff', gap: 6 }}>
+        <Image
+          source={{ uri: post.createdBy.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(post.createdBy.name)}&size=64&background=e5e7eb` }}
+          style={{ width: 20, height: 20, borderRadius: 10, backgroundColor: '#e5e7eb' }}
+        />
+        <Text style={{ flex: 1, fontSize: 11, fontWeight: '600', color: '#374151' }} numberOfLines={1}>
+          {post.createdBy.name}
+        </Text>
+        <Pressable
+          style={{ flexDirection: 'row', alignItems: 'center', gap: 3 }}
+          onPress={() => onReact(post.id, post.myReaction, '❤️')}
+        >
+          <Heart size={13} color="#e11d48" fill={post.myReaction ? '#e11d48' : 'none'} />
+          {totalReactions > 0 && (
+            <Text style={{ fontSize: 11, fontWeight: '700', color: '#6b7280' }}>{totalReactions}</Text>
+          )}
+        </Pressable>
+      </View>
+    </View>
+  );
+}
+
 export default function GalleryScreen() {
   const queryClient = useQueryClient();
   const { isAdmin, isOwner } = useUserRole();
+  const { cacheLatestMedia, getCachedUrl, clearCache } = useGalleryCache();
 
   const queryOpts = orpc.gallery.getAllPosts.queryOptions({ input: { limit: 50 } });
   const { data, isPending, isError, refetch } = useQuery(queryOpts);
 
   const [refreshing, setRefreshing] = React.useState(false);
+  const [uploading, setUploading] = React.useState(false);
+
+  // Cache latest 10 posts when data loads (only when data changes, not on every render)
+  React.useEffect(() => {
+    if (data?.items && data.items.length > 0) {
+      const postsToCache = data.items.map((item: any) => ({
+        id: item.id,
+        url: item.url,
+        type: item.type,
+        createdAt: item.createdAt,
+      }));
+      cacheLatestMedia(postsToCache);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data?.items]);
+
   const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
+    // Clear cache on manual refresh to force re-download of latest media
+    await clearCache();
     await refetch();
     setRefreshing(false);
-  }, [refetch]);
+  }, [refetch, clearCache]);
+
+  const handleAddMedia = async () => {
+    const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (!permission.granted) {
+      Alert.alert('Permission required', 'Permission to access the media library is required.');
+      return;
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ['images', 'videos'],
+      allowsEditing: false,
+      quality: 0.8,
+    });
+
+    if (result.canceled || !result.assets[0]) return;
+
+    const asset = result.assets[0];
+    const isVideo = asset.mimeType?.startsWith('video/') || asset.type?.startsWith('video/');
+    setUploading(true);
+    try {
+      await uploadGalleryMedia({
+        uri: asset.uri,
+        type: asset.mimeType,
+        fileName: asset.fileName,
+        mediaType: isVideo ? 'video' : 'image',
+      });
+      queryClient.invalidateQueries({ queryKey: queryOpts.queryKey });
+    } catch (err: any) {
+      Alert.alert('Upload failed', err?.message ?? 'Something went wrong.');
+    } finally {
+      setUploading(false);
+    }
+  };
 
   const reactMutation = useMutation({
     ...orpc.gallery.reactPostById.mutationOptions(),
@@ -72,8 +275,7 @@ export default function GalleryScreen() {
   });
 
   const posts = data?.items ?? [];
-  const newestPost = posts[0];
-  const gridPosts = posts.slice(1);
+  const { left, right, heights } = useMasonryColumns(posts);
 
   const handleReact = (postId: string, myReaction: string | null, emoji: string) => {
     if (myReaction) {
@@ -100,17 +302,20 @@ export default function GalleryScreen() {
           <Pressable
             className="h-10 w-10 items-center justify-center rounded-full bg-primary"
             style={{ elevation: 4, shadowColor: 'rgba(19,236,91,0.3)', shadowOffset: { width: 0, height: 0 }, shadowOpacity: 1, shadowRadius: 15 }}
-            onPress={() => router.push('/modal/new-post')}
+            onPress={handleAddMedia}
+            disabled={uploading}
           >
-            <Plus size={20} color="#0a2e16" />
+            {uploading ? (
+              <ActivityIndicator size="small" color="#0a2e16" />
+            ) : (
+              <Plus size={20} color="#0a2e16" />
+            )}
           </Pressable>
         </View>
       </View>
 
       {isPending ? (
-        <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color="#13ec5b" />
-        </View>
+        <GallerySkeleton />
       ) : isError ? (
         <ErrorView onRetry={() => refetch()} />
       ) : (
@@ -127,115 +332,43 @@ export default function GalleryScreen() {
             />
           }
         >
-          <View className="px-4 gap-6 pt-2">
-            {/* Newest Memory */}
-            {newestPost && (
-              <View>
-                <View className="mb-3 flex-row items-center justify-between px-1">
-                  <Text className="text-lg font-bold text-[#111827]">Newest Memory</Text>
-                  <View className="rounded-full bg-primary/10 px-2.5 py-1">
-                    <Text className="text-xs font-medium text-primary">{formatTimeAgo(newestPost.createdAt)}</Text>
-                  </View>
-                </View>
-
-                <View className="overflow-hidden rounded-2xl bg-white" style={{ borderWidth: 1, borderColor: '#e5e7eb', elevation: 6, shadowColor: '#000', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.1, shadowRadius: 12 }}>
-                  {/* User row */}
-                  <View className="flex-row items-center gap-3 p-3">
-                    <Image
-                      source={{ uri: newestPost.createdBy.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(newestPost.createdBy.name)}&size=100` }}
-                      style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: '#e5e7eb' }}
-                    />
-                    <View className="flex-1">
-                      <Text className="text-sm font-bold text-[#111827]">{newestPost.createdBy.name}</Text>
-                      <Text className="text-xs text-gray-500">{formatTimeAgo(newestPost.createdAt)}</Text>
-                    </View>
-                    {(isAdmin || isOwner(newestPost.createdBy.userId)) && (
-                      <Pressable
-                        className="h-10 w-10 items-center justify-center"
-                        onPress={() => deletePostMutation.mutate({ id: newestPost.id })}
-                      >
-                        <Trash2 size={20} color="#ef4444" />
-                      </Pressable>
-                    )}
-                  </View>
-
-                  {/* Hero image */}
-                  <View style={{ aspectRatio: 4 / 3, backgroundColor: '#111827' }}>
-                    <Image
-                      source={{ uri: newestPost.url }}
-                      style={{ width: '100%', height: '100%' }}
-                      resizeMode="cover"
-                    />
-                    {newestPost.type === 'video' && (
-                      <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, alignItems: 'center', justifyContent: 'center' }}>
-                        <View style={{ width: 48, height: 48, borderRadius: 24, backgroundColor: 'rgba(255,255,255,0.2)', alignItems: 'center', justifyContent: 'center' }}>
-                          <Play size={24} color="#fff" fill="#fff" />
-                        </View>
-                      </View>
-                    )}
-                  </View>
-
-                  {/* Reactions */}
-                  <View className="flex-row items-center px-2 py-1.5" style={{ borderTopWidth: 1, borderTopColor: '#f3f4f6' }}>
-                    <Pressable
-                      className="flex-row items-center gap-1.5 px-3 py-2"
-                      onPress={() => handleReact(newestPost.id, newestPost.myReaction, '❤️')}
-                    >
-                      <Heart size={18} color="#e11d48" fill={newestPost.myReaction ? '#e11d48' : 'none'} />
-                      <Text className="text-sm font-bold text-gray-600">{getTotalReactions(newestPost.reactions)}</Text>
-                    </Pressable>
-                  </View>
-                </View>
-              </View>
-            )}
-
-            {/* Grid */}
-            {gridPosts.length > 0 && (
-              <View>
-                <View className="mb-3 flex-row items-center justify-between px-1 mt-2">
-                  <Text className="text-lg font-bold text-[#111827]">All Posts</Text>
-                </View>
-                <View className="flex-row flex-wrap" style={{ gap: GRID_GAP }}>
-                  {gridPosts.map((post) => {
-                    const totalReactions = getTotalReactions(post.reactions);
-                    return (
-                      <View
-                        key={post.id}
-                        style={{ width: ITEM_WIDTH, borderRadius: 12, overflow: 'hidden' }}
-                        className="bg-white"
-                      >
-                        <View style={{ aspectRatio: post.type === 'video' ? 1 : 3 / 4, backgroundColor: '#e5e7eb' }}>
-                          <Image
-                            source={{ uri: post.url }}
-                            style={{ width: '100%', height: '100%' }}
-                            resizeMode="cover"
-                          />
-
-                          {post.type === 'video' && (
-                            <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, alignItems: 'center', justifyContent: 'center' }}>
-                              <View style={{ width: 40, height: 40, borderRadius: 20, backgroundColor: 'rgba(255,255,255,0.2)', alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: 'rgba(255,255,255,0.3)' }}>
-                                <Play size={20} color="#fff" fill="#fff" />
-                              </View>
-                            </View>
-                          )}
-
-                          {totalReactions > 0 && (
-                            <View style={{ position: 'absolute', bottom: 8, right: 8, flexDirection: 'row', alignItems: 'center', gap: 4, backgroundColor: 'rgba(0,0,0,0.4)', paddingHorizontal: 8, paddingVertical: 4, borderRadius: 999 }}>
-                              <Heart size={14} color="#f43f5e" fill="#f43f5e" />
-                              <Text className="text-[10px] font-bold text-white">{totalReactions}</Text>
-                            </View>
-                          )}
-                        </View>
-                      </View>
-                    );
-                  })}
-                </View>
-              </View>
-            )}
-
-            {posts.length === 0 && (
+            <View style={{ paddingHorizontal: GRID_PADDING, paddingTop: 8 }}>
+            {posts.length === 0 ? (
               <View className="items-center py-16">
                 <Text className="text-slate-400 text-sm">No posts yet. Be the first!</Text>
+              </View>
+            ) : (
+              <View style={{ flexDirection: 'row', gap: GRID_GAP }}>
+                {/* Left column */}
+                <View style={{ flex: 1, gap: GRID_GAP }}>
+                  {left.map((post) => (
+                    <MasonryCard
+                      key={post.id}
+                      post={post}
+                      height={heights[post.id]}
+                      isAdmin={isAdmin}
+                      isOwner={isOwner}
+                      onReact={handleReact}
+                      onDelete={(id: string) => deletePostMutation.mutate({ id })}
+                      getCachedUrl={getCachedUrl}
+                    />
+                  ))}
+                </View>
+                {/* Right column */}
+                <View style={{ flex: 1, gap: GRID_GAP }}>
+                  {right.map((post) => (
+                    <MasonryCard
+                      key={post.id}
+                      post={post}
+                      height={heights[post.id]}
+                      isAdmin={isAdmin}
+                      isOwner={isOwner}
+                      onReact={handleReact}
+                      getCachedUrl={getCachedUrl}
+                      onDelete={(id: string) => deletePostMutation.mutate({ id })}
+                    />
+                  ))}
+                </View>
               </View>
             )}
           </View>

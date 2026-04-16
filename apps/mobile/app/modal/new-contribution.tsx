@@ -6,14 +6,8 @@ import { Image } from 'expo-image';
 import { ArrowLeft, Banknote, User, ChevronDown, ArrowUp, ArrowDown } from 'lucide-react-native';
 import * as React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import {
-  Alert,
-  FlatList,
-  Modal,
-  Pressable,
-  TextInput,
-  View,
-} from 'react-native';
+import { Alert, FlatList, Modal } from 'react-native';
+import { View, Pressable, TextInput } from '@/tw';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 function formatCurrency(amount: number) {
@@ -38,11 +32,16 @@ export default function NewContributionScreen() {
 
   const selectedUser = users.find((u: any) => u.id === userId);
 
+  const invalidateDashboard = () => {
+    queryClient.invalidateQueries({ queryKey: orpc.dashboard.getDashboardSummary.queryOptions().queryKey });
+  };
+
   const createMutation = useMutation({
     ...orpc.funds.createContribution.mutationOptions(),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: orpc.funds.getAllContributions.queryOptions({ input: { limit: 50 } }).queryKey });
       queryClient.invalidateQueries({ queryKey: orpc.funds.getFund.queryOptions().queryKey });
+      invalidateDashboard();
       router.back();
       Alert.alert('Success', 'Transaksi berhasil ditambahkan!');
     },

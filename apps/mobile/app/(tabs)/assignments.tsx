@@ -11,15 +11,86 @@ import {
   CheckCircle,
   MoreHorizontal,
   Plus,
+  Users,
+  Trash2,
+  Pencil,
 } from 'lucide-react-native';
 import * as React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ActivityIndicator, View, ScrollView, Pressable, RefreshControl } from 'react-native';
+import { RefreshControl, Alert } from 'react-native';
+import { View, ScrollView, Pressable } from '@/tw';
+import Animated, { useSharedValue, useAnimatedStyle, withSpring, withTiming } from 'react-native-reanimated';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { orpc } from '@/lib/api';
 import { useUserRole } from '@/lib/hooks/useUserRole';
 import { authClient } from '@/lib/auth-client';
 import { router } from 'expo-router';
+import { SkeletonBox } from '@/components/ui/skeleton';
+
+// Animated progress bar for weekly goal
+function AnimatedProgressBar({ percentage }: { percentage: number }) {
+  const progress = useSharedValue(0);
+  const hasAnimated = React.useRef(false);
+
+  React.useEffect(() => {
+    if (!hasAnimated.current) {
+      // Start from 0 and animate to target on first load
+      progress.value = 0;
+      const timeout = setTimeout(() => {
+        progress.value = withSpring(percentage / 100, {
+          damping: 18,
+          stiffness: 120,
+          mass: 1,
+        });
+      }, 150);
+      hasAnimated.current = true;
+      return () => clearTimeout(timeout);
+    } else {
+      // Animate to new value on updates
+      progress.value = withSpring(percentage / 100, {
+        damping: 18,
+        stiffness: 120,
+        mass: 1,
+      });
+    }
+  }, [percentage, progress]);
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    width: `${progress.value * 100}%`,
+  }));
+
+  return (
+    <View style={{ height: 12, backgroundColor: '#f3f4f6', borderRadius: 9999, overflow: 'hidden' }}>
+      <Animated.View
+        style={[animatedStyle, { height: 12, backgroundColor: '#0fae43', borderRadius: 9999 }]}
+      />
+    </View>
+  );
+}
+
+function AssignmentsSkeleton() {
+  return (
+    <View style={{ paddingHorizontal: 16, paddingTop: 8, gap: 16 }}>
+      {/* Greeting */}
+      <SkeletonBox width={220} height={28} borderRadius={8} />
+      <SkeletonBox width={180} height={14} borderRadius={6} />
+      {/* Progress card */}
+      <SkeletonBox height={96} borderRadius={12} />
+      {/* Filter pills */}
+      <View style={{ flexDirection: 'row', gap: 10 }}>
+        <SkeletonBox width={60} height={34} borderRadius={17} />
+        <SkeletonBox width={80} height={34} borderRadius={17} />
+        <SkeletonBox width={90} height={34} borderRadius={17} />
+      </View>
+      {/* Section label */}
+      <SkeletonBox width={60} height={18} borderRadius={6} />
+      {/* Task cards */}
+      {[0, 1, 2, 3, 4].map((i) => (
+        <SkeletonBox key={i} height={88} borderRadius={12} />
+      ))}
+    </View>
+  );
+}
 
 const TASK_FILTERS = ['All', 'Pending', 'Completed'] as const;
 
@@ -82,14 +153,32 @@ export default function AssignmentsScreen() {
     setRefreshing(false);
   }, [refetch]);
 
+  const invalidateDashboard = () => {
+    queryClient.invalidateQueries({ queryKey: orpc.dashboard.getDashboardSummary.queryOptions().queryKey });
+  };
+
   const markMutation = useMutation({
     ...orpc.assignments.markAssignment.mutationOptions(),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: orpc.assignments.getAllAssignments.queryOptions({ input: { limit: 50 } }).queryKey }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: orpc.assignments.getAllAssignments.queryOptions({ input: { limit: 50 } }).queryKey });
+      invalidateDashboard();
+    },
   });
 
   const unmarkMutation = useMutation({
     ...orpc.assignments.unmarkAssignment.mutationOptions(),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: orpc.assignments.getAllAssignments.queryOptions({ input: { limit: 50 } }).queryKey }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: orpc.assignments.getAllAssignments.queryOptions({ input: { limit: 50 } }).queryKey });
+      invalidateDashboard();
+    },
+  });
+
+  const deleteMutation = useMutation({
+    ...orpc.assignments.deleteAssignment.mutationOptions(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: orpc.assignments.getAllAssignments.queryOptions({ input: { limit: 50 } }).queryKey });
+      invalidateDashboard();
+    },
   });
 
   const assignments = data?.items ?? [];
@@ -115,8 +204,11 @@ export default function AssignmentsScreen() {
       markMutation.mutate({ id });
     }
   };
+  const {
+        data: profile,
+      } = useQuery(orpc.profiles.getMe.queryOptions());
 
-  const userName = session?.user?.name?.split(' ')[0] ?? 'Student';
+  const userName = profile?.name.split(" ")[0]
 
   const renderAssignmentCard = (a: (typeof assignments)[number]) => {
     const colors = getSubjectColor(a.subject.name);
@@ -137,6 +229,22 @@ export default function AssignmentsScreen() {
           </View>
           {a.done ? (
             <CheckCircle size={20} color="#13ec5b" />
+          ) : canWrite('assignments') ? (
+            <Pressable
+              onPress={() => {
+                Alert.alert(
+                  a.title,
+                  'Pilih aksi',
+                  [
+                    { text: 'Edit', onPress: () => router.push(`/modal/new-assignment?id=${a.id}` as any) },
+                    { text: 'Hapus', style: 'destructive', onPress: () => deleteMutation.mutate({ id: a.id }) },
+                    { text: 'Batal', style: 'cancel' },
+                  ]
+                );
+              }}
+            >
+              <MoreHorizontal size={20} color="#cbd5e1" />
+            </Pressable>
           ) : (
             <MoreHorizontal size={20} color="#cbd5e1" />
           )}
@@ -188,28 +296,10 @@ export default function AssignmentsScreen() {
           <Text className="text-xl font-bold tracking-[-0.015em] text-foreground flex-1">
             Tugas Saya
           </Text>
-          <View className="flex-row gap-3">
-            <Pressable className="w-10 h-10 items-center justify-center">
-              <Search size={24} color="#111827" />
-            </Pressable>
-            <Pressable className="w-10 h-10 items-center justify-center">
-              <ListFilter size={24} color="#111827" />
-            </Pressable>
-          </View>
-        <View className="flex-row gap-3">
-          <Pressable className="w-10 h-10 items-center justify-center">
-            <Search size={24} color="#111827" />
-          </Pressable>
-          <Pressable className="w-10 h-10 items-center justify-center">
-            <ListFilter size={24} color="#111827" />
-          </Pressable>
         </View>
-      </View>
 
       {isPending ? (
-        <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color="#13ec5b" />
-        </View>
+        <AssignmentsSkeleton />
       ) : isError ? (
         <ErrorView onRetry={() => refetch()} />
       ) : (
@@ -249,9 +339,7 @@ export default function AssignmentsScreen() {
                   <Text className="text-xs font-bold text-green-700">{doneCount}/{totalCount} Done</Text>
                 </View>
               </View>
-              <View className="h-3 bg-gray-100 rounded-full overflow-hidden">
-                <View className="h-full bg-primary rounded-full" style={{ width: `${pct}%` }} />
-              </View>
+              <AnimatedProgressBar percentage={pct} />
             </View>
 
             {/* Filter pills */}
@@ -332,9 +420,15 @@ export default function AssignmentsScreen() {
         </ScrollView>
       )}
 
-      {/* FAB — only for mentor/admin */}
+      {/* FABs — only for mentor/admin */}
       {canWrite('assignments') && (
-        <View className="absolute bottom-24 right-6 z-40">
+        <View className="absolute bottom-24 right-6 z-40 gap-3">
+          <Pressable
+            className="w-14 h-14 rounded-full bg-white border-2 border-primary items-center justify-center shadow-lg"
+            onPress={() => router.push('/modal/mentor-assignments' as any)}
+          >
+            <Users size={24} color="#0fae43" />
+          </Pressable>
           <Pressable
             className="w-14 h-14 rounded-full bg-primary items-center justify-center shadow-lg"
             onPress={() => router.push('/modal/new-assignment' as any)}

@@ -5,14 +5,8 @@ import { Stack, router } from 'expo-router';
 import { ArrowRight, Smartphone } from 'lucide-react-native';
 import * as React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import {
-  Alert,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  TextInput,
-  View,
-} from 'react-native';
+import { Alert, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, ScrollView, TextInput } from '@/tw';
 
 export default function LoginScreen() {
   const [countryCode, setCountryCode] = React.useState('+62');

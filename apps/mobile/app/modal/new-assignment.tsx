@@ -1,22 +1,19 @@
 import { Text } from '@/components/ui/text';
 import { Button } from '@/components/ui/button';
 import { orpc } from '@/lib/api';
-import { Stack, router } from 'expo-router';
+import { Stack, router, useLocalSearchParams } from 'expo-router';
 import { ArrowLeft, Calendar, ChevronDown, BookOpen, FileText } from 'lucide-react-native';
 import * as React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import {
-  Alert,
-  FlatList,
-  Modal,
-  Pressable,
-  TextInput,
-  View,
-} from 'react-native';
+import { Alert, FlatList, Modal, ActivityIndicator } from 'react-native';
+import { View, Pressable, TextInput, ScrollView } from '@/tw';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 export default function NewAssignmentScreen() {
   const queryClient = useQueryClient();
+  const { id } = useLocalSearchParams<{ id?: string }>();
+  const isEditing = !!id;
+
   const [title, setTitle] = React.useState('');
   const [description, setDescription] = React.useState('');
   const [subjectId, setSubjectId] = React.useState<string | null>(null);
@@ -33,15 +30,60 @@ export default function NewAssignmentScreen() {
 
   const selectedSubject = subjects.find((s: any) => s.id === subjectId);
 
+  // Fetch assignment data if editing
+  const { data: assignmentData, isPending: isLoadingAssignment } = useQuery({
+    ...orpc.assignments.getAllAssignments.queryOptions({ input: { limit: 50 } }),
+    enabled: isEditing,
+  });
+
+  // Populate form when editing
+  React.useEffect(() => {
+    if (isEditing && assignmentData?.items) {
+      const assignment = assignmentData.items.find((a: any) => a.id === id);
+      if (assignment) {
+        setTitle(assignment.title);
+        setDescription(assignment.description || '');
+        setSubjectId(assignment.subject.id);
+        const due = new Date(assignment.dueDate);
+        setDueDate(due);
+        const year = due.getFullYear();
+        const month = String(due.getMonth() + 1).padStart(2, '0');
+        const day = String(due.getDate()).padStart(2, '0');
+        const hours = String(due.getHours()).padStart(2, '0');
+        const minutes = String(due.getMinutes()).padStart(2, '0');
+        setDateInput(`${year}-${month}-${day}`);
+        setTimeInput(`${hours}:${minutes}`);
+      }
+    }
+  }, [isEditing, assignmentData, id]);
+
+  const invalidateDashboard = () => {
+    queryClient.invalidateQueries({ queryKey: orpc.dashboard.getDashboardSummary.queryOptions().queryKey });
+  };
+
   const createMutation = useMutation({
     ...orpc.assignments.createAssignment.mutationOptions(),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: orpc.assignments.getAllAssignments.queryOptions({ input: { limit: 50 } }).queryKey });
+      invalidateDashboard();
       router.back();
       Alert.alert('Success', 'Tugas berhasil ditambahkan!');
     },
-    onError: (err) => {
+    onError: (err: any) => {
       Alert.alert('Error', err.message ?? 'Gagal menambahkan tugas.');
+    },
+  });
+
+  const updateMutation = useMutation({
+    ...orpc.assignments.updateAssignment.mutationOptions(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: orpc.assignments.getAllAssignments.queryOptions({ input: { limit: 50 } }).queryKey });
+      invalidateDashboard();
+      router.back();
+      Alert.alert('Success', 'Tugas berhasil diperbarui!');
+    },
+    onError: (err: any) => {
+      Alert.alert('Error', err.message ?? 'Gagal memperbarui tugas.');
     },
   });
 
@@ -63,16 +105,38 @@ export default function NewAssignmentScreen() {
     }
 
     setSubmitting(true);
-    createMutation.mutate({
-      title: title.trim(),
-      description: description.trim() || undefined,
-      dueDate: dueDate.toISOString(),
-      subjectId,
-    });
+    if (isEditing) {
+      updateMutation.mutate({
+        id: id!,
+        title: title.trim(),
+        description: description.trim() || undefined,
+        dueDate: dueDate.toISOString(),
+        subjectId,
+      });
+    } else {
+      createMutation.mutate({
+        title: title.trim(),
+        description: description.trim() || undefined,
+        dueDate: dueDate.toISOString(),
+        subjectId,
+      });
+    }
     setSubmitting(false);
   };
 
   const isValid = title.trim().length >= 1 && subjectId !== null;
+
+  if (isEditing && isLoadingAssignment) {
+    return (
+      <SafeAreaView className="flex-1 bg-white" edges={['top']}>
+        <Stack.Screen options={{ headerShown: false, presentation: 'modal', animation: 'slide_from_bottom' }} />
+        <View className="flex-1 items-center justify-center">
+          <ActivityIndicator size="large" color="#0ea340" />
+          <Text className="text-slate-400 mt-4">Memuat tugas...</Text>
+        </View>
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView className="flex-1 bg-white" edges={['top']}>
@@ -86,7 +150,7 @@ export default function NewAssignmentScreen() {
         >
           <ArrowLeft size={24} color="#111827" />
         </Pressable>
-        <Text className="text-lg font-bold text-foreground">Tambah Tugas</Text>
+        <Text className="text-lg font-bold text-foreground">{isEditing ? 'Edit Tugas' : 'Tambah Tugas'}</Text>
         <View className="h-10 w-10" />
       </View>
 
@@ -195,11 +259,13 @@ export default function NewAssignmentScreen() {
       <View className="px-4 pb-8 pt-4 border-t border-gray-200">
         <Button
           onPress={handleSubmit}
-          disabled={!isValid || submitting || createMutation.isPending}
+          disabled={!isValid || submitting || createMutation.isPending || updateMutation.isPending}
           className="w-full h-14 rounded-xl flex-row items-center justify-center gap-2"
         >
           <Text className="text-lg font-bold tracking-tight" style={{ color: '#0a2e16' }}>
-            {submitting || createMutation.isPending ? 'Menyimpan...' : 'Simpan Tugas'}
+            {submitting || createMutation.isPending || updateMutation.isPending
+              ? 'Menyimpan...'
+              : isEditing ? 'Perbarui Tugas' : 'Simpan Tugas'}
           </Text>
         </Button>
       </View>

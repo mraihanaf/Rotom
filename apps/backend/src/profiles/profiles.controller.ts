@@ -60,4 +60,26 @@ export class ProfilesController {
         };
       });
   }
+
+  @Implement(contract.profiles.updateProfileImage)
+  updateProfileImage() {
+    return implement(contract.profiles.updateProfileImage)
+      .use(protectedRoute)
+      .handler(async ({ input, context }) => {
+        const updatedUser = await this.profilesService.updateProfileImage(
+          context.session!.user.id,
+          input.file,
+        );
+        return {
+          id: updatedUser.id,
+          createdAt: updatedUser.createdAt,
+          image: updatedUser.image,
+          name: updatedUser.name,
+          phoneNumber: updatedUser.phoneNumber,
+          birthday: updatedUser.birthday,
+          role: updatedUser.role,
+          isProfileComplete: updatedUser.isProfileComplete,
+        };
+      });
+  }
 }

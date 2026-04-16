@@ -182,7 +182,7 @@ export type FundGroupByOutputType = {
   _max: FundMaxAggregateOutputType | null
 }
 
-type GetFundGroupByPayload<T extends FundGroupByArgs> = Prisma.PrismaPromise<
+export type GetFundGroupByPayload<T extends FundGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<FundGroupByOutputType, T['by']> &
       {
@@ -1082,6 +1082,11 @@ export type FundFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    * Skip the first `n` Funds.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of Funds.
+   */
   distinct?: Prisma.FundScalarFieldEnum | Prisma.FundScalarFieldEnum[]
 }
 

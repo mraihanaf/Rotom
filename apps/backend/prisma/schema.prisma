@@ -15,10 +15,10 @@ datasource db {
 }
 
 model Organization {
-  id Int @id @default(1)
-  name String
+  id          Int      @id @default(1)
+  name        String
   description String?
-  image String?
+  image       String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
@@ -42,6 +42,7 @@ model User {
 
   galleryPosts     GalleryPost[]
   galleryReactions GalleryPostReaction[]
+  dutySchedules    DutySchedule[]
 
   phoneNumber         String?
   phoneNumberVerified Boolean?
@@ -53,8 +54,8 @@ model User {
   birthday            DateTime?
 
   @@unique([email])
-  @@map("user")
   @@unique([phoneNumber])
+  @@map("user")
 }
 
 model Session {
@@ -113,7 +114,8 @@ model Subject {
 
   schedules   SubjectSchedule[]
   assignments Assignment[]
-  createdAt   DateTime     @default(now())
+  createdAt   DateTime          @default(now())
+
   @@unique([name])
 }
 
@@ -122,9 +124,9 @@ model SubjectSchedule {
   subjectId String
   subject   Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
 
-  dayOfWeek Int     // 0=Sunday .. 6=Saturday
-  startTime String  // "08:00"
-  endTime   String  // "09:30"
+  dayOfWeek Int // 0=Sunday .. 6=Saturday
+  startTime String // "08:00"
+  endTime   String // "09:30"
   room      String?
 
   createdAt DateTime @default(now())
@@ -169,7 +171,7 @@ model AssignmentStatus {
 model Fund {
   id               Int                   @id @default(1)
   totalAmount      Float                 @default(0)
-  currency         String               @default("idr")
+  currency         String                @default("idr")
   contributionLogs FundContributionLog[]
 }
 
@@ -182,10 +184,10 @@ model FundContributionLog {
   reporter      User    @relation("ReporterLogs", fields: [reporterId], references: [id], onDelete: Cascade)
   contributor   User?   @relation("ContributorLogs", fields: [contributorId], references: [id], onDelete: Cascade)
 
-  currency String              @default("idr")
-  amount   Float
-  note     String?
-  type     FundTransactionType @default(INCOME)
+  currency  String              @default("idr")
+  amount    Float
+  note      String?
+  type      FundTransactionType @default(INCOME)
   createdAt DateTime            @default(now())
 
   @@index([reporterId])
@@ -204,44 +206,59 @@ enum MediaType {
 }
 
 model GalleryPost {
-  id          String @id @default(cuid())
-  userId String
-  createdBy   User   @relation(fields: [userId], references: [id])
+  id        String @id @default(cuid())
+  userId    String
+  createdBy User   @relation(fields: [userId], references: [id])
 
   reactions GalleryPostReaction[]
-  
+
   mediaKey String @unique
 
-  type      MediaType
-  
-  createdAt DateTime  @default(now())
+  type MediaType
+
+  createdAt DateTime @default(now())
+
   @@index([userId])
   @@index([createdAt])
 }
 
-
 model GalleryPostReaction {
-  id        String   @id @default(cuid())
-  post     GalleryPost  @relation(fields: [postId], references: [id], onDelete: Cascade)
-  postId   String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id        String      @id @default(cuid())
+  post      GalleryPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    String
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
   emoji     String
-  createdAt DateTime @default(now())
+  createdAt DateTime    @default(now())
+
   @@unique([postId, userId])
   @@index([postId])
 }
 
-model Duty {
-  id    String @id @default(cuid())
-  title String
-  // i'll add this later
-
+model DutyType {
+  id        String   @id @default(cuid())
+  name      String
+  category  String // "CLEANING" | "MBG"
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  schedules DutySchedule[]
 }
 
 model DutySchedule {
-  id String @id @default(cuid())
+  id          String    @id @default(cuid())
+  dutyTypeId  String
+  userId      String
+  dayOfWeek   Int // 1=Monday, 5=Friday
+  status      String    @default("SCHEDULED") // SCHEDULED | COMPLETED | MISSED | EXCUSED
+  completedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  dutyType DutyType @relation(fields: [dutyTypeId], references: [id], onDelete: Cascade)
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([dutyTypeId, userId, dayOfWeek])
 }
 
 model Settings {

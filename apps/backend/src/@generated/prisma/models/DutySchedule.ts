@@ -20,34 +20,94 @@ export type DutyScheduleModel = runtime.Types.Result.DefaultSelection<Prisma.$Du
 
 export type AggregateDutySchedule = {
   _count: DutyScheduleCountAggregateOutputType | null
+  _avg: DutyScheduleAvgAggregateOutputType | null
+  _sum: DutyScheduleSumAggregateOutputType | null
   _min: DutyScheduleMinAggregateOutputType | null
   _max: DutyScheduleMaxAggregateOutputType | null
 }
 
+export type DutyScheduleAvgAggregateOutputType = {
+  dayOfWeek: number | null
+}
+
+export type DutyScheduleSumAggregateOutputType = {
+  dayOfWeek: number | null
+}
+
 export type DutyScheduleMinAggregateOutputType = {
   id: string | null
+  dutyTypeId: string | null
+  userId: string | null
+  dayOfWeek: number | null
+  status: string | null
+  completedAt: Date | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type DutyScheduleMaxAggregateOutputType = {
   id: string | null
+  dutyTypeId: string | null
+  userId: string | null
+  dayOfWeek: number | null
+  status: string | null
+  completedAt: Date | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type DutyScheduleCountAggregateOutputType = {
   id: number
+  dutyTypeId: number
+  userId: number
+  dayOfWeek: number
+  status: number
+  completedAt: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
 
+export type DutyScheduleAvgAggregateInputType = {
+  dayOfWeek?: true
+}
+
+export type DutyScheduleSumAggregateInputType = {
+  dayOfWeek?: true
+}
+
 export type DutyScheduleMinAggregateInputType = {
   id?: true
+  dutyTypeId?: true
+  userId?: true
+  dayOfWeek?: true
+  status?: true
+  completedAt?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type DutyScheduleMaxAggregateInputType = {
   id?: true
+  dutyTypeId?: true
+  userId?: true
+  dayOfWeek?: true
+  status?: true
+  completedAt?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type DutyScheduleCountAggregateInputType = {
   id?: true
+  dutyTypeId?: true
+  userId?: true
+  dayOfWeek?: true
+  status?: true
+  completedAt?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -89,6 +149,18 @@ export type DutyScheduleAggregateArgs<ExtArgs extends runtime.Types.Extensions.I
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: DutyScheduleAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: DutyScheduleSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: DutyScheduleMinAggregateInputType
@@ -119,18 +191,29 @@ export type DutyScheduleGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   _count?: DutyScheduleCountAggregateInputType | true
+  _avg?: DutyScheduleAvgAggregateInputType
+  _sum?: DutyScheduleSumAggregateInputType
   _min?: DutyScheduleMinAggregateInputType
   _max?: DutyScheduleMaxAggregateInputType
 }
 
 export type DutyScheduleGroupByOutputType = {
   id: string
+  dutyTypeId: string
+  userId: string
+  dayOfWeek: number
+  status: string
+  completedAt: Date | null
+  createdAt: Date
+  updatedAt: Date
   _count: DutyScheduleCountAggregateOutputType | null
+  _avg: DutyScheduleAvgAggregateOutputType | null
+  _sum: DutyScheduleSumAggregateOutputType | null
   _min: DutyScheduleMinAggregateOutputType | null
   _max: DutyScheduleMaxAggregateOutputType | null
 }
 
-type GetDutyScheduleGroupByPayload<T extends DutyScheduleGroupByArgs> = Prisma.PrismaPromise<
+export type GetDutyScheduleGroupByPayload<T extends DutyScheduleGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<DutyScheduleGroupByOutputType, T['by']> &
       {
@@ -150,24 +233,61 @@ export type DutyScheduleWhereInput = {
   OR?: Prisma.DutyScheduleWhereInput[]
   NOT?: Prisma.DutyScheduleWhereInput | Prisma.DutyScheduleWhereInput[]
   id?: Prisma.StringFilter<"DutySchedule"> | string
+  dutyTypeId?: Prisma.StringFilter<"DutySchedule"> | string
+  userId?: Prisma.StringFilter<"DutySchedule"> | string
+  dayOfWeek?: Prisma.IntFilter<"DutySchedule"> | number
+  status?: Prisma.StringFilter<"DutySchedule"> | string
+  completedAt?: Prisma.DateTimeNullableFilter<"DutySchedule"> | Date | string | null
+  createdAt?: Prisma.DateTimeFilter<"DutySchedule"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"DutySchedule"> | Date | string
+  dutyType?: Prisma.XOR<Prisma.DutyTypeScalarRelationFilter, Prisma.DutyTypeWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type DutyScheduleOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  dutyTypeId?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  dayOfWeek?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  completedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  dutyType?: Prisma.DutyTypeOrderByWithRelationInput
+  user?: Prisma.UserOrderByWithRelationInput
 }
 
 export type DutyScheduleWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  dutyTypeId_userId_dayOfWeek?: Prisma.DutyScheduleDutyTypeIdUserIdDayOfWeekCompoundUniqueInput
   AND?: Prisma.DutyScheduleWhereInput | Prisma.DutyScheduleWhereInput[]
   OR?: Prisma.DutyScheduleWhereInput[]
   NOT?: Prisma.DutyScheduleWhereInput | Prisma.DutyScheduleWhereInput[]
-}, "id">
+  dutyTypeId?: Prisma.StringFilter<"DutySchedule"> | string
+  userId?: Prisma.StringFilter<"DutySchedule"> | string
+  dayOfWeek?: Prisma.IntFilter<"DutySchedule"> | number
+  status?: Prisma.StringFilter<"DutySchedule"> | string
+  completedAt?: Prisma.DateTimeNullableFilter<"DutySchedule"> | Date | string | null
+  createdAt?: Prisma.DateTimeFilter<"DutySchedule"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"DutySchedule"> | Date | string
+  dutyType?: Prisma.XOR<Prisma.DutyTypeScalarRelationFilter, Prisma.DutyTypeWhereInput>
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+}, "id" | "dutyTypeId_userId_dayOfWeek">
 
 export type DutyScheduleOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  dutyTypeId?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  dayOfWeek?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  completedAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.DutyScheduleCountOrderByAggregateInput
+  _avg?: Prisma.DutyScheduleAvgOrderByAggregateInput
   _max?: Prisma.DutyScheduleMaxOrderByAggregateInput
   _min?: Prisma.DutyScheduleMinOrderByAggregateInput
+  _sum?: Prisma.DutyScheduleSumOrderByAggregateInput
 }
 
 export type DutyScheduleScalarWhereWithAggregatesInput = {
@@ -175,73 +295,496 @@ export type DutyScheduleScalarWhereWithAggregatesInput = {
   OR?: Prisma.DutyScheduleScalarWhereWithAggregatesInput[]
   NOT?: Prisma.DutyScheduleScalarWhereWithAggregatesInput | Prisma.DutyScheduleScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"DutySchedule"> | string
+  dutyTypeId?: Prisma.StringWithAggregatesFilter<"DutySchedule"> | string
+  userId?: Prisma.StringWithAggregatesFilter<"DutySchedule"> | string
+  dayOfWeek?: Prisma.IntWithAggregatesFilter<"DutySchedule"> | number
+  status?: Prisma.StringWithAggregatesFilter<"DutySchedule"> | string
+  completedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"DutySchedule"> | Date | string | null
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"DutySchedule"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"DutySchedule"> | Date | string
 }
 
 export type DutyScheduleCreateInput = {
   id?: string
+  dayOfWeek: number
+  status?: string
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  dutyType: Prisma.DutyTypeCreateNestedOneWithoutSchedulesInput
+  user: Prisma.UserCreateNestedOneWithoutDutySchedulesInput
 }
 
 export type DutyScheduleUncheckedCreateInput = {
   id?: string
+  dutyTypeId: string
+  userId: string
+  dayOfWeek: number
+  status?: string
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type DutyScheduleUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  dayOfWeek?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dutyType?: Prisma.DutyTypeUpdateOneRequiredWithoutSchedulesNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutDutySchedulesNestedInput
 }
 
 export type DutyScheduleUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  dutyTypeId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  dayOfWeek?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type DutyScheduleCreateManyInput = {
   id?: string
+  dutyTypeId: string
+  userId: string
+  dayOfWeek: number
+  status?: string
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type DutyScheduleUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  dayOfWeek?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type DutyScheduleUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  dutyTypeId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  dayOfWeek?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type DutyScheduleListRelationFilter = {
+  every?: Prisma.DutyScheduleWhereInput
+  some?: Prisma.DutyScheduleWhereInput
+  none?: Prisma.DutyScheduleWhereInput
+}
+
+export type DutyScheduleOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
+export type DutyScheduleDutyTypeIdUserIdDayOfWeekCompoundUniqueInput = {
+  dutyTypeId: string
+  userId: string
+  dayOfWeek: number
 }
 
 export type DutyScheduleCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  dutyTypeId?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  dayOfWeek?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  completedAt?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+}
+
+export type DutyScheduleAvgOrderByAggregateInput = {
+  dayOfWeek?: Prisma.SortOrder
 }
 
 export type DutyScheduleMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  dutyTypeId?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  dayOfWeek?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  completedAt?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type DutyScheduleMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  dutyTypeId?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  dayOfWeek?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  completedAt?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+}
+
+export type DutyScheduleSumOrderByAggregateInput = {
+  dayOfWeek?: Prisma.SortOrder
+}
+
+export type DutyScheduleCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.DutyScheduleCreateWithoutUserInput, Prisma.DutyScheduleUncheckedCreateWithoutUserInput> | Prisma.DutyScheduleCreateWithoutUserInput[] | Prisma.DutyScheduleUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.DutyScheduleCreateOrConnectWithoutUserInput | Prisma.DutyScheduleCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.DutyScheduleCreateManyUserInputEnvelope
+  connect?: Prisma.DutyScheduleWhereUniqueInput | Prisma.DutyScheduleWhereUniqueInput[]
+}
+
+export type DutyScheduleUncheckedCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.DutyScheduleCreateWithoutUserInput, Prisma.DutyScheduleUncheckedCreateWithoutUserInput> | Prisma.DutyScheduleCreateWithoutUserInput[] | Prisma.DutyScheduleUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.DutyScheduleCreateOrConnectWithoutUserInput | Prisma.DutyScheduleCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.DutyScheduleCreateManyUserInputEnvelope
+  connect?: Prisma.DutyScheduleWhereUniqueInput | Prisma.DutyScheduleWhereUniqueInput[]
+}
+
+export type DutyScheduleUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.DutyScheduleCreateWithoutUserInput, Prisma.DutyScheduleUncheckedCreateWithoutUserInput> | Prisma.DutyScheduleCreateWithoutUserInput[] | Prisma.DutyScheduleUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.DutyScheduleCreateOrConnectWithoutUserInput | Prisma.DutyScheduleCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.DutyScheduleUpsertWithWhereUniqueWithoutUserInput | Prisma.DutyScheduleUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.DutyScheduleCreateManyUserInputEnvelope
+  set?: Prisma.DutyScheduleWhereUniqueInput | Prisma.DutyScheduleWhereUniqueInput[]
+  disconnect?: Prisma.DutyScheduleWhereUniqueInput | Prisma.DutyScheduleWhereUniqueInput[]
+  delete?: Prisma.DutyScheduleWhereUniqueInput | Prisma.DutyScheduleWhereUniqueInput[]
+  connect?: Prisma.DutyScheduleWhereUniqueInput | Prisma.DutyScheduleWhereUniqueInput[]
+  update?: Prisma.DutyScheduleUpdateWithWhereUniqueWithoutUserInput | Prisma.DutyScheduleUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.DutyScheduleUpdateManyWithWhereWithoutUserInput | Prisma.DutyScheduleUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.DutyScheduleScalarWhereInput | Prisma.DutyScheduleScalarWhereInput[]
+}
+
+export type DutyScheduleUncheckedUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.DutyScheduleCreateWithoutUserInput, Prisma.DutyScheduleUncheckedCreateWithoutUserInput> | Prisma.DutyScheduleCreateWithoutUserInput[] | Prisma.DutyScheduleUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.DutyScheduleCreateOrConnectWithoutUserInput | Prisma.DutyScheduleCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.DutyScheduleUpsertWithWhereUniqueWithoutUserInput | Prisma.DutyScheduleUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.DutyScheduleCreateManyUserInputEnvelope
+  set?: Prisma.DutyScheduleWhereUniqueInput | Prisma.DutyScheduleWhereUniqueInput[]
+  disconnect?: Prisma.DutyScheduleWhereUniqueInput | Prisma.DutyScheduleWhereUniqueInput[]
+  delete?: Prisma.DutyScheduleWhereUniqueInput | Prisma.DutyScheduleWhereUniqueInput[]
+  connect?: Prisma.DutyScheduleWhereUniqueInput | Prisma.DutyScheduleWhereUniqueInput[]
+  update?: Prisma.DutyScheduleUpdateWithWhereUniqueWithoutUserInput | Prisma.DutyScheduleUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.DutyScheduleUpdateManyWithWhereWithoutUserInput | Prisma.DutyScheduleUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.DutyScheduleScalarWhereInput | Prisma.DutyScheduleScalarWhereInput[]
+}
+
+export type DutyScheduleCreateNestedManyWithoutDutyTypeInput = {
+  create?: Prisma.XOR<Prisma.DutyScheduleCreateWithoutDutyTypeInput, Prisma.DutyScheduleUncheckedCreateWithoutDutyTypeInput> | Prisma.DutyScheduleCreateWithoutDutyTypeInput[] | Prisma.DutyScheduleUncheckedCreateWithoutDutyTypeInput[]
+  connectOrCreate?: Prisma.DutyScheduleCreateOrConnectWithoutDutyTypeInput | Prisma.DutyScheduleCreateOrConnectWithoutDutyTypeInput[]
+  createMany?: Prisma.DutyScheduleCreateManyDutyTypeInputEnvelope
+  connect?: Prisma.DutyScheduleWhereUniqueInput | Prisma.DutyScheduleWhereUniqueInput[]
+}
+
+export type DutyScheduleUncheckedCreateNestedManyWithoutDutyTypeInput = {
+  create?: Prisma.XOR<Prisma.DutyScheduleCreateWithoutDutyTypeInput, Prisma.DutyScheduleUncheckedCreateWithoutDutyTypeInput> | Prisma.DutyScheduleCreateWithoutDutyTypeInput[] | Prisma.DutyScheduleUncheckedCreateWithoutDutyTypeInput[]
+  connectOrCreate?: Prisma.DutyScheduleCreateOrConnectWithoutDutyTypeInput | Prisma.DutyScheduleCreateOrConnectWithoutDutyTypeInput[]
+  createMany?: Prisma.DutyScheduleCreateManyDutyTypeInputEnvelope
+  connect?: Prisma.DutyScheduleWhereUniqueInput | Prisma.DutyScheduleWhereUniqueInput[]
+}
+
+export type DutyScheduleUpdateManyWithoutDutyTypeNestedInput = {
+  create?: Prisma.XOR<Prisma.DutyScheduleCreateWithoutDutyTypeInput, Prisma.DutyScheduleUncheckedCreateWithoutDutyTypeInput> | Prisma.DutyScheduleCreateWithoutDutyTypeInput[] | Prisma.DutyScheduleUncheckedCreateWithoutDutyTypeInput[]
+  connectOrCreate?: Prisma.DutyScheduleCreateOrConnectWithoutDutyTypeInput | Prisma.DutyScheduleCreateOrConnectWithoutDutyTypeInput[]
+  upsert?: Prisma.DutyScheduleUpsertWithWhereUniqueWithoutDutyTypeInput | Prisma.DutyScheduleUpsertWithWhereUniqueWithoutDutyTypeInput[]
+  createMany?: Prisma.DutyScheduleCreateManyDutyTypeInputEnvelope
+  set?: Prisma.DutyScheduleWhereUniqueInput | Prisma.DutyScheduleWhereUniqueInput[]
+  disconnect?: Prisma.DutyScheduleWhereUniqueInput | Prisma.DutyScheduleWhereUniqueInput[]
+  delete?: Prisma.DutyScheduleWhereUniqueInput | Prisma.DutyScheduleWhereUniqueInput[]
+  connect?: Prisma.DutyScheduleWhereUniqueInput | Prisma.DutyScheduleWhereUniqueInput[]
+  update?: Prisma.DutyScheduleUpdateWithWhereUniqueWithoutDutyTypeInput | Prisma.DutyScheduleUpdateWithWhereUniqueWithoutDutyTypeInput[]
+  updateMany?: Prisma.DutyScheduleUpdateManyWithWhereWithoutDutyTypeInput | Prisma.DutyScheduleUpdateManyWithWhereWithoutDutyTypeInput[]
+  deleteMany?: Prisma.DutyScheduleScalarWhereInput | Prisma.DutyScheduleScalarWhereInput[]
+}
+
+export type DutyScheduleUncheckedUpdateManyWithoutDutyTypeNestedInput = {
+  create?: Prisma.XOR<Prisma.DutyScheduleCreateWithoutDutyTypeInput, Prisma.DutyScheduleUncheckedCreateWithoutDutyTypeInput> | Prisma.DutyScheduleCreateWithoutDutyTypeInput[] | Prisma.DutyScheduleUncheckedCreateWithoutDutyTypeInput[]
+  connectOrCreate?: Prisma.DutyScheduleCreateOrConnectWithoutDutyTypeInput | Prisma.DutyScheduleCreateOrConnectWithoutDutyTypeInput[]
+  upsert?: Prisma.DutyScheduleUpsertWithWhereUniqueWithoutDutyTypeInput | Prisma.DutyScheduleUpsertWithWhereUniqueWithoutDutyTypeInput[]
+  createMany?: Prisma.DutyScheduleCreateManyDutyTypeInputEnvelope
+  set?: Prisma.DutyScheduleWhereUniqueInput | Prisma.DutyScheduleWhereUniqueInput[]
+  disconnect?: Prisma.DutyScheduleWhereUniqueInput | Prisma.DutyScheduleWhereUniqueInput[]
+  delete?: Prisma.DutyScheduleWhereUniqueInput | Prisma.DutyScheduleWhereUniqueInput[]
+  connect?: Prisma.DutyScheduleWhereUniqueInput | Prisma.DutyScheduleWhereUniqueInput[]
+  update?: Prisma.DutyScheduleUpdateWithWhereUniqueWithoutDutyTypeInput | Prisma.DutyScheduleUpdateWithWhereUniqueWithoutDutyTypeInput[]
+  updateMany?: Prisma.DutyScheduleUpdateManyWithWhereWithoutDutyTypeInput | Prisma.DutyScheduleUpdateManyWithWhereWithoutDutyTypeInput[]
+  deleteMany?: Prisma.DutyScheduleScalarWhereInput | Prisma.DutyScheduleScalarWhereInput[]
+}
+
+export type DutyScheduleCreateWithoutUserInput = {
+  id?: string
+  dayOfWeek: number
+  status?: string
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  dutyType: Prisma.DutyTypeCreateNestedOneWithoutSchedulesInput
+}
+
+export type DutyScheduleUncheckedCreateWithoutUserInput = {
+  id?: string
+  dutyTypeId: string
+  dayOfWeek: number
+  status?: string
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type DutyScheduleCreateOrConnectWithoutUserInput = {
+  where: Prisma.DutyScheduleWhereUniqueInput
+  create: Prisma.XOR<Prisma.DutyScheduleCreateWithoutUserInput, Prisma.DutyScheduleUncheckedCreateWithoutUserInput>
+}
+
+export type DutyScheduleCreateManyUserInputEnvelope = {
+  data: Prisma.DutyScheduleCreateManyUserInput | Prisma.DutyScheduleCreateManyUserInput[]
+}
+
+export type DutyScheduleUpsertWithWhereUniqueWithoutUserInput = {
+  where: Prisma.DutyScheduleWhereUniqueInput
+  update: Prisma.XOR<Prisma.DutyScheduleUpdateWithoutUserInput, Prisma.DutyScheduleUncheckedUpdateWithoutUserInput>
+  create: Prisma.XOR<Prisma.DutyScheduleCreateWithoutUserInput, Prisma.DutyScheduleUncheckedCreateWithoutUserInput>
+}
+
+export type DutyScheduleUpdateWithWhereUniqueWithoutUserInput = {
+  where: Prisma.DutyScheduleWhereUniqueInput
+  data: Prisma.XOR<Prisma.DutyScheduleUpdateWithoutUserInput, Prisma.DutyScheduleUncheckedUpdateWithoutUserInput>
+}
+
+export type DutyScheduleUpdateManyWithWhereWithoutUserInput = {
+  where: Prisma.DutyScheduleScalarWhereInput
+  data: Prisma.XOR<Prisma.DutyScheduleUpdateManyMutationInput, Prisma.DutyScheduleUncheckedUpdateManyWithoutUserInput>
+}
+
+export type DutyScheduleScalarWhereInput = {
+  AND?: Prisma.DutyScheduleScalarWhereInput | Prisma.DutyScheduleScalarWhereInput[]
+  OR?: Prisma.DutyScheduleScalarWhereInput[]
+  NOT?: Prisma.DutyScheduleScalarWhereInput | Prisma.DutyScheduleScalarWhereInput[]
+  id?: Prisma.StringFilter<"DutySchedule"> | string
+  dutyTypeId?: Prisma.StringFilter<"DutySchedule"> | string
+  userId?: Prisma.StringFilter<"DutySchedule"> | string
+  dayOfWeek?: Prisma.IntFilter<"DutySchedule"> | number
+  status?: Prisma.StringFilter<"DutySchedule"> | string
+  completedAt?: Prisma.DateTimeNullableFilter<"DutySchedule"> | Date | string | null
+  createdAt?: Prisma.DateTimeFilter<"DutySchedule"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"DutySchedule"> | Date | string
+}
+
+export type DutyScheduleCreateWithoutDutyTypeInput = {
+  id?: string
+  dayOfWeek: number
+  status?: string
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutDutySchedulesInput
+}
+
+export type DutyScheduleUncheckedCreateWithoutDutyTypeInput = {
+  id?: string
+  userId: string
+  dayOfWeek: number
+  status?: string
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type DutyScheduleCreateOrConnectWithoutDutyTypeInput = {
+  where: Prisma.DutyScheduleWhereUniqueInput
+  create: Prisma.XOR<Prisma.DutyScheduleCreateWithoutDutyTypeInput, Prisma.DutyScheduleUncheckedCreateWithoutDutyTypeInput>
+}
+
+export type DutyScheduleCreateManyDutyTypeInputEnvelope = {
+  data: Prisma.DutyScheduleCreateManyDutyTypeInput | Prisma.DutyScheduleCreateManyDutyTypeInput[]
+}
+
+export type DutyScheduleUpsertWithWhereUniqueWithoutDutyTypeInput = {
+  where: Prisma.DutyScheduleWhereUniqueInput
+  update: Prisma.XOR<Prisma.DutyScheduleUpdateWithoutDutyTypeInput, Prisma.DutyScheduleUncheckedUpdateWithoutDutyTypeInput>
+  create: Prisma.XOR<Prisma.DutyScheduleCreateWithoutDutyTypeInput, Prisma.DutyScheduleUncheckedCreateWithoutDutyTypeInput>
+}
+
+export type DutyScheduleUpdateWithWhereUniqueWithoutDutyTypeInput = {
+  where: Prisma.DutyScheduleWhereUniqueInput
+  data: Prisma.XOR<Prisma.DutyScheduleUpdateWithoutDutyTypeInput, Prisma.DutyScheduleUncheckedUpdateWithoutDutyTypeInput>
+}
+
+export type DutyScheduleUpdateManyWithWhereWithoutDutyTypeInput = {
+  where: Prisma.DutyScheduleScalarWhereInput
+  data: Prisma.XOR<Prisma.DutyScheduleUpdateManyMutationInput, Prisma.DutyScheduleUncheckedUpdateManyWithoutDutyTypeInput>
+}
+
+export type DutyScheduleCreateManyUserInput = {
+  id?: string
+  dutyTypeId: string
+  dayOfWeek: number
+  status?: string
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type DutyScheduleUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  dayOfWeek?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dutyType?: Prisma.DutyTypeUpdateOneRequiredWithoutSchedulesNestedInput
+}
+
+export type DutyScheduleUncheckedUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  dutyTypeId?: Prisma.StringFieldUpdateOperationsInput | string
+  dayOfWeek?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type DutyScheduleUncheckedUpdateManyWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  dutyTypeId?: Prisma.StringFieldUpdateOperationsInput | string
+  dayOfWeek?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type DutyScheduleCreateManyDutyTypeInput = {
+  id?: string
+  userId: string
+  dayOfWeek: number
+  status?: string
+  completedAt?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type DutyScheduleUpdateWithoutDutyTypeInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  dayOfWeek?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutDutySchedulesNestedInput
+}
+
+export type DutyScheduleUncheckedUpdateWithoutDutyTypeInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  dayOfWeek?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type DutyScheduleUncheckedUpdateManyWithoutDutyTypeInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  dayOfWeek?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  completedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
 
 export type DutyScheduleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  dutyTypeId?: boolean
+  userId?: boolean
+  dayOfWeek?: boolean
+  status?: boolean
+  completedAt?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  dutyType?: boolean | Prisma.DutyTypeDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["dutySchedule"]>
 
 export type DutyScheduleSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  dutyTypeId?: boolean
+  userId?: boolean
+  dayOfWeek?: boolean
+  status?: boolean
+  completedAt?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  dutyType?: boolean | Prisma.DutyTypeDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["dutySchedule"]>
 
 export type DutyScheduleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  dutyTypeId?: boolean
+  userId?: boolean
+  dayOfWeek?: boolean
+  status?: boolean
+  completedAt?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  dutyType?: boolean | Prisma.DutyTypeDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["dutySchedule"]>
 
 export type DutyScheduleSelectScalar = {
   id?: boolean
+  dutyTypeId?: boolean
+  userId?: boolean
+  dayOfWeek?: boolean
+  status?: boolean
+  completedAt?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type DutyScheduleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id", ExtArgs["result"]["dutySchedule"]>
+export type DutyScheduleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "dutyTypeId" | "userId" | "dayOfWeek" | "status" | "completedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["dutySchedule"]>
+export type DutyScheduleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  dutyType?: boolean | Prisma.DutyTypeDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+}
+export type DutyScheduleIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  dutyType?: boolean | Prisma.DutyTypeDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+}
+export type DutyScheduleIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  dutyType?: boolean | Prisma.DutyTypeDefaultArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+}
 
 export type $DutySchedulePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "DutySchedule"
-  objects: {}
+  objects: {
+    dutyType: Prisma.$DutyTypePayload<ExtArgs>
+    user: Prisma.$UserPayload<ExtArgs>
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    dutyTypeId: string
+    userId: string
+    dayOfWeek: number
+    status: string
+    completedAt: Date | null
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["dutySchedule"]>
   composites: {}
 }
@@ -636,6 +1179,8 @@ readonly fields: DutyScheduleFieldRefs;
  */
 export interface Prisma__DutyScheduleClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  dutyType<T extends Prisma.DutyTypeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DutyTypeDefaultArgs<ExtArgs>>): Prisma.Prisma__DutyTypeClient<runtime.Types.Result.GetResult<Prisma.$DutyTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -666,6 +1211,13 @@ export interface Prisma__DutyScheduleClient<T, Null = never, ExtArgs extends run
  */
 export interface DutyScheduleFieldRefs {
   readonly id: Prisma.FieldRef<"DutySchedule", 'String'>
+  readonly dutyTypeId: Prisma.FieldRef<"DutySchedule", 'String'>
+  readonly userId: Prisma.FieldRef<"DutySchedule", 'String'>
+  readonly dayOfWeek: Prisma.FieldRef<"DutySchedule", 'Int'>
+  readonly status: Prisma.FieldRef<"DutySchedule", 'String'>
+  readonly completedAt: Prisma.FieldRef<"DutySchedule", 'DateTime'>
+  readonly createdAt: Prisma.FieldRef<"DutySchedule", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"DutySchedule", 'DateTime'>
 }
     
 
@@ -682,6 +1234,10 @@ export type DutyScheduleFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.
    * Omit specific fields from the DutySchedule
    */
   omit?: Prisma.DutyScheduleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DutyScheduleInclude<ExtArgs> | null
   /**
    * Filter, which DutySchedule to fetch.
    */
@@ -701,6 +1257,10 @@ export type DutyScheduleFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Exte
    */
   omit?: Prisma.DutyScheduleOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DutyScheduleInclude<ExtArgs> | null
+  /**
    * Filter, which DutySchedule to fetch.
    */
   where: Prisma.DutyScheduleWhereUniqueInput
@@ -718,6 +1278,10 @@ export type DutyScheduleFindFirstArgs<ExtArgs extends runtime.Types.Extensions.I
    * Omit specific fields from the DutySchedule
    */
   omit?: Prisma.DutyScheduleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DutyScheduleInclude<ExtArgs> | null
   /**
    * Filter, which DutySchedule to fetch.
    */
@@ -767,6 +1331,10 @@ export type DutyScheduleFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Exten
    */
   omit?: Prisma.DutyScheduleOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DutyScheduleInclude<ExtArgs> | null
+  /**
    * Filter, which DutySchedule to fetch.
    */
   where?: Prisma.DutyScheduleWhereInput
@@ -815,6 +1383,10 @@ export type DutyScheduleFindManyArgs<ExtArgs extends runtime.Types.Extensions.In
    */
   omit?: Prisma.DutyScheduleOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DutyScheduleInclude<ExtArgs> | null
+  /**
    * Filter, which DutySchedules to fetch.
    */
   where?: Prisma.DutyScheduleWhereInput
@@ -842,6 +1414,11 @@ export type DutyScheduleFindManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Skip the first `n` DutySchedules.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of DutySchedules.
+   */
   distinct?: Prisma.DutyScheduleScalarFieldEnum | Prisma.DutyScheduleScalarFieldEnum[]
 }
 
@@ -858,9 +1435,13 @@ export type DutyScheduleCreateArgs<ExtArgs extends runtime.Types.Extensions.Inte
    */
   omit?: Prisma.DutyScheduleOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DutyScheduleInclude<ExtArgs> | null
+  /**
    * The data needed to create a DutySchedule.
    */
-  data?: Prisma.XOR<Prisma.DutyScheduleCreateInput, Prisma.DutyScheduleUncheckedCreateInput>
+  data: Prisma.XOR<Prisma.DutyScheduleCreateInput, Prisma.DutyScheduleUncheckedCreateInput>
 }
 
 /**
@@ -889,6 +1470,10 @@ export type DutyScheduleCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Ex
    * The data used to create many DutySchedules.
    */
   data: Prisma.DutyScheduleCreateManyInput | Prisma.DutyScheduleCreateManyInput[]
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DutyScheduleIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -903,6 +1488,10 @@ export type DutyScheduleUpdateArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Omit specific fields from the DutySchedule
    */
   omit?: Prisma.DutyScheduleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DutyScheduleInclude<ExtArgs> | null
   /**
    * The data needed to update a DutySchedule.
    */
@@ -955,6 +1544,10 @@ export type DutyScheduleUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Ex
    * Limit how many DutySchedules to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DutyScheduleIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -969,6 +1562,10 @@ export type DutyScheduleUpsertArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Omit specific fields from the DutySchedule
    */
   omit?: Prisma.DutyScheduleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DutyScheduleInclude<ExtArgs> | null
   /**
    * The filter to search for the DutySchedule to update in case it exists.
    */
@@ -995,6 +1592,10 @@ export type DutyScheduleDeleteArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Omit specific fields from the DutySchedule
    */
   omit?: Prisma.DutyScheduleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DutyScheduleInclude<ExtArgs> | null
   /**
    * Filter which DutySchedule to delete.
    */
@@ -1027,4 +1628,8 @@ export type DutyScheduleDefaultArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Omit specific fields from the DutySchedule
    */
   omit?: Prisma.DutyScheduleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DutyScheduleInclude<ExtArgs> | null
 }

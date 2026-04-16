@@ -1,4 +1,5 @@
 import { assignmentsContract } from './assignments/assignments.contract';
+import { dashboardContract } from './dashboard/dashboard.contract';
 import { dutiesContract } from './duties/duties.contract';
 import { fundsContract } from './funds/funds.contract';
 import { galleryContract } from './gallery/gallery.contract';
@@ -18,4 +19,5 @@ export const contract = {
   organization: organizationContract,
   schedules: schedulesContract,
   users: usersContract,
+  dashboard: dashboardContract,
 };

@@ -14,11 +14,33 @@ import {
 } from 'lucide-react-native';
 import * as React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ActivityIndicator, View, ScrollView, Pressable, Image, RefreshControl } from 'react-native';
+import { Image, RefreshControl } from 'react-native';
+import { View, ScrollView, Pressable } from '@/tw';
 import { useQuery } from '@tanstack/react-query';
 import { orpc } from '@/lib/api';
 import { useUserRole } from '@/lib/hooks/useUserRole';
 import { router } from 'expo-router';
+import { SkeletonBox } from '@/components/ui/skeleton';
+
+function FundsSkeleton() {
+  return (
+    <View style={{ paddingHorizontal: 16, paddingTop: 16, gap: 16 }}>
+      {/* Balance card */}
+      <SkeletonBox height={150} borderRadius={16} />
+      {/* Stat boxes */}
+      <View style={{ flexDirection: 'row', gap: 12 }}>
+        <SkeletonBox height={80} borderRadius={12} style={{ flex: 1 }} />
+        <SkeletonBox height={80} borderRadius={12} style={{ flex: 1 }} />
+      </View>
+      {/* Section label */}
+      <SkeletonBox width={120} height={18} borderRadius={6} />
+      {/* Transaction rows */}
+      {[0, 1, 2, 3, 4].map((i) => (
+        <SkeletonBox key={i} height={64} borderRadius={12} />
+      ))}
+    </View>
+  );
+}
 
 function formatCurrency(amount: number) {
   return `Rp ${amount.toLocaleString('id-ID')}`;
@@ -57,7 +79,7 @@ export default function FundsScreen() {
   const totalIncome = incomeItems.reduce((sum, c) => sum + c.amount, 0);
   const totalExpense = expenseItems.reduce((sum, c) => sum + c.amount, 0);
   const netBalance = totalIncome - totalExpense;
-  const contributorCount = new Set(incomeItems.map((c) => c.contributor.id)).size;
+  const contributorCount = new Set(incomeItems.filter((c) => c.contributor).map((c) => c.contributor!.id)).size;
 
   const [refreshing, setRefreshing] = React.useState(false);
   const onRefresh = React.useCallback(async () => {
@@ -73,9 +95,7 @@ export default function FundsScreen() {
 
   
       {isPending ? (
-        <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color="#13ec5b" />
-        </View>
+        <FundsSkeleton />
       ) : isError ? (
         <ErrorView onRetry={onRefresh} />
       ) : (
@@ -188,7 +208,7 @@ export default function FundsScreen() {
                       <Text className="text-[10px] text-slate-400">{formatRelativeDate(c.createdAt)}</Text>
                     </View>
                     <Text className="text-sm font-bold text-[#111827]" numberOfLines={1}>
-                      {c.type === 'EXPENSE' ? c.note || 'Pengeluaran' : `Iuran: ${c.contributor.name}`}
+                      {c.type === 'EXPENSE' ? c.note || 'Pengeluaran' : `Iuran: ${c.contributor?.name ?? 'Unknown'}`}
                     </Text>
                     <Text className={`text-xs font-bold mt-1 ${c.type === 'EXPENSE' ? 'text-red-600' : 'text-green-600'}`}>
                       {c.type === 'EXPENSE' ? '-' : '+'} {formatCurrency(c.amount)}
@@ -260,7 +280,7 @@ export default function FundsScreen() {
                 >
                   <View className="flex-row items-center gap-3">
                     <View className="relative">
-                      {c.contributor.image ? (
+                      {c.contributor?.image ? (
                         <Image
                           source={{ uri: c.contributor.image }}
                           className="w-10 h-10 rounded-full"
@@ -276,7 +296,7 @@ export default function FundsScreen() {
                           }}
                         >
                           <Text className="text-white font-bold text-xs">
-                            {getInitials(c.contributor.name)}
+                            {getInitials(c.contributor?.name ?? 'Unknown')}
                           </Text>
                         </View>
                       )}
@@ -285,7 +305,7 @@ export default function FundsScreen() {
                       </View>
                     </View>
                     <View>
-                      <Text className="text-sm font-bold text-[#111827]">{c.contributor.name}</Text>
+                      <Text className="text-sm font-bold text-[#111827]">{c.contributor?.name ?? 'Unknown'}</Text>
                       <Text className="text-xs text-slate-500">
                         {new Date(c.createdAt).toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' })}
                       </Text>
