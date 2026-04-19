@@ -491,7 +491,11 @@
               "android",
               "ios",
               "web",
-              "clean"
+              "clean",
+              "bundle:export",
+              "bundle:analyze",
+              "bundle:analyze:android",
+              "bundle:stats"
             ]
           },
           "js": {
@@ -559,6 +563,54 @@
             },
             "options": {
               "script": "clean"
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "bundle:export": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "bundle:export"
+            },
+            "metadata": {
+              "scriptContent": "npx expo export --platform ios",
+              "runCommand": "yarn bundle:export"
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "bundle:analyze": {
+            "executor": "nx:run-script",
+            "metadata": {
+              "scriptContent": "npx expo export --platform ios && npx source-map-explorer dist/_expo/static/js/ios/*.js --html bundle-report.html",
+              "runCommand": "yarn bundle:analyze"
+            },
+            "options": {
+              "script": "bundle:analyze"
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "bundle:analyze:android": {
+            "executor": "nx:run-script",
+            "options": {
+              "script": "bundle:analyze:android"
+            },
+            "metadata": {
+              "scriptContent": "npx expo export --platform android && npx source-map-explorer dist/_expo/static/js/android/*.js --html bundle-report-android.html",
+              "runCommand": "yarn bundle:analyze:android"
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "bundle:stats": {
+            "executor": "nx:run-script",
+            "metadata": {
+              "scriptContent": "npx expo export --platform ios && echo '=== Bundle sizes ===' && du -sh dist/_expo/static/js/ios/* && echo '=== Total ===' && du -sh dist/",
+              "runCommand": "yarn bundle:stats"
+            },
+            "options": {
+              "script": "bundle:stats"
             },
             "configurations": {},
             "parallelism": true
@@ -3650,6 +3702,15 @@
         "hash": "3082573509915207906"
       }
     },
+    "npm:@opentelemetry/api": {
+      "type": "npm",
+      "name": "npm:@opentelemetry/api",
+      "data": {
+        "version": "1.9.1",
+        "packageName": "@opentelemetry/api",
+        "hash": "10c0/c608485fc8b5a91e1f7e05e843b45b509307456b31cd2ad365933d90813e40ebfedf179f1451c762037e82d7c76aa8500e95d2da3609f640a1206cde5322cd14"
+      }
+    },
     "npm:@opentelemetry/semantic-conventions": {
       "type": "npm",
       "name": "npm:@opentelemetry/semantic-conventions",
@@ -4629,6 +4690,15 @@
         "version": "1.1.1",
         "packageName": "@radix-ui/rect",
         "hash": "10c0/0dac4f0f15691199abe6a0e067821ddd9d0349c0c05f39834e4eafc8403caf724106884035ae91bbc826e10367e6a5672e7bec4d4243860fa7649de246b1f60b"
+      }
+    },
+    "npm:@react-native-async-storage/async-storage": {
+      "type": "npm",
+      "name": "npm:@react-native-async-storage/async-storage",
+      "data": {
+        "version": "2.2.0",
+        "packageName": "@react-native-async-storage/async-storage",
+        "hash": "10c0/84900eba46a40225c4ac9bf5eb58885200dc1e789d873ecda46a2a213870cc7110536ed1fd7a74b873071f3603c093958fbd84c635d6f6d4f94bfbb616ffa0ef"
       }
     },
     "npm:@react-native-community/netinfo": {
@@ -5891,15 +5961,6 @@
         "hash": "10c0/b5dd407040db7d8aa1bd36e79e5f3f32292f6b075abc287529e9f48df1a25fda3e3799ba30b4656667ffb931d3b75690c1d6ca71e39f7337ea6dfda8581916d0"
       }
     },
-    "npm:@types/debug": {
-      "type": "npm",
-      "name": "npm:@types/debug",
-      "data": {
-        "version": "4.1.13",
-        "packageName": "@types/debug",
-        "hash": "10c0/e5e124021bbdb23a82727eee0a726ae0fc8a3ae1f57253cbcc47497f259afb357de7f6941375e773e1abbfa1604c1555b901a409d762ec2bb4c1612131d4afb7"
-      }
-    },
     "npm:@types/eslint-scope": {
       "type": "npm",
       "name": "npm:@types/eslint-scope",
@@ -6033,15 +6094,6 @@
         "version": "1.1.4",
         "packageName": "@types/methods",
         "hash": "10c0/a78534d79c300718298bfff92facd07bf38429c66191f640c1db4c9cff1e36f819304298a96f7536b6512bfc398e5c3e6b831405e138cd774b88ad7be78d682a"
-      }
-    },
-    "npm:@types/ms": {
-      "type": "npm",
-      "name": "npm:@types/ms",
-      "data": {
-        "version": "2.1.0",
-        "packageName": "@types/ms",
-        "hash": "10c0/5ce692ffe1549e1b827d99ef8ff71187457e0eb44adbae38fdf7b9a74bae8d20642ee963c14516db1d35fa2652e65f47680fdf679dcbde52bbfadd021f497225"
       }
     },
     "npm:@types/node@25.6.0": {
@@ -9293,6 +9345,15 @@
         "hash": "10c0/303b7e08126edbddd3235a6803ffa6ff98b1cc0fb7bfa019d1ad891560bbbe9a9b84db7275ced33011330a8f4f225175d3780f4771a925d8e1c3782a343b9796"
       }
     },
+    "npm:expo-av": {
+      "type": "npm",
+      "name": "npm:expo-av",
+      "data": {
+        "version": "16.0.8",
+        "packageName": "expo-av",
+        "hash": "10c0/2f40b8fcc7824d4f3e0078e6dff25ccb5b12b21abfcf6de30f4ea831716c6be18f9b59ab085e7b88ece5b0d314f998798e864f4b4a3c0f493c66060f4fc94955"
+      }
+    },
     "npm:expo-constants": {
       "type": "npm",
       "name": "npm:expo-constants",
@@ -9423,9 +9484,9 @@
       "type": "npm",
       "name": "npm:expo-network",
       "data": {
-        "version": "55.0.13",
+        "version": "8.0.8",
         "packageName": "expo-network",
-        "hash": "10c0/128bf22bbefedcf7bac113a1db03ff164bf0a8514b54437b4c9e2a048a68bd9a56d4995eae9e7a76524d80ebb4c439a8649206c2e2ea28396fb1dfc462bbdc55"
+        "hash": "10c0/e12e4d136dae02e22ceaf0344ed7ee053e5aed126a71e69718c91bf7161c8bc97f745eec6e794f66e60cfba44d341b4462ce2987c958671a80fc5bea85dd124d"
       }
     },
     "npm:expo-router": {
@@ -9441,9 +9502,9 @@
       "type": "npm",
       "name": "npm:expo-secure-store",
       "data": {
-        "version": "55.0.13",
+        "version": "15.0.8",
         "packageName": "expo-secure-store",
-        "hash": "10c0/0f51e54070cab2e02094ade6b343c59c19a82d59fc637e9c3a40e9362eb0e8f2bdba80345b81fc7c337c43d766bbda6a0ea07ad2dd800e3f7da2ab1e6d6fb98e"
+        "hash": "10c0/c3a581aae66990c442e566c677cd884f623e33ab43015e7c1be9c6fe46fbf0dfc57c6213ec12984c86455485d0b22524e37b8d24e19acfa8b7d0d83be914496b"
       }
     },
     "npm:expo-server": {
@@ -9507,6 +9568,15 @@
         "version": "29.0.16",
         "packageName": "expo-updates",
         "hash": "10c0/2dfadc04df7a6e37c1162a4d1eca76f6249e2c3fb8f8e6ac0ccd6f55cce34acf6867c2dfbd75c2d0a37c0578386d19d1a2fbc97a2b5efba0b5217f2a83e3a85d"
+      }
+    },
+    "npm:expo-video": {
+      "type": "npm",
+      "name": "npm:expo-video",
+      "data": {
+        "version": "2.1.9",
+        "packageName": "expo-video",
+        "hash": "10c0/7e674e790d6d820b6a2018afca44fa87c589f8c5921abb3d296daa785d84070c3f1462666d9d02bd0e6789bf87d7bf29202a5e13d50eee1663782e8c8c5116e8"
       }
     },
     "npm:expo": {
@@ -10895,6 +10965,15 @@
         "hash": "10c0/b4686d0d3053146095ccd45346461bc8e53b80aeb7671cc52a4de02dbbf7dc0d1d2a986e2fe4ae206984b4d34ef37e8b795ebc4f4295c978373e6575e295d811"
       }
     },
+    "npm:is-plain-obj": {
+      "type": "npm",
+      "name": "npm:is-plain-obj",
+      "data": {
+        "version": "2.1.0",
+        "packageName": "is-plain-obj",
+        "hash": "10c0/e5c9814cdaa627a9ad0a0964ded0e0491bfd9ace405c49a5d63c88b30a162f1512c069d5b80997893c4d0181eadc3fed02b4ab4b81059aba5620bfcdfdeb9c53"
+      }
+    },
     "npm:is-promise": {
       "type": "npm",
       "name": "npm:is-promise",
@@ -12263,6 +12342,15 @@
         "hash": "10c0/95389b7ced3f9b36fbdcf32eb946dc3dd1774c2fdf164609e55b18d03aa499b12bd3aae3a76c1c7185b96279e9803525550d3eb292b5224866060a288f335cb3"
       }
     },
+    "npm:merge-options": {
+      "type": "npm",
+      "name": "npm:merge-options",
+      "data": {
+        "version": "3.0.4",
+        "packageName": "merge-options",
+        "hash": "10c0/02b5891ceef09b0b497b5a0154c37a71784e68ed71b14748f6fd4258ffd3fe4ecd5cb0fd6f7cae3954fd11e7686c5cb64486daffa63c2793bbe8b614b61c7055"
+      }
+    },
     "npm:merge-stream": {
       "type": "npm",
       "name": "npm:merge-stream",
@@ -12767,6 +12855,24 @@
         "hash": "10c0/46ea0f3ffa8bc6a5bc0c7081ffc3907777f0ed6516888d40a518c5111f8366d97d2678911ad1a6882bf592fa9de6c784fea32e1687bb94e1f4944170af48a5cf"
       }
     },
+    "npm:moment-timezone": {
+      "type": "npm",
+      "name": "npm:moment-timezone",
+      "data": {
+        "version": "0.5.48",
+        "packageName": "moment-timezone",
+        "hash": "10c0/ab14ec9d94bc33f29ac18e5417b7f8aca0b17130b952c5cc9697b8fea839e5ece9313af5fd3c9703a05db472b1560ddbfc7ad2aa24aac9afd047d6da6c3c6033"
+      }
+    },
+    "npm:moment": {
+      "type": "npm",
+      "name": "npm:moment",
+      "data": {
+        "version": "2.30.1",
+        "packageName": "moment",
+        "hash": "10c0/865e4279418c6de666fca7786607705fd0189d8a7b7624e2e56be99290ac846f90878a6f602e34b4e0455c549b85385b1baf9966845962b313699e7cb847543a"
+      }
+    },
     "npm:ms@2.0.0": {
       "type": "npm",
       "name": "npm:ms@2.0.0",
@@ -12897,9 +13003,9 @@
       "type": "npm",
       "name": "npm:nativewind",
       "data": {
-        "version": "5.0.0-preview.3",
+        "version": "5.0.0-preview.2",
         "packageName": "nativewind",
-        "hash": "10c0/f7c091e515d79fab400296c4cad94acc16429f070c52788ff3be070f11057117054431928f69de7926881a1eaf47afb966645939b216a0ac7adb35bead989dec"
+        "hash": "10c0/6d2d728e0fde52870624cc138929337acb54a212e2fc3ba2c0a4e8e5d98204ae2b55bcc2462313cee0f3da531a5260c8698159dba32e7235331a730a79d02e80"
       }
     },
     "npm:natural-compare": {
@@ -14220,9 +14326,9 @@
       "type": "npm",
       "name": "npm:react-native-css",
       "data": {
-        "version": "3.0.7",
+        "version": "0.0.0-nightly.5ce6396",
         "packageName": "react-native-css",
-        "hash": "10c0/6dc83a65e9e26ace24d8c2ae82e8d75504b261069f0372d7a82be5d389561f04e8defbb92a1ad6876113d3565c19b2e22b4fe159a8c76557fec5900045d75a0d"
+        "hash": "10c0/b264bb6c9f522c59a7831accc3d10afbdb342da5ad54a689a2321a48853ebd29594fd24d949cd6efecf1627494cf59fcf84c68bd27ae04bbcf76ba95b7473570"
       }
     },
     "npm:react-native-gesture-handler": {
@@ -17166,6 +17272,11 @@
       },
       {
         "source": "whatsapp-bot",
+        "target": "npm:moment-timezone",
+        "type": "static"
+      },
+      {
+        "source": "whatsapp-bot",
         "target": "npm:pino",
         "type": "static"
       },
@@ -17383,6 +17494,11 @@
       },
       {
         "source": "backend",
+        "target": "npm:@opentelemetry/api",
+        "type": "static"
+      },
+      {
+        "source": "backend",
         "target": "npm:@orpc/contract",
         "type": "static"
       },
@@ -17511,6 +17627,11 @@
       {
         "source": "mobile",
         "target": "npm:@orpc/tanstack-query",
+        "type": "static"
+      },
+      {
+        "source": "mobile",
+        "target": "npm:@react-native-async-storage/async-storage",
         "type": "static"
       },
       {
@@ -17675,7 +17796,17 @@
       },
       {
         "source": "mobile",
+        "target": "npm:expo-av",
+        "type": "static"
+      },
+      {
+        "source": "mobile",
         "target": "npm:expo-constants",
+        "type": "static"
+      },
+      {
+        "source": "mobile",
+        "target": "npm:expo-file-system",
         "type": "static"
       },
       {
@@ -17735,12 +17866,22 @@
       },
       {
         "source": "mobile",
+        "target": "npm:expo-video",
+        "type": "static"
+      },
+      {
+        "source": "mobile",
         "target": "npm:lightningcss",
         "type": "static"
       },
       {
         "source": "mobile",
         "target": "npm:lucide-react-native",
+        "type": "static"
+      },
+      {
+        "source": "mobile",
+        "target": "npm:moment-timezone",
         "type": "static"
       },
       {
@@ -25885,6 +26026,13 @@
         "type": "static"
       }
     ],
+    "npm:@react-native-async-storage/async-storage": [
+      {
+        "source": "npm:@react-native-async-storage/async-storage",
+        "target": "npm:merge-options",
+        "type": "static"
+      }
+    ],
     "npm:@react-native/babel-plugin-codegen": [
       {
         "source": "npm:@react-native/babel-plugin-codegen",
@@ -28138,13 +28286,6 @@
       {
         "source": "npm:@types/cors",
         "target": "npm:@types/node@25.6.0",
-        "type": "static"
-      }
-    ],
-    "npm:@types/debug": [
-      {
-        "source": "npm:@types/debug",
-        "target": "npm:@types/ms",
         "type": "static"
       }
     ],
@@ -35373,6 +35514,13 @@
         "type": "static"
       }
     ],
+    "npm:merge-options": [
+      {
+        "source": "npm:merge-options",
+        "target": "npm:is-plain-obj",
+        "type": "static"
+      }
+    ],
     "npm:metro-babel-transformer": [
       {
         "source": "npm:metro-babel-transformer",
@@ -36634,6 +36782,13 @@
       {
         "source": "npm:minizlib",
         "target": "npm:minipass",
+        "type": "static"
+      }
+    ],
+    "npm:moment-timezone": [
+      {
+        "source": "npm:moment-timezone",
+        "target": "npm:moment",
         "type": "static"
       }
     ],
@@ -38518,7 +38673,7 @@
     "npm:react-native-css": [
       {
         "source": "npm:react-native-css",
-        "target": "npm:@types/debug",
+        "target": "npm:@expo/metro-runtime",
         "type": "static"
       },
       {
@@ -41858,5 +42013,5 @@
   },
   "version": "6.0",
   "errors": [],
-  "computedAt": 1776134072128
+  "computedAt": 1776637860476
 }

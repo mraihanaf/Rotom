@@ -20,8 +20,10 @@ import { AssignmentsModule } from './assignments/assignments.module';
 import type { AuthInstance } from './auth/auth';
 import { StorageModule } from './storage/storage.module';
 import { BullModule } from '@nestjs/bullmq';
+import { AnnouncementsModule } from './announcements/announcements.module';
 import { OrganizationModule } from './organization/organization.module';
 import { SchedulesModule } from './schedules/schedules.module';
+import { SettingsModule } from './settings/settings.module';
 import { UsersModule } from './users/users.module';
 
 declare module '@orpc/nest' {
@@ -94,7 +96,11 @@ declare module '@orpc/nest' {
 
     OrganizationModule,
 
+    AnnouncementsModule,
+
     SchedulesModule,
+
+    SettingsModule,
 
     UsersModule,
   ],

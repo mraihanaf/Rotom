@@ -7,6 +7,8 @@ import {
   CheckCircle,
   History,
   MapPin,
+  Settings,
+  Users,
   Video,
   Wallet,
 } from 'lucide-react-native';
@@ -58,7 +60,7 @@ export default function DashboardScreen() {
   console.log('[Dashboard] Component mounting');
   // Wrap in try-catch to catch any render errors
   try {
-    const { canWrite } = useUserRole();
+    const { canWrite, isAdmin } = useUserRole();
     console.log('[Dashboard] useUserRole succeeded');
     const { data: session } = authClient.useSession();
     console.log('[Dashboard] useSession succeeded, session:', !!session);
@@ -134,20 +136,38 @@ export default function DashboardScreen() {
                   Halo, {userName}! 👋
                 </Text>
               </View>
-              <View className="relative">
-                <View className="h-12 w-12 rounded-full border-2 border-primary p-0.5">
-                  <Image
-                    source={{ uri: avatarUrl }}
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      borderRadius: 999,
-                    }}
-                    contentFit="cover"
-                    transition={200}
-                  />
+              <View className="flex-row items-center gap-3">
+                {isAdmin && (
+                  <>
+                    <Pressable
+                      onPress={() => router.push('/modal/user-management' as import('expo-router').Href)}
+                      className="p-2 rounded-full bg-gray-100"
+                    >
+                      <Users size={20} color="#374151" />
+                    </Pressable>
+                    <Pressable
+                      onPress={() => router.push('/modal/whatsapp-settings' as import('expo-router').Href)}
+                      className="p-2 rounded-full bg-gray-100"
+                    >
+                      <Settings size={20} color="#374151" />
+                    </Pressable>
+                  </>
+                )}
+                <View className="relative">
+                  <View className="h-12 w-12 rounded-full border-2 border-primary p-0.5">
+                    <Image
+                      source={{ uri: avatarUrl }}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        borderRadius: 999,
+                      }}
+                      contentFit="cover"
+                      transition={200}
+                    />
+                  </View>
+                  <View className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-primary border-2 border-white" />
                 </View>
-                <View className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-primary border-2 border-white" />
               </View>
             </View>
 

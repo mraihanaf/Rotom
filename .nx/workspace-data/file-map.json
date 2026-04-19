@@ -6,168 +6,260 @@
   "fileMap": {
     "nonProjectFiles": [
       {
-        "file": ".agents/skills/better-auth-best-practices/SKILL.md",
-        "hash": "11148653335857441819"
-      },
-      {
-        "file": ".agents/skills/building-native-ui/SKILL.md",
-        "hash": "12556624378086733167"
-      },
-      {
-        "file": ".agents/skills/building-native-ui/references/animations.md",
-        "hash": "16659509221890254195"
-      },
-      {
-        "file": ".agents/skills/building-native-ui/references/controls.md",
-        "hash": "13594423891190645983"
-      },
-      {
-        "file": ".agents/skills/building-native-ui/references/form-sheet.md",
-        "hash": "11296081415706917209"
+        "file": "FRONTEND.md",
+        "hash": "2355648989840914851"
       },
       {
         "file": ".agents/skills/building-native-ui/references/gradients.md",
         "hash": "7683384278168716274"
       },
       {
-        "file": ".agents/skills/building-native-ui/references/icons.md",
-        "hash": "3711277837757561024"
-      },
-      {
-        "file": ".agents/skills/building-native-ui/references/media.md",
-        "hash": "15563182479780269074"
-      },
-      {
-        "file": ".agents/skills/building-native-ui/references/route-structure.md",
-        "hash": "1237552355785649990"
-      },
-      {
-        "file": ".agents/skills/building-native-ui/references/search.md",
-        "hash": "6798945983405824103"
-      },
-      {
-        "file": ".agents/skills/building-native-ui/references/storage.md",
-        "hash": "2496255976451778583"
-      },
-      {
-        "file": ".agents/skills/building-native-ui/references/tabs.md",
-        "hash": "15839502489568743031"
+        "file": ".agents/skills/turborepo/references/environment/gotchas.md",
+        "hash": "13661446698603105203"
       },
       {
         "file": ".agents/skills/building-native-ui/references/toolbar-and-headers.md",
         "hash": "6552123564164958041"
       },
       {
-        "file": ".agents/skills/building-native-ui/references/visual-effects.md",
-        "hash": "2333041927566838213"
+        "file": ".agents/skills/vercel-react-native-skills/rules/animation-derived-value.md",
+        "hash": "7107835665174542422"
       },
       {
-        "file": ".agents/skills/building-native-ui/references/webgpu-three.md",
-        "hash": "6040387838949561594"
+        "file": ".agents/skills/vercel-react-native-skills/rules/js-hoist-intl.md",
+        "hash": "607730580547944713"
       },
       {
-        "file": ".agents/skills/building-native-ui/references/zoom-transitions.md",
-        "hash": "15739997366431436180"
+        "file": ".agents/skills/nestjs-best-practices/rules/test-mock-external-services.md",
+        "hash": "14629747144060823527"
       },
       {
-        "file": ".agents/skills/caveman-commit/SKILL.md",
-        "hash": "3303961109927490189"
+        "file": "sdd.md",
+        "hash": "11996106778614198499"
       },
       {
-        "file": ".agents/skills/caveman/SKILL.md",
-        "hash": "6517681523112722541"
+        "file": ".yarnrc.yml",
+        "hash": "9773565372686775399"
       },
       {
-        "file": ".agents/skills/expo-tailwind-setup/SKILL.md",
-        "hash": "8163366740740813881"
+        "file": ".agents/skills/vercel-react-native-skills/rules/monorepo-native-deps-in-app.md",
+        "hash": "433204802989701388"
       },
       {
-        "file": ".agents/skills/native-data-fetching/SKILL.md",
-        "hash": "10595759704950978489"
+        "file": ".agents/skills/turborepo/references/best-practices/packages.md",
+        "hash": "13731963547528774870"
       },
       {
-        "file": ".agents/skills/native-data-fetching/references/expo-router-loaders.md",
-        "hash": "6434376072718669336"
+        "file": ".agents/skills/skill-creator/agents/analyzer.md",
+        "hash": "10461413315271464070"
       },
       {
         "file": ".agents/skills/nestjs-best-practices/AGENTS.md",
         "hash": "1573255514618888625"
       },
       {
-        "file": ".agents/skills/nestjs-best-practices/README.md",
-        "hash": "13154030097987805164"
+        "file": ".agents/skills/vercel-react-native-skills/rules/fonts-config-plugin.md",
+        "hash": "5311843647851566375"
       },
       {
-        "file": ".agents/skills/nestjs-best-practices/SKILL.md",
-        "hash": "5336732479732571940"
+        "file": ".agents/skills/skill-creator/scripts/package_skill.py",
+        "hash": "17895309006094276499"
       },
       {
-        "file": ".agents/skills/nestjs-best-practices/rules/_sections.md",
-        "hash": "17643591958680749324"
+        "file": ".agents/skills/nestjs-best-practices/rules/test-use-testing-module.md",
+        "hash": "14585872989562677982"
       },
       {
-        "file": ".agents/skills/nestjs-best-practices/rules/_template.md",
-        "hash": "17490252344016912475"
+        "file": ".agents/skills/skill-creator/scripts/quick_validate.py",
+        "hash": "14879279634403542837"
       },
       {
-        "file": ".agents/skills/nestjs-best-practices/rules/api-use-dto-serialization.md",
-        "hash": "3522317544411903397"
+        "file": "docker-compose.prod.yaml",
+        "hash": "4829840565637787177"
       },
       {
-        "file": ".agents/skills/nestjs-best-practices/rules/api-use-interceptors.md",
-        "hash": "15707861903085387892"
+        "file": ".agents/skills/nestjs-best-practices/rules/micro-use-queues.md",
+        "hash": "10652126139352666288"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/di-interface-segregation.md",
+        "hash": "15356488567632899721"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/list-performance-inline-objects.md",
+        "hash": "6869447854339362714"
+      },
+      {
+        "file": ".agents/skills/turborepo/references/filtering/RULE.md",
+        "hash": "7756816925659233885"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/ui-styling.md",
+        "hash": "1416957481657431520"
+      },
+      {
+        "file": ".agents/skills/rotom-backend-contracts/SKILL.md",
+        "hash": "14788434904207326290"
+      },
+      {
+        "file": ".agents/skills/turborepo/references/caching/gotchas.md",
+        "hash": "3971889349248033568"
+      },
+      {
+        "file": ".agents/skills/building-native-ui/references/controls.md",
+        "hash": "13594423891190645983"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/scripts/package-lock.json",
+        "hash": "10698678987372087396"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/ui-pressable.md",
+        "hash": "12593024439665145812"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/perf-use-caching.md",
+        "hash": "222672868098118145"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/list-performance-function-references.md",
+        "hash": "7902657041828144805"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/error-use-exception-filters.md",
+        "hash": "6737506252535317106"
+      },
+      {
+        "file": ".agents/skills/expo-tailwind-setup/SKILL.md",
+        "hash": "8163366740740813881"
       },
       {
         "file": ".agents/skills/nestjs-best-practices/rules/api-use-pipes.md",
         "hash": "3714371110948546471"
       },
       {
-        "file": ".agents/skills/nestjs-best-practices/rules/api-versioning.md",
-        "hash": "14821415052062463249"
+        "file": ".agents/skills/vercel-react-native-skills/rules/list-performance-images.md",
+        "hash": "8145760451035499048"
+      },
+      {
+        "file": ".agents/skills/skill-creator/references/schemas.md",
+        "hash": "14946141799465254368"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/list-performance-virtualize.md",
+        "hash": "12548530418370563401"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/_template.md",
+        "hash": "17490252344016912475"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/security-rate-limiting.md",
+        "hash": "10655383023914258586"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/di-liskov-substitution.md",
+        "hash": "7599283527317561409"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/error-handle-async-errors.md",
+        "hash": "10380061863506432924"
+      },
+      {
+        "file": ".agents/skills/skill-creator/eval-viewer/generate_review.py",
+        "hash": "17930020314825123453"
+      },
+      {
+        "file": ".agents/skills/better-auth-best-practices/SKILL.md",
+        "hash": "11148653335857441819"
+      },
+      {
+        "file": ".agents/skills/turborepo/references/watch/RULE.md",
+        "hash": "11189937379604676720"
+      },
+      {
+        "file": ".agents/skills/building-native-ui/references/route-structure.md",
+        "hash": "1237552355785649990"
+      },
+      {
+        "file": ".agents/skills/upgrading-expo/references/expo-av-to-video.md",
+        "hash": "5200199317565800702"
+      },
+      {
+        "file": ".agents/skills/skill-creator/SKILL.md",
+        "hash": "2324833355999059476"
+      },
+      {
+        "file": "scripts/verify-docker.sh",
+        "hash": "7879825397414932945"
       },
       {
         "file": ".agents/skills/nestjs-best-practices/rules/arch-avoid-circular-deps.md",
         "hash": "698852283938910638"
       },
       {
-        "file": ".agents/skills/nestjs-best-practices/rules/arch-feature-modules.md",
-        "hash": "12513147537489441740"
+        "file": ".agents/skills/nestjs-best-practices/rules/micro-use-patterns.md",
+        "hash": "6428373727611896383"
       },
       {
-        "file": ".agents/skills/nestjs-best-practices/rules/arch-module-sharing.md",
-        "hash": "6045302150870872722"
+        "file": ".env.production.example",
+        "hash": "17080914991218303846"
       },
       {
-        "file": ".agents/skills/nestjs-best-practices/rules/arch-single-responsibility.md",
-        "hash": "6075981793845011149"
+        "file": ".agents/skills/vercel-react-native-skills/rules/_sections.md",
+        "hash": "13407279896145307644"
       },
       {
-        "file": ".agents/skills/nestjs-best-practices/rules/arch-use-events.md",
-        "hash": "12678163817177738952"
+        "file": ".agents/skills/building-native-ui/references/storage.md",
+        "hash": "2496255976451778583"
       },
       {
-        "file": ".agents/skills/nestjs-best-practices/rules/arch-use-repository-pattern.md",
-        "hash": "2330311481743668967"
+        "file": ".agents/skills/nestjs-best-practices/scripts/package.json",
+        "hash": "4701058360176884517"
       },
       {
-        "file": ".agents/skills/nestjs-best-practices/rules/db-avoid-n-plus-one.md",
-        "hash": "9543007801958141298"
+        "file": ".agents/skills/building-native-ui/references/icons.md",
+        "hash": "3711277837757561024"
       },
       {
-        "file": ".agents/skills/nestjs-best-practices/rules/db-use-migrations.md",
-        "hash": "12367313221659612006"
+        "file": ".agents/skills/nestjs-best-practices/rules/security-validate-all-input.md",
+        "hash": "14788116912916657640"
       },
       {
-        "file": ".agents/skills/nestjs-best-practices/rules/db-use-transactions.md",
-        "hash": "7582929543867063014"
+        "file": ".agents/skills/nestjs-best-practices/README.md",
+        "hash": "13154030097987805164"
       },
       {
-        "file": ".agents/skills/nestjs-best-practices/rules/devops-graceful-shutdown.md",
-        "hash": "8153105084746265492"
+        "file": ".agents/skills/vercel-react-native-skills/rules/scroll-position-no-state.md",
+        "hash": "16008279163972094190"
       },
       {
-        "file": ".agents/skills/nestjs-best-practices/rules/devops-use-config-module.md",
-        "hash": "6266081342888450085"
+        "file": ".agents/skills/turborepo/references/configuration/gotchas.md",
+        "hash": "14910617051086991371"
+      },
+      {
+        "file": ".agents/skills/building-native-ui/references/visual-effects.md",
+        "hash": "2333041927566838213"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/animation-gesture-detector-press.md",
+        "hash": "29814631329740602"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/_template.md",
+        "hash": "17490252344016912475"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/SKILL.md",
+        "hash": "5336732479732571940"
+      },
+      {
+        "file": "yarn.lock",
+        "hash": "8118687833913268265"
+      },
+      {
+        "file": ".env.production",
+        "hash": "10106619593662917410"
       },
       {
         "file": ".agents/skills/nestjs-best-practices/rules/devops-use-logging.md",
@@ -178,571 +270,896 @@
         "hash": "6821547601527825017"
       },
       {
-        "file": ".agents/skills/nestjs-best-practices/rules/di-interface-segregation.md",
-        "hash": "15356488567632899721"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/di-liskov-substitution.md",
-        "hash": "7599283527317561409"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/di-prefer-constructor-injection.md",
-        "hash": "13272272996542096529"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/di-scope-awareness.md",
-        "hash": "3201840825662381724"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/di-use-interfaces-tokens.md",
-        "hash": "5880270361444715233"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/error-handle-async-errors.md",
-        "hash": "10380061863506432924"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/error-throw-http-exceptions.md",
-        "hash": "3361903037476258132"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/error-use-exception-filters.md",
-        "hash": "6737506252535317106"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/micro-use-health-checks.md",
-        "hash": "17429378853248668985"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/micro-use-patterns.md",
-        "hash": "6428373727611896383"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/micro-use-queues.md",
-        "hash": "10652126139352666288"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/perf-async-hooks.md",
-        "hash": "15909863196638808520"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/perf-lazy-loading.md",
-        "hash": "18446262861506692212"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/perf-optimize-database.md",
-        "hash": "9459277224276239185"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/perf-use-caching.md",
-        "hash": "222672868098118145"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/security-auth-jwt.md",
-        "hash": "2029801452440099546"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/security-rate-limiting.md",
-        "hash": "10655383023914258586"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/security-sanitize-output.md",
-        "hash": "2213721355087609067"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/security-use-guards.md",
-        "hash": "16733441279102364758"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/security-validate-all-input.md",
-        "hash": "14788116912916657640"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/test-e2e-supertest.md",
-        "hash": "4635258358699549986"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/test-mock-external-services.md",
-        "hash": "14629747144060823527"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/test-use-testing-module.md",
-        "hash": "14585872989562677982"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/scripts/build-agents.ts",
-        "hash": "5674651936403046033"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/scripts/build.sh",
-        "hash": "16672039367184415096"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/scripts/package-lock.json",
-        "hash": "10698678987372087396"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/scripts/package.json",
-        "hash": "4701058360176884517"
-      },
-      {
-        "file": ".agents/skills/nx-workspace-patterns/SKILL.md",
-        "hash": "3269501844762994814"
-      },
-      {
-        "file": ".agents/skills/rotom-backend-contracts/SKILL.md",
-        "hash": "14788434904207326290"
-      },
-      {
-        "file": ".agents/skills/skill-creator/LICENSE.txt",
-        "hash": "10305757678668291285"
-      },
-      {
-        "file": ".agents/skills/skill-creator/SKILL.md",
-        "hash": "2324833355999059476"
-      },
-      {
-        "file": ".agents/skills/skill-creator/agents/analyzer.md",
-        "hash": "10461413315271464070"
-      },
-      {
-        "file": ".agents/skills/skill-creator/agents/comparator.md",
-        "hash": "5313389878373071925"
-      },
-      {
-        "file": ".agents/skills/skill-creator/agents/grader.md",
-        "hash": "17050392632881371026"
-      },
-      {
-        "file": ".agents/skills/skill-creator/assets/eval_review.html",
-        "hash": "13160386512453611513"
-      },
-      {
-        "file": ".agents/skills/skill-creator/eval-viewer/generate_review.py",
-        "hash": "17930020314825123453"
-      },
-      {
-        "file": ".agents/skills/skill-creator/eval-viewer/viewer.html",
-        "hash": "349776459495843747"
-      },
-      {
-        "file": ".agents/skills/skill-creator/references/schemas.md",
-        "hash": "14946141799465254368"
-      },
-      {
-        "file": ".agents/skills/skill-creator/scripts/__init__.py",
-        "hash": "3244421341483603138"
-      },
-      {
-        "file": ".agents/skills/skill-creator/scripts/aggregate_benchmark.py",
-        "hash": "17830013374402773814"
-      },
-      {
-        "file": ".agents/skills/skill-creator/scripts/generate_report.py",
-        "hash": "4016332422545733835"
-      },
-      {
-        "file": ".agents/skills/skill-creator/scripts/improve_description.py",
-        "hash": "7370058642974988650"
-      },
-      {
-        "file": ".agents/skills/skill-creator/scripts/package_skill.py",
-        "hash": "17895309006094276499"
-      },
-      {
-        "file": ".agents/skills/skill-creator/scripts/quick_validate.py",
-        "hash": "14879279634403542837"
-      },
-      {
-        "file": ".agents/skills/skill-creator/scripts/run_eval.py",
-        "hash": "2272478237495837725"
-      },
-      {
-        "file": ".agents/skills/skill-creator/scripts/run_loop.py",
-        "hash": "2857490353274284501"
-      },
-      {
-        "file": ".agents/skills/skill-creator/scripts/utils.py",
-        "hash": "12314786479776539753"
-      },
-      {
-        "file": ".agents/skills/turborepo/SKILL.md",
-        "hash": "15196375615900229517"
-      },
-      {
-        "file": ".agents/skills/turborepo/command/turborepo.md",
-        "hash": "12258691955636788789"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/best-practices/RULE.md",
-        "hash": "8778846337585711538"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/best-practices/dependencies.md",
-        "hash": "10087497382888761823"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/best-practices/packages.md",
-        "hash": "13731963547528774870"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/best-practices/structure.md",
-        "hash": "15471258396929499571"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/boundaries/RULE.md",
-        "hash": "3087705956985574628"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/caching/RULE.md",
-        "hash": "1855417407520266135"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/caching/gotchas.md",
-        "hash": "3971889349248033568"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/caching/remote-cache.md",
-        "hash": "14706283994886886292"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/ci/RULE.md",
-        "hash": "4260072562596148331"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/ci/github-actions.md",
-        "hash": "342276637279697198"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/ci/patterns.md",
-        "hash": "6218801851857406279"
+        "file": ".agents/skills/turborepo/references/environment/RULE.md",
+        "hash": "4806629372399002838"
       },
       {
         "file": ".agents/skills/turborepo/references/ci/vercel.md",
         "hash": "1767478066602084009"
       },
       {
-        "file": ".agents/skills/turborepo/references/cli/RULE.md",
-        "hash": "14511820688544528179"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/cli/commands.md",
-        "hash": "2744294654732829936"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/configuration/RULE.md",
-        "hash": "18159313020415773569"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/configuration/global-options.md",
-        "hash": "8871552824056822355"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/configuration/gotchas.md",
-        "hash": "14910617051086991371"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/configuration/tasks.md",
-        "hash": "4226918888506190535"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/environment/RULE.md",
-        "hash": "4806629372399002838"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/environment/gotchas.md",
-        "hash": "13661446698603105203"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/environment/modes.md",
-        "hash": "10813307192021261945"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/filtering/RULE.md",
-        "hash": "7756816925659233885"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/filtering/patterns.md",
-        "hash": "636838732611787036"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/watch/RULE.md",
-        "hash": "11189937379604676720"
-      },
-      {
-        "file": ".agents/skills/upgrading-expo/SKILL.md",
-        "hash": "1815125675464671482"
-      },
-      {
-        "file": ".agents/skills/upgrading-expo/references/expo-av-to-audio.md",
-        "hash": "4665717971096100763"
-      },
-      {
-        "file": ".agents/skills/upgrading-expo/references/expo-av-to-video.md",
-        "hash": "5200199317565800702"
-      },
-      {
-        "file": ".agents/skills/upgrading-expo/references/native-tabs.md",
-        "hash": "1695738347822800778"
-      },
-      {
-        "file": ".agents/skills/upgrading-expo/references/new-architecture.md",
-        "hash": "18049529845019518407"
-      },
-      {
         "file": ".agents/skills/upgrading-expo/references/react-19.md",
         "hash": "14751311189084822209"
-      },
-      {
-        "file": ".agents/skills/upgrading-expo/references/react-compiler.md",
-        "hash": "1248770484668435073"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/AGENTS.md",
-        "hash": "17181689165413350204"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/README.md",
-        "hash": "2865178391168966499"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/SKILL.md",
-        "hash": "9169058955088021789"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/metadata.json",
-        "hash": "7879555184949791557"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/_sections.md",
-        "hash": "13407279896145307644"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/_template.md",
-        "hash": "17490252344016912475"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/animation-derived-value.md",
-        "hash": "7107835665174542422"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/animation-gesture-detector-press.md",
-        "hash": "29814631329740602"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/animation-gpu-properties.md",
-        "hash": "4238871588493793173"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/design-system-compound-components.md",
-        "hash": "17951159972523973962"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/fonts-config-plugin.md",
-        "hash": "5311843647851566375"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/imports-design-system-folder.md",
-        "hash": "16274451491627740085"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/js-hoist-intl.md",
-        "hash": "607730580547944713"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/list-performance-callbacks.md",
-        "hash": "614520349392295740"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/list-performance-function-references.md",
-        "hash": "7902657041828144805"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/list-performance-images.md",
-        "hash": "8145760451035499048"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/list-performance-inline-objects.md",
-        "hash": "6869447854339362714"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/list-performance-item-expensive.md",
-        "hash": "13614208573486570827"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/list-performance-item-memo.md",
-        "hash": "3682304976666658025"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/list-performance-item-types.md",
-        "hash": "565597155964375188"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/list-performance-virtualize.md",
-        "hash": "12548530418370563401"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/monorepo-native-deps-in-app.md",
-        "hash": "433204802989701388"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/monorepo-single-dependency-versions.md",
-        "hash": "8944770936730972585"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/navigation-native-navigators.md",
-        "hash": "11718435335134929717"
       },
       {
         "file": ".agents/skills/vercel-react-native-skills/rules/react-compiler-destructure-functions.md",
         "hash": "8945941087233471787"
       },
       {
-        "file": ".agents/skills/vercel-react-native-skills/rules/react-compiler-reanimated-shared-values.md",
-        "hash": "9799315361807766473"
+        "file": ".agents/skills/vercel-react-native-skills/rules/monorepo-single-dependency-versions.md",
+        "hash": "8944770936730972585"
       },
       {
-        "file": ".agents/skills/vercel-react-native-skills/rules/react-state-dispatcher.md",
-        "hash": "13278628156580052414"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/react-state-fallback.md",
-        "hash": "14107301297928467333"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/react-state-minimize.md",
-        "hash": "10917913825837837707"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/rendering-no-falsy-and.md",
-        "hash": "8602754232752043247"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/rendering-text-in-text-component.md",
-        "hash": "4828280384993964068"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/scroll-position-no-state.md",
-        "hash": "16008279163972094190"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/state-ground-truth.md",
-        "hash": "14722369409617744292"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/ui-expo-image.md",
-        "hash": "14576234002039564963"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/ui-image-gallery.md",
-        "hash": "12061226322888799571"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/ui-measure-views.md",
-        "hash": "7745855060775727135"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/ui-menus.md",
-        "hash": "13196936797446626396"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/ui-native-modals.md",
-        "hash": "18144238978630907811"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/ui-pressable.md",
-        "hash": "12593024439665145812"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/ui-safe-area-scroll.md",
-        "hash": "9867607088286522251"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/ui-scrollview-content-inset.md",
-        "hash": "17527044365033603158"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/ui-styling.md",
-        "hash": "1416957481657431520"
-      },
-      {
-        "file": ".dockerignore",
-        "hash": "2303642404724327591"
-      },
-      {
-        "file": ".gitignore",
-        "hash": "14996999848283946150"
-      },
-      {
-        "file": ".npmrc",
-        "hash": "3244421341483603138"
-      },
-      {
-        "file": ".vscode/settings.json",
-        "hash": "1409024233119639755"
-      },
-      {
-        "file": ".windsurf/skills/rotom-backend-contracts/SKILL.md",
-        "hash": "14788434904207326290"
-      },
-      {
-        "file": ".yarn/install-state.gz",
-        "hash": "12651887379801945005"
-      },
-      {
-        "file": ".yarnrc.yml",
-        "hash": "9773565372686775399"
-      },
-      {
-        "file": "COMMUNICATION_PROTOCOL_ANALYSIS.md",
-        "hash": "1636445311684501189"
-      },
-      {
-        "file": "FRONTEND.md",
-        "hash": "2355648989840914851"
+        "file": ".agents/skills/nestjs-best-practices/rules/arch-module-sharing.md",
+        "hash": "6045302150870872722"
       },
       {
         "file": "README.md",
         "hash": "18243470648104499844"
       },
       {
-        "file": "assets/app_logo.jpg",
-        "hash": "10234680146238322103"
+        "file": ".agents/skills/nestjs-best-practices/rules/security-use-guards.md",
+        "hash": "16733441279102364758"
       },
       {
-        "file": "assets/logo.png",
-        "hash": "347363948700687554"
+        "file": ".agents/skills/building-native-ui/references/search.md",
+        "hash": "6798945983405824103"
       },
       {
-        "file": "docker-compose.yaml",
-        "hash": "4605043415105001488"
+        "file": ".agents/skills/vercel-react-native-skills/AGENTS.md",
+        "hash": "17181689165413350204"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/api-use-dto-serialization.md",
+        "hash": "3522317544411903397"
+      },
+      {
+        "file": ".agents/skills/turborepo/references/boundaries/RULE.md",
+        "hash": "3087705956985574628"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/security-sanitize-output.md",
+        "hash": "2213721355087609067"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/animation-gpu-properties.md",
+        "hash": "4238871588493793173"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/security-auth-jwt.md",
+        "hash": "2029801452440099546"
+      },
+      {
+        "file": ".agents/skills/caveman-commit/SKILL.md",
+        "hash": "3303961109927490189"
+      },
+      {
+        "file": ".agents/skills/upgrading-expo/references/expo-av-to-audio.md",
+        "hash": "4665717971096100763"
+      },
+      {
+        "file": ".agents/skills/skill-creator/scripts/run_eval.py",
+        "hash": "2272478237495837725"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "14996999848283946150"
+      },
+      {
+        "file": ".agents/skills/turborepo/references/environment/modes.md",
+        "hash": "10813307192021261945"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/imports-design-system-folder.md",
+        "hash": "16274451491627740085"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/api-versioning.md",
+        "hash": "14821415052062463249"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/perf-optimize-database.md",
+        "hash": "9459277224276239185"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/error-throw-http-exceptions.md",
+        "hash": "3361903037476258132"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/react-state-dispatcher.md",
+        "hash": "13278628156580052414"
+      },
+      {
+        "file": "COMMUNICATION_PROTOCOL_ANALYSIS.md",
+        "hash": "1636445311684501189"
+      },
+      {
+        "file": ".agents/skills/skill-creator/assets/eval_review.html",
+        "hash": "13160386512453611513"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/ui-menus.md",
+        "hash": "13196936797446626396"
+      },
+      {
+        "file": ".agents/skills/skill-creator/eval-viewer/viewer.html",
+        "hash": "349776459495843747"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/test-e2e-supertest.md",
+        "hash": "4635258358699549986"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/react-state-minimize.md",
+        "hash": "10917913825837837707"
+      },
+      {
+        "file": ".dockerignore",
+        "hash": "12926087156711528919"
       },
       {
         "file": "nx.json",
         "hash": "11146420676927926877"
       },
       {
+        "file": ".agents/skills/vercel-react-native-skills/rules/list-performance-callbacks.md",
+        "hash": "614520349392295740"
+      },
+      {
+        "file": ".agents/skills/native-data-fetching/SKILL.md",
+        "hash": "10595759704950978489"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/perf-async-hooks.md",
+        "hash": "15909863196638808520"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/ui-measure-views.md",
+        "hash": "7745855060775727135"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/metadata.json",
+        "hash": "7879555184949791557"
+      },
+      {
+        "file": ".agents/skills/skill-creator/scripts/aggregate_benchmark.py",
+        "hash": "17830013374402773814"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/design-system-compound-components.md",
+        "hash": "17951159972523973962"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/list-performance-item-expensive.md",
+        "hash": "13614208573486570827"
+      },
+      {
+        "file": ".agents/skills/skill-creator/LICENSE.txt",
+        "hash": "10305757678668291285"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/micro-use-health-checks.md",
+        "hash": "17429378853248668985"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/ui-safe-area-scroll.md",
+        "hash": "9867607088286522251"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/devops-graceful-shutdown.md",
+        "hash": "8153105084746265492"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/react-state-fallback.md",
+        "hash": "14107301297928467333"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/arch-use-repository-pattern.md",
+        "hash": "2330311481743668967"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/README.md",
+        "hash": "2865178391168966499"
+      },
+      {
+        "file": ".agents/skills/turborepo/SKILL.md",
+        "hash": "15196375615900229517"
+      },
+      {
+        "file": ".agents/skills/turborepo/references/configuration/global-options.md",
+        "hash": "8871552824056822355"
+      },
+      {
+        "file": ".agents/skills/turborepo/command/turborepo.md",
+        "hash": "12258691955636788789"
+      },
+      {
+        "file": ".agents/skills/skill-creator/agents/grader.md",
+        "hash": "17050392632881371026"
+      },
+      {
         "file": "package.json",
-        "hash": "9694013109324858598"
+        "hash": "6527365184555534955"
       },
       {
-        "file": "sdd.md",
-        "hash": "11996106778614198499"
+        "file": ".agents/skills/upgrading-expo/SKILL.md",
+        "hash": "1815125675464671482"
       },
       {
-        "file": "skills-lock.json",
-        "hash": "5237117869721905651"
+        "file": ".npmrc",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": ".agents/skills/upgrading-expo/references/native-tabs.md",
+        "hash": "1695738347822800778"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/perf-lazy-loading.md",
+        "hash": "18446262861506692212"
+      },
+      {
+        "file": ".agents/skills/upgrading-expo/references/new-architecture.md",
+        "hash": "18049529845019518407"
+      },
+      {
+        "file": ".agents/skills/building-native-ui/references/zoom-transitions.md",
+        "hash": "15739997366431436180"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/ui-scrollview-content-inset.md",
+        "hash": "17527044365033603158"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/arch-feature-modules.md",
+        "hash": "12513147537489441740"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/arch-use-events.md",
+        "hash": "12678163817177738952"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/di-prefer-constructor-injection.md",
+        "hash": "13272272996542096529"
+      },
+      {
+        "file": "assets/logo.png",
+        "hash": "347363948700687554"
+      },
+      {
+        "file": ".agents/skills/turborepo/references/filtering/patterns.md",
+        "hash": "636838732611787036"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/ui-native-modals.md",
+        "hash": "18144238978630907811"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/db-use-transactions.md",
+        "hash": "7582929543867063014"
+      },
+      {
+        "file": ".agents/skills/turborepo/references/caching/RULE.md",
+        "hash": "1855417407520266135"
+      },
+      {
+        "file": ".agents/skills/skill-creator/scripts/utils.py",
+        "hash": "12314786479776539753"
       },
       {
         "file": "white_background.jpg",
         "hash": "16306406121044749301"
       },
       {
-        "file": "yarn.lock",
-        "hash": "16100160946013037186"
+        "file": ".agents/skills/turborepo/references/ci/patterns.md",
+        "hash": "6218801851857406279"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/scripts/build.sh",
+        "hash": "16672039367184415096"
+      },
+      {
+        "file": ".agents/skills/turborepo/references/ci/github-actions.md",
+        "hash": "342276637279697198"
+      },
+      {
+        "file": ".agents/skills/turborepo/references/cli/commands.md",
+        "hash": "2744294654732829936"
+      },
+      {
+        "file": ".agents/skills/building-native-ui/references/tabs.md",
+        "hash": "15839502489568743031"
+      },
+      {
+        "file": ".windsurf/skills/rotom-backend-contracts/SKILL.md",
+        "hash": "14788434904207326290"
+      },
+      {
+        "file": ".agents/skills/skill-creator/scripts/run_loop.py",
+        "hash": "2857490353274284501"
+      },
+      {
+        "file": "assets/app_logo.jpg",
+        "hash": "10234680146238322103"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/ui-expo-image.md",
+        "hash": "14576234002039564963"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/di-use-interfaces-tokens.md",
+        "hash": "5880270361444715233"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/di-scope-awareness.md",
+        "hash": "3201840825662381724"
+      },
+      {
+        "file": "WHATSAPP_FEATURES_SUMMARY.md",
+        "hash": "14872618513068634943"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/scripts/build-agents.ts",
+        "hash": "5674651936403046033"
+      },
+      {
+        "file": ".agents/skills/upgrading-expo/references/react-compiler.md",
+        "hash": "1248770484668435073"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/arch-single-responsibility.md",
+        "hash": "6075981793845011149"
+      },
+      {
+        "file": ".agents/skills/building-native-ui/references/animations.md",
+        "hash": "16659509221890254195"
+      },
+      {
+        "file": ".agents/skills/skill-creator/scripts/generate_report.py",
+        "hash": "4016332422545733835"
+      },
+      {
+        "file": ".agents/skills/turborepo/references/caching/remote-cache.md",
+        "hash": "14706283994886886292"
+      },
+      {
+        "file": ".agents/skills/caveman/SKILL.md",
+        "hash": "6517681523112722541"
+      },
+      {
+        "file": ".agents/skills/building-native-ui/references/webgpu-three.md",
+        "hash": "6040387838949561594"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/db-avoid-n-plus-one.md",
+        "hash": "9543007801958141298"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/list-performance-item-memo.md",
+        "hash": "3682304976666658025"
+      },
+      {
+        "file": ".agents/skills/building-native-ui/references/media.md",
+        "hash": "15563182479780269074"
+      },
+      {
+        "file": ".agents/skills/turborepo/references/configuration/RULE.md",
+        "hash": "18159313020415773569"
+      },
+      {
+        "file": ".agents/skills/skill-creator/scripts/__init__.py",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": ".agents/skills/turborepo/references/cli/RULE.md",
+        "hash": "14511820688544528179"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/state-ground-truth.md",
+        "hash": "14722369409617744292"
+      },
+      {
+        "file": ".agents/skills/turborepo/references/best-practices/dependencies.md",
+        "hash": "10087497382888761823"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/navigation-native-navigators.md",
+        "hash": "11718435335134929717"
+      },
+      {
+        "file": "docker-compose.yaml",
+        "hash": "4605043415105001488"
+      },
+      {
+        "file": ".agents/skills/building-native-ui/references/form-sheet.md",
+        "hash": "11296081415706917209"
+      },
+      {
+        "file": ".agents/skills/turborepo/references/ci/RULE.md",
+        "hash": "4260072562596148331"
+      },
+      {
+        "file": ".agents/skills/native-data-fetching/references/expo-router-loaders.md",
+        "hash": "6434376072718669336"
+      },
+      {
+        "file": ".agents/skills/nx-workspace-patterns/SKILL.md",
+        "hash": "3269501844762994814"
+      },
+      {
+        "file": ".yarn/install-state.gz",
+        "hash": "17475402650148725899"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/rendering-no-falsy-and.md",
+        "hash": "8602754232752043247"
+      },
+      {
+        "file": ".vscode/settings.json",
+        "hash": "1409024233119639755"
+      },
+      {
+        "file": ".agents/skills/turborepo/references/best-practices/structure.md",
+        "hash": "15471258396929499571"
+      },
+      {
+        "file": "skills-lock.json",
+        "hash": "5237117869721905651"
+      },
+      {
+        "file": ".agents/skills/turborepo/references/best-practices/RULE.md",
+        "hash": "8778846337585711538"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/ui-image-gallery.md",
+        "hash": "12061226322888799571"
+      },
+      {
+        "file": ".agents/skills/skill-creator/scripts/improve_description.py",
+        "hash": "7370058642974988650"
+      },
+      {
+        "file": ".agents/skills/skill-creator/agents/comparator.md",
+        "hash": "5313389878373071925"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/api-use-interceptors.md",
+        "hash": "15707861903085387892"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/db-use-migrations.md",
+        "hash": "12367313221659612006"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/list-performance-item-types.md",
+        "hash": "565597155964375188"
+      },
+      {
+        "file": ".agents/skills/turborepo/references/configuration/tasks.md",
+        "hash": "4226918888506190535"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/SKILL.md",
+        "hash": "9169058955088021789"
+      },
+      {
+        "file": ".agents/skills/building-native-ui/SKILL.md",
+        "hash": "12556624378086733167"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/_sections.md",
+        "hash": "17643591958680749324"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/react-compiler-reanimated-shared-values.md",
+        "hash": "9799315361807766473"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/rendering-text-in-text-component.md",
+        "hash": "4828280384993964068"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/devops-use-config-module.md",
+        "hash": "6266081342888450085"
       }
     ],
     "projectFileMap": {
+      "eslint-config": [
+        {
+          "file": "packages/eslint-config/README.md",
+          "hash": "13754227653957484045"
+        },
+        {
+          "file": "packages/eslint-config/base.js",
+          "hash": "13415738514823582499"
+        },
+        {
+          "file": "packages/eslint-config/next.js",
+          "hash": "14252493761496035585"
+        },
+        {
+          "file": "packages/eslint-config/package.json",
+          "hash": "7624567923543603753",
+          "deps": [
+            "npm:@eslint/js",
+            "npm:@next/eslint-plugin-next",
+            "npm:eslint",
+            "npm:eslint-config-prettier",
+            "npm:eslint-plugin-only-warn",
+            "npm:eslint-plugin-react",
+            "npm:eslint-plugin-react-hooks",
+            "npm:globals",
+            "npm:typescript@5.9.3",
+            "npm:typescript-eslint@8.58.2"
+          ]
+        },
+        {
+          "file": "packages/eslint-config/project.json",
+          "hash": "16632465850133719383"
+        },
+        {
+          "file": "packages/eslint-config/react-internal.js",
+          "hash": "3207875352665207252"
+        }
+      ],
+      "mobile": [
+        {
+          "file": "apps/mobile/.easignore",
+          "hash": "8764083643808301368"
+        },
+        {
+          "file": "apps/mobile/.gitignore",
+          "hash": "11988622709807168759"
+        },
+        {
+          "file": "apps/mobile/.npmrc",
+          "hash": "2931084260337952320"
+        },
+        {
+          "file": "apps/mobile/.prettierrc",
+          "hash": "5575458510476529077"
+        },
+        {
+          "file": "apps/mobile/README.md",
+          "hash": "9264175227273935186"
+        },
+        {
+          "file": "apps/mobile/api-1(1).json",
+          "hash": "5696967789337728445"
+        },
+        {
+          "file": "apps/mobile/app.json",
+          "hash": "18165179275906859462"
+        },
+        {
+          "file": "apps/mobile/app/(tabs)/_layout.tsx",
+          "hash": "17373408915311099526"
+        },
+        {
+          "file": "apps/mobile/app/(tabs)/assignments.tsx",
+          "hash": "11495192334983908183"
+        },
+        {
+          "file": "apps/mobile/app/(tabs)/funds.tsx",
+          "hash": "10775164084171769071"
+        },
+        {
+          "file": "apps/mobile/app/(tabs)/gallery.tsx",
+          "hash": "16897608901668611431"
+        },
+        {
+          "file": "apps/mobile/app/(tabs)/index.tsx",
+          "hash": "18395012296340281763"
+        },
+        {
+          "file": "apps/mobile/app/(tabs)/profile.tsx",
+          "hash": "6477935855552354492"
+        },
+        {
+          "file": "apps/mobile/app/(tabs)/schedule.tsx",
+          "hash": "14409130261664069621"
+        },
+        {
+          "file": "apps/mobile/app/+html.tsx",
+          "hash": "7898599921441917411"
+        },
+        {
+          "file": "apps/mobile/app/+not-found.tsx",
+          "hash": "9921046426708211535"
+        },
+        {
+          "file": "apps/mobile/app/_layout.tsx",
+          "hash": "8222269831189472760"
+        },
+        {
+          "file": "apps/mobile/app/auth/complete-profile.tsx",
+          "hash": "10593545568555091904"
+        },
+        {
+          "file": "apps/mobile/app/auth/login.tsx",
+          "hash": "15458635835640378928"
+        },
+        {
+          "file": "apps/mobile/app/auth/otp.tsx",
+          "hash": "8603344505969658830"
+        },
+        {
+          "file": "apps/mobile/app/index.tsx",
+          "hash": "2985705397119914148"
+        },
+        {
+          "file": "apps/mobile/app/modal/_layout.tsx",
+          "hash": "4923188698317198959"
+        },
+        {
+          "file": "apps/mobile/app/modal/manage-duties.tsx",
+          "hash": "1981720769173462602"
+        },
+        {
+          "file": "apps/mobile/app/modal/manage-subjects.tsx",
+          "hash": "6413707354901798640"
+        },
+        {
+          "file": "apps/mobile/app/modal/mentor-assignments.tsx",
+          "hash": "6113334323630000718"
+        },
+        {
+          "file": "apps/mobile/app/modal/new-assignment.tsx",
+          "hash": "110640842827058880"
+        },
+        {
+          "file": "apps/mobile/app/modal/new-contribution.tsx",
+          "hash": "17204059421397602346"
+        },
+        {
+          "file": "apps/mobile/app/modal/new-post.tsx",
+          "hash": "17321954287085769511"
+        },
+        {
+          "file": "apps/mobile/app/modal/new-schedule.tsx",
+          "hash": "466401843146139902"
+        },
+        {
+          "file": "apps/mobile/app/modal/new-subject.tsx",
+          "hash": "12302217134591189375"
+        },
+        {
+          "file": "apps/mobile/app/modal/user-management.tsx",
+          "hash": "6397574030568102894"
+        },
+        {
+          "file": "apps/mobile/app/modal/whatsapp-settings.tsx",
+          "hash": "5079948533513237956"
+        },
+        {
+          "file": "apps/mobile/assets/images/adaptive-icon.png",
+          "hash": "17968662385582925649"
+        },
+        {
+          "file": "apps/mobile/assets/images/favicon.png",
+          "hash": "9208250042878611199"
+        },
+        {
+          "file": "apps/mobile/assets/images/icon.png",
+          "hash": "17968662385582925649"
+        },
+        {
+          "file": "apps/mobile/assets/images/logo.png",
+          "hash": "347363948700687554"
+        },
+        {
+          "file": "apps/mobile/assets/images/react-native-reusables-dark.png",
+          "hash": "4458935672799312457"
+        },
+        {
+          "file": "apps/mobile/assets/images/react-native-reusables-light.png",
+          "hash": "4807005786644951844"
+        },
+        {
+          "file": "apps/mobile/assets/images/splash.png",
+          "hash": "347363948700687554"
+        },
+        {
+          "file": "apps/mobile/babel.config.js",
+          "hash": "18328231312189618870"
+        },
+        {
+          "file": "apps/mobile/components.json",
+          "hash": "3623135559414802683"
+        },
+        {
+          "file": "apps/mobile/components/AnimatedTabScreen.tsx",
+          "hash": "107753727916739336"
+        },
+        {
+          "file": "apps/mobile/components/ui/button.tsx",
+          "hash": "7522542770704131888"
+        },
+        {
+          "file": "apps/mobile/components/ui/checkbox.tsx",
+          "hash": "16961523817496033257"
+        },
+        {
+          "file": "apps/mobile/components/ui/error-view.tsx",
+          "hash": "1337639511683559162"
+        },
+        {
+          "file": "apps/mobile/components/ui/skeleton.tsx",
+          "hash": "11835858815721087051"
+        },
+        {
+          "file": "apps/mobile/components/ui/text.tsx",
+          "hash": "1844908864435161322"
+        },
+        {
+          "file": "apps/mobile/eas.json",
+          "hash": "6892636409181407478"
+        },
+        {
+          "file": "apps/mobile/global.css",
+          "hash": "18097298358496847222"
+        },
+        {
+          "file": "apps/mobile/lib/animation/TabAnimationContext.tsx",
+          "hash": "10479829027359652290"
+        },
+        {
+          "file": "apps/mobile/lib/api.ts",
+          "hash": "17729328960176825867"
+        },
+        {
+          "file": "apps/mobile/lib/auth-client.ts",
+          "hash": "5218792498744382692"
+        },
+        {
+          "file": "apps/mobile/lib/hooks/useGalleryCache.ts",
+          "hash": "3612288209688772327"
+        },
+        {
+          "file": "apps/mobile/lib/hooks/useUserRole.ts",
+          "hash": "16925478219955865963"
+        },
+        {
+          "file": "apps/mobile/lib/query-client.ts",
+          "hash": "13306782668214358790"
+        },
+        {
+          "file": "apps/mobile/lib/theme.ts",
+          "hash": "16626351395862346807"
+        },
+        {
+          "file": "apps/mobile/lib/utils.ts",
+          "hash": "15456290709904554663"
+        },
+        {
+          "file": "apps/mobile/metro.config.js",
+          "hash": "5382841163949788407"
+        },
+        {
+          "file": "apps/mobile/nativewind-env.d.ts",
+          "hash": "16847716270646474250"
+        },
+        {
+          "file": "apps/mobile/navigator/MainNavigator.tsx",
+          "hash": "13722799064003312439"
+        },
+        {
+          "file": "apps/mobile/package.json",
+          "hash": "3482906238642730618",
+          "deps": [
+            "npm:@babel/core",
+            "npm:@tailwindcss/postcss",
+            "npm:@types/react",
+            "npm:prettier",
+            "npm:prettier-plugin-tailwindcss",
+            "npm:typescript@5.9.3",
+            "npm:@better-auth/expo",
+            "npm:@orpc/client",
+            "npm:@orpc/contract",
+            "npm:@orpc/openapi-client",
+            "npm:@orpc/tanstack-query",
+            "npm:@react-native-async-storage/async-storage",
+            "npm:@react-native-community/netinfo",
+            "npm:@react-navigation/native",
+            "npm:@rn-primitives/accordion",
+            "npm:@rn-primitives/alert-dialog",
+            "npm:@rn-primitives/aspect-ratio",
+            "npm:@rn-primitives/avatar",
+            "npm:@rn-primitives/checkbox",
+            "npm:@rn-primitives/collapsible",
+            "npm:@rn-primitives/context-menu",
+            "npm:@rn-primitives/dialog",
+            "npm:@rn-primitives/dropdown-menu",
+            "npm:@rn-primitives/hover-card",
+            "npm:@rn-primitives/label",
+            "npm:@rn-primitives/menubar",
+            "npm:@rn-primitives/popover",
+            "npm:@rn-primitives/portal",
+            "npm:@rn-primitives/progress",
+            "npm:@rn-primitives/radio-group",
+            "npm:@rn-primitives/select",
+            "npm:@rn-primitives/separator",
+            "npm:@rn-primitives/slot",
+            "npm:@rn-primitives/switch",
+            "npm:@rn-primitives/tabs",
+            "npm:@rn-primitives/toggle",
+            "npm:@rn-primitives/toggle-group",
+            "npm:@rn-primitives/tooltip",
+            "npm:@shopify/flash-list",
+            "npm:@tanstack/react-query",
+            "npm:better-auth",
+            "npm:class-variance-authority",
+            "npm:clsx",
+            "npm:expo",
+            "npm:expo-av",
+            "npm:expo-constants",
+            "npm:expo-file-system",
+            "npm:expo-haptics",
+            "npm:expo-image",
+            "npm:expo-image-picker",
+            "npm:expo-linking",
+            "npm:expo-network",
+            "npm:expo-router",
+            "npm:expo-secure-store",
+            "npm:expo-splash-screen",
+            "npm:expo-status-bar",
+            "npm:expo-system-ui",
+            "npm:expo-updates",
+            "npm:expo-video",
+            "npm:lightningcss",
+            "npm:lucide-react-native",
+            "npm:moment-timezone",
+            "npm:nativewind",
+            "npm:react",
+            "npm:react-dom",
+            "npm:react-native",
+            "npm:react-native-css",
+            "npm:react-native-gesture-handler",
+            "npm:react-native-image-picker",
+            "npm:react-native-keyboard-controller",
+            "npm:react-native-reanimated",
+            "npm:react-native-safe-area-context",
+            "npm:react-native-screens",
+            "npm:react-native-svg",
+            "npm:react-native-web",
+            "npm:react-native-worklets",
+            "npm:tailwind-merge",
+            "npm:tailwindcss",
+            "npm:zod"
+          ]
+        },
+        {
+          "file": "apps/mobile/postcss.config.mjs",
+          "hash": "5511442426987897172"
+        },
+        {
+          "file": "apps/mobile/project.json",
+          "hash": "5441779829213058538"
+        },
+        {
+          "file": "apps/mobile/shims/node-module.js",
+          "hash": "2654331811633272731"
+        },
+        {
+          "file": "apps/mobile/skills-lock.json",
+          "hash": "500308740643283262"
+        },
+        {
+          "file": "apps/mobile/tsconfig.json",
+          "hash": "6311441893922619050"
+        },
+        {
+          "file": "apps/mobile/tw/animated.tsx",
+          "hash": "2437924040256479341"
+        },
+        {
+          "file": "apps/mobile/tw/image.tsx",
+          "hash": "11163876943316568969"
+        },
+        {
+          "file": "apps/mobile/tw/index.tsx",
+          "hash": "16343353104896147228"
+        }
+      ],
       "backend": [
         {
           "file": "apps/backend/.dockerignore",
@@ -758,7 +1175,7 @@
         },
         {
           "file": "apps/backend/Dockerfile",
-          "hash": "2955091048827053897"
+          "hash": "12324505802881286870"
         },
         {
           "file": "apps/backend/README.md",
@@ -767,6 +1184,10 @@
         {
           "file": "apps/backend/a.out",
           "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/backend/docker-entrypoint.sh",
+          "hash": "15765051630668508213"
         },
         {
           "file": "apps/backend/eslint.config.mjs",
@@ -778,7 +1199,7 @@
         },
         {
           "file": "apps/backend/package.json",
-          "hash": "5421287807732614076",
+          "hash": "5338711103760906671",
           "deps": [
             "npm:@eslint/eslintrc",
             "npm:@eslint/js",
@@ -817,6 +1238,7 @@
             "npm:@nestjs/core",
             "npm:@nestjs/mapped-types",
             "npm:@nestjs/platform-express",
+            "npm:@opentelemetry/api",
             "npm:@orpc/contract",
             "npm:@orpc/json-schema",
             "npm:@orpc/nest",
@@ -887,12 +1309,24 @@
           "hash": "9797156733194862487"
         },
         {
+          "file": "apps/backend/prisma/migrations/20260414215022_add_duty_schedule_schema/migration.sql",
+          "hash": "11900535490198354431"
+        },
+        {
+          "file": "apps/backend/prisma/migrations/20260419203204_add_announcement/migration.sql",
+          "hash": "18371991099125238667"
+        },
+        {
+          "file": "apps/backend/prisma/migrations/20260419213729_add_timezone/migration.sql",
+          "hash": "10169822592710786978"
+        },
+        {
           "file": "apps/backend/prisma/migrations/migration_lock.toml",
           "hash": "17507861707484682820"
         },
         {
           "file": "apps/backend/prisma/schema.prisma",
-          "hash": "14880935500207759877"
+          "hash": "17641735119989674729"
         },
         {
           "file": "apps/backend/project.json",
@@ -900,11 +1334,11 @@
         },
         {
           "file": "apps/backend/src/@generated/prisma/browser.ts",
-          "hash": "16792914095751818222"
+          "hash": "15587921929745122163"
         },
         {
           "file": "apps/backend/src/@generated/prisma/client.ts",
-          "hash": "2624390491057011436"
+          "hash": "17561316300716519727"
         },
         {
           "file": "apps/backend/src/@generated/prisma/commonInputTypes.ts",
@@ -916,99 +1350,131 @@
         },
         {
           "file": "apps/backend/src/@generated/prisma/internal/class.ts",
-          "hash": "18360262303456258075"
+          "hash": "4517326739998744597"
         },
         {
           "file": "apps/backend/src/@generated/prisma/internal/prismaNamespace.ts",
-          "hash": "10555811955785263086"
+          "hash": "18393418689998972145"
         },
         {
           "file": "apps/backend/src/@generated/prisma/internal/prismaNamespaceBrowser.ts",
-          "hash": "17271731598791288099"
+          "hash": "4740210446420477184"
         },
         {
           "file": "apps/backend/src/@generated/prisma/models.ts",
-          "hash": "5683724166401888295"
+          "hash": "15905678864439287778"
         },
         {
           "file": "apps/backend/src/@generated/prisma/models/Account.ts",
-          "hash": "15003874611466195074"
+          "hash": "10166590846064659352"
         },
         {
           "file": "apps/backend/src/@generated/prisma/models/Assignment.ts",
-          "hash": "433998486469599247"
+          "hash": "17302884262695982791"
         },
         {
           "file": "apps/backend/src/@generated/prisma/models/AssignmentStatus.ts",
-          "hash": "8640122056573108579"
-        },
-        {
-          "file": "apps/backend/src/@generated/prisma/models/Duty.ts",
-          "hash": "2150865784412733674"
+          "hash": "16518489696584017866"
         },
         {
           "file": "apps/backend/src/@generated/prisma/models/DutySchedule.ts",
-          "hash": "4591055108562920739"
+          "hash": "10786101187556948099"
+        },
+        {
+          "file": "apps/backend/src/@generated/prisma/models/DutyType.ts",
+          "hash": "17322705692758175091"
         },
         {
           "file": "apps/backend/src/@generated/prisma/models/Fund.ts",
-          "hash": "14972952111988207692"
+          "hash": "10770127878124984780"
         },
         {
           "file": "apps/backend/src/@generated/prisma/models/FundContributionLog.ts",
-          "hash": "5167468319048165197"
+          "hash": "4699376926439348417"
         },
         {
           "file": "apps/backend/src/@generated/prisma/models/GalleryPost.ts",
-          "hash": "8759251802237278992"
+          "hash": "3845550396620530935"
         },
         {
           "file": "apps/backend/src/@generated/prisma/models/GalleryPostReaction.ts",
-          "hash": "13215669267917073984"
+          "hash": "7281676562000404565"
         },
         {
           "file": "apps/backend/src/@generated/prisma/models/Organization.ts",
-          "hash": "14428494138313043581"
+          "hash": "2855890874207494528"
         },
         {
           "file": "apps/backend/src/@generated/prisma/models/Session.ts",
-          "hash": "7041775851503013101"
+          "hash": "11340103878642645139"
         },
         {
           "file": "apps/backend/src/@generated/prisma/models/Settings.ts",
-          "hash": "10494619239642138403"
+          "hash": "17556183144897771498"
         },
         {
           "file": "apps/backend/src/@generated/prisma/models/Subject.ts",
-          "hash": "2579558852218531199"
+          "hash": "15254222436000258463"
         },
         {
           "file": "apps/backend/src/@generated/prisma/models/SubjectSchedule.ts",
-          "hash": "7016409341222594777"
+          "hash": "9976109037668280470"
         },
         {
           "file": "apps/backend/src/@generated/prisma/models/User.ts",
-          "hash": "9803610166333689003"
+          "hash": "2593437315360722509"
         },
         {
           "file": "apps/backend/src/@generated/prisma/models/Verification.ts",
-          "hash": "15990716572607261674"
+          "hash": "4107280026876866340"
+        },
+        {
+          "file": "apps/backend/src/announcements/announcements.contract.ts",
+          "hash": "15703224346402724560"
+        },
+        {
+          "file": "apps/backend/src/announcements/announcements.controller.ts",
+          "hash": "6152929627221180879"
+        },
+        {
+          "file": "apps/backend/src/announcements/announcements.module.ts",
+          "hash": "3996532715303278973"
+        },
+        {
+          "file": "apps/backend/src/announcements/announcements.schema.ts",
+          "hash": "16393841416239355727"
+        },
+        {
+          "file": "apps/backend/src/announcements/announcements.service.ts",
+          "hash": "470683534724104446"
         },
         {
           "file": "apps/backend/src/app.module.ts",
-          "hash": "13164462814980540445"
+          "hash": "17180644593764984094"
+        },
+        {
+          "file": "apps/backend/src/assignments/assignments-completion.contract.ts",
+          "hash": "9866638104220686802"
+        },
+        {
+          "file": "apps/backend/src/assignments/assignments-completion.controller.ts",
+          "hash": "16741046574653891715"
+        },
+        {
+          "file": "apps/backend/src/assignments/assignments-completion.service.ts",
+          "hash": "13813602499467552541"
         },
         {
           "file": "apps/backend/src/assignments/assignments.contract.ts",
-          "hash": "3958178129429419638"
+          "hash": "5277124824187163667"
         },
         {
           "file": "apps/backend/src/assignments/assignments.controller.ts",
-          "hash": "1289944555245921622"
+          "hash": "16207387481283708633"
         },
         {
           "file": "apps/backend/src/assignments/assignments.module.ts",
-          "hash": "1058923773441278049"
+          "hash": "14531589606254645103"
         },
         {
           "file": "apps/backend/src/assignments/assignments.schema.ts",
@@ -1024,7 +1490,7 @@
         },
         {
           "file": "apps/backend/src/auth/auth.base.ts",
-          "hash": "12871851565355985461"
+          "hash": "9703555225463526410"
         },
         {
           "file": "apps/backend/src/auth/auth.controller.ts",
@@ -1068,15 +1534,19 @@
         },
         {
           "file": "apps/backend/src/contract.ts",
-          "hash": "3243447014062875380"
+          "hash": "7233415857594906510"
+        },
+        {
+          "file": "apps/backend/src/dashboard/dashboard.contract.ts",
+          "hash": "12182731729215173131"
         },
         {
           "file": "apps/backend/src/dashboard/dashboard.controller.ts",
-          "hash": "13942670479466182184"
+          "hash": "9585379010985841597"
         },
         {
           "file": "apps/backend/src/dashboard/dashboard.module.ts",
-          "hash": "4034514951194887308"
+          "hash": "17278146048530218938"
         },
         {
           "file": "apps/backend/src/dashboard/dashboard.service.spec.ts",
@@ -1084,15 +1554,15 @@
         },
         {
           "file": "apps/backend/src/dashboard/dashboard.service.ts",
-          "hash": "6775677628226354106"
+          "hash": "14902223976736874705"
         },
         {
           "file": "apps/backend/src/duties/duties.contract.ts",
-          "hash": "10030350345621205638"
+          "hash": "16423927332790286375"
         },
         {
           "file": "apps/backend/src/duties/duties.controller.ts",
-          "hash": "582906536472722439"
+          "hash": "4727881994717753243"
         },
         {
           "file": "apps/backend/src/duties/duties.module.ts",
@@ -1100,7 +1570,7 @@
         },
         {
           "file": "apps/backend/src/duties/duties.schema.ts",
-          "hash": "8484696787265760048"
+          "hash": "5067084841316860048"
         },
         {
           "file": "apps/backend/src/duties/duties.service.spec.ts",
@@ -1108,7 +1578,7 @@
         },
         {
           "file": "apps/backend/src/duties/duties.service.ts",
-          "hash": "3926322734805445526"
+          "hash": "2650458706952484360"
         },
         {
           "file": "apps/backend/src/features/features.controller.ts",
@@ -1156,7 +1626,7 @@
         },
         {
           "file": "apps/backend/src/gallery/gallery.controller.ts",
-          "hash": "17997138714798506137"
+          "hash": "14118253997339098103"
         },
         {
           "file": "apps/backend/src/gallery/gallery.module.ts",
@@ -1164,7 +1634,7 @@
         },
         {
           "file": "apps/backend/src/gallery/gallery.schema.ts",
-          "hash": "8414272609128779451"
+          "hash": "7460410134459134908"
         },
         {
           "file": "apps/backend/src/gallery/gallery.service.spec.ts",
@@ -1172,11 +1642,11 @@
         },
         {
           "file": "apps/backend/src/gallery/gallery.service.ts",
-          "hash": "6378854232872143760"
+          "hash": "7449131086136372321"
         },
         {
           "file": "apps/backend/src/main.ts",
-          "hash": "10584888703459275934"
+          "hash": "6877944782462100500"
         },
         {
           "file": "apps/backend/src/notifications/notifications.controller.ts",
@@ -1240,7 +1710,7 @@
         },
         {
           "file": "apps/backend/src/profiles/profile.contract.ts",
-          "hash": "3056715614279161635"
+          "hash": "4619751427087340536"
         },
         {
           "file": "apps/backend/src/profiles/profile.schema.ts",
@@ -1248,15 +1718,15 @@
         },
         {
           "file": "apps/backend/src/profiles/profiles.controller.ts",
-          "hash": "13161806708566421349"
+          "hash": "13255692950456230772"
         },
         {
           "file": "apps/backend/src/profiles/profiles.module.ts",
-          "hash": "1895892040776672260"
+          "hash": "17846419317788325661"
         },
         {
           "file": "apps/backend/src/profiles/profiles.service.ts",
-          "hash": "860147638223823217"
+          "hash": "14122464333659216174"
         },
         {
           "file": "apps/backend/src/reference/reference.controller.ts",
@@ -1295,6 +1765,26 @@
           "hash": "8266362821299171625"
         },
         {
+          "file": "apps/backend/src/settings/settings.contract.ts",
+          "hash": "18117426384399737404"
+        },
+        {
+          "file": "apps/backend/src/settings/settings.controller.ts",
+          "hash": "1636200704296721729"
+        },
+        {
+          "file": "apps/backend/src/settings/settings.module.ts",
+          "hash": "6731372571329322735"
+        },
+        {
+          "file": "apps/backend/src/settings/settings.schema.ts",
+          "hash": "2606925703158478409"
+        },
+        {
+          "file": "apps/backend/src/settings/settings.service.ts",
+          "hash": "13365005983225423022"
+        },
+        {
           "file": "apps/backend/src/storage/storage.module.ts",
           "hash": "10299211301342347095"
         },
@@ -1304,7 +1794,7 @@
         },
         {
           "file": "apps/backend/src/storage/storage.service.ts",
-          "hash": "93268260662079732"
+          "hash": "16802650790273369394"
         },
         {
           "file": "apps/backend/src/subjects/subjects.contract.ts",
@@ -1332,11 +1822,11 @@
         },
         {
           "file": "apps/backend/src/users/users.contract.ts",
-          "hash": "943615008750347498"
+          "hash": "13940541435152424235"
         },
         {
           "file": "apps/backend/src/users/users.controller.ts",
-          "hash": "14542261456502457576"
+          "hash": "17335686332728654294"
         },
         {
           "file": "apps/backend/src/users/users.module.ts",
@@ -1344,11 +1834,11 @@
         },
         {
           "file": "apps/backend/src/users/users.schema.ts",
-          "hash": "7013180944691687490"
+          "hash": "2917148542909216695"
         },
         {
           "file": "apps/backend/src/users/users.service.ts",
-          "hash": "7276597863551005733"
+          "hash": "9013330649522563410"
         },
         {
           "file": "apps/backend/test/app.e2e-spec.ts",
@@ -1367,339 +1857,11 @@
           "hash": "13757859475919901779"
         }
       ],
-      "mobile": [
-        {
-          "file": "apps/mobile/.gitignore",
-          "hash": "11988622709807168759"
-        },
-        {
-          "file": "apps/mobile/.npmrc",
-          "hash": "2931084260337952320"
-        },
-        {
-          "file": "apps/mobile/.prettierrc",
-          "hash": "5575458510476529077"
-        },
-        {
-          "file": "apps/mobile/README.md",
-          "hash": "9264175227273935186"
-        },
-        {
-          "file": "apps/mobile/api-1(1).json",
-          "hash": "5696967789337728445"
-        },
-        {
-          "file": "apps/mobile/app.json",
-          "hash": "12733062127694789018"
-        },
-        {
-          "file": "apps/mobile/app/(tabs)/_layout.tsx",
-          "hash": "11981226019282729846"
-        },
-        {
-          "file": "apps/mobile/app/(tabs)/assignments.tsx",
-          "hash": "17767618077736591543"
-        },
-        {
-          "file": "apps/mobile/app/(tabs)/funds.tsx",
-          "hash": "7995456849907068741"
-        },
-        {
-          "file": "apps/mobile/app/(tabs)/gallery.tsx",
-          "hash": "10771427932745028297"
-        },
-        {
-          "file": "apps/mobile/app/(tabs)/index.tsx",
-          "hash": "8105996128164740844"
-        },
-        {
-          "file": "apps/mobile/app/(tabs)/profile.tsx",
-          "hash": "9741575509003404165"
-        },
-        {
-          "file": "apps/mobile/app/(tabs)/schedule.tsx",
-          "hash": "1262058188404699416"
-        },
-        {
-          "file": "apps/mobile/app/+html.tsx",
-          "hash": "7898599921441917411"
-        },
-        {
-          "file": "apps/mobile/app/+not-found.tsx",
-          "hash": "9921046426708211535"
-        },
-        {
-          "file": "apps/mobile/app/_layout.tsx",
-          "hash": "8391835592906421381"
-        },
-        {
-          "file": "apps/mobile/app/auth/complete-profile.tsx",
-          "hash": "8291735299386507102"
-        },
-        {
-          "file": "apps/mobile/app/auth/login.tsx",
-          "hash": "7127009264042858338"
-        },
-        {
-          "file": "apps/mobile/app/auth/otp.tsx",
-          "hash": "13944201098107307090"
-        },
-        {
-          "file": "apps/mobile/app/index.tsx",
-          "hash": "2985705397119914148"
-        },
-        {
-          "file": "apps/mobile/app/modal/_layout.tsx",
-          "hash": "4923188698317198959"
-        },
-        {
-          "file": "apps/mobile/app/modal/new-assignment.tsx",
-          "hash": "16828583837520681110"
-        },
-        {
-          "file": "apps/mobile/app/modal/new-contribution.tsx",
-          "hash": "880291463429923303"
-        },
-        {
-          "file": "apps/mobile/app/modal/new-post.tsx",
-          "hash": "16798153516121994718"
-        },
-        {
-          "file": "apps/mobile/assets/images/adaptive-icon.png",
-          "hash": "17968662385582925649"
-        },
-        {
-          "file": "apps/mobile/assets/images/favicon.png",
-          "hash": "9208250042878611199"
-        },
-        {
-          "file": "apps/mobile/assets/images/icon.png",
-          "hash": "17968662385582925649"
-        },
-        {
-          "file": "apps/mobile/assets/images/logo.png",
-          "hash": "347363948700687554"
-        },
-        {
-          "file": "apps/mobile/assets/images/react-native-reusables-dark.png",
-          "hash": "4458935672799312457"
-        },
-        {
-          "file": "apps/mobile/assets/images/react-native-reusables-light.png",
-          "hash": "4807005786644951844"
-        },
-        {
-          "file": "apps/mobile/assets/images/splash.png",
-          "hash": "347363948700687554"
-        },
-        {
-          "file": "apps/mobile/babel.config.js",
-          "hash": "18328231312189618870"
-        },
-        {
-          "file": "apps/mobile/components.json",
-          "hash": "3623135559414802683"
-        },
-        {
-          "file": "apps/mobile/components/AnimatedTabScreen.tsx",
-          "hash": "3291480525347547867"
-        },
-        {
-          "file": "apps/mobile/components/ui/button.tsx",
-          "hash": "18325807273272219619"
-        },
-        {
-          "file": "apps/mobile/components/ui/checkbox.tsx",
-          "hash": "4176760279831828195"
-        },
-        {
-          "file": "apps/mobile/components/ui/error-view.tsx",
-          "hash": "15174536084228203047"
-        },
-        {
-          "file": "apps/mobile/components/ui/text.tsx",
-          "hash": "6430251861519053491"
-        },
-        {
-          "file": "apps/mobile/global.css",
-          "hash": "3919351003435874424"
-        },
-        {
-          "file": "apps/mobile/lib/animation/TabAnimationContext.tsx",
-          "hash": "15513658921216843661"
-        },
-        {
-          "file": "apps/mobile/lib/api.ts",
-          "hash": "3288582019538157192"
-        },
-        {
-          "file": "apps/mobile/lib/auth-client.ts",
-          "hash": "5218792498744382692"
-        },
-        {
-          "file": "apps/mobile/lib/hooks/useUserRole.ts",
-          "hash": "4626208742823595005"
-        },
-        {
-          "file": "apps/mobile/lib/query-client.ts",
-          "hash": "13306782668214358790"
-        },
-        {
-          "file": "apps/mobile/lib/theme.ts",
-          "hash": "16626351395862346807"
-        },
-        {
-          "file": "apps/mobile/lib/utils.ts",
-          "hash": "15456290709904554663"
-        },
-        {
-          "file": "apps/mobile/metro.config.js",
-          "hash": "5382841163949788407"
-        },
-        {
-          "file": "apps/mobile/nativewind-env.d.ts",
-          "hash": "16847716270646474250"
-        },
-        {
-          "file": "apps/mobile/navigator/MainNavigator.tsx",
-          "hash": "13722799064003312439"
-        },
-        {
-          "file": "apps/mobile/package.json",
-          "hash": "18359545694633494440",
-          "deps": [
-            "npm:@babel/core",
-            "npm:@tailwindcss/postcss",
-            "npm:@types/react",
-            "npm:prettier",
-            "npm:prettier-plugin-tailwindcss",
-            "npm:typescript@5.9.3",
-            "npm:@better-auth/expo",
-            "npm:@orpc/client",
-            "npm:@orpc/contract",
-            "npm:@orpc/openapi-client",
-            "npm:@orpc/tanstack-query",
-            "npm:@react-native-community/netinfo",
-            "npm:@react-navigation/native",
-            "npm:@rn-primitives/accordion",
-            "npm:@rn-primitives/alert-dialog",
-            "npm:@rn-primitives/aspect-ratio",
-            "npm:@rn-primitives/avatar",
-            "npm:@rn-primitives/checkbox",
-            "npm:@rn-primitives/collapsible",
-            "npm:@rn-primitives/context-menu",
-            "npm:@rn-primitives/dialog",
-            "npm:@rn-primitives/dropdown-menu",
-            "npm:@rn-primitives/hover-card",
-            "npm:@rn-primitives/label",
-            "npm:@rn-primitives/menubar",
-            "npm:@rn-primitives/popover",
-            "npm:@rn-primitives/portal",
-            "npm:@rn-primitives/progress",
-            "npm:@rn-primitives/radio-group",
-            "npm:@rn-primitives/select",
-            "npm:@rn-primitives/separator",
-            "npm:@rn-primitives/slot",
-            "npm:@rn-primitives/switch",
-            "npm:@rn-primitives/tabs",
-            "npm:@rn-primitives/toggle",
-            "npm:@rn-primitives/toggle-group",
-            "npm:@rn-primitives/tooltip",
-            "npm:@shopify/flash-list",
-            "npm:@tanstack/react-query",
-            "npm:better-auth",
-            "npm:class-variance-authority",
-            "npm:clsx",
-            "npm:expo",
-            "npm:expo-constants",
-            "npm:expo-haptics",
-            "npm:expo-image",
-            "npm:expo-image-picker",
-            "npm:expo-linking",
-            "npm:expo-network",
-            "npm:expo-router",
-            "npm:expo-secure-store",
-            "npm:expo-splash-screen",
-            "npm:expo-status-bar",
-            "npm:expo-system-ui",
-            "npm:expo-updates",
-            "npm:lightningcss",
-            "npm:lucide-react-native",
-            "npm:nativewind",
-            "npm:react",
-            "npm:react-dom",
-            "npm:react-native",
-            "npm:react-native-css",
-            "npm:react-native-gesture-handler",
-            "npm:react-native-image-picker",
-            "npm:react-native-keyboard-controller",
-            "npm:react-native-reanimated",
-            "npm:react-native-safe-area-context",
-            "npm:react-native-screens",
-            "npm:react-native-svg",
-            "npm:react-native-web",
-            "npm:react-native-worklets",
-            "npm:tailwind-merge",
-            "npm:tailwindcss",
-            "npm:zod"
-          ]
-        },
-        {
-          "file": "apps/mobile/postcss.config.mjs",
-          "hash": "5511442426987897172"
-        },
-        {
-          "file": "apps/mobile/project.json",
-          "hash": "14716178426710474623"
-        },
-        {
-          "file": "apps/mobile/shims/node-module.js",
-          "hash": "2654331811633272731"
-        },
-        {
-          "file": "apps/mobile/skills-lock.json",
-          "hash": "500308740643283262"
-        },
-        {
-          "file": "apps/mobile/tsconfig.json",
-          "hash": "6311441893922619050"
-        },
-        {
-          "file": "apps/mobile/tw/animated.tsx",
-          "hash": "2437924040256479341"
-        },
-        {
-          "file": "apps/mobile/tw/image.tsx",
-          "hash": "7855646066870479851"
-        },
-        {
-          "file": "apps/mobile/tw/index.tsx",
-          "hash": "8991633758882498221"
-        }
-      ],
-      "typescript-config": [
-        {
-          "file": "packages/typescript-config/base.json",
-          "hash": "16582354637600534236"
-        },
-        {
-          "file": "packages/typescript-config/nextjs.json",
-          "hash": "5420817179880079656"
-        },
-        {
-          "file": "packages/typescript-config/package.json",
-          "hash": "471180667494266307"
-        },
-        {
-          "file": "packages/typescript-config/project.json",
-          "hash": "1554913700563187926"
-        },
-        {
-          "file": "packages/typescript-config/react-library.json",
-          "hash": "15305099616913920141"
-        }
-      ],
       "whatsapp-bot": [
+        {
+          "file": "apps/whatsapp-bot/.dockerignore",
+          "hash": "3139440024897287126"
+        },
         {
           "file": "apps/whatsapp-bot/.env.example",
           "hash": "7297275958007453006"
@@ -1711,6 +1873,10 @@
         {
           "file": "apps/whatsapp-bot/.prettierrc",
           "hash": "9555875142989992828"
+        },
+        {
+          "file": "apps/whatsapp-bot/Dockerfile",
+          "hash": "10889066631238440548"
         },
         {
           "file": "apps/whatsapp-bot/README.md",
@@ -1726,7 +1892,7 @@
         },
         {
           "file": "apps/whatsapp-bot/package.json",
-          "hash": "7376048116000588378",
+          "hash": "2949586851061791170",
           "deps": [
             "npm:@eslint/eslintrc",
             "npm:@eslint/js",
@@ -1761,6 +1927,7 @@
             "npm:@nestjs/platform-express",
             "npm:baileys",
             "npm:bullmq",
+            "npm:moment-timezone",
             "npm:pino",
             "npm:pino-pretty",
             "npm:qrcode",
@@ -1774,6 +1941,26 @@
           "hash": "758997015486183928"
         },
         {
+          "file": "apps/whatsapp-bot/src/announcements/announcements.module.ts",
+          "hash": "1813802150171878244"
+        },
+        {
+          "file": "apps/whatsapp-bot/src/announcements/announcements.processor.ts",
+          "hash": "13831565861375320366"
+        },
+        {
+          "file": "apps/whatsapp-bot/src/announcements/announcements.scheduler.ts",
+          "hash": "8128373575505757474"
+        },
+        {
+          "file": "apps/whatsapp-bot/src/api/api.module.ts",
+          "hash": "8094046067374781751"
+        },
+        {
+          "file": "apps/whatsapp-bot/src/api/api.service.ts",
+          "hash": "2812862666398976743"
+        },
+        {
           "file": "apps/whatsapp-bot/src/app.controller.spec.ts",
           "hash": "2727664763654384995"
         },
@@ -1783,7 +1970,7 @@
         },
         {
           "file": "apps/whatsapp-bot/src/app.module.ts",
-          "hash": "7945414128076481465"
+          "hash": "5304791812145233604"
         },
         {
           "file": "apps/whatsapp-bot/src/app.service.ts",
@@ -1791,7 +1978,7 @@
         },
         {
           "file": "apps/whatsapp-bot/src/baileys/baileys.module.ts",
-          "hash": "3367205734102666638"
+          "hash": "10109915299135909615"
         },
         {
           "file": "apps/whatsapp-bot/src/baileys/baileys.processor.ts",
@@ -1807,7 +1994,7 @@
         },
         {
           "file": "apps/whatsapp-bot/src/baileys/baileys.service.ts",
-          "hash": "9646330923257017534"
+          "hash": "16329460639675980834"
         },
         {
           "file": "apps/whatsapp-bot/src/baileys/decorators/index.ts",
@@ -1850,45 +2037,29 @@
           "hash": "13757859475919901779"
         }
       ],
-      "eslint-config": [
+      "typescript-config": [
         {
-          "file": "packages/eslint-config/README.md",
-          "hash": "13754227653957484045"
+          "file": "packages/typescript-config/base.json",
+          "hash": "16582354637600534236"
         },
         {
-          "file": "packages/eslint-config/base.js",
-          "hash": "13415738514823582499"
+          "file": "packages/typescript-config/nextjs.json",
+          "hash": "5420817179880079656"
         },
         {
-          "file": "packages/eslint-config/next.js",
-          "hash": "14252493761496035585"
+          "file": "packages/typescript-config/package.json",
+          "hash": "471180667494266307"
         },
         {
-          "file": "packages/eslint-config/package.json",
-          "hash": "7624567923543603753",
-          "deps": [
-            "npm:@eslint/js",
-            "npm:@next/eslint-plugin-next",
-            "npm:eslint",
-            "npm:eslint-config-prettier",
-            "npm:eslint-plugin-only-warn",
-            "npm:eslint-plugin-react",
-            "npm:eslint-plugin-react-hooks",
-            "npm:globals",
-            "npm:typescript@5.9.3",
-            "npm:typescript-eslint@8.58.2"
-          ]
+          "file": "packages/typescript-config/project.json",
+          "hash": "1554913700563187926"
         },
         {
-          "file": "packages/eslint-config/project.json",
-          "hash": "16632465850133719383"
-        },
-        {
-          "file": "packages/eslint-config/react-internal.js",
-          "hash": "3207875352665207252"
+          "file": "packages/typescript-config/react-library.json",
+          "hash": "15305099616913920141"
         }
       ]
     }
   },
-  "externalNodesHash": "6550544453245594134"
+  "externalNodesHash": "2026685402451371041"
 }

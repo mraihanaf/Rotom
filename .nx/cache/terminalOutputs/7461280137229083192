@@ -1,0 +1,54 @@
+[1mnpm[22m [33mwarn[39m [94mconfig[39m ignoring workspace config at /home/rai/Documents/programming-stuff/Rotom/apps/mobile/.npmrc
+[1G[0K⠙[1G[0K[2mStarting Metro Bundler[22m
+[1miOS[22m [0m[2mnode_modules/expo-router/[22m[0m[1mentry.js[22m [47m[37m░░░░░░░░░░░░░░░░[39m[49m[1m  0.0% [22m[2m(0/1)[22m
+[191D[1A[0J[1miOS[22m [0m[2mnode_modules/expo-router/[22m[0m[1mentry.js[22m [32m[42m▓[49m[39m[47m[37m░░░░░░░░░░░░░░░[39m[49m[1m 10.1% [22m[2m(13/41)[22m
+[191D[1A[0J[1miOS[22m [0m[2mnode_modules/expo-router/[22m[0m[1mentry.js[22m [32m[42m▓[49m[39m[47m[37m░░░░░░░░░░░░░░░[39m[49m[1m 10.1% [22m[2m( 38/186)[22m
+[191D[1A[0J[1miOS[22m [0m[2mnode_modules/expo-router/[22m[0m[1mentry.js[22m [32m[42m▓[49m[39m[47m[37m░░░░░░░░░░░░░░░[39m[49m[1m 10.4% [22m[2m(104/323)[22m
+[191D[1A[0J[1miOS[22m [0m[2mnode_modules/expo-router/[22m[0m[1mentry.js[22m [32m[42m▓▓▓▓[49m[39m[47m[37m░░░░░░░░░░░░[39m[49m[1m 26.0% [22m[2m(246/482)[22m
+[191D[1A[0J[1miOS[22m [0m[2mnode_modules/expo-router/[22m[0m[1mentry.js[22m [32m[42m▓▓▓▓▓▓[49m[39m[47m[37m░░░░░░░░░░[39m[49m[1m 40.4% [22m[2m(445/700)[22m
+[191D[1A[0J[1miOS[22m [0m[2mnode_modules/expo-router/[22m[0m[1mentry.js[22m [32m[42m▓▓▓▓▓▓▓[49m[39m[47m[37m░░░░░░░░░[39m[49m[1m 46.5% [22m[2m(593/870)[22m
+[191D[1A[0J[1miOS[22m [0m[2mnode_modules/expo-router/[22m[0m[1mentry.js[22m [32m[42m▓▓▓▓▓▓▓▓[49m[39m[47m[37m░░░░░░░░[39m[49m[1m 53.8% [22m[2m( 742/1012)[22m
+[191D[1A[0J[1miOS[22m [0m[2mnode_modules/expo-router/[22m[0m[1mentry.js[22m [32m[42m▓▓▓▓▓▓▓▓▓[49m[39m[47m[37m░░░░░░░[39m[49m[1m 57.7% [22m[2m( 867/1141)[22m
+[191D[1A[0J[1miOS[22m [0m[2mnode_modules/expo-router/[22m[0m[1mentry.js[22m [32m[42m▓▓▓▓▓▓▓▓▓▓▓[49m[39m[47m[37m░░░░░[39m[49m[1m 70.7% [22m[2m(1037/1233)[22m
+[191D[1A[0J[1miOS[22m [0m[2mnode_modules/expo-router/[22m[0m[1mentry.js[22m [32m[42m▓▓▓▓▓▓▓▓▓▓▓[49m[39m[47m[37m░░░░░[39m[49m[1m 72.9% [22m[2m(1139/1334)[22m
+[191D[1A[0J[1miOS[22m [0m[2mnode_modules/expo-router/[22m[0m[1mentry.js[22m [32m[42m▓▓▓▓▓▓▓▓▓▓▓[49m[39m[47m[37m░░░░░[39m[49m[1m 72.9% [22m[2m(1144/2974)[22m
+[191D[1A[0J[1miOS[22m [0m[2mnode_modules/expo-router/[22m[0m[1mentry.js[22m [32m[42m▓▓▓▓▓▓▓▓▓▓▓[49m[39m[47m[37m░░░░░[39m[49m[1m 72.9% [22m[2m(1277/3043)[22m
+[191D[1A[0J[1miOS[22m [0m[2mnode_modules/expo-router/[22m[0m[1mentry.js[22m [32m[42m▓▓▓▓▓▓▓▓▓▓▓[49m[39m[47m[37m░░░░░[39m[49m[1m 72.9% [22m[2m(1892/3064)[22m
+[191D[1A[0J[1miOS[22m [0m[2mnode_modules/expo-router/[22m[0m[1mentry.js[22m [32m[42m▓▓▓▓▓▓▓▓▓▓▓▓▓▓[49m[39m[47m[37m░░[39m[49m[1m 91.2% [22m[2m(3024/3167)[22m
+[191D[1A[0J[1miOS[22m [0m[2mnode_modules/expo-router/[22m[0m[1mentry.js[22m [32m[42m▓▓▓▓▓▓▓▓▓▓▓▓▓▓[49m[39m[47m[37m░░[39m[49m[1m 91.7% [22m[2m(3113/3251)[22m
+[191D[1A[0J[1miOS[22m [0m[2mnode_modules/expo-router/[22m[0m[1mentry.js[22m [32m[42m▓▓▓▓▓▓▓▓▓▓▓▓▓▓[49m[39m[47m[37m░░[39m[49m[1m 91.7% [22m[2m(3202/3351)[22m
+[191D[1A[0J[1miOS[22m [0m[2mnode_modules/expo-router/[22m[0m[1mentry.js[22m [32m[42m▓▓▓▓▓▓▓▓▓▓▓▓▓▓[49m[39m[47m[37m░░[39m[49m[1m 91.7% [22m[2m(3353/3518)[22m
+[191D[1A[0J[1miOS[22m [0m[2mnode_modules/expo-router/[22m[0m[1mentry.js[22m [32m[42m▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓[49m[39m[47m[37m░[39m[49m[1m 99.8% [22m[2m(3593/3596)[22m
+[191D[1A[0J[1miOS[22m [0m[2mnode_modules/expo-router/[22m[0m[1mentry.js[22m [32m[42m▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓[49m[39m[47m[37m░[39m[49m[1m 99.9% [22m[2m(3595/3596)[22m
+[191D[1A[0J[1miOS[22m [0m[2mnode_modules/expo-router/[22m[0m[1mentry.js[22m [32m[42m▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓[49m[39m[47m[37m░[39m[49m[1m 99.9% [22m[2m(3596/3596)[22m
+[191D[1A[0J[32m[1miOS[22m Bundled [39m[2m7560ms[22m[0m[2m node_modules/expo-router/entry.js (3596 modules)[22m[0m
+[1miOS[22m [0m[2mnode_modules/expo-router/[22m[0m[1mentry.js[22m [32m[42m▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓[49m[39m[47m[37m░[39m[49m[1m 99.9% [22m[2m(3596/3596)[22m
+[191D[1A[0J
+[1m› Assets (23):[22m
+../../node_modules/@react-navigation/elements/lib/module/assets/back-icon-mask.png [90m(653 B)[39m
+../../node_modules/@react-navigation/elements/lib/module/assets/back-icon.png [90m(4 variations | 566 B)[39m
+../../node_modules/@react-navigation/elements/lib/module/assets/clear-icon.png [90m(4 variations | 425 B)[39m
+../../node_modules/@react-navigation/elements/lib/module/assets/close-icon.png [90m(4 variations | 235 B)[39m
+../../node_modules/@react-navigation/elements/lib/module/assets/search-icon.png [90m(3 variations | 582 B)[39m
+../../node_modules/expo-router/assets/arrow_down.png [90m(9.46 kB)[39m
+../../node_modules/expo-router/assets/error.png [90m(469 B)[39m
+../../node_modules/expo-router/assets/file.png [90m(138 B)[39m
+../../node_modules/expo-router/assets/forward.png [90m(188 B)[39m
+../../node_modules/expo-router/assets/pkg.png [90m(364 B)[39m
+../../node_modules/expo-router/assets/sitemap.png [90m(465 B)[39m
+../../node_modules/expo-router/assets/unmatched.png [90m(4.75 kB)[39m
+
+[1m› ios bundles (1):[22m
+_expo/static/js/ios/entry-9f95d43490f55f287ddd1a934fcc439a.hbc [90m(7.94 MB)[39m
+
+[1m› web bundles (1):[22m
+_expo/static/css/global-d41d8cd98f00b204e9800998ecf8427e.css [90m(0 B)[39m
+
+[1m› Files (1):[22m
+metadata.json [90m(1.78 kB)[39m
+
+[92mExported: dist[39m
+[1G[0K⠙[1G[0K=== Bundle sizes ===
+7.6M	dist/_expo/static/js/ios/entry-9f95d43490f55f287ddd1a934fcc439a.hbc
+=== Total ===
+7.7M	dist/

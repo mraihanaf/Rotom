@@ -264,8 +264,33 @@ model DutySchedule {
 model Settings {
   id Int @id @default(1)
 
+  // Enable flags
   ENABLE_WHATSAPP_BOT_FUND_REPORT               Boolean @default(true)
   ENABLE_WHATSAPP_BOT_DUTY_REPORT               Boolean @default(true)
   ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER Boolean @default(true)
   ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER         Boolean @default(true)
+  ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER       Boolean @default(true)
+
+  // Announcement group configuration
+  announcementGroupJid String?
+
+  // Reminder times (HH:MM format)
+  dutyReminderTime     String @default("07:00")
+  scheduleReminderTime String @default("07:00")
+  assignmentReminderTime String @default("18:00")
+  birthdayReminderTime String @default("09:00")
+
+  // Fund report configuration
+  fundReportDay  Int    @default(1) // Day of month (1-31)
+  fundReportTime String @default("08:00")
+
+  // Message templates
+  dutyPersonalizedMessage String @default("jangan lupa piket hari ini ya {name}!")
+  birthdayMessageTemplate String @default("Selamat ulang tahun {name}! Semoga panjang umur dan sehat selalu!")
+
+  // Timezone configuration (IANA format, e.g., "Asia/Jakarta")
+  timezone String @default("system")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

@@ -1,5 +1,6 @@
 import { oc } from '@orpc/contract';
-import { getAllUsersInputSchema, getAllUsersOutputSchema } from './users.schema';
+import { z } from 'zod';
+import { getAllUsersInputSchema, getAllUsersOutputSchema, userSchema } from './users.schema';
 
 const getAll = oc
   .route({
@@ -10,6 +11,16 @@ const getAll = oc
   .input(getAllUsersInputSchema)
   .output(getAllUsersOutputSchema);
 
+const updateRole = oc
+  .route({
+    path: '/users/{id}/role',
+    method: 'PUT',
+    tags: ['Users'],
+  })
+  .input(z.object({ id: z.string(), role: z.string() }))
+  .output(z.object({ success: z.boolean(), user: userSchema }));
+
 export const usersContract = {
   getAll,
+  updateRole,
 };

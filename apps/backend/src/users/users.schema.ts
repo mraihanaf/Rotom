@@ -4,6 +4,7 @@ export const userSchema = z.object({
   id: z.string(),
   name: z.string(),
   image: z.string().nullable(),
+  role: z.string().nullable().transform((v) => v || 'user'),
 });
 
 export const getAllUsersInputSchema = z.object({

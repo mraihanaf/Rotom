@@ -20,8 +20,44 @@ export class UsersService {
         id: true,
         name: true,
         image: true,
+        role: true,
       },
     });
-    return buildCursorPagination(items, limit, (item) => item.id);
+    
+    // Ensure role is always a string
+    const mappedItems = items.map(item => ({
+      ...item,
+      role: item.role || 'user',
+    }));
+    
+    return buildCursorPagination(mappedItems, limit, (item) => item.id);
+  }
+
+  async updateUserRole(
+    userId: string,
+    role: string,
+    currentUserId: string,
+  ): Promise<{ id: string; name: string; image: string | null; role: string }> {
+    // Self-protection: cannot change own role
+    if (userId === currentUserId) {
+      throw new Error('Cannot change your own role');
+    }
+
+    const updated = await this.prismaService.user.update({
+      where: { id: userId },
+      data: { role },
+      select: {
+        id: true,
+        name: true,
+        image: true,
+        role: true,
+      },
+    });
+
+    this.logger.log(`Updated user ${userId} role to ${role}`);
+    return {
+      ...updated,
+      role: updated.role || 'user',
+    };
   }
 }

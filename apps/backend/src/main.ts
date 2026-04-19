@@ -10,6 +10,12 @@ async function bootstrap() {
     origin: process.env.FRONTEND_URL,
   });
   app.enableShutdownHooks();
+
+  // Health check endpoint for Docker/container orchestration
+  app.getHttpAdapter().get('/health', (_req, res) => {
+    res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
+  });
+
   await app.listen(process.env.PORT ?? 3000);
 }
 

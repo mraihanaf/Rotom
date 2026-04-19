@@ -550,6 +550,22 @@
       "apps/mobile/package.json",
       "nx/core/package-json"
     ],
+    "metadata.targetGroups.NPM Scripts.5": [
+      "apps/mobile/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups.NPM Scripts.6": [
+      "apps/mobile/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups.NPM Scripts.7": [
+      "apps/mobile/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups.NPM Scripts.8": [
+      "apps/mobile/package.json",
+      "nx/core/package-json"
+    ],
     "metadata.js": [
       "apps/mobile/package.json",
       "nx/core/package-json"
@@ -711,6 +727,118 @@
       "nx/core/package-json"
     ],
     "targets.clean.metadata.runCommand": [
+      "apps/mobile/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.bundle:export": [
+      "apps/mobile/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.bundle:export.executor": [
+      "apps/mobile/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.bundle:export.options": [
+      "apps/mobile/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.bundle:export.metadata": [
+      "apps/mobile/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.bundle:export.options.script": [
+      "apps/mobile/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.bundle:export.metadata.scriptContent": [
+      "apps/mobile/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.bundle:export.metadata.runCommand": [
+      "apps/mobile/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.bundle:analyze": [
+      "apps/mobile/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.bundle:analyze.executor": [
+      "apps/mobile/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.bundle:analyze.options": [
+      "apps/mobile/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.bundle:analyze.metadata": [
+      "apps/mobile/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.bundle:analyze.options.script": [
+      "apps/mobile/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.bundle:analyze.metadata.scriptContent": [
+      "apps/mobile/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.bundle:analyze.metadata.runCommand": [
+      "apps/mobile/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.bundle:analyze:android": [
+      "apps/mobile/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.bundle:analyze:android.executor": [
+      "apps/mobile/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.bundle:analyze:android.options": [
+      "apps/mobile/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.bundle:analyze:android.metadata": [
+      "apps/mobile/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.bundle:analyze:android.options.script": [
+      "apps/mobile/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.bundle:analyze:android.metadata.scriptContent": [
+      "apps/mobile/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.bundle:analyze:android.metadata.runCommand": [
+      "apps/mobile/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.bundle:stats": [
+      "apps/mobile/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.bundle:stats.executor": [
+      "apps/mobile/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.bundle:stats.options": [
+      "apps/mobile/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.bundle:stats.metadata": [
+      "apps/mobile/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.bundle:stats.options.script": [
+      "apps/mobile/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.bundle:stats.metadata.scriptContent": [
+      "apps/mobile/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.bundle:stats.metadata.runCommand": [
       "apps/mobile/package.json",
       "nx/core/package-json"
     ],

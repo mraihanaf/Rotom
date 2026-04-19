@@ -28,10 +28,12 @@ export type AggregateSettings = {
 
 export type SettingsAvgAggregateOutputType = {
   id: number | null
+  fundReportDay: number | null
 }
 
 export type SettingsSumAggregateOutputType = {
   id: number | null
+  fundReportDay: number | null
 }
 
 export type SettingsMinAggregateOutputType = {
@@ -40,6 +42,19 @@ export type SettingsMinAggregateOutputType = {
   ENABLE_WHATSAPP_BOT_DUTY_REPORT: boolean | null
   ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER: boolean | null
   ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER: boolean | null
+  ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER: boolean | null
+  announcementGroupJid: string | null
+  dutyReminderTime: string | null
+  scheduleReminderTime: string | null
+  assignmentReminderTime: string | null
+  birthdayReminderTime: string | null
+  fundReportDay: number | null
+  fundReportTime: string | null
+  dutyPersonalizedMessage: string | null
+  birthdayMessageTemplate: string | null
+  timezone: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type SettingsMaxAggregateOutputType = {
@@ -48,6 +63,19 @@ export type SettingsMaxAggregateOutputType = {
   ENABLE_WHATSAPP_BOT_DUTY_REPORT: boolean | null
   ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER: boolean | null
   ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER: boolean | null
+  ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER: boolean | null
+  announcementGroupJid: string | null
+  dutyReminderTime: string | null
+  scheduleReminderTime: string | null
+  assignmentReminderTime: string | null
+  birthdayReminderTime: string | null
+  fundReportDay: number | null
+  fundReportTime: string | null
+  dutyPersonalizedMessage: string | null
+  birthdayMessageTemplate: string | null
+  timezone: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type SettingsCountAggregateOutputType = {
@@ -56,16 +84,31 @@ export type SettingsCountAggregateOutputType = {
   ENABLE_WHATSAPP_BOT_DUTY_REPORT: number
   ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER: number
   ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER: number
+  ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER: number
+  announcementGroupJid: number
+  dutyReminderTime: number
+  scheduleReminderTime: number
+  assignmentReminderTime: number
+  birthdayReminderTime: number
+  fundReportDay: number
+  fundReportTime: number
+  dutyPersonalizedMessage: number
+  birthdayMessageTemplate: number
+  timezone: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
 
 export type SettingsAvgAggregateInputType = {
   id?: true
+  fundReportDay?: true
 }
 
 export type SettingsSumAggregateInputType = {
   id?: true
+  fundReportDay?: true
 }
 
 export type SettingsMinAggregateInputType = {
@@ -74,6 +117,19 @@ export type SettingsMinAggregateInputType = {
   ENABLE_WHATSAPP_BOT_DUTY_REPORT?: true
   ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER?: true
   ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER?: true
+  ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER?: true
+  announcementGroupJid?: true
+  dutyReminderTime?: true
+  scheduleReminderTime?: true
+  assignmentReminderTime?: true
+  birthdayReminderTime?: true
+  fundReportDay?: true
+  fundReportTime?: true
+  dutyPersonalizedMessage?: true
+  birthdayMessageTemplate?: true
+  timezone?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type SettingsMaxAggregateInputType = {
@@ -82,6 +138,19 @@ export type SettingsMaxAggregateInputType = {
   ENABLE_WHATSAPP_BOT_DUTY_REPORT?: true
   ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER?: true
   ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER?: true
+  ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER?: true
+  announcementGroupJid?: true
+  dutyReminderTime?: true
+  scheduleReminderTime?: true
+  assignmentReminderTime?: true
+  birthdayReminderTime?: true
+  fundReportDay?: true
+  fundReportTime?: true
+  dutyPersonalizedMessage?: true
+  birthdayMessageTemplate?: true
+  timezone?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type SettingsCountAggregateInputType = {
@@ -90,6 +159,19 @@ export type SettingsCountAggregateInputType = {
   ENABLE_WHATSAPP_BOT_DUTY_REPORT?: true
   ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER?: true
   ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER?: true
+  ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER?: true
+  announcementGroupJid?: true
+  dutyReminderTime?: true
+  scheduleReminderTime?: true
+  assignmentReminderTime?: true
+  birthdayReminderTime?: true
+  fundReportDay?: true
+  fundReportTime?: true
+  dutyPersonalizedMessage?: true
+  birthdayMessageTemplate?: true
+  timezone?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -185,6 +267,19 @@ export type SettingsGroupByOutputType = {
   ENABLE_WHATSAPP_BOT_DUTY_REPORT: boolean
   ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER: boolean
   ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER: boolean
+  ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER: boolean
+  announcementGroupJid: string | null
+  dutyReminderTime: string
+  scheduleReminderTime: string
+  assignmentReminderTime: string
+  birthdayReminderTime: string
+  fundReportDay: number
+  fundReportTime: string
+  dutyPersonalizedMessage: string
+  birthdayMessageTemplate: string
+  timezone: string
+  createdAt: Date
+  updatedAt: Date
   _count: SettingsCountAggregateOutputType | null
   _avg: SettingsAvgAggregateOutputType | null
   _sum: SettingsSumAggregateOutputType | null
@@ -216,6 +311,19 @@ export type SettingsWhereInput = {
   ENABLE_WHATSAPP_BOT_DUTY_REPORT?: Prisma.BoolFilter<"Settings"> | boolean
   ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER?: Prisma.BoolFilter<"Settings"> | boolean
   ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER?: Prisma.BoolFilter<"Settings"> | boolean
+  ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER?: Prisma.BoolFilter<"Settings"> | boolean
+  announcementGroupJid?: Prisma.StringNullableFilter<"Settings"> | string | null
+  dutyReminderTime?: Prisma.StringFilter<"Settings"> | string
+  scheduleReminderTime?: Prisma.StringFilter<"Settings"> | string
+  assignmentReminderTime?: Prisma.StringFilter<"Settings"> | string
+  birthdayReminderTime?: Prisma.StringFilter<"Settings"> | string
+  fundReportDay?: Prisma.IntFilter<"Settings"> | number
+  fundReportTime?: Prisma.StringFilter<"Settings"> | string
+  dutyPersonalizedMessage?: Prisma.StringFilter<"Settings"> | string
+  birthdayMessageTemplate?: Prisma.StringFilter<"Settings"> | string
+  timezone?: Prisma.StringFilter<"Settings"> | string
+  createdAt?: Prisma.DateTimeFilter<"Settings"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Settings"> | Date | string
 }
 
 export type SettingsOrderByWithRelationInput = {
@@ -224,6 +332,19 @@ export type SettingsOrderByWithRelationInput = {
   ENABLE_WHATSAPP_BOT_DUTY_REPORT?: Prisma.SortOrder
   ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER?: Prisma.SortOrder
   ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER?: Prisma.SortOrder
+  ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER?: Prisma.SortOrder
+  announcementGroupJid?: Prisma.SortOrderInput | Prisma.SortOrder
+  dutyReminderTime?: Prisma.SortOrder
+  scheduleReminderTime?: Prisma.SortOrder
+  assignmentReminderTime?: Prisma.SortOrder
+  birthdayReminderTime?: Prisma.SortOrder
+  fundReportDay?: Prisma.SortOrder
+  fundReportTime?: Prisma.SortOrder
+  dutyPersonalizedMessage?: Prisma.SortOrder
+  birthdayMessageTemplate?: Prisma.SortOrder
+  timezone?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type SettingsWhereUniqueInput = Prisma.AtLeast<{
@@ -235,6 +356,19 @@ export type SettingsWhereUniqueInput = Prisma.AtLeast<{
   ENABLE_WHATSAPP_BOT_DUTY_REPORT?: Prisma.BoolFilter<"Settings"> | boolean
   ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER?: Prisma.BoolFilter<"Settings"> | boolean
   ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER?: Prisma.BoolFilter<"Settings"> | boolean
+  ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER?: Prisma.BoolFilter<"Settings"> | boolean
+  announcementGroupJid?: Prisma.StringNullableFilter<"Settings"> | string | null
+  dutyReminderTime?: Prisma.StringFilter<"Settings"> | string
+  scheduleReminderTime?: Prisma.StringFilter<"Settings"> | string
+  assignmentReminderTime?: Prisma.StringFilter<"Settings"> | string
+  birthdayReminderTime?: Prisma.StringFilter<"Settings"> | string
+  fundReportDay?: Prisma.IntFilter<"Settings"> | number
+  fundReportTime?: Prisma.StringFilter<"Settings"> | string
+  dutyPersonalizedMessage?: Prisma.StringFilter<"Settings"> | string
+  birthdayMessageTemplate?: Prisma.StringFilter<"Settings"> | string
+  timezone?: Prisma.StringFilter<"Settings"> | string
+  createdAt?: Prisma.DateTimeFilter<"Settings"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Settings"> | Date | string
 }, "id">
 
 export type SettingsOrderByWithAggregationInput = {
@@ -243,6 +377,19 @@ export type SettingsOrderByWithAggregationInput = {
   ENABLE_WHATSAPP_BOT_DUTY_REPORT?: Prisma.SortOrder
   ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER?: Prisma.SortOrder
   ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER?: Prisma.SortOrder
+  ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER?: Prisma.SortOrder
+  announcementGroupJid?: Prisma.SortOrderInput | Prisma.SortOrder
+  dutyReminderTime?: Prisma.SortOrder
+  scheduleReminderTime?: Prisma.SortOrder
+  assignmentReminderTime?: Prisma.SortOrder
+  birthdayReminderTime?: Prisma.SortOrder
+  fundReportDay?: Prisma.SortOrder
+  fundReportTime?: Prisma.SortOrder
+  dutyPersonalizedMessage?: Prisma.SortOrder
+  birthdayMessageTemplate?: Prisma.SortOrder
+  timezone?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.SettingsCountOrderByAggregateInput
   _avg?: Prisma.SettingsAvgOrderByAggregateInput
   _max?: Prisma.SettingsMaxOrderByAggregateInput
@@ -259,6 +406,19 @@ export type SettingsScalarWhereWithAggregatesInput = {
   ENABLE_WHATSAPP_BOT_DUTY_REPORT?: Prisma.BoolWithAggregatesFilter<"Settings"> | boolean
   ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER?: Prisma.BoolWithAggregatesFilter<"Settings"> | boolean
   ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER?: Prisma.BoolWithAggregatesFilter<"Settings"> | boolean
+  ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER?: Prisma.BoolWithAggregatesFilter<"Settings"> | boolean
+  announcementGroupJid?: Prisma.StringNullableWithAggregatesFilter<"Settings"> | string | null
+  dutyReminderTime?: Prisma.StringWithAggregatesFilter<"Settings"> | string
+  scheduleReminderTime?: Prisma.StringWithAggregatesFilter<"Settings"> | string
+  assignmentReminderTime?: Prisma.StringWithAggregatesFilter<"Settings"> | string
+  birthdayReminderTime?: Prisma.StringWithAggregatesFilter<"Settings"> | string
+  fundReportDay?: Prisma.IntWithAggregatesFilter<"Settings"> | number
+  fundReportTime?: Prisma.StringWithAggregatesFilter<"Settings"> | string
+  dutyPersonalizedMessage?: Prisma.StringWithAggregatesFilter<"Settings"> | string
+  birthdayMessageTemplate?: Prisma.StringWithAggregatesFilter<"Settings"> | string
+  timezone?: Prisma.StringWithAggregatesFilter<"Settings"> | string
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Settings"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Settings"> | Date | string
 }
 
 export type SettingsCreateInput = {
@@ -267,6 +427,19 @@ export type SettingsCreateInput = {
   ENABLE_WHATSAPP_BOT_DUTY_REPORT?: boolean
   ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER?: boolean
   ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER?: boolean
+  ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER?: boolean
+  announcementGroupJid?: string | null
+  dutyReminderTime?: string
+  scheduleReminderTime?: string
+  assignmentReminderTime?: string
+  birthdayReminderTime?: string
+  fundReportDay?: number
+  fundReportTime?: string
+  dutyPersonalizedMessage?: string
+  birthdayMessageTemplate?: string
+  timezone?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type SettingsUncheckedCreateInput = {
@@ -275,6 +448,19 @@ export type SettingsUncheckedCreateInput = {
   ENABLE_WHATSAPP_BOT_DUTY_REPORT?: boolean
   ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER?: boolean
   ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER?: boolean
+  ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER?: boolean
+  announcementGroupJid?: string | null
+  dutyReminderTime?: string
+  scheduleReminderTime?: string
+  assignmentReminderTime?: string
+  birthdayReminderTime?: string
+  fundReportDay?: number
+  fundReportTime?: string
+  dutyPersonalizedMessage?: string
+  birthdayMessageTemplate?: string
+  timezone?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type SettingsUpdateInput = {
@@ -283,6 +469,19 @@ export type SettingsUpdateInput = {
   ENABLE_WHATSAPP_BOT_DUTY_REPORT?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  announcementGroupJid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dutyReminderTime?: Prisma.StringFieldUpdateOperationsInput | string
+  scheduleReminderTime?: Prisma.StringFieldUpdateOperationsInput | string
+  assignmentReminderTime?: Prisma.StringFieldUpdateOperationsInput | string
+  birthdayReminderTime?: Prisma.StringFieldUpdateOperationsInput | string
+  fundReportDay?: Prisma.IntFieldUpdateOperationsInput | number
+  fundReportTime?: Prisma.StringFieldUpdateOperationsInput | string
+  dutyPersonalizedMessage?: Prisma.StringFieldUpdateOperationsInput | string
+  birthdayMessageTemplate?: Prisma.StringFieldUpdateOperationsInput | string
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type SettingsUncheckedUpdateInput = {
@@ -291,6 +490,19 @@ export type SettingsUncheckedUpdateInput = {
   ENABLE_WHATSAPP_BOT_DUTY_REPORT?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  announcementGroupJid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dutyReminderTime?: Prisma.StringFieldUpdateOperationsInput | string
+  scheduleReminderTime?: Prisma.StringFieldUpdateOperationsInput | string
+  assignmentReminderTime?: Prisma.StringFieldUpdateOperationsInput | string
+  birthdayReminderTime?: Prisma.StringFieldUpdateOperationsInput | string
+  fundReportDay?: Prisma.IntFieldUpdateOperationsInput | number
+  fundReportTime?: Prisma.StringFieldUpdateOperationsInput | string
+  dutyPersonalizedMessage?: Prisma.StringFieldUpdateOperationsInput | string
+  birthdayMessageTemplate?: Prisma.StringFieldUpdateOperationsInput | string
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type SettingsCreateManyInput = {
@@ -299,6 +511,19 @@ export type SettingsCreateManyInput = {
   ENABLE_WHATSAPP_BOT_DUTY_REPORT?: boolean
   ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER?: boolean
   ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER?: boolean
+  ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER?: boolean
+  announcementGroupJid?: string | null
+  dutyReminderTime?: string
+  scheduleReminderTime?: string
+  assignmentReminderTime?: string
+  birthdayReminderTime?: string
+  fundReportDay?: number
+  fundReportTime?: string
+  dutyPersonalizedMessage?: string
+  birthdayMessageTemplate?: string
+  timezone?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type SettingsUpdateManyMutationInput = {
@@ -307,6 +532,19 @@ export type SettingsUpdateManyMutationInput = {
   ENABLE_WHATSAPP_BOT_DUTY_REPORT?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  announcementGroupJid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dutyReminderTime?: Prisma.StringFieldUpdateOperationsInput | string
+  scheduleReminderTime?: Prisma.StringFieldUpdateOperationsInput | string
+  assignmentReminderTime?: Prisma.StringFieldUpdateOperationsInput | string
+  birthdayReminderTime?: Prisma.StringFieldUpdateOperationsInput | string
+  fundReportDay?: Prisma.IntFieldUpdateOperationsInput | number
+  fundReportTime?: Prisma.StringFieldUpdateOperationsInput | string
+  dutyPersonalizedMessage?: Prisma.StringFieldUpdateOperationsInput | string
+  birthdayMessageTemplate?: Prisma.StringFieldUpdateOperationsInput | string
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type SettingsUncheckedUpdateManyInput = {
@@ -315,6 +553,19 @@ export type SettingsUncheckedUpdateManyInput = {
   ENABLE_WHATSAPP_BOT_DUTY_REPORT?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  announcementGroupJid?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dutyReminderTime?: Prisma.StringFieldUpdateOperationsInput | string
+  scheduleReminderTime?: Prisma.StringFieldUpdateOperationsInput | string
+  assignmentReminderTime?: Prisma.StringFieldUpdateOperationsInput | string
+  birthdayReminderTime?: Prisma.StringFieldUpdateOperationsInput | string
+  fundReportDay?: Prisma.IntFieldUpdateOperationsInput | number
+  fundReportTime?: Prisma.StringFieldUpdateOperationsInput | string
+  dutyPersonalizedMessage?: Prisma.StringFieldUpdateOperationsInput | string
+  birthdayMessageTemplate?: Prisma.StringFieldUpdateOperationsInput | string
+  timezone?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type SettingsCountOrderByAggregateInput = {
@@ -323,10 +574,24 @@ export type SettingsCountOrderByAggregateInput = {
   ENABLE_WHATSAPP_BOT_DUTY_REPORT?: Prisma.SortOrder
   ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER?: Prisma.SortOrder
   ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER?: Prisma.SortOrder
+  ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER?: Prisma.SortOrder
+  announcementGroupJid?: Prisma.SortOrder
+  dutyReminderTime?: Prisma.SortOrder
+  scheduleReminderTime?: Prisma.SortOrder
+  assignmentReminderTime?: Prisma.SortOrder
+  birthdayReminderTime?: Prisma.SortOrder
+  fundReportDay?: Prisma.SortOrder
+  fundReportTime?: Prisma.SortOrder
+  dutyPersonalizedMessage?: Prisma.SortOrder
+  birthdayMessageTemplate?: Prisma.SortOrder
+  timezone?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type SettingsAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  fundReportDay?: Prisma.SortOrder
 }
 
 export type SettingsMaxOrderByAggregateInput = {
@@ -335,6 +600,19 @@ export type SettingsMaxOrderByAggregateInput = {
   ENABLE_WHATSAPP_BOT_DUTY_REPORT?: Prisma.SortOrder
   ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER?: Prisma.SortOrder
   ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER?: Prisma.SortOrder
+  ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER?: Prisma.SortOrder
+  announcementGroupJid?: Prisma.SortOrder
+  dutyReminderTime?: Prisma.SortOrder
+  scheduleReminderTime?: Prisma.SortOrder
+  assignmentReminderTime?: Prisma.SortOrder
+  birthdayReminderTime?: Prisma.SortOrder
+  fundReportDay?: Prisma.SortOrder
+  fundReportTime?: Prisma.SortOrder
+  dutyPersonalizedMessage?: Prisma.SortOrder
+  birthdayMessageTemplate?: Prisma.SortOrder
+  timezone?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type SettingsMinOrderByAggregateInput = {
@@ -343,10 +621,24 @@ export type SettingsMinOrderByAggregateInput = {
   ENABLE_WHATSAPP_BOT_DUTY_REPORT?: Prisma.SortOrder
   ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER?: Prisma.SortOrder
   ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER?: Prisma.SortOrder
+  ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER?: Prisma.SortOrder
+  announcementGroupJid?: Prisma.SortOrder
+  dutyReminderTime?: Prisma.SortOrder
+  scheduleReminderTime?: Prisma.SortOrder
+  assignmentReminderTime?: Prisma.SortOrder
+  birthdayReminderTime?: Prisma.SortOrder
+  fundReportDay?: Prisma.SortOrder
+  fundReportTime?: Prisma.SortOrder
+  dutyPersonalizedMessage?: Prisma.SortOrder
+  birthdayMessageTemplate?: Prisma.SortOrder
+  timezone?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type SettingsSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  fundReportDay?: Prisma.SortOrder
 }
 
 
@@ -357,6 +649,19 @@ export type SettingsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   ENABLE_WHATSAPP_BOT_DUTY_REPORT?: boolean
   ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER?: boolean
   ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER?: boolean
+  ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER?: boolean
+  announcementGroupJid?: boolean
+  dutyReminderTime?: boolean
+  scheduleReminderTime?: boolean
+  assignmentReminderTime?: boolean
+  birthdayReminderTime?: boolean
+  fundReportDay?: boolean
+  fundReportTime?: boolean
+  dutyPersonalizedMessage?: boolean
+  birthdayMessageTemplate?: boolean
+  timezone?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["settings"]>
 
 export type SettingsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -365,6 +670,19 @@ export type SettingsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   ENABLE_WHATSAPP_BOT_DUTY_REPORT?: boolean
   ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER?: boolean
   ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER?: boolean
+  ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER?: boolean
+  announcementGroupJid?: boolean
+  dutyReminderTime?: boolean
+  scheduleReminderTime?: boolean
+  assignmentReminderTime?: boolean
+  birthdayReminderTime?: boolean
+  fundReportDay?: boolean
+  fundReportTime?: boolean
+  dutyPersonalizedMessage?: boolean
+  birthdayMessageTemplate?: boolean
+  timezone?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["settings"]>
 
 export type SettingsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -373,6 +691,19 @@ export type SettingsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   ENABLE_WHATSAPP_BOT_DUTY_REPORT?: boolean
   ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER?: boolean
   ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER?: boolean
+  ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER?: boolean
+  announcementGroupJid?: boolean
+  dutyReminderTime?: boolean
+  scheduleReminderTime?: boolean
+  assignmentReminderTime?: boolean
+  birthdayReminderTime?: boolean
+  fundReportDay?: boolean
+  fundReportTime?: boolean
+  dutyPersonalizedMessage?: boolean
+  birthdayMessageTemplate?: boolean
+  timezone?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["settings"]>
 
 export type SettingsSelectScalar = {
@@ -381,9 +712,22 @@ export type SettingsSelectScalar = {
   ENABLE_WHATSAPP_BOT_DUTY_REPORT?: boolean
   ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER?: boolean
   ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER?: boolean
+  ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER?: boolean
+  announcementGroupJid?: boolean
+  dutyReminderTime?: boolean
+  scheduleReminderTime?: boolean
+  assignmentReminderTime?: boolean
+  birthdayReminderTime?: boolean
+  fundReportDay?: boolean
+  fundReportTime?: boolean
+  dutyPersonalizedMessage?: boolean
+  birthdayMessageTemplate?: boolean
+  timezone?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type SettingsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "ENABLE_WHATSAPP_BOT_FUND_REPORT" | "ENABLE_WHATSAPP_BOT_DUTY_REPORT" | "ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER" | "ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER", ExtArgs["result"]["settings"]>
+export type SettingsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "ENABLE_WHATSAPP_BOT_FUND_REPORT" | "ENABLE_WHATSAPP_BOT_DUTY_REPORT" | "ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER" | "ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER" | "ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER" | "announcementGroupJid" | "dutyReminderTime" | "scheduleReminderTime" | "assignmentReminderTime" | "birthdayReminderTime" | "fundReportDay" | "fundReportTime" | "dutyPersonalizedMessage" | "birthdayMessageTemplate" | "timezone" | "createdAt" | "updatedAt", ExtArgs["result"]["settings"]>
 
 export type $SettingsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Settings"
@@ -394,6 +738,19 @@ export type $SettingsPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     ENABLE_WHATSAPP_BOT_DUTY_REPORT: boolean
     ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER: boolean
     ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER: boolean
+    ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER: boolean
+    announcementGroupJid: string | null
+    dutyReminderTime: string
+    scheduleReminderTime: string
+    assignmentReminderTime: string
+    birthdayReminderTime: string
+    fundReportDay: number
+    fundReportTime: string
+    dutyPersonalizedMessage: string
+    birthdayMessageTemplate: string
+    timezone: string
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["settings"]>
   composites: {}
 }
@@ -822,6 +1179,19 @@ export interface SettingsFieldRefs {
   readonly ENABLE_WHATSAPP_BOT_DUTY_REPORT: Prisma.FieldRef<"Settings", 'Boolean'>
   readonly ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER: Prisma.FieldRef<"Settings", 'Boolean'>
   readonly ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER: Prisma.FieldRef<"Settings", 'Boolean'>
+  readonly ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER: Prisma.FieldRef<"Settings", 'Boolean'>
+  readonly announcementGroupJid: Prisma.FieldRef<"Settings", 'String'>
+  readonly dutyReminderTime: Prisma.FieldRef<"Settings", 'String'>
+  readonly scheduleReminderTime: Prisma.FieldRef<"Settings", 'String'>
+  readonly assignmentReminderTime: Prisma.FieldRef<"Settings", 'String'>
+  readonly birthdayReminderTime: Prisma.FieldRef<"Settings", 'String'>
+  readonly fundReportDay: Prisma.FieldRef<"Settings", 'Int'>
+  readonly fundReportTime: Prisma.FieldRef<"Settings", 'String'>
+  readonly dutyPersonalizedMessage: Prisma.FieldRef<"Settings", 'String'>
+  readonly birthdayMessageTemplate: Prisma.FieldRef<"Settings", 'String'>
+  readonly timezone: Prisma.FieldRef<"Settings", 'String'>
+  readonly createdAt: Prisma.FieldRef<"Settings", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"Settings", 'DateTime'>
 }
     
 
@@ -1021,7 +1391,7 @@ export type SettingsCreateArgs<ExtArgs extends runtime.Types.Extensions.Internal
   /**
    * The data needed to create a Settings.
    */
-  data?: Prisma.XOR<Prisma.SettingsCreateInput, Prisma.SettingsUncheckedCreateInput>
+  data: Prisma.XOR<Prisma.SettingsCreateInput, Prisma.SettingsUncheckedCreateInput>
 }
 
 /**

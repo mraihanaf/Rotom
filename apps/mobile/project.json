@@ -34,6 +34,18 @@
       "options": {
         "script": "clean"
       }
+    },
+    "bundle:analyze": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "bundle:analyze"
+      }
+    },
+    "bundle:stats": {
+      "executor": "nx:run-script",
+      "options": {
+        "script": "bundle:stats"
+      }
     }
   }
 }

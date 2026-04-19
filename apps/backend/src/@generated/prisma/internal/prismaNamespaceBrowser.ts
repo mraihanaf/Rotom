@@ -284,7 +284,20 @@ export const SettingsScalarFieldEnum = {
   ENABLE_WHATSAPP_BOT_FUND_REPORT: 'ENABLE_WHATSAPP_BOT_FUND_REPORT',
   ENABLE_WHATSAPP_BOT_DUTY_REPORT: 'ENABLE_WHATSAPP_BOT_DUTY_REPORT',
   ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER: 'ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER',
-  ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER: 'ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER'
+  ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER: 'ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER',
+  ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER: 'ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER',
+  announcementGroupJid: 'announcementGroupJid',
+  dutyReminderTime: 'dutyReminderTime',
+  scheduleReminderTime: 'scheduleReminderTime',
+  assignmentReminderTime: 'assignmentReminderTime',
+  birthdayReminderTime: 'birthdayReminderTime',
+  fundReportDay: 'fundReportDay',
+  fundReportTime: 'fundReportTime',
+  dutyPersonalizedMessage: 'dutyPersonalizedMessage',
+  birthdayMessageTemplate: 'birthdayMessageTemplate',
+  timezone: 'timezone',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type SettingsScalarFieldEnum = (typeof SettingsScalarFieldEnum)[keyof typeof SettingsScalarFieldEnum]

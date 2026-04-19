@@ -19,7 +19,9 @@ export function createAuthBaseConfig(overrides?: AuthBaseOverrides) {
 
     trustedOrigins: [
       'minimal://',
-      ...(process.env.NODE_ENV === 'development' ? ['exp://*'] : []),
+      'exp://*',
+      'https://*.exp.direct',
+      ...(process.env.BETTER_AUTH_TRUSTED_ORIGINS?.split(',') || []),
     ],
 
     user: {

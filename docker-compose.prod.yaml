@@ -1,0 +1,155 @@
+# ============================================================================
+# Rotom Production Docker Compose
+# Production-grade setup with health checks, restart policies, and resource limits
+# ============================================================================
+
+# Production environment variables (create from .env.production.example)
+# cp .env.production.example .env.production && fill in your values
+
+services:
+  redis:
+    image: redis:7.2-alpine
+    container_name: rotom-redis
+    restart: unless-stopped
+    command: >
+      redis-server
+      --bind 0.0.0.0
+      --port 6379
+      --maxmemory 256mb
+      --maxmemory-policy allkeys-lru
+      --appendonly yes
+      --appendfsync everysec
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+
+  minio:
+    image: minio/minio:latest
+    container_name: rotom-minio
+    restart: unless-stopped
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioAccessKey}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioSecretKey}
+    command: server --console-address ":9001" /data
+    volumes:
+      - minio-data:/data
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+
+  createbuckets:
+    image: minio/mc:latest
+    container_name: rotom-createbuckets
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: >
+      /bin/sh -c "
+      /usr/bin/mc alias set local http://minio:9000 ${MINIO_ROOT_USER:-minioAccessKey} ${MINIO_ROOT_PASSWORD:-minioSecretKey};
+      /usr/bin/mc mb local/${S3_BUCKET:-rotom-development} || true;
+      /usr/bin/mc policy set public local/${S3_BUCKET:-rotom-development} || true;
+      exit 0;
+      "
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+  backend:
+    build:
+      context: .
+      dockerfile: apps/backend/Dockerfile
+    container_name: rotom-backend
+    restart: unless-stopped
+    env_file:
+      - .env.production
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      # SQLite database file (stored in persistent volume)
+      DATABASE_URL: file:./data/prod.db
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      S3_ENDPOINT: http://minio:9000
+      S3_BUCKET: ${S3_BUCKET:-rotom-development}
+      S3_ACCESS_KEY: ${MINIO_ROOT_USER:-minioAccessKey}
+      S3_SECRET_KEY: ${MINIO_ROOT_PASSWORD:-minioSecretKey}
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET}
+      BETTER_AUTH_URL: ${BETTER_AUTH_URL:-http://localhost:3000}
+      FRONTEND_URL: ${FRONTEND_URL:-*}
+    volumes:
+      - backend-data:/app/data
+    ports:
+      - "3000:3000"
+    depends_on:
+      redis:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+    networks:
+      - rotom-network
+
+  whatsapp-bot:
+    build:
+      context: .
+      dockerfile: apps/whatsapp-bot/Dockerfile
+    container_name: rotom-whatsapp-bot
+    restart: unless-stopped
+    env_file:
+      - .env.production
+    environment:
+      NODE_ENV: production
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    volumes:
+      - whatsapp-auth:/app/apps/whatsapp-bot/baileys_auth_info
+    depends_on:
+      redis:
+        condition: service_healthy
+      backend:
+        condition: service_started
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    networks:
+      - rotom-network
+    # No healthcheck - worker process, check logs instead
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  backend-data:
+  redis-data:
+  minio-data:
+  whatsapp-auth:
+
+networks:
+  rotom-network:
+    driver: bridge
