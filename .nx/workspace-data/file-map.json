@@ -6,268 +6,376 @@
   "fileMap": {
     "nonProjectFiles": [
       {
-        "file": "FRONTEND.md",
-        "hash": "2355648989840914851"
+        "file": ".agents/skills/building-native-ui/references/media.md",
+        "hash": "15563182479780269074"
       },
       {
-        "file": ".agents/skills/building-native-ui/references/gradients.md",
-        "hash": "7683384278168716274"
+        "file": ".agents/skills/nestjs-best-practices/rules/perf-async-hooks.md",
+        "hash": "15909863196638808520"
       },
       {
-        "file": ".agents/skills/turborepo/references/environment/gotchas.md",
-        "hash": "13661446698603105203"
+        "file": ".agents/skills/upgrading-expo/SKILL.md",
+        "hash": "1815125675464671482"
       },
       {
-        "file": ".agents/skills/building-native-ui/references/toolbar-and-headers.md",
-        "hash": "6552123564164958041"
+        "file": ".agents/skills/native-data-fetching/references/expo-router-loaders.md",
+        "hash": "6434376072718669336"
       },
       {
-        "file": ".agents/skills/vercel-react-native-skills/rules/animation-derived-value.md",
-        "hash": "7107835665174542422"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/js-hoist-intl.md",
-        "hash": "607730580547944713"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/test-mock-external-services.md",
-        "hash": "14629747144060823527"
-      },
-      {
-        "file": "sdd.md",
-        "hash": "11996106778614198499"
-      },
-      {
-        "file": ".yarnrc.yml",
-        "hash": "9773565372686775399"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/monorepo-native-deps-in-app.md",
-        "hash": "433204802989701388"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/best-practices/packages.md",
-        "hash": "13731963547528774870"
-      },
-      {
-        "file": ".agents/skills/skill-creator/agents/analyzer.md",
-        "hash": "10461413315271464070"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/AGENTS.md",
-        "hash": "1573255514618888625"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/fonts-config-plugin.md",
-        "hash": "5311843647851566375"
-      },
-      {
-        "file": ".agents/skills/skill-creator/scripts/package_skill.py",
-        "hash": "17895309006094276499"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/test-use-testing-module.md",
-        "hash": "14585872989562677982"
-      },
-      {
-        "file": ".agents/skills/skill-creator/scripts/quick_validate.py",
-        "hash": "14879279634403542837"
-      },
-      {
-        "file": "docker-compose.prod.yaml",
-        "hash": "4829840565637787177"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/micro-use-queues.md",
-        "hash": "10652126139352666288"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/di-interface-segregation.md",
-        "hash": "15356488567632899721"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/list-performance-inline-objects.md",
-        "hash": "6869447854339362714"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/filtering/RULE.md",
-        "hash": "7756816925659233885"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/ui-styling.md",
-        "hash": "1416957481657431520"
-      },
-      {
-        "file": ".agents/skills/rotom-backend-contracts/SKILL.md",
-        "hash": "14788434904207326290"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/caching/gotchas.md",
-        "hash": "3971889349248033568"
-      },
-      {
-        "file": ".agents/skills/building-native-ui/references/controls.md",
-        "hash": "13594423891190645983"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/scripts/package-lock.json",
-        "hash": "10698678987372087396"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/ui-pressable.md",
-        "hash": "12593024439665145812"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/perf-use-caching.md",
-        "hash": "222672868098118145"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/list-performance-function-references.md",
-        "hash": "7902657041828144805"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/error-use-exception-filters.md",
-        "hash": "6737506252535317106"
-      },
-      {
-        "file": ".agents/skills/expo-tailwind-setup/SKILL.md",
-        "hash": "8163366740740813881"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/api-use-pipes.md",
-        "hash": "3714371110948546471"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/list-performance-images.md",
-        "hash": "8145760451035499048"
-      },
-      {
-        "file": ".agents/skills/skill-creator/references/schemas.md",
-        "hash": "14946141799465254368"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/list-performance-virtualize.md",
-        "hash": "12548530418370563401"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/_template.md",
-        "hash": "17490252344016912475"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/security-rate-limiting.md",
-        "hash": "10655383023914258586"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/di-liskov-substitution.md",
-        "hash": "7599283527317561409"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/error-handle-async-errors.md",
-        "hash": "10380061863506432924"
-      },
-      {
-        "file": ".agents/skills/skill-creator/eval-viewer/generate_review.py",
-        "hash": "17930020314825123453"
-      },
-      {
-        "file": ".agents/skills/better-auth-best-practices/SKILL.md",
-        "hash": "11148653335857441819"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/watch/RULE.md",
-        "hash": "11189937379604676720"
-      },
-      {
-        "file": ".agents/skills/building-native-ui/references/route-structure.md",
-        "hash": "1237552355785649990"
-      },
-      {
-        "file": ".agents/skills/upgrading-expo/references/expo-av-to-video.md",
-        "hash": "5200199317565800702"
-      },
-      {
-        "file": ".agents/skills/skill-creator/SKILL.md",
-        "hash": "2324833355999059476"
-      },
-      {
-        "file": "scripts/verify-docker.sh",
-        "hash": "7879825397414932945"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/arch-avoid-circular-deps.md",
-        "hash": "698852283938910638"
+        "file": "assets/app_logo.jpg",
+        "hash": "10234680146238322103"
       },
       {
         "file": ".agents/skills/nestjs-best-practices/rules/micro-use-patterns.md",
         "hash": "6428373727611896383"
       },
       {
-        "file": ".env.production.example",
-        "hash": "17080914991218303846"
+        "file": ".agents/skills/native-data-fetching/SKILL.md",
+        "hash": "10595759704950978489"
       },
       {
-        "file": ".agents/skills/vercel-react-native-skills/rules/_sections.md",
-        "hash": "13407279896145307644"
+        "file": ".agents/skills/vercel-react-native-skills/rules/rendering-text-in-text-component.md",
+        "hash": "4828280384993964068"
       },
       {
-        "file": ".agents/skills/building-native-ui/references/storage.md",
-        "hash": "2496255976451778583"
+        "file": ".agents/skills/turborepo/references/boundaries/RULE.md",
+        "hash": "3087705956985574628"
       },
       {
-        "file": ".agents/skills/nestjs-best-practices/scripts/package.json",
-        "hash": "4701058360176884517"
+        "file": ".agents/skills/vercel-react-native-skills/rules/ui-pressable.md",
+        "hash": "12593024439665145812"
       },
       {
-        "file": ".agents/skills/building-native-ui/references/icons.md",
-        "hash": "3711277837757561024"
+        "file": ".npmrc",
+        "hash": "3244421341483603138"
       },
       {
-        "file": ".agents/skills/nestjs-best-practices/rules/security-validate-all-input.md",
-        "hash": "14788116912916657640"
+        "file": ".agents/skills/building-native-ui/references/animations.md",
+        "hash": "16659509221890254195"
       },
       {
-        "file": ".agents/skills/nestjs-best-practices/README.md",
-        "hash": "13154030097987805164"
+        "file": ".agents/skills/nestjs-best-practices/rules/db-use-migrations.md",
+        "hash": "12367313221659612006"
       },
       {
-        "file": ".agents/skills/vercel-react-native-skills/rules/scroll-position-no-state.md",
-        "hash": "16008279163972094190"
+        "file": ".agents/skills/turborepo/references/ci/RULE.md",
+        "hash": "4260072562596148331"
       },
       {
-        "file": ".agents/skills/turborepo/references/configuration/gotchas.md",
-        "hash": "14910617051086991371"
+        "file": ".agents/skills/nestjs-best-practices/rules/arch-single-responsibility.md",
+        "hash": "6075981793845011149"
       },
       {
-        "file": ".agents/skills/building-native-ui/references/visual-effects.md",
-        "hash": "2333041927566838213"
+        "file": ".agents/skills/nestjs-best-practices/rules/di-interface-segregation.md",
+        "hash": "15356488567632899721"
       },
       {
-        "file": ".agents/skills/vercel-react-native-skills/rules/animation-gesture-detector-press.md",
-        "hash": "29814631329740602"
+        "file": "COMMUNICATION_PROTOCOL_ANALYSIS.md",
+        "hash": "1636445311684501189"
       },
       {
-        "file": ".agents/skills/vercel-react-native-skills/rules/_template.md",
-        "hash": "17490252344016912475"
+        "file": ".agents/skills/nestjs-best-practices/rules/di-avoid-service-locator.md",
+        "hash": "6821547601527825017"
       },
       {
-        "file": ".agents/skills/nestjs-best-practices/SKILL.md",
-        "hash": "5336732479732571940"
+        "file": ".agents/skills/turborepo/references/configuration/global-options.md",
+        "hash": "8871552824056822355"
       },
       {
-        "file": "yarn.lock",
-        "hash": "8118687833913268265"
+        "file": ".agents/skills/turborepo/references/best-practices/structure.md",
+        "hash": "15471258396929499571"
+      },
+      {
+        "file": ".agents/skills/skill-creator/scripts/improve_description.py",
+        "hash": "7370058642974988650"
       },
       {
         "file": ".env.production",
         "hash": "10106619593662917410"
       },
       {
+        "file": ".env.production.example",
+        "hash": "17080914991218303846"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/ui-expo-image.md",
+        "hash": "14576234002039564963"
+      },
+      {
+        "file": ".agents/skills/skill-creator/scripts/run_loop.py",
+        "hash": "2857490353274284501"
+      },
+      {
+        "file": "yarn.lock",
+        "hash": "8118687833913268265"
+      },
+      {
+        "file": ".agents/skills/turborepo/references/configuration/gotchas.md",
+        "hash": "14910617051086991371"
+      },
+      {
+        "file": "WHATSAPP_FEATURES_SUMMARY.md",
+        "hash": "14872618513068634943"
+      },
+      {
+        "file": ".agents/skills/skill-creator/eval-viewer/generate_review.py",
+        "hash": "17930020314825123453"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/AGENTS.md",
+        "hash": "1573255514618888625"
+      },
+      {
+        "file": ".agents/skills/building-native-ui/references/form-sheet.md",
+        "hash": "11296081415706917209"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/react-state-fallback.md",
+        "hash": "14107301297928467333"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/design-system-compound-components.md",
+        "hash": "17951159972523973962"
+      },
+      {
+        "file": "scripts/verify-docker.sh",
+        "hash": "7879825397414932945"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/list-performance-item-types.md",
+        "hash": "565597155964375188"
+      },
+      {
+        "file": "sdd.md",
+        "hash": "11996106778614198499"
+      },
+      {
+        "file": ".agents/skills/skill-creator/LICENSE.txt",
+        "hash": "10305757678668291285"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/error-throw-http-exceptions.md",
+        "hash": "3361903037476258132"
+      },
+      {
         "file": ".agents/skills/nestjs-best-practices/rules/devops-use-logging.md",
         "hash": "10868546106396630082"
       },
       {
-        "file": ".agents/skills/nestjs-best-practices/rules/di-avoid-service-locator.md",
-        "hash": "6821547601527825017"
+        "file": ".agents/skills/building-native-ui/references/storage.md",
+        "hash": "2496255976451778583"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/di-use-interfaces-tokens.md",
+        "hash": "5880270361444715233"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/SKILL.md",
+        "hash": "9169058955088021789"
+      },
+      {
+        "file": ".agents/skills/skill-creator/scripts/generate_report.py",
+        "hash": "4016332422545733835"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/perf-lazy-loading.md",
+        "hash": "18446262861506692212"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/list-performance-images.md",
+        "hash": "8145760451035499048"
+      },
+      {
+        "file": ".agents/skills/turborepo/SKILL.md",
+        "hash": "15196375615900229517"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/js-hoist-intl.md",
+        "hash": "607730580547944713"
+      },
+      {
+        "file": ".agents/skills/skill-creator/agents/grader.md",
+        "hash": "17050392632881371026"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/scripts/build.sh",
+        "hash": "16672039367184415096"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/README.md",
+        "hash": "13154030097987805164"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/react-compiler-reanimated-shared-values.md",
+        "hash": "9799315361807766473"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/test-mock-external-services.md",
+        "hash": "14629747144060823527"
+      },
+      {
+        "file": ".agents/skills/upgrading-expo/references/expo-av-to-audio.md",
+        "hash": "4665717971096100763"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/list-performance-item-memo.md",
+        "hash": "3682304976666658025"
+      },
+      {
+        "file": ".agents/skills/skill-creator/agents/comparator.md",
+        "hash": "5313389878373071925"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/ui-image-gallery.md",
+        "hash": "12061226322888799571"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/ui-menus.md",
+        "hash": "13196936797446626396"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/navigation-native-navigators.md",
+        "hash": "11718435335134929717"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/scripts/package-lock.json",
+        "hash": "10698678987372087396"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/db-use-transactions.md",
+        "hash": "7582929543867063014"
+      },
+      {
+        "file": ".agents/skills/turborepo/references/configuration/tasks.md",
+        "hash": "4226918888506190535"
+      },
+      {
+        "file": ".agents/skills/upgrading-expo/references/new-architecture.md",
+        "hash": "18049529845019518407"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/ui-native-modals.md",
+        "hash": "18144238978630907811"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/ui-styling.md",
+        "hash": "1416957481657431520"
+      },
+      {
+        "file": ".agents/skills/turborepo/references/configuration/RULE.md",
+        "hash": "18159313020415773569"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/security-validate-all-input.md",
+        "hash": "14788116912916657640"
+      },
+      {
+        "file": ".agents/skills/turborepo/command/turborepo.md",
+        "hash": "12258691955636788789"
+      },
+      {
+        "file": ".agents/skills/turborepo/references/cli/RULE.md",
+        "hash": "14511820688544528179"
+      },
+      {
+        "file": ".agents/skills/skill-creator/eval-viewer/viewer.html",
+        "hash": "349776459495843747"
+      },
+      {
+        "file": "skills-lock.json",
+        "hash": "5237117869721905651"
+      },
+      {
+        "file": ".agents/skills/turborepo/references/cli/commands.md",
+        "hash": "2744294654732829936"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/test-e2e-supertest.md",
+        "hash": "4635258358699549986"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/api-use-dto-serialization.md",
+        "hash": "3522317544411903397"
+      },
+      {
+        "file": ".agents/skills/turborepo/references/ci/github-actions.md",
+        "hash": "342276637279697198"
+      },
+      {
+        "file": ".agents/skills/skill-creator/scripts/run_eval.py",
+        "hash": "2272478237495837725"
+      },
+      {
+        "file": ".agents/skills/skill-creator/scripts/__init__.py",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": ".agents/skills/turborepo/references/environment/gotchas.md",
+        "hash": "13661446698603105203"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/scripts/build-agents.ts",
+        "hash": "5674651936403046033"
+      },
+      {
+        "file": "docker-compose.yaml",
+        "hash": "4605043415105001488"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/ui-safe-area-scroll.md",
+        "hash": "9867607088286522251"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/security-use-guards.md",
+        "hash": "16733441279102364758"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/SKILL.md",
+        "hash": "5336732479732571940"
+      },
+      {
+        "file": ".dockerignore",
+        "hash": "12926087156711528919"
+      },
+      {
+        "file": ".agents/skills/turborepo/references/filtering/patterns.md",
+        "hash": "636838732611787036"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/list-performance-item-expensive.md",
+        "hash": "13614208573486570827"
+      },
+      {
+        "file": ".agents/skills/rotom-backend-contracts/SKILL.md",
+        "hash": "14788434904207326290"
+      },
+      {
+        "file": ".windsurf/skills/rotom-backend-contracts/SKILL.md",
+        "hash": "14788434904207326290"
+      },
+      {
+        "file": ".vscode/settings.json",
+        "hash": "1409024233119639755"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/ui-scrollview-content-inset.md",
+        "hash": "17527044365033603158"
+      },
+      {
+        "file": ".agents/skills/nx-workspace-patterns/SKILL.md",
+        "hash": "3269501844762994814"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "14996999848283946150"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/di-prefer-constructor-injection.md",
+        "hash": "13272272996542096529"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/arch-use-events.md",
+        "hash": "12678163817177738952"
       },
       {
         "file": ".agents/skills/turborepo/references/environment/RULE.md",
@@ -278,488 +386,380 @@
         "hash": "1767478066602084009"
       },
       {
-        "file": ".agents/skills/upgrading-expo/references/react-19.md",
-        "hash": "14751311189084822209"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/react-compiler-destructure-functions.md",
-        "hash": "8945941087233471787"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/monorepo-single-dependency-versions.md",
-        "hash": "8944770936730972585"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/arch-module-sharing.md",
-        "hash": "6045302150870872722"
-      },
-      {
-        "file": "README.md",
-        "hash": "18243470648104499844"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/security-use-guards.md",
-        "hash": "16733441279102364758"
-      },
-      {
-        "file": ".agents/skills/building-native-ui/references/search.md",
-        "hash": "6798945983405824103"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/AGENTS.md",
-        "hash": "17181689165413350204"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/api-use-dto-serialization.md",
-        "hash": "3522317544411903397"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/boundaries/RULE.md",
-        "hash": "3087705956985574628"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/security-sanitize-output.md",
-        "hash": "2213721355087609067"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/animation-gpu-properties.md",
-        "hash": "4238871588493793173"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/security-auth-jwt.md",
-        "hash": "2029801452440099546"
-      },
-      {
-        "file": ".agents/skills/caveman-commit/SKILL.md",
-        "hash": "3303961109927490189"
-      },
-      {
-        "file": ".agents/skills/upgrading-expo/references/expo-av-to-audio.md",
-        "hash": "4665717971096100763"
-      },
-      {
-        "file": ".agents/skills/skill-creator/scripts/run_eval.py",
-        "hash": "2272478237495837725"
-      },
-      {
-        "file": ".gitignore",
-        "hash": "14996999848283946150"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/environment/modes.md",
-        "hash": "10813307192021261945"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/imports-design-system-folder.md",
-        "hash": "16274451491627740085"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/api-versioning.md",
-        "hash": "14821415052062463249"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/perf-optimize-database.md",
-        "hash": "9459277224276239185"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/error-throw-http-exceptions.md",
-        "hash": "3361903037476258132"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/react-state-dispatcher.md",
-        "hash": "13278628156580052414"
-      },
-      {
-        "file": "COMMUNICATION_PROTOCOL_ANALYSIS.md",
-        "hash": "1636445311684501189"
-      },
-      {
-        "file": ".agents/skills/skill-creator/assets/eval_review.html",
-        "hash": "13160386512453611513"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/ui-menus.md",
-        "hash": "13196936797446626396"
-      },
-      {
-        "file": ".agents/skills/skill-creator/eval-viewer/viewer.html",
-        "hash": "349776459495843747"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/test-e2e-supertest.md",
-        "hash": "4635258358699549986"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/react-state-minimize.md",
-        "hash": "10917913825837837707"
-      },
-      {
-        "file": ".dockerignore",
-        "hash": "12926087156711528919"
-      },
-      {
-        "file": "nx.json",
-        "hash": "11146420676927926877"
-      },
-      {
         "file": ".agents/skills/vercel-react-native-skills/rules/list-performance-callbacks.md",
         "hash": "614520349392295740"
       },
       {
-        "file": ".agents/skills/native-data-fetching/SKILL.md",
-        "hash": "10595759704950978489"
+        "file": ".agents/skills/nestjs-best-practices/rules/api-use-pipes.md",
+        "hash": "3714371110948546471"
       },
       {
-        "file": ".agents/skills/nestjs-best-practices/rules/perf-async-hooks.md",
-        "hash": "15909863196638808520"
+        "file": ".agents/skills/building-native-ui/references/icons.md",
+        "hash": "3711277837757561024"
       },
       {
-        "file": ".agents/skills/vercel-react-native-skills/rules/ui-measure-views.md",
-        "hash": "7745855060775727135"
+        "file": ".agents/skills/building-native-ui/references/route-structure.md",
+        "hash": "1237552355785649990"
       },
       {
-        "file": ".agents/skills/vercel-react-native-skills/metadata.json",
-        "hash": "7879555184949791557"
+        "file": ".agents/skills/vercel-react-native-skills/rules/_template.md",
+        "hash": "17490252344016912475"
       },
       {
-        "file": ".agents/skills/skill-creator/scripts/aggregate_benchmark.py",
-        "hash": "17830013374402773814"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/design-system-compound-components.md",
-        "hash": "17951159972523973962"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/list-performance-item-expensive.md",
-        "hash": "13614208573486570827"
-      },
-      {
-        "file": ".agents/skills/skill-creator/LICENSE.txt",
-        "hash": "10305757678668291285"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/micro-use-health-checks.md",
-        "hash": "17429378853248668985"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/ui-safe-area-scroll.md",
-        "hash": "9867607088286522251"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/devops-graceful-shutdown.md",
-        "hash": "8153105084746265492"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/react-state-fallback.md",
-        "hash": "14107301297928467333"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/arch-use-repository-pattern.md",
-        "hash": "2330311481743668967"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/README.md",
-        "hash": "2865178391168966499"
-      },
-      {
-        "file": ".agents/skills/turborepo/SKILL.md",
-        "hash": "15196375615900229517"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/configuration/global-options.md",
-        "hash": "8871552824056822355"
-      },
-      {
-        "file": ".agents/skills/turborepo/command/turborepo.md",
-        "hash": "12258691955636788789"
-      },
-      {
-        "file": ".agents/skills/skill-creator/agents/grader.md",
-        "hash": "17050392632881371026"
-      },
-      {
-        "file": "package.json",
-        "hash": "6527365184555534955"
-      },
-      {
-        "file": ".agents/skills/upgrading-expo/SKILL.md",
-        "hash": "1815125675464671482"
-      },
-      {
-        "file": ".npmrc",
-        "hash": "3244421341483603138"
-      },
-      {
-        "file": ".agents/skills/upgrading-expo/references/native-tabs.md",
-        "hash": "1695738347822800778"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/perf-lazy-loading.md",
-        "hash": "18446262861506692212"
-      },
-      {
-        "file": ".agents/skills/upgrading-expo/references/new-architecture.md",
-        "hash": "18049529845019518407"
-      },
-      {
-        "file": ".agents/skills/building-native-ui/references/zoom-transitions.md",
-        "hash": "15739997366431436180"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/ui-scrollview-content-inset.md",
-        "hash": "17527044365033603158"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/arch-feature-modules.md",
-        "hash": "12513147537489441740"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/arch-use-events.md",
-        "hash": "12678163817177738952"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/di-prefer-constructor-injection.md",
-        "hash": "13272272996542096529"
-      },
-      {
-        "file": "assets/logo.png",
-        "hash": "347363948700687554"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/filtering/patterns.md",
-        "hash": "636838732611787036"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/ui-native-modals.md",
-        "hash": "18144238978630907811"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/db-use-transactions.md",
-        "hash": "7582929543867063014"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/caching/RULE.md",
-        "hash": "1855417407520266135"
-      },
-      {
-        "file": ".agents/skills/skill-creator/scripts/utils.py",
-        "hash": "12314786479776539753"
-      },
-      {
-        "file": "white_background.jpg",
-        "hash": "16306406121044749301"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/ci/patterns.md",
-        "hash": "6218801851857406279"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/scripts/build.sh",
-        "hash": "16672039367184415096"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/ci/github-actions.md",
-        "hash": "342276637279697198"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/cli/commands.md",
-        "hash": "2744294654732829936"
-      },
-      {
-        "file": ".agents/skills/building-native-ui/references/tabs.md",
-        "hash": "15839502489568743031"
-      },
-      {
-        "file": ".windsurf/skills/rotom-backend-contracts/SKILL.md",
-        "hash": "14788434904207326290"
-      },
-      {
-        "file": ".agents/skills/skill-creator/scripts/run_loop.py",
-        "hash": "2857490353274284501"
-      },
-      {
-        "file": "assets/app_logo.jpg",
-        "hash": "10234680146238322103"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/ui-expo-image.md",
-        "hash": "14576234002039564963"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/di-use-interfaces-tokens.md",
-        "hash": "5880270361444715233"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/di-scope-awareness.md",
-        "hash": "3201840825662381724"
-      },
-      {
-        "file": "WHATSAPP_FEATURES_SUMMARY.md",
-        "hash": "14872618513068634943"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/scripts/build-agents.ts",
-        "hash": "5674651936403046033"
-      },
-      {
-        "file": ".agents/skills/upgrading-expo/references/react-compiler.md",
-        "hash": "1248770484668435073"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/arch-single-responsibility.md",
-        "hash": "6075981793845011149"
-      },
-      {
-        "file": ".agents/skills/building-native-ui/references/animations.md",
-        "hash": "16659509221890254195"
-      },
-      {
-        "file": ".agents/skills/skill-creator/scripts/generate_report.py",
-        "hash": "4016332422545733835"
+        "file": ".agents/skills/nestjs-best-practices/rules/security-rate-limiting.md",
+        "hash": "10655383023914258586"
       },
       {
         "file": ".agents/skills/turborepo/references/caching/remote-cache.md",
         "hash": "14706283994886886292"
       },
       {
-        "file": ".agents/skills/caveman/SKILL.md",
-        "hash": "6517681523112722541"
+        "file": ".agents/skills/building-native-ui/references/zoom-transitions.md",
+        "hash": "15739997366431436180"
       },
       {
-        "file": ".agents/skills/building-native-ui/references/webgpu-three.md",
-        "hash": "6040387838949561594"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/db-avoid-n-plus-one.md",
-        "hash": "9543007801958141298"
-      },
-      {
-        "file": ".agents/skills/vercel-react-native-skills/rules/list-performance-item-memo.md",
-        "hash": "3682304976666658025"
-      },
-      {
-        "file": ".agents/skills/building-native-ui/references/media.md",
-        "hash": "15563182479780269074"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/configuration/RULE.md",
-        "hash": "18159313020415773569"
-      },
-      {
-        "file": ".agents/skills/skill-creator/scripts/__init__.py",
-        "hash": "3244421341483603138"
-      },
-      {
-        "file": ".agents/skills/turborepo/references/cli/RULE.md",
-        "hash": "14511820688544528179"
+        "file": ".agents/skills/vercel-react-native-skills/README.md",
+        "hash": "2865178391168966499"
       },
       {
         "file": ".agents/skills/vercel-react-native-skills/rules/state-ground-truth.md",
         "hash": "14722369409617744292"
       },
       {
+        "file": ".agents/skills/vercel-react-native-skills/rules/monorepo-single-dependency-versions.md",
+        "hash": "8944770936730972585"
+      },
+      {
+        "file": ".agents/skills/building-native-ui/references/toolbar-and-headers.md",
+        "hash": "6552123564164958041"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/monorepo-native-deps-in-app.md",
+        "hash": "433204802989701388"
+      },
+      {
         "file": ".agents/skills/turborepo/references/best-practices/dependencies.md",
         "hash": "10087497382888761823"
       },
       {
-        "file": ".agents/skills/vercel-react-native-skills/rules/navigation-native-navigators.md",
-        "hash": "11718435335134929717"
+        "file": ".agents/skills/nestjs-best-practices/rules/arch-feature-modules.md",
+        "hash": "12513147537489441740"
       },
       {
-        "file": "docker-compose.yaml",
-        "hash": "4605043415105001488"
+        "file": ".agents/skills/upgrading-expo/references/native-tabs.md",
+        "hash": "1695738347822800778"
       },
       {
-        "file": ".agents/skills/building-native-ui/references/form-sheet.md",
-        "hash": "11296081415706917209"
+        "file": ".agents/skills/nestjs-best-practices/rules/perf-optimize-database.md",
+        "hash": "9459277224276239185"
       },
       {
-        "file": ".agents/skills/turborepo/references/ci/RULE.md",
-        "hash": "4260072562596148331"
+        "file": "white_background.jpg",
+        "hash": "16306406121044749301"
       },
       {
-        "file": ".agents/skills/native-data-fetching/references/expo-router-loaders.md",
-        "hash": "6434376072718669336"
+        "file": ".agents/skills/vercel-react-native-skills/rules/react-compiler-destructure-functions.md",
+        "hash": "8945941087233471787"
       },
       {
-        "file": ".agents/skills/nx-workspace-patterns/SKILL.md",
-        "hash": "3269501844762994814"
+        "file": ".agents/skills/skill-creator/scripts/package_skill.py",
+        "hash": "17895309006094276499"
       },
       {
-        "file": ".yarn/install-state.gz",
-        "hash": "17475402650148725899"
+        "file": ".agents/skills/turborepo/references/watch/RULE.md",
+        "hash": "11189937379604676720"
       },
       {
-        "file": ".agents/skills/vercel-react-native-skills/rules/rendering-no-falsy-and.md",
-        "hash": "8602754232752043247"
+        "file": "README.md",
+        "hash": "18243470648104499844"
       },
       {
-        "file": ".vscode/settings.json",
-        "hash": "1409024233119639755"
+        "file": ".agents/skills/vercel-react-native-skills/rules/react-state-dispatcher.md",
+        "hash": "13278628156580052414"
       },
       {
-        "file": ".agents/skills/turborepo/references/best-practices/structure.md",
-        "hash": "15471258396929499571"
+        "file": ".agents/skills/nestjs-best-practices/rules/_template.md",
+        "hash": "17490252344016912475"
       },
       {
-        "file": "skills-lock.json",
-        "hash": "5237117869721905651"
+        "file": ".agents/skills/caveman/SKILL.md",
+        "hash": "6517681523112722541"
       },
       {
-        "file": ".agents/skills/turborepo/references/best-practices/RULE.md",
-        "hash": "8778846337585711538"
+        "file": ".agents/skills/upgrading-expo/references/react-19.md",
+        "hash": "14751311189084822209"
       },
       {
-        "file": ".agents/skills/vercel-react-native-skills/rules/ui-image-gallery.md",
-        "hash": "12061226322888799571"
+        "file": ".agents/skills/vercel-react-native-skills/rules/imports-design-system-folder.md",
+        "hash": "16274451491627740085"
       },
       {
-        "file": ".agents/skills/skill-creator/scripts/improve_description.py",
-        "hash": "7370058642974988650"
+        "file": ".agents/skills/nestjs-best-practices/rules/arch-module-sharing.md",
+        "hash": "6045302150870872722"
       },
       {
-        "file": ".agents/skills/skill-creator/agents/comparator.md",
-        "hash": "5313389878373071925"
+        "file": ".agents/skills/nestjs-best-practices/scripts/package.json",
+        "hash": "4701058360176884517"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/arch-avoid-circular-deps.md",
+        "hash": "698852283938910638"
+      },
+      {
+        "file": ".agents/skills/skill-creator/agents/analyzer.md",
+        "hash": "10461413315271464070"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/arch-use-repository-pattern.md",
+        "hash": "2330311481743668967"
       },
       {
         "file": ".agents/skills/nestjs-best-practices/rules/api-use-interceptors.md",
         "hash": "15707861903085387892"
       },
       {
-        "file": ".agents/skills/nestjs-best-practices/rules/db-use-migrations.md",
-        "hash": "12367313221659612006"
+        "file": ".agents/skills/nestjs-best-practices/rules/micro-use-queues.md",
+        "hash": "10652126139352666288"
       },
       {
-        "file": ".agents/skills/vercel-react-native-skills/rules/list-performance-item-types.md",
-        "hash": "565597155964375188"
+        "file": ".agents/skills/nestjs-best-practices/rules/db-avoid-n-plus-one.md",
+        "hash": "9543007801958141298"
       },
       {
-        "file": ".agents/skills/turborepo/references/configuration/tasks.md",
-        "hash": "4226918888506190535"
+        "file": ".agents/skills/vercel-react-native-skills/rules/list-performance-virtualize.md",
+        "hash": "12548530418370563401"
       },
       {
-        "file": ".agents/skills/vercel-react-native-skills/SKILL.md",
-        "hash": "9169058955088021789"
+        "file": ".agents/skills/vercel-react-native-skills/rules/scroll-position-no-state.md",
+        "hash": "16008279163972094190"
+      },
+      {
+        "file": ".agents/skills/building-native-ui/references/controls.md",
+        "hash": "13594423891190645983"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/metadata.json",
+        "hash": "7879555184949791557"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/api-versioning.md",
+        "hash": "14821415052062463249"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/_sections.md",
+        "hash": "13407279896145307644"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/fonts-config-plugin.md",
+        "hash": "5311843647851566375"
+      },
+      {
+        "file": "docker-compose.prod.yaml",
+        "hash": "4829840565637787177"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/animation-derived-value.md",
+        "hash": "7107835665174542422"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/animation-gpu-properties.md",
+        "hash": "4238871588493793173"
+      },
+      {
+        "file": ".agents/skills/skill-creator/scripts/aggregate_benchmark.py",
+        "hash": "17830013374402773814"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/animation-gesture-detector-press.md",
+        "hash": "29814631329740602"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/list-performance-function-references.md",
+        "hash": "7902657041828144805"
+      },
+      {
+        "file": ".agents/skills/turborepo/references/caching/RULE.md",
+        "hash": "1855417407520266135"
+      },
+      {
+        "file": ".agents/skills/expo-tailwind-setup/SKILL.md",
+        "hash": "8163366740740813881"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/AGENTS.md",
+        "hash": "17181689165413350204"
+      },
+      {
+        "file": ".agents/skills/building-native-ui/references/search.md",
+        "hash": "6798945983405824103"
+      },
+      {
+        "file": ".agents/skills/building-native-ui/references/visual-effects.md",
+        "hash": "2333041927566838213"
+      },
+      {
+        "file": ".agents/skills/building-native-ui/references/gradients.md",
+        "hash": "7683384278168716274"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/test-use-testing-module.md",
+        "hash": "14585872989562677982"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/perf-use-caching.md",
+        "hash": "222672868098118145"
+      },
+      {
+        "file": ".yarnrc.yml",
+        "hash": "9773565372686775399"
+      },
+      {
+        "file": ".agents/skills/turborepo/references/environment/modes.md",
+        "hash": "10813307192021261945"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/di-scope-awareness.md",
+        "hash": "3201840825662381724"
+      },
+      {
+        "file": ".agents/skills/skill-creator/scripts/quick_validate.py",
+        "hash": "14879279634403542837"
+      },
+      {
+        "file": ".agents/skills/upgrading-expo/references/react-compiler.md",
+        "hash": "1248770484668435073"
+      },
+      {
+        "file": "nx.json",
+        "hash": "11146420676927926877"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/ui-measure-views.md",
+        "hash": "7745855060775727135"
+      },
+      {
+        "file": "package.json",
+        "hash": "6527365184555534955"
+      },
+      {
+        "file": ".agents/skills/skill-creator/references/schemas.md",
+        "hash": "14946141799465254368"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/micro-use-health-checks.md",
+        "hash": "17429378853248668985"
+      },
+      {
+        "file": ".yarn/install-state.gz",
+        "hash": "17475402650148725899"
+      },
+      {
+        "file": ".agents/skills/building-native-ui/references/webgpu-three.md",
+        "hash": "6040387838949561594"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/list-performance-inline-objects.md",
+        "hash": "6869447854339362714"
+      },
+      {
+        "file": ".agents/skills/caveman-commit/SKILL.md",
+        "hash": "3303961109927490189"
+      },
+      {
+        "file": "FRONTEND.md",
+        "hash": "2355648989840914851"
+      },
+      {
+        "file": ".agents/skills/skill-creator/SKILL.md",
+        "hash": "2324833355999059476"
+      },
+      {
+        "file": ".agents/skills/vercel-react-native-skills/rules/react-state-minimize.md",
+        "hash": "10917913825837837707"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/devops-use-config-module.md",
+        "hash": "6266081342888450085"
+      },
+      {
+        "file": ".agents/skills/turborepo/references/best-practices/packages.md",
+        "hash": "13731963547528774870"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/security-sanitize-output.md",
+        "hash": "2213721355087609067"
+      },
+      {
+        "file": "assets/logo.png",
+        "hash": "347363948700687554"
+      },
+      {
+        "file": ".agents/skills/upgrading-expo/references/expo-av-to-video.md",
+        "hash": "5200199317565800702"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/error-handle-async-errors.md",
+        "hash": "10380061863506432924"
+      },
+      {
+        "file": ".agents/skills/better-auth-best-practices/SKILL.md",
+        "hash": "11148653335857441819"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/di-liskov-substitution.md",
+        "hash": "7599283527317561409"
+      },
+      {
+        "file": ".agents/skills/turborepo/references/caching/gotchas.md",
+        "hash": "3971889349248033568"
       },
       {
         "file": ".agents/skills/building-native-ui/SKILL.md",
         "hash": "12556624378086733167"
       },
       {
+        "file": ".agents/skills/vercel-react-native-skills/rules/rendering-no-falsy-and.md",
+        "hash": "8602754232752043247"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/devops-graceful-shutdown.md",
+        "hash": "8153105084746265492"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/error-use-exception-filters.md",
+        "hash": "6737506252535317106"
+      },
+      {
+        "file": ".agents/skills/turborepo/references/ci/patterns.md",
+        "hash": "6218801851857406279"
+      },
+      {
+        "file": ".agents/skills/turborepo/references/filtering/RULE.md",
+        "hash": "7756816925659233885"
+      },
+      {
+        "file": ".agents/skills/nestjs-best-practices/rules/security-auth-jwt.md",
+        "hash": "2029801452440099546"
+      },
+      {
+        "file": ".agents/skills/skill-creator/scripts/utils.py",
+        "hash": "12314786479776539753"
+      },
+      {
+        "file": ".agents/skills/turborepo/references/best-practices/RULE.md",
+        "hash": "8778846337585711538"
+      },
+      {
         "file": ".agents/skills/nestjs-best-practices/rules/_sections.md",
         "hash": "17643591958680749324"
       },
       {
-        "file": ".agents/skills/vercel-react-native-skills/rules/react-compiler-reanimated-shared-values.md",
-        "hash": "9799315361807766473"
+        "file": ".agents/skills/skill-creator/assets/eval_review.html",
+        "hash": "13160386512453611513"
       },
       {
-        "file": ".agents/skills/vercel-react-native-skills/rules/rendering-text-in-text-component.md",
-        "hash": "4828280384993964068"
-      },
-      {
-        "file": ".agents/skills/nestjs-best-practices/rules/devops-use-config-module.md",
-        "hash": "6266081342888450085"
+        "file": ".agents/skills/building-native-ui/references/tabs.md",
+        "hash": "15839502489568743031"
       }
     ],
     "projectFileMap": {
@@ -828,7 +828,7 @@
         },
         {
           "file": "apps/mobile/app.json",
-          "hash": "18165179275906859462"
+          "hash": "17898993935996664601"
         },
         {
           "file": "apps/mobile/app/(tabs)/_layout.tsx",
@@ -876,7 +876,7 @@
         },
         {
           "file": "apps/mobile/app/auth/login.tsx",
-          "hash": "15458635835640378928"
+          "hash": "5496938051285912469"
         },
         {
           "file": "apps/mobile/app/auth/otp.tsx",
@@ -929,6 +929,10 @@
         {
           "file": "apps/mobile/app/modal/whatsapp-settings.tsx",
           "hash": "5079948533513237956"
+        },
+        {
+          "file": "apps/mobile/assets/hero.jpg",
+          "hash": "16306406121044749301"
         },
         {
           "file": "apps/mobile/assets/images/adaptive-icon.png",

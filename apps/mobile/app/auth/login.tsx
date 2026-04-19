@@ -7,6 +7,7 @@ import * as React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Alert, KeyboardAvoidingView, Platform } from 'react-native';
 import { View, ScrollView, TextInput } from '@/tw';
+import { Image } from 'expo-image';
 
 export default function LoginScreen() {
   const [countryCode, setCountryCode] = React.useState('+62');
@@ -46,16 +47,18 @@ export default function LoginScreen() {
         >
           <ScrollView
             contentInsetAdjustmentBehavior="automatic"
-            contentContainerClassName="flex-grow justify-center p-4"
+            contentContainerClassName="min-h-full justify-center items-center p-4"
             keyboardShouldPersistTaps="handled"
           >
-            <View className="w-full max-w-[400px] self-center">
-              <View className="items-center justify-center pt-8 pb-4">
-                <View className="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-[#f3f4f6] items-center justify-center">
-                  <Text className="text-6xl font-extrabold" style={{ color: '#0ea340' }}>
-                    R
-                  </Text>
-                  <Text className="text-sm font-medium text-[#6b7280] mt-1">Rotom</Text>
+            <View className="w-full max-w-[400px]">
+              <View className="items-center justify-center py-2">
+                <View className="w-48 h-48 rounded-2xl overflow-hidden bg-white">
+                  <Image
+                    source={require('../../assets/hero.jpg')}
+                    style={{ width: '100%', height: '100%' }}
+                    contentFit="cover"
+                    transition={200}
+                  />
                 </View>
               </View>
 
@@ -112,10 +115,7 @@ export default function LoginScreen() {
               </View>
 
               <View className="pt-8 pb-6">
-                <Text className="text-xs text-[#6b7280] text-center leading-relaxed">
-                  By tapping "Get Login Code", you agree to our Terms of Service
-                  and Privacy Policy.
-                </Text>
+      
                 <View className="mt-8 flex-row justify-center gap-4 opacity-30">
                   <View className="w-1.5 h-1.5 rounded-full bg-slate-300" />
                   <View className="w-1.5 h-1.5 rounded-full bg-slate-300" />

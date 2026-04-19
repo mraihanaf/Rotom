@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "minimal",
-    "slug": "minimal",
+    "name": "Rotom",
+    "slug": "rotom",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "minimal",
+    "scheme": "rotom",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {
