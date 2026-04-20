@@ -16,7 +16,7 @@ export class AuthService implements OnModuleInit {
 
   constructor(
     private readonly prismaService: PrismaService,
-    @InjectQueue('whatsapp') private readonly whatsappQueue: Queue,
+    @InjectQueue('whatsapp-messaging') private readonly whatsappQueue: Queue,
   ) {
     const baseConfig: ReturnType<typeof createAuthBaseConfig> =
       createAuthBaseConfig({

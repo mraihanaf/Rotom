@@ -10,7 +10,7 @@ import { ApiModule } from '../api/api.module';
     DiscoveryModule,
     ApiModule,
     BullModule.registerQueue({
-      name: 'whatsapp',
+      name: 'whatsapp-messaging',
     }),
   ],
   providers: [BaileysService, BaileysProcessor],

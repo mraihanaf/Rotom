@@ -5,7 +5,7 @@ import { PrismaModule } from 'src/prisma/prisma.module';
 import { BullModule } from '@nestjs/bullmq';
 
 @Module({
-  imports: [PrismaModule, BullModule.registerQueue({ name: 'whatsapp' })],
+  imports: [PrismaModule, BullModule.registerQueue({ name: 'whatsapp-messaging' })],
   providers: [AuthService],
   controllers: [AuthController],
   exports: [AuthService],

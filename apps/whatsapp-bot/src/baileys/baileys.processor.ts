@@ -4,7 +4,7 @@ import { Job } from 'bullmq';
 import { BaileysService } from './baileys.service';
 import { sendOtpSchema } from './baileys.schema';
 
-@Processor('whatsapp')
+@Processor('whatsapp-messaging')
 export class BaileysProcessor extends WorkerHost {
   constructor(private readonly baileysService: BaileysService) {
     super();
