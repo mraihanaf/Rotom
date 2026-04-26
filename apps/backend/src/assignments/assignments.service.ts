@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { ORPCError } from '@orpc/contract';
 import { SubjectsService } from 'src/subjects/subjects.service';
+import { NotificationsService } from 'src/notifications/notifications.service';
 import {
   buildCursorPagination,
   buildPrismaCursorPaginationArgs,
@@ -14,6 +15,7 @@ export class AssignmentsService {
   constructor(
     public readonly prismaService: PrismaService,
     public readonly subjectsService: SubjectsService,
+    private readonly notificationsService: NotificationsService,
   ) {}
 
   async getAssignmentById(id: string) {
@@ -117,7 +119,7 @@ export class AssignmentsService {
     dueDate: string | Date;
   }) {
     try {
-      return await this.prismaService.assignment.create({
+      const created = await this.prismaService.assignment.create({
         data: {
           title,
           description,
@@ -126,6 +128,8 @@ export class AssignmentsService {
           createdBy: creatorId,
         },
       });
+      await this.notificationsService.publishSchedulerResyncAll('assignments.created');
+      return created;
     } catch (e) {
       if (
         e instanceof Prisma.PrismaClientKnownRequestError &&
@@ -139,9 +143,11 @@ export class AssignmentsService {
 
   async deleteAssignmentById(id: string) {
     try {
-      return await this.prismaService.assignment.delete({
+      const deleted = await this.prismaService.assignment.delete({
         where: { id },
       });
+      await this.notificationsService.publishSchedulerResyncAll('assignments.deleted');
+      return deleted;
     } catch (err) {
       if (
         err instanceof Prisma.PrismaClientKnownRequestError &&
@@ -161,7 +167,7 @@ export class AssignmentsService {
     subjectId: string;
   }) {
     try {
-      return await this.prismaService.assignment.update({
+      const updated = await this.prismaService.assignment.update({
         where: { id: input.id },
         data: {
           title: input.title,
@@ -170,6 +176,8 @@ export class AssignmentsService {
           subjectId: input.subjectId,
         },
       });
+      await this.notificationsService.publishSchedulerResyncAll('assignments.updated');
+      return updated;
     } catch (err) {
       if (
         err instanceof Prisma.PrismaClientKnownRequestError &&

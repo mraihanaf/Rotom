@@ -12,26 +12,61 @@ export class AnnouncementsService {
     private readonly settingsService: SettingsService,
   ) {}
 
+  private getDayOfWeekForDate(date: Date, timezone: string): number {
+    if (timezone === 'system') {
+      return date.getDay();
+    }
+
+    const dayName = date.toLocaleString('en-US', { timeZone: timezone, weekday: 'long' }).toLowerCase();
+    const dayMap: Record<string, number> = {
+      sunday: 0, monday: 1, tuesday: 2, wednesday: 3,
+      thursday: 4, friday: 5, saturday: 6,
+    };
+
+    return dayMap[dayName] ?? date.getDay();
+  }
+
   async getTodayDuties() {
     const settings = await this.settingsService.getOrCreateSettings();
     const timezone = (settings as any).timezone || 'system';
-    
-    // Get current day in configured timezone
-    const now = new Date();
-    let dayOfWeek: number;
-    if (timezone === 'system') {
-      dayOfWeek = now.getDay();
-    } else {
-      const dayName = now.toLocaleString('en-US', { timeZone: timezone, weekday: 'long' }).toLowerCase();
-      const dayMap: Record<string, number> = {
-        sunday: 0, monday: 1, tuesday: 2, wednesday: 3,
-        thursday: 4, friday: 5, saturday: 6
-      };
-      dayOfWeek = dayMap[dayName] ?? now.getDay();
+
+    const normalizedDay = this.getDayOfWeekForDate(new Date(), timezone);
+
+    const duties = await this.prisma.dutySchedule.findMany({
+      where: { dayOfWeek: normalizedDay },
+      include: {
+        dutyType: true,
+        user: {
+          select: {
+            id: true,
+            name: true,
+            phoneNumber: true,
+          },
+        },
+      },
+    });
+
+    return duties.map((duty) => ({
+      id: duty.user.id,
+      name: duty.user.name,
+      phoneNumber: duty.user.phoneNumber,
+      dutyType: {
+        id: duty.dutyType.id,
+        name: duty.dutyType.name,
+        category: duty.dutyType.category,
+      },
+    }));
+  }
+
+  async getDutiesByDate(dateStr: string) {
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) {
+      throw new Error('Invalid date format');
     }
-    
-    // Convert to Monday=1, Friday=5 format used in DutySchedule
-    const normalizedDay = dayOfWeek === 0 ? 0 : dayOfWeek;
+
+    const settings = await this.settingsService.getOrCreateSettings();
+    const timezone = (settings as any).timezone || 'system';
+    const normalizedDay = this.getDayOfWeekForDate(date, timezone);
 
     const duties = await this.prisma.dutySchedule.findMany({
       where: { dayOfWeek: normalizedDay },
@@ -62,20 +97,48 @@ export class AnnouncementsService {
   async getTodaySchedule() {
     const settings = await this.settingsService.getOrCreateSettings();
     const timezone = (settings as any).timezone || 'system';
-    
-    // Get current day in configured timezone
-    const now = new Date();
+    const dayOfWeek = this.getDayOfWeekForDate(new Date(), timezone);
+
+    const schedules = await this.prisma.subjectSchedule.findMany({
+      where: { dayOfWeek },
+      include: {
+        subject: true,
+      },
+      orderBy: { startTime: 'asc' },
+    });
+
+    return schedules.map((s) => ({
+      id: s.id,
+      subjectId: s.subjectId,
+      subjectName: s.subject.name,
+      dayOfWeek: s.dayOfWeek,
+      startTime: s.startTime,
+      endTime: s.endTime,
+      room: s.room,
+    }));
+  }
+
+  async getScheduleByDate(dateStr: string) {
+    // Parse date string (YYYY-MM-DD)
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) {
+      throw new Error('Invalid date format');
+    }
+
+    const settings = await this.settingsService.getOrCreateSettings();
+    const timezone = (settings as any).timezone || 'system';
+
+    // Get day of week for the specified date
     let dayOfWeek: number;
     if (timezone === 'system') {
-      dayOfWeek = now.getDay();
+      dayOfWeek = date.getDay();
     } else {
-      // Get day name in target timezone and map to number
-      const dayName = now.toLocaleString('en-US', { timeZone: timezone, weekday: 'long' }).toLowerCase();
+      const dayName = date.toLocaleString('en-US', { timeZone: timezone, weekday: 'long' }).toLowerCase();
       const dayMap: Record<string, number> = {
         sunday: 0, monday: 1, tuesday: 2, wednesday: 3,
         thursday: 4, friday: 5, saturday: 6
       };
-      dayOfWeek = dayMap[dayName] ?? now.getDay();
+      dayOfWeek = dayMap[dayName] ?? date.getDay();
     }
 
     const schedules = await this.prisma.subjectSchedule.findMany({
@@ -97,17 +160,20 @@ export class AnnouncementsService {
     }));
   }
 
-  async getPendingAssignments() {
-    const today = new Date();
-    // Get assignments due today or in the next 3 days
-    const threeDaysLater = new Date(today);
-    threeDaysLater.setDate(today.getDate() + 3);
+  async getPendingAssignments(dateStr?: string) {
+    const start = dateStr ? new Date(dateStr) : new Date();
+    if (isNaN(start.getTime())) {
+      throw new Error('Invalid date format');
+    }
+
+    const end = new Date(start);
+    end.setDate(start.getDate() + 1);
 
     const assignments = await this.prisma.assignment.findMany({
       where: {
         dueDate: {
-          gte: today,
-          lte: threeDaysLater,
+          gte: start,
+          lt: end,
         },
       },
       include: {
@@ -239,10 +305,13 @@ export class AnnouncementsService {
       ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER: settings.ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER,
       ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER: settings.ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER,
       ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER: settings.ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER,
-      dutyReminderTime: settings.dutyReminderTime,
-      scheduleReminderTime: settings.scheduleReminderTime,
-      assignmentReminderTime: settings.assignmentReminderTime,
+      dutyReminderLeadTime: settings.dutyReminderLeadTime,
+      scheduleReminderLeadTime: settings.scheduleReminderLeadTime,
+      assignmentReminderLeadTime: settings.assignmentReminderLeadTime,
       birthdayReminderTime: settings.birthdayReminderTime,
+      dutyReminderLeadDays: settings.dutyReminderLeadDays ?? 0,
+      scheduleReminderLeadDays: settings.scheduleReminderLeadDays ?? 0,
+      assignmentReminderLeadDays: settings.assignmentReminderLeadDays ?? 0,
       fundReportDay: settings.fundReportDay,
       fundReportTime: settings.fundReportTime,
       dutyPersonalizedMessage: settings.dutyPersonalizedMessage,

@@ -1,12 +1,16 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import type { UpdateWhatsappSettingsInput, WhatsappSettings } from './settings.schema';
+import { NotificationsService } from '../notifications/notifications.service';
 
 @Injectable()
 export class SettingsService {
   private readonly logger = new Logger(SettingsService.name);
 
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly notificationsService: NotificationsService,
+  ) {}
 
   async getOrCreateSettings() {
     let settings = await this.prisma.settings.findUnique({
@@ -34,10 +38,13 @@ export class SettingsService {
 
       announcementGroupJid: settings.announcementGroupJid,
 
-      dutyReminderTime: settings.dutyReminderTime,
-      scheduleReminderTime: settings.scheduleReminderTime,
-      assignmentReminderTime: settings.assignmentReminderTime,
+      dutyReminderLeadTime: (settings as any).dutyReminderLeadTime ?? settings.dutyReminderTime,
+      scheduleReminderLeadTime: settings.scheduleReminderLeadTime,
+      assignmentReminderLeadTime: (settings as any).assignmentReminderLeadTime ?? settings.assignmentReminderTime,
       birthdayReminderTime: settings.birthdayReminderTime,
+      dutyReminderLeadDays: (settings as any).dutyReminderLeadDays ?? 0,
+      scheduleReminderLeadDays: settings.scheduleReminderLeadDays ?? 0,
+      assignmentReminderLeadDays: (settings as any).assignmentReminderLeadDays ?? 0,
 
       fundReportDay: settings.fundReportDay,
       fundReportTime: settings.fundReportTime,
@@ -60,6 +67,7 @@ export class SettingsService {
     });
 
     this.logger.log('WhatsApp settings updated');
+    await this.notificationsService.publishSchedulerResyncAll('settings.updated');
 
     return {
       ENABLE_WHATSAPP_BOT_FUND_REPORT: updated.ENABLE_WHATSAPP_BOT_FUND_REPORT,
@@ -70,10 +78,13 @@ export class SettingsService {
 
       announcementGroupJid: updated.announcementGroupJid,
 
-      dutyReminderTime: updated.dutyReminderTime,
-      scheduleReminderTime: updated.scheduleReminderTime,
-      assignmentReminderTime: updated.assignmentReminderTime,
+      dutyReminderLeadTime: (updated as any).dutyReminderLeadTime ?? updated.dutyReminderTime,
+      scheduleReminderLeadTime: (updated as any).scheduleReminderLeadTime ?? updated.scheduleReminderTime,
+      assignmentReminderLeadTime: (updated as any).assignmentReminderLeadTime ?? updated.assignmentReminderTime,
       birthdayReminderTime: updated.birthdayReminderTime,
+      dutyReminderLeadDays: (updated as any).dutyReminderLeadDays ?? 0,
+      scheduleReminderLeadDays: updated.scheduleReminderLeadDays ?? 0,
+      assignmentReminderLeadDays: (updated as any).assignmentReminderLeadDays ?? 0,
 
       fundReportDay: updated.fundReportDay,
       fundReportTime: updated.fundReportTime,
@@ -89,10 +100,13 @@ export class SettingsService {
 
     // Return only non-sensitive settings
     return {
-      dutyReminderTime: settings.dutyReminderTime,
-      scheduleReminderTime: settings.scheduleReminderTime,
-      assignmentReminderTime: settings.assignmentReminderTime,
+      dutyReminderLeadTime: settings.dutyReminderLeadTime,
+      scheduleReminderLeadTime: settings.scheduleReminderLeadTime,
+      assignmentReminderLeadTime: settings.assignmentReminderLeadTime,
       birthdayReminderTime: settings.birthdayReminderTime,
+      dutyReminderLeadDays: settings.dutyReminderLeadDays,
+      scheduleReminderLeadDays: settings.scheduleReminderLeadDays ?? 0,
+      assignmentReminderLeadDays: settings.assignmentReminderLeadDays,
       fundReportDay: settings.fundReportDay,
       fundReportTime: settings.fundReportTime,
       ENABLE_WHATSAPP_BOT_FUND_REPORT: settings.ENABLE_WHATSAPP_BOT_FUND_REPORT,

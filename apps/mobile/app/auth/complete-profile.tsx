@@ -196,6 +196,9 @@ export default function CompleteProfileScreen() {
                   />
                   <User size={20} color="#0ea340" />
                 </View>
+                <Text className="text-xs text-slate-500 ml-1">
+                  Name requires admin approval before it appears on your profile.
+                </Text>
               </View>
 
               <View className="gap-1">

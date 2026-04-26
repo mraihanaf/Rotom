@@ -53,6 +53,10 @@ model User {
   banExpires          DateTime?
   birthday            DateTime?
 
+  // Name change requests
+  nameChangeRequests        UserNameChangeRequest[]
+  reviewedNameChangeRequests UserNameChangeRequest[] @relation("NameChangeReviewer")
+
   @@unique([email])
   @@unique([phoneNumber])
   @@map("user")
@@ -261,6 +265,29 @@ model DutySchedule {
   @@unique([dutyTypeId, userId, dayOfWeek])
 }
 
+model UserNameChangeRequest {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  requestedName String
+  status        String   @default("PENDING") // PENDING | APPROVED | REJECTED
+  source        String   // COMPLETE_PROFILE | PROFILE_EDIT
+  requestedAt   DateTime @default(now())
+  reviewedAt    DateTime?
+  reviewedById  String?
+  reviewedBy    User?    @relation("NameChangeReviewer", fields: [reviewedById], references: [id], onDelete: SetNull)
+  rejectionReason String?
+
+  // Admin notification tracking
+  adminsNotified  Boolean  @default(false)
+  notifiedAt      DateTime?
+
+  @@index([userId, status])
+  @@index([status, requestedAt])
+  @@index([requestedAt])
+  @@index([adminsNotified, status])
+}
+
 model Settings {
   id Int @id @default(1)
 
@@ -276,9 +303,17 @@ model Settings {
 
   // Reminder times (HH:MM format)
   dutyReminderTime     String @default("07:00")
+  dutyReminderLeadTime String @default("07:00")
   scheduleReminderTime String @default("07:00")
+  scheduleReminderLeadTime String @default("20:00")
   assignmentReminderTime String @default("18:00")
+  assignmentReminderLeadTime String @default("18:00")
   birthdayReminderTime String @default("09:00")
+
+  // Schedule reminder lead time (days before)
+  dutyReminderLeadDays Int @default(0)
+  scheduleReminderLeadDays Int @default(0)
+  assignmentReminderLeadDays Int @default(0)
 
   // Fund report configuration
   fundReportDay  Int    @default(1) // Day of month (1-31)

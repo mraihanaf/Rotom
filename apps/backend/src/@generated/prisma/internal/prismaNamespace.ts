@@ -399,6 +399,7 @@ export const ModelName = {
   GalleryPostReaction: 'GalleryPostReaction',
   DutyType: 'DutyType',
   DutySchedule: 'DutySchedule',
+  UserNameChangeRequest: 'UserNameChangeRequest',
   Settings: 'Settings'
 } as const
 
@@ -415,7 +416,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "organization" | "user" | "session" | "account" | "verification" | "subject" | "subjectSchedule" | "assignment" | "assignmentStatus" | "fund" | "fundContributionLog" | "galleryPost" | "galleryPostReaction" | "dutyType" | "dutySchedule" | "settings"
+    modelProps: "organization" | "user" | "session" | "account" | "verification" | "subject" | "subjectSchedule" | "assignment" | "assignmentStatus" | "fund" | "fundContributionLog" | "galleryPost" | "galleryPostReaction" | "dutyType" | "dutySchedule" | "userNameChangeRequest" | "settings"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1529,6 +1530,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    UserNameChangeRequest: {
+      payload: Prisma.$UserNameChangeRequestPayload<ExtArgs>
+      fields: Prisma.UserNameChangeRequestFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UserNameChangeRequestFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserNameChangeRequestPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UserNameChangeRequestFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserNameChangeRequestPayload>
+        }
+        findFirst: {
+          args: Prisma.UserNameChangeRequestFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserNameChangeRequestPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UserNameChangeRequestFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserNameChangeRequestPayload>
+        }
+        findMany: {
+          args: Prisma.UserNameChangeRequestFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserNameChangeRequestPayload>[]
+        }
+        create: {
+          args: Prisma.UserNameChangeRequestCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserNameChangeRequestPayload>
+        }
+        createMany: {
+          args: Prisma.UserNameChangeRequestCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UserNameChangeRequestCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserNameChangeRequestPayload>[]
+        }
+        delete: {
+          args: Prisma.UserNameChangeRequestDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserNameChangeRequestPayload>
+        }
+        update: {
+          args: Prisma.UserNameChangeRequestUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserNameChangeRequestPayload>
+        }
+        deleteMany: {
+          args: Prisma.UserNameChangeRequestDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UserNameChangeRequestUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UserNameChangeRequestUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserNameChangeRequestPayload>[]
+        }
+        upsert: {
+          args: Prisma.UserNameChangeRequestUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UserNameChangeRequestPayload>
+        }
+        aggregate: {
+          args: Prisma.UserNameChangeRequestAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUserNameChangeRequest>
+        }
+        groupBy: {
+          args: Prisma.UserNameChangeRequestGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserNameChangeRequestGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UserNameChangeRequestCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UserNameChangeRequestCountAggregateOutputType> | number
+        }
+      }
+    }
     Settings: {
       payload: Prisma.$SettingsPayload<ExtArgs>
       fields: Prisma.SettingsFieldRefs
@@ -1836,6 +1911,23 @@ export const DutyScheduleScalarFieldEnum = {
 export type DutyScheduleScalarFieldEnum = (typeof DutyScheduleScalarFieldEnum)[keyof typeof DutyScheduleScalarFieldEnum]
 
 
+export const UserNameChangeRequestScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  requestedName: 'requestedName',
+  status: 'status',
+  source: 'source',
+  requestedAt: 'requestedAt',
+  reviewedAt: 'reviewedAt',
+  reviewedById: 'reviewedById',
+  rejectionReason: 'rejectionReason',
+  adminsNotified: 'adminsNotified',
+  notifiedAt: 'notifiedAt'
+} as const
+
+export type UserNameChangeRequestScalarFieldEnum = (typeof UserNameChangeRequestScalarFieldEnum)[keyof typeof UserNameChangeRequestScalarFieldEnum]
+
+
 export const SettingsScalarFieldEnum = {
   id: 'id',
   ENABLE_WHATSAPP_BOT_FUND_REPORT: 'ENABLE_WHATSAPP_BOT_FUND_REPORT',
@@ -1845,9 +1937,15 @@ export const SettingsScalarFieldEnum = {
   ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER: 'ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER',
   announcementGroupJid: 'announcementGroupJid',
   dutyReminderTime: 'dutyReminderTime',
+  dutyReminderLeadTime: 'dutyReminderLeadTime',
   scheduleReminderTime: 'scheduleReminderTime',
+  scheduleReminderLeadTime: 'scheduleReminderLeadTime',
   assignmentReminderTime: 'assignmentReminderTime',
+  assignmentReminderLeadTime: 'assignmentReminderLeadTime',
   birthdayReminderTime: 'birthdayReminderTime',
+  dutyReminderLeadDays: 'dutyReminderLeadDays',
+  scheduleReminderLeadDays: 'scheduleReminderLeadDays',
+  assignmentReminderLeadDays: 'assignmentReminderLeadDays',
   fundReportDay: 'fundReportDay',
   fundReportTime: 'fundReportTime',
   dutyPersonalizedMessage: 'dutyPersonalizedMessage',
@@ -2040,6 +2138,7 @@ export type GlobalOmitConfig = {
   galleryPostReaction?: Prisma.GalleryPostReactionOmit
   dutyType?: Prisma.DutyTypeOmit
   dutySchedule?: Prisma.DutyScheduleOmit
+  userNameChangeRequest?: Prisma.UserNameChangeRequestOmit
   settings?: Prisma.SettingsOmit
 }
 

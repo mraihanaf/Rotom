@@ -15,6 +15,14 @@ export class AnnouncementsController {
       });
   }
 
+  @Implement(contract.announcements.getDutiesByDate)
+  getDutiesByDate() {
+    return implement(contract.announcements.getDutiesByDate)
+      .handler(async ({ input }) => {
+        return this.announcementsService.getDutiesByDate(input.date);
+      });
+  }
+
   @Implement(contract.announcements.getTodaySchedule)
   getTodaySchedule() {
     return implement(contract.announcements.getTodaySchedule)
@@ -26,8 +34,8 @@ export class AnnouncementsController {
   @Implement(contract.announcements.getPendingAssignments)
   getPendingAssignments() {
     return implement(contract.announcements.getPendingAssignments)
-      .handler(async () => {
-        return this.announcementsService.getPendingAssignments();
+      .handler(async ({ input }) => {
+        return this.announcementsService.getPendingAssignments(input?.date);
       });
   }
 
@@ -73,6 +81,14 @@ export class AnnouncementsController {
           input.groupJid,
         );
         return { success };
+      });
+  }
+
+  @Implement(contract.announcements.getScheduleByDate)
+  getScheduleByDate() {
+    return implement(contract.announcements.getScheduleByDate)
+      .handler(async ({ input }) => {
+        return this.announcementsService.getScheduleByDate(input.date);
       });
   }
 }

@@ -271,6 +271,8 @@ export type UserWhereInput = {
   galleryPosts?: Prisma.GalleryPostListRelationFilter
   galleryReactions?: Prisma.GalleryPostReactionListRelationFilter
   dutySchedules?: Prisma.DutyScheduleListRelationFilter
+  nameChangeRequests?: Prisma.UserNameChangeRequestListRelationFilter
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -298,6 +300,8 @@ export type UserOrderByWithRelationInput = {
   galleryPosts?: Prisma.GalleryPostOrderByRelationAggregateInput
   galleryReactions?: Prisma.GalleryPostReactionOrderByRelationAggregateInput
   dutySchedules?: Prisma.DutyScheduleOrderByRelationAggregateInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestOrderByRelationAggregateInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -328,6 +332,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   galleryPosts?: Prisma.GalleryPostListRelationFilter
   galleryReactions?: Prisma.GalleryPostReactionListRelationFilter
   dutySchedules?: Prisma.DutyScheduleListRelationFilter
+  nameChangeRequests?: Prisma.UserNameChangeRequestListRelationFilter
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestListRelationFilter
 }, "id" | "email" | "phoneNumber">
 
 export type UserOrderByWithAggregationInput = {
@@ -397,6 +403,8 @@ export type UserCreateInput = {
   galleryPosts?: Prisma.GalleryPostCreateNestedManyWithoutCreatedByInput
   galleryReactions?: Prisma.GalleryPostReactionCreateNestedManyWithoutUserInput
   dutySchedules?: Prisma.DutyScheduleCreateNestedManyWithoutUserInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestCreateNestedManyWithoutUserInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -424,6 +432,8 @@ export type UserUncheckedCreateInput = {
   galleryPosts?: Prisma.GalleryPostUncheckedCreateNestedManyWithoutCreatedByInput
   galleryReactions?: Prisma.GalleryPostReactionUncheckedCreateNestedManyWithoutUserInput
   dutySchedules?: Prisma.DutyScheduleUncheckedCreateNestedManyWithoutUserInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestUncheckedCreateNestedManyWithoutUserInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUpdateInput = {
@@ -451,6 +461,8 @@ export type UserUpdateInput = {
   galleryPosts?: Prisma.GalleryPostUpdateManyWithoutCreatedByNestedInput
   galleryReactions?: Prisma.GalleryPostReactionUpdateManyWithoutUserNestedInput
   dutySchedules?: Prisma.DutyScheduleUpdateManyWithoutUserNestedInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestUpdateManyWithoutUserNestedInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -478,6 +490,8 @@ export type UserUncheckedUpdateInput = {
   galleryPosts?: Prisma.GalleryPostUncheckedUpdateManyWithoutCreatedByNestedInput
   galleryReactions?: Prisma.GalleryPostReactionUncheckedUpdateManyWithoutUserNestedInput
   dutySchedules?: Prisma.DutyScheduleUncheckedUpdateManyWithoutUserNestedInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestUncheckedUpdateManyWithoutUserNestedInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -738,6 +752,36 @@ export type UserUpdateOneRequiredWithoutDutySchedulesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutDutySchedulesInput, Prisma.UserUpdateWithoutDutySchedulesInput>, Prisma.UserUncheckedUpdateWithoutDutySchedulesInput>
 }
 
+export type UserCreateNestedOneWithoutNameChangeRequestsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNameChangeRequestsInput, Prisma.UserUncheckedCreateWithoutNameChangeRequestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNameChangeRequestsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserCreateNestedOneWithoutReviewedNameChangeRequestsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReviewedNameChangeRequestsInput, Prisma.UserUncheckedCreateWithoutReviewedNameChangeRequestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReviewedNameChangeRequestsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutNameChangeRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNameChangeRequestsInput, Prisma.UserUncheckedCreateWithoutNameChangeRequestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNameChangeRequestsInput
+  upsert?: Prisma.UserUpsertWithoutNameChangeRequestsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNameChangeRequestsInput, Prisma.UserUpdateWithoutNameChangeRequestsInput>, Prisma.UserUncheckedUpdateWithoutNameChangeRequestsInput>
+}
+
+export type UserUpdateOneWithoutReviewedNameChangeRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReviewedNameChangeRequestsInput, Prisma.UserUncheckedCreateWithoutReviewedNameChangeRequestsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReviewedNameChangeRequestsInput
+  upsert?: Prisma.UserUpsertWithoutReviewedNameChangeRequestsInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReviewedNameChangeRequestsInput, Prisma.UserUpdateWithoutReviewedNameChangeRequestsInput>, Prisma.UserUncheckedUpdateWithoutReviewedNameChangeRequestsInput>
+}
+
 export type UserCreateWithoutSessionsInput = {
   id: string
   name: string
@@ -762,6 +806,8 @@ export type UserCreateWithoutSessionsInput = {
   galleryPosts?: Prisma.GalleryPostCreateNestedManyWithoutCreatedByInput
   galleryReactions?: Prisma.GalleryPostReactionCreateNestedManyWithoutUserInput
   dutySchedules?: Prisma.DutyScheduleCreateNestedManyWithoutUserInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestCreateNestedManyWithoutUserInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -788,6 +834,8 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   galleryPosts?: Prisma.GalleryPostUncheckedCreateNestedManyWithoutCreatedByInput
   galleryReactions?: Prisma.GalleryPostReactionUncheckedCreateNestedManyWithoutUserInput
   dutySchedules?: Prisma.DutyScheduleUncheckedCreateNestedManyWithoutUserInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestUncheckedCreateNestedManyWithoutUserInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -830,6 +878,8 @@ export type UserUpdateWithoutSessionsInput = {
   galleryPosts?: Prisma.GalleryPostUpdateManyWithoutCreatedByNestedInput
   galleryReactions?: Prisma.GalleryPostReactionUpdateManyWithoutUserNestedInput
   dutySchedules?: Prisma.DutyScheduleUpdateManyWithoutUserNestedInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestUpdateManyWithoutUserNestedInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -856,6 +906,8 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   galleryPosts?: Prisma.GalleryPostUncheckedUpdateManyWithoutCreatedByNestedInput
   galleryReactions?: Prisma.GalleryPostReactionUncheckedUpdateManyWithoutUserNestedInput
   dutySchedules?: Prisma.DutyScheduleUncheckedUpdateManyWithoutUserNestedInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestUncheckedUpdateManyWithoutUserNestedInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -882,6 +934,8 @@ export type UserCreateWithoutAccountsInput = {
   galleryPosts?: Prisma.GalleryPostCreateNestedManyWithoutCreatedByInput
   galleryReactions?: Prisma.GalleryPostReactionCreateNestedManyWithoutUserInput
   dutySchedules?: Prisma.DutyScheduleCreateNestedManyWithoutUserInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestCreateNestedManyWithoutUserInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -908,6 +962,8 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   galleryPosts?: Prisma.GalleryPostUncheckedCreateNestedManyWithoutCreatedByInput
   galleryReactions?: Prisma.GalleryPostReactionUncheckedCreateNestedManyWithoutUserInput
   dutySchedules?: Prisma.DutyScheduleUncheckedCreateNestedManyWithoutUserInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestUncheckedCreateNestedManyWithoutUserInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -950,6 +1006,8 @@ export type UserUpdateWithoutAccountsInput = {
   galleryPosts?: Prisma.GalleryPostUpdateManyWithoutCreatedByNestedInput
   galleryReactions?: Prisma.GalleryPostReactionUpdateManyWithoutUserNestedInput
   dutySchedules?: Prisma.DutyScheduleUpdateManyWithoutUserNestedInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestUpdateManyWithoutUserNestedInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -976,6 +1034,8 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   galleryPosts?: Prisma.GalleryPostUncheckedUpdateManyWithoutCreatedByNestedInput
   galleryReactions?: Prisma.GalleryPostReactionUncheckedUpdateManyWithoutUserNestedInput
   dutySchedules?: Prisma.DutyScheduleUncheckedUpdateManyWithoutUserNestedInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestUncheckedUpdateManyWithoutUserNestedInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutAssignmentsInput = {
@@ -1002,6 +1062,8 @@ export type UserCreateWithoutAssignmentsInput = {
   galleryPosts?: Prisma.GalleryPostCreateNestedManyWithoutCreatedByInput
   galleryReactions?: Prisma.GalleryPostReactionCreateNestedManyWithoutUserInput
   dutySchedules?: Prisma.DutyScheduleCreateNestedManyWithoutUserInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestCreateNestedManyWithoutUserInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutAssignmentsInput = {
@@ -1028,6 +1090,8 @@ export type UserUncheckedCreateWithoutAssignmentsInput = {
   galleryPosts?: Prisma.GalleryPostUncheckedCreateNestedManyWithoutCreatedByInput
   galleryReactions?: Prisma.GalleryPostReactionUncheckedCreateNestedManyWithoutUserInput
   dutySchedules?: Prisma.DutyScheduleUncheckedCreateNestedManyWithoutUserInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestUncheckedCreateNestedManyWithoutUserInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutAssignmentsInput = {
@@ -1070,6 +1134,8 @@ export type UserUpdateWithoutAssignmentsInput = {
   galleryPosts?: Prisma.GalleryPostUpdateManyWithoutCreatedByNestedInput
   galleryReactions?: Prisma.GalleryPostReactionUpdateManyWithoutUserNestedInput
   dutySchedules?: Prisma.DutyScheduleUpdateManyWithoutUserNestedInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestUpdateManyWithoutUserNestedInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAssignmentsInput = {
@@ -1096,6 +1162,8 @@ export type UserUncheckedUpdateWithoutAssignmentsInput = {
   galleryPosts?: Prisma.GalleryPostUncheckedUpdateManyWithoutCreatedByNestedInput
   galleryReactions?: Prisma.GalleryPostReactionUncheckedUpdateManyWithoutUserNestedInput
   dutySchedules?: Prisma.DutyScheduleUncheckedUpdateManyWithoutUserNestedInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestUncheckedUpdateManyWithoutUserNestedInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutAssignmentStatusesInput = {
@@ -1122,6 +1190,8 @@ export type UserCreateWithoutAssignmentStatusesInput = {
   galleryPosts?: Prisma.GalleryPostCreateNestedManyWithoutCreatedByInput
   galleryReactions?: Prisma.GalleryPostReactionCreateNestedManyWithoutUserInput
   dutySchedules?: Prisma.DutyScheduleCreateNestedManyWithoutUserInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestCreateNestedManyWithoutUserInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutAssignmentStatusesInput = {
@@ -1148,6 +1218,8 @@ export type UserUncheckedCreateWithoutAssignmentStatusesInput = {
   galleryPosts?: Prisma.GalleryPostUncheckedCreateNestedManyWithoutCreatedByInput
   galleryReactions?: Prisma.GalleryPostReactionUncheckedCreateNestedManyWithoutUserInput
   dutySchedules?: Prisma.DutyScheduleUncheckedCreateNestedManyWithoutUserInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestUncheckedCreateNestedManyWithoutUserInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutAssignmentStatusesInput = {
@@ -1190,6 +1262,8 @@ export type UserUpdateWithoutAssignmentStatusesInput = {
   galleryPosts?: Prisma.GalleryPostUpdateManyWithoutCreatedByNestedInput
   galleryReactions?: Prisma.GalleryPostReactionUpdateManyWithoutUserNestedInput
   dutySchedules?: Prisma.DutyScheduleUpdateManyWithoutUserNestedInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestUpdateManyWithoutUserNestedInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAssignmentStatusesInput = {
@@ -1216,6 +1290,8 @@ export type UserUncheckedUpdateWithoutAssignmentStatusesInput = {
   galleryPosts?: Prisma.GalleryPostUncheckedUpdateManyWithoutCreatedByNestedInput
   galleryReactions?: Prisma.GalleryPostReactionUncheckedUpdateManyWithoutUserNestedInput
   dutySchedules?: Prisma.DutyScheduleUncheckedUpdateManyWithoutUserNestedInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestUncheckedUpdateManyWithoutUserNestedInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutReportedLogsInput = {
@@ -1242,6 +1318,8 @@ export type UserCreateWithoutReportedLogsInput = {
   galleryPosts?: Prisma.GalleryPostCreateNestedManyWithoutCreatedByInput
   galleryReactions?: Prisma.GalleryPostReactionCreateNestedManyWithoutUserInput
   dutySchedules?: Prisma.DutyScheduleCreateNestedManyWithoutUserInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestCreateNestedManyWithoutUserInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutReportedLogsInput = {
@@ -1268,6 +1346,8 @@ export type UserUncheckedCreateWithoutReportedLogsInput = {
   galleryPosts?: Prisma.GalleryPostUncheckedCreateNestedManyWithoutCreatedByInput
   galleryReactions?: Prisma.GalleryPostReactionUncheckedCreateNestedManyWithoutUserInput
   dutySchedules?: Prisma.DutyScheduleUncheckedCreateNestedManyWithoutUserInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestUncheckedCreateNestedManyWithoutUserInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutReportedLogsInput = {
@@ -1299,6 +1379,8 @@ export type UserCreateWithoutContributedLogsInput = {
   galleryPosts?: Prisma.GalleryPostCreateNestedManyWithoutCreatedByInput
   galleryReactions?: Prisma.GalleryPostReactionCreateNestedManyWithoutUserInput
   dutySchedules?: Prisma.DutyScheduleCreateNestedManyWithoutUserInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestCreateNestedManyWithoutUserInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutContributedLogsInput = {
@@ -1325,6 +1407,8 @@ export type UserUncheckedCreateWithoutContributedLogsInput = {
   galleryPosts?: Prisma.GalleryPostUncheckedCreateNestedManyWithoutCreatedByInput
   galleryReactions?: Prisma.GalleryPostReactionUncheckedCreateNestedManyWithoutUserInput
   dutySchedules?: Prisma.DutyScheduleUncheckedCreateNestedManyWithoutUserInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestUncheckedCreateNestedManyWithoutUserInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutContributedLogsInput = {
@@ -1367,6 +1451,8 @@ export type UserUpdateWithoutReportedLogsInput = {
   galleryPosts?: Prisma.GalleryPostUpdateManyWithoutCreatedByNestedInput
   galleryReactions?: Prisma.GalleryPostReactionUpdateManyWithoutUserNestedInput
   dutySchedules?: Prisma.DutyScheduleUpdateManyWithoutUserNestedInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestUpdateManyWithoutUserNestedInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReportedLogsInput = {
@@ -1393,6 +1479,8 @@ export type UserUncheckedUpdateWithoutReportedLogsInput = {
   galleryPosts?: Prisma.GalleryPostUncheckedUpdateManyWithoutCreatedByNestedInput
   galleryReactions?: Prisma.GalleryPostReactionUncheckedUpdateManyWithoutUserNestedInput
   dutySchedules?: Prisma.DutyScheduleUncheckedUpdateManyWithoutUserNestedInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestUncheckedUpdateManyWithoutUserNestedInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUpsertWithoutContributedLogsInput = {
@@ -1430,6 +1518,8 @@ export type UserUpdateWithoutContributedLogsInput = {
   galleryPosts?: Prisma.GalleryPostUpdateManyWithoutCreatedByNestedInput
   galleryReactions?: Prisma.GalleryPostReactionUpdateManyWithoutUserNestedInput
   dutySchedules?: Prisma.DutyScheduleUpdateManyWithoutUserNestedInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestUpdateManyWithoutUserNestedInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutContributedLogsInput = {
@@ -1456,6 +1546,8 @@ export type UserUncheckedUpdateWithoutContributedLogsInput = {
   galleryPosts?: Prisma.GalleryPostUncheckedUpdateManyWithoutCreatedByNestedInput
   galleryReactions?: Prisma.GalleryPostReactionUncheckedUpdateManyWithoutUserNestedInput
   dutySchedules?: Prisma.DutyScheduleUncheckedUpdateManyWithoutUserNestedInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestUncheckedUpdateManyWithoutUserNestedInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutGalleryPostsInput = {
@@ -1482,6 +1574,8 @@ export type UserCreateWithoutGalleryPostsInput = {
   contributedLogs?: Prisma.FundContributionLogCreateNestedManyWithoutContributorInput
   galleryReactions?: Prisma.GalleryPostReactionCreateNestedManyWithoutUserInput
   dutySchedules?: Prisma.DutyScheduleCreateNestedManyWithoutUserInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestCreateNestedManyWithoutUserInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutGalleryPostsInput = {
@@ -1508,6 +1602,8 @@ export type UserUncheckedCreateWithoutGalleryPostsInput = {
   contributedLogs?: Prisma.FundContributionLogUncheckedCreateNestedManyWithoutContributorInput
   galleryReactions?: Prisma.GalleryPostReactionUncheckedCreateNestedManyWithoutUserInput
   dutySchedules?: Prisma.DutyScheduleUncheckedCreateNestedManyWithoutUserInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestUncheckedCreateNestedManyWithoutUserInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutGalleryPostsInput = {
@@ -1550,6 +1646,8 @@ export type UserUpdateWithoutGalleryPostsInput = {
   contributedLogs?: Prisma.FundContributionLogUpdateManyWithoutContributorNestedInput
   galleryReactions?: Prisma.GalleryPostReactionUpdateManyWithoutUserNestedInput
   dutySchedules?: Prisma.DutyScheduleUpdateManyWithoutUserNestedInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestUpdateManyWithoutUserNestedInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutGalleryPostsInput = {
@@ -1576,6 +1674,8 @@ export type UserUncheckedUpdateWithoutGalleryPostsInput = {
   contributedLogs?: Prisma.FundContributionLogUncheckedUpdateManyWithoutContributorNestedInput
   galleryReactions?: Prisma.GalleryPostReactionUncheckedUpdateManyWithoutUserNestedInput
   dutySchedules?: Prisma.DutyScheduleUncheckedUpdateManyWithoutUserNestedInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestUncheckedUpdateManyWithoutUserNestedInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutGalleryReactionsInput = {
@@ -1602,6 +1702,8 @@ export type UserCreateWithoutGalleryReactionsInput = {
   contributedLogs?: Prisma.FundContributionLogCreateNestedManyWithoutContributorInput
   galleryPosts?: Prisma.GalleryPostCreateNestedManyWithoutCreatedByInput
   dutySchedules?: Prisma.DutyScheduleCreateNestedManyWithoutUserInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestCreateNestedManyWithoutUserInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutGalleryReactionsInput = {
@@ -1628,6 +1730,8 @@ export type UserUncheckedCreateWithoutGalleryReactionsInput = {
   contributedLogs?: Prisma.FundContributionLogUncheckedCreateNestedManyWithoutContributorInput
   galleryPosts?: Prisma.GalleryPostUncheckedCreateNestedManyWithoutCreatedByInput
   dutySchedules?: Prisma.DutyScheduleUncheckedCreateNestedManyWithoutUserInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestUncheckedCreateNestedManyWithoutUserInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutGalleryReactionsInput = {
@@ -1670,6 +1774,8 @@ export type UserUpdateWithoutGalleryReactionsInput = {
   contributedLogs?: Prisma.FundContributionLogUpdateManyWithoutContributorNestedInput
   galleryPosts?: Prisma.GalleryPostUpdateManyWithoutCreatedByNestedInput
   dutySchedules?: Prisma.DutyScheduleUpdateManyWithoutUserNestedInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestUpdateManyWithoutUserNestedInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutGalleryReactionsInput = {
@@ -1696,6 +1802,8 @@ export type UserUncheckedUpdateWithoutGalleryReactionsInput = {
   contributedLogs?: Prisma.FundContributionLogUncheckedUpdateManyWithoutContributorNestedInput
   galleryPosts?: Prisma.GalleryPostUncheckedUpdateManyWithoutCreatedByNestedInput
   dutySchedules?: Prisma.DutyScheduleUncheckedUpdateManyWithoutUserNestedInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestUncheckedUpdateManyWithoutUserNestedInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestUncheckedUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserCreateWithoutDutySchedulesInput = {
@@ -1722,6 +1830,8 @@ export type UserCreateWithoutDutySchedulesInput = {
   contributedLogs?: Prisma.FundContributionLogCreateNestedManyWithoutContributorInput
   galleryPosts?: Prisma.GalleryPostCreateNestedManyWithoutCreatedByInput
   galleryReactions?: Prisma.GalleryPostReactionCreateNestedManyWithoutUserInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestCreateNestedManyWithoutUserInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserUncheckedCreateWithoutDutySchedulesInput = {
@@ -1748,6 +1858,8 @@ export type UserUncheckedCreateWithoutDutySchedulesInput = {
   contributedLogs?: Prisma.FundContributionLogUncheckedCreateNestedManyWithoutContributorInput
   galleryPosts?: Prisma.GalleryPostUncheckedCreateNestedManyWithoutCreatedByInput
   galleryReactions?: Prisma.GalleryPostReactionUncheckedCreateNestedManyWithoutUserInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestUncheckedCreateNestedManyWithoutUserInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestUncheckedCreateNestedManyWithoutReviewedByInput
 }
 
 export type UserCreateOrConnectWithoutDutySchedulesInput = {
@@ -1790,6 +1902,8 @@ export type UserUpdateWithoutDutySchedulesInput = {
   contributedLogs?: Prisma.FundContributionLogUpdateManyWithoutContributorNestedInput
   galleryPosts?: Prisma.GalleryPostUpdateManyWithoutCreatedByNestedInput
   galleryReactions?: Prisma.GalleryPostReactionUpdateManyWithoutUserNestedInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestUpdateManyWithoutUserNestedInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestUpdateManyWithoutReviewedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDutySchedulesInput = {
@@ -1816,6 +1930,264 @@ export type UserUncheckedUpdateWithoutDutySchedulesInput = {
   contributedLogs?: Prisma.FundContributionLogUncheckedUpdateManyWithoutContributorNestedInput
   galleryPosts?: Prisma.GalleryPostUncheckedUpdateManyWithoutCreatedByNestedInput
   galleryReactions?: Prisma.GalleryPostReactionUncheckedUpdateManyWithoutUserNestedInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestUncheckedUpdateManyWithoutUserNestedInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserCreateWithoutNameChangeRequestsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  phoneNumber?: string | null
+  phoneNumberVerified?: boolean | null
+  role?: string | null
+  isProfileComplete?: boolean
+  banned?: boolean | null
+  banReason?: string | null
+  banExpires?: Date | string | null
+  birthday?: Date | string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  assignments?: Prisma.AssignmentCreateNestedManyWithoutUserInput
+  assignmentStatuses?: Prisma.AssignmentStatusCreateNestedManyWithoutUserInput
+  reportedLogs?: Prisma.FundContributionLogCreateNestedManyWithoutReporterInput
+  contributedLogs?: Prisma.FundContributionLogCreateNestedManyWithoutContributorInput
+  galleryPosts?: Prisma.GalleryPostCreateNestedManyWithoutCreatedByInput
+  galleryReactions?: Prisma.GalleryPostReactionCreateNestedManyWithoutUserInput
+  dutySchedules?: Prisma.DutyScheduleCreateNestedManyWithoutUserInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestCreateNestedManyWithoutReviewedByInput
+}
+
+export type UserUncheckedCreateWithoutNameChangeRequestsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  phoneNumber?: string | null
+  phoneNumberVerified?: boolean | null
+  role?: string | null
+  isProfileComplete?: boolean
+  banned?: boolean | null
+  banReason?: string | null
+  banExpires?: Date | string | null
+  birthday?: Date | string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  assignments?: Prisma.AssignmentUncheckedCreateNestedManyWithoutUserInput
+  assignmentStatuses?: Prisma.AssignmentStatusUncheckedCreateNestedManyWithoutUserInput
+  reportedLogs?: Prisma.FundContributionLogUncheckedCreateNestedManyWithoutReporterInput
+  contributedLogs?: Prisma.FundContributionLogUncheckedCreateNestedManyWithoutContributorInput
+  galleryPosts?: Prisma.GalleryPostUncheckedCreateNestedManyWithoutCreatedByInput
+  galleryReactions?: Prisma.GalleryPostReactionUncheckedCreateNestedManyWithoutUserInput
+  dutySchedules?: Prisma.DutyScheduleUncheckedCreateNestedManyWithoutUserInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestUncheckedCreateNestedManyWithoutReviewedByInput
+}
+
+export type UserCreateOrConnectWithoutNameChangeRequestsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutNameChangeRequestsInput, Prisma.UserUncheckedCreateWithoutNameChangeRequestsInput>
+}
+
+export type UserCreateWithoutReviewedNameChangeRequestsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  phoneNumber?: string | null
+  phoneNumberVerified?: boolean | null
+  role?: string | null
+  isProfileComplete?: boolean
+  banned?: boolean | null
+  banReason?: string | null
+  banExpires?: Date | string | null
+  birthday?: Date | string | null
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  assignments?: Prisma.AssignmentCreateNestedManyWithoutUserInput
+  assignmentStatuses?: Prisma.AssignmentStatusCreateNestedManyWithoutUserInput
+  reportedLogs?: Prisma.FundContributionLogCreateNestedManyWithoutReporterInput
+  contributedLogs?: Prisma.FundContributionLogCreateNestedManyWithoutContributorInput
+  galleryPosts?: Prisma.GalleryPostCreateNestedManyWithoutCreatedByInput
+  galleryReactions?: Prisma.GalleryPostReactionCreateNestedManyWithoutUserInput
+  dutySchedules?: Prisma.DutyScheduleCreateNestedManyWithoutUserInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutReviewedNameChangeRequestsInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  phoneNumber?: string | null
+  phoneNumberVerified?: boolean | null
+  role?: string | null
+  isProfileComplete?: boolean
+  banned?: boolean | null
+  banReason?: string | null
+  banExpires?: Date | string | null
+  birthday?: Date | string | null
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  assignments?: Prisma.AssignmentUncheckedCreateNestedManyWithoutUserInput
+  assignmentStatuses?: Prisma.AssignmentStatusUncheckedCreateNestedManyWithoutUserInput
+  reportedLogs?: Prisma.FundContributionLogUncheckedCreateNestedManyWithoutReporterInput
+  contributedLogs?: Prisma.FundContributionLogUncheckedCreateNestedManyWithoutContributorInput
+  galleryPosts?: Prisma.GalleryPostUncheckedCreateNestedManyWithoutCreatedByInput
+  galleryReactions?: Prisma.GalleryPostReactionUncheckedCreateNestedManyWithoutUserInput
+  dutySchedules?: Prisma.DutyScheduleUncheckedCreateNestedManyWithoutUserInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutReviewedNameChangeRequestsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutReviewedNameChangeRequestsInput, Prisma.UserUncheckedCreateWithoutReviewedNameChangeRequestsInput>
+}
+
+export type UserUpsertWithoutNameChangeRequestsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutNameChangeRequestsInput, Prisma.UserUncheckedUpdateWithoutNameChangeRequestsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutNameChangeRequestsInput, Prisma.UserUncheckedCreateWithoutNameChangeRequestsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutNameChangeRequestsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutNameChangeRequestsInput, Prisma.UserUncheckedUpdateWithoutNameChangeRequestsInput>
+}
+
+export type UserUpdateWithoutNameChangeRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumberVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isProfileComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banned?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  birthday?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  assignments?: Prisma.AssignmentUpdateManyWithoutUserNestedInput
+  assignmentStatuses?: Prisma.AssignmentStatusUpdateManyWithoutUserNestedInput
+  reportedLogs?: Prisma.FundContributionLogUpdateManyWithoutReporterNestedInput
+  contributedLogs?: Prisma.FundContributionLogUpdateManyWithoutContributorNestedInput
+  galleryPosts?: Prisma.GalleryPostUpdateManyWithoutCreatedByNestedInput
+  galleryReactions?: Prisma.GalleryPostReactionUpdateManyWithoutUserNestedInput
+  dutySchedules?: Prisma.DutyScheduleUpdateManyWithoutUserNestedInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutNameChangeRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumberVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isProfileComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banned?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  birthday?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  assignments?: Prisma.AssignmentUncheckedUpdateManyWithoutUserNestedInput
+  assignmentStatuses?: Prisma.AssignmentStatusUncheckedUpdateManyWithoutUserNestedInput
+  reportedLogs?: Prisma.FundContributionLogUncheckedUpdateManyWithoutReporterNestedInput
+  contributedLogs?: Prisma.FundContributionLogUncheckedUpdateManyWithoutContributorNestedInput
+  galleryPosts?: Prisma.GalleryPostUncheckedUpdateManyWithoutCreatedByNestedInput
+  galleryReactions?: Prisma.GalleryPostReactionUncheckedUpdateManyWithoutUserNestedInput
+  dutySchedules?: Prisma.DutyScheduleUncheckedUpdateManyWithoutUserNestedInput
+  reviewedNameChangeRequests?: Prisma.UserNameChangeRequestUncheckedUpdateManyWithoutReviewedByNestedInput
+}
+
+export type UserUpsertWithoutReviewedNameChangeRequestsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutReviewedNameChangeRequestsInput, Prisma.UserUncheckedUpdateWithoutReviewedNameChangeRequestsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutReviewedNameChangeRequestsInput, Prisma.UserUncheckedCreateWithoutReviewedNameChangeRequestsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutReviewedNameChangeRequestsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutReviewedNameChangeRequestsInput, Prisma.UserUncheckedUpdateWithoutReviewedNameChangeRequestsInput>
+}
+
+export type UserUpdateWithoutReviewedNameChangeRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumberVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isProfileComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banned?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  birthday?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  assignments?: Prisma.AssignmentUpdateManyWithoutUserNestedInput
+  assignmentStatuses?: Prisma.AssignmentStatusUpdateManyWithoutUserNestedInput
+  reportedLogs?: Prisma.FundContributionLogUpdateManyWithoutReporterNestedInput
+  contributedLogs?: Prisma.FundContributionLogUpdateManyWithoutContributorNestedInput
+  galleryPosts?: Prisma.GalleryPostUpdateManyWithoutCreatedByNestedInput
+  galleryReactions?: Prisma.GalleryPostReactionUpdateManyWithoutUserNestedInput
+  dutySchedules?: Prisma.DutyScheduleUpdateManyWithoutUserNestedInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutReviewedNameChangeRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumberVerified?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isProfileComplete?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  banned?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  banReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  banExpires?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  birthday?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  assignments?: Prisma.AssignmentUncheckedUpdateManyWithoutUserNestedInput
+  assignmentStatuses?: Prisma.AssignmentStatusUncheckedUpdateManyWithoutUserNestedInput
+  reportedLogs?: Prisma.FundContributionLogUncheckedUpdateManyWithoutReporterNestedInput
+  contributedLogs?: Prisma.FundContributionLogUncheckedUpdateManyWithoutContributorNestedInput
+  galleryPosts?: Prisma.GalleryPostUncheckedUpdateManyWithoutCreatedByNestedInput
+  galleryReactions?: Prisma.GalleryPostReactionUncheckedUpdateManyWithoutUserNestedInput
+  dutySchedules?: Prisma.DutyScheduleUncheckedUpdateManyWithoutUserNestedInput
+  nameChangeRequests?: Prisma.UserNameChangeRequestUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -1833,6 +2205,8 @@ export type UserCountOutputType = {
   galleryPosts: number
   galleryReactions: number
   dutySchedules: number
+  nameChangeRequests: number
+  reviewedNameChangeRequests: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1845,6 +2219,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   galleryPosts?: boolean | UserCountOutputTypeCountGalleryPostsArgs
   galleryReactions?: boolean | UserCountOutputTypeCountGalleryReactionsArgs
   dutySchedules?: boolean | UserCountOutputTypeCountDutySchedulesArgs
+  nameChangeRequests?: boolean | UserCountOutputTypeCountNameChangeRequestsArgs
+  reviewedNameChangeRequests?: boolean | UserCountOutputTypeCountReviewedNameChangeRequestsArgs
 }
 
 /**
@@ -1920,6 +2296,20 @@ export type UserCountOutputTypeCountDutySchedulesArgs<ExtArgs extends runtime.Ty
   where?: Prisma.DutyScheduleWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountNameChangeRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserNameChangeRequestWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountReviewedNameChangeRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserNameChangeRequestWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1946,6 +2336,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   galleryPosts?: boolean | Prisma.User$galleryPostsArgs<ExtArgs>
   galleryReactions?: boolean | Prisma.User$galleryReactionsArgs<ExtArgs>
   dutySchedules?: boolean | Prisma.User$dutySchedulesArgs<ExtArgs>
+  nameChangeRequests?: boolean | Prisma.User$nameChangeRequestsArgs<ExtArgs>
+  reviewedNameChangeRequests?: boolean | Prisma.User$reviewedNameChangeRequestsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -2014,6 +2406,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   galleryPosts?: boolean | Prisma.User$galleryPostsArgs<ExtArgs>
   galleryReactions?: boolean | Prisma.User$galleryReactionsArgs<ExtArgs>
   dutySchedules?: boolean | Prisma.User$dutySchedulesArgs<ExtArgs>
+  nameChangeRequests?: boolean | Prisma.User$nameChangeRequestsArgs<ExtArgs>
+  reviewedNameChangeRequests?: boolean | Prisma.User$reviewedNameChangeRequestsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -2031,6 +2425,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     galleryPosts: Prisma.$GalleryPostPayload<ExtArgs>[]
     galleryReactions: Prisma.$GalleryPostReactionPayload<ExtArgs>[]
     dutySchedules: Prisma.$DutySchedulePayload<ExtArgs>[]
+    nameChangeRequests: Prisma.$UserNameChangeRequestPayload<ExtArgs>[]
+    reviewedNameChangeRequests: Prisma.$UserNameChangeRequestPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2451,6 +2847,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   galleryPosts<T extends Prisma.User$galleryPostsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$galleryPostsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GalleryPostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   galleryReactions<T extends Prisma.User$galleryReactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$galleryReactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GalleryPostReactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   dutySchedules<T extends Prisma.User$dutySchedulesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$dutySchedulesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DutySchedulePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  nameChangeRequests<T extends Prisma.User$nameChangeRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$nameChangeRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserNameChangeRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reviewedNameChangeRequests<T extends Prisma.User$reviewedNameChangeRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reviewedNameChangeRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserNameChangeRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3099,6 +3497,54 @@ export type User$dutySchedulesArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.DutyScheduleScalarFieldEnum | Prisma.DutyScheduleScalarFieldEnum[]
+}
+
+/**
+ * User.nameChangeRequests
+ */
+export type User$nameChangeRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserNameChangeRequest
+   */
+  select?: Prisma.UserNameChangeRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserNameChangeRequest
+   */
+  omit?: Prisma.UserNameChangeRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserNameChangeRequestInclude<ExtArgs> | null
+  where?: Prisma.UserNameChangeRequestWhereInput
+  orderBy?: Prisma.UserNameChangeRequestOrderByWithRelationInput | Prisma.UserNameChangeRequestOrderByWithRelationInput[]
+  cursor?: Prisma.UserNameChangeRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserNameChangeRequestScalarFieldEnum | Prisma.UserNameChangeRequestScalarFieldEnum[]
+}
+
+/**
+ * User.reviewedNameChangeRequests
+ */
+export type User$reviewedNameChangeRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserNameChangeRequest
+   */
+  select?: Prisma.UserNameChangeRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserNameChangeRequest
+   */
+  omit?: Prisma.UserNameChangeRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserNameChangeRequestInclude<ExtArgs> | null
+  where?: Prisma.UserNameChangeRequestWhereInput
+  orderBy?: Prisma.UserNameChangeRequestOrderByWithRelationInput | Prisma.UserNameChangeRequestOrderByWithRelationInput[]
+  cursor?: Prisma.UserNameChangeRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UserNameChangeRequestScalarFieldEnum | Prisma.UserNameChangeRequestScalarFieldEnum[]
 }
 
 /**

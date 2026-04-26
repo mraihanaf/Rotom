@@ -97,9 +97,12 @@ export default function WhatsappSettingsModal() {
   // Local state for form
   const [form, setForm] = useState({
     announcementGroupJid: '',
-    dutyReminderTime: '07:00',
-    scheduleReminderTime: '07:00',
-    assignmentReminderTime: '18:00',
+    dutyReminderLeadTime: '07:00',
+    dutyReminderLeadDays: 0,
+    scheduleReminderLeadTime: '20:00',
+    scheduleReminderLeadDays: 0,
+    assignmentReminderLeadTime: '18:00',
+    assignmentReminderLeadDays: 0,
     birthdayReminderTime: '09:00',
     fundReportDay: 1,
     fundReportTime: '08:00',
@@ -118,9 +121,12 @@ export default function WhatsappSettingsModal() {
     if (settings) {
       setForm({
         announcementGroupJid: settings.announcementGroupJid ?? '',
-        dutyReminderTime: settings.dutyReminderTime,
-        scheduleReminderTime: settings.scheduleReminderTime,
-        assignmentReminderTime: settings.assignmentReminderTime,
+        dutyReminderLeadTime: settings.dutyReminderLeadTime,
+        dutyReminderLeadDays: settings.dutyReminderLeadDays ?? 0,
+        scheduleReminderLeadTime: settings.scheduleReminderLeadTime,
+        scheduleReminderLeadDays: settings.scheduleReminderLeadDays ?? 0,
+        assignmentReminderLeadTime: settings.assignmentReminderLeadTime,
+        assignmentReminderLeadDays: settings.assignmentReminderLeadDays ?? 0,
         birthdayReminderTime: settings.birthdayReminderTime,
         fundReportDay: settings.fundReportDay,
         fundReportTime: settings.fundReportTime,
@@ -308,24 +314,96 @@ export default function WhatsappSettingsModal() {
 
         {/* Reminder Times */}
         <View className="bg-white rounded-xl p-4 border border-gray-100">
-          <Text className="text-base font-semibold mb-4">⏰ Reminder Times</Text>
+          <Text className="text-base font-semibold mb-4">⏰ Reminder Timing</Text>
 
           <View className="gap-4">
-            <TimePicker
-              label="Duty"
-              value={form.dutyReminderTime}
-              onChange={(time) => setForm({ ...form, dutyReminderTime: time })}
-            />
-            <TimePicker
-              label="Schedule"
-              value={form.scheduleReminderTime}
-              onChange={(time) => setForm({ ...form, scheduleReminderTime: time })}
-            />
-            <TimePicker
-              label="Assignment"
-              value={form.assignmentReminderTime}
-              onChange={(time) => setForm({ ...form, assignmentReminderTime: time })}
-            />
+            <View className="gap-3 rounded-lg border border-gray-200 bg-gray-50 p-3">
+              <Text className="text-sm font-medium text-gray-700">Duty reminder</Text>
+              <View className="flex-row items-center justify-between">
+                <Text className="text-sm text-gray-600">Days before</Text>
+                <View className="flex-row items-center gap-2">
+                  <Pressable
+                    onPress={() => setForm({ ...form, dutyReminderLeadDays: Math.max(0, form.dutyReminderLeadDays - 1) })}
+                    className="w-8 h-8 bg-gray-100 rounded-lg items-center justify-center"
+                  >
+                    <Text className="text-base font-bold">-</Text>
+                  </Pressable>
+                  <View className="w-12 h-8 bg-white rounded-lg items-center justify-center border border-gray-200">
+                    <Text className="font-mono text-sm font-semibold">{form.dutyReminderLeadDays}</Text>
+                  </View>
+                  <Pressable
+                    onPress={() => setForm({ ...form, dutyReminderLeadDays: Math.min(7, form.dutyReminderLeadDays + 1) })}
+                    className="w-8 h-8 bg-gray-100 rounded-lg items-center justify-center"
+                  >
+                    <Text className="text-base font-bold">+</Text>
+                  </Pressable>
+                </View>
+              </View>
+              <TimePicker
+                label="Send at"
+                value={form.dutyReminderLeadTime}
+                onChange={(time) => setForm({ ...form, dutyReminderLeadTime: time })}
+              />
+            </View>
+            <View className="gap-3 rounded-lg border border-gray-200 bg-gray-50 p-3">
+              <Text className="text-sm font-medium text-gray-700">Schedule reminder</Text>
+              <View className="flex-row items-center justify-between">
+                <Text className="text-sm text-gray-600">Days before</Text>
+                <View className="flex-row items-center gap-2">
+                  <Pressable
+                    onPress={() => setForm({ ...form, scheduleReminderLeadDays: Math.max(0, form.scheduleReminderLeadDays - 1) })}
+                    className="w-8 h-8 bg-gray-100 rounded-lg items-center justify-center"
+                  >
+                    <Text className="text-base font-bold">-</Text>
+                  </Pressable>
+                  <View className="w-12 h-8 bg-white rounded-lg items-center justify-center border border-gray-200">
+                    <Text className="font-mono text-sm font-semibold">{form.scheduleReminderLeadDays}</Text>
+                  </View>
+                  <Pressable
+                    onPress={() => setForm({ ...form, scheduleReminderLeadDays: Math.min(7, form.scheduleReminderLeadDays + 1) })}
+                    className="w-8 h-8 bg-gray-100 rounded-lg items-center justify-center"
+                  >
+                    <Text className="text-base font-bold">+</Text>
+                  </Pressable>
+                </View>
+              </View>
+              <TimePicker
+                label="Send at"
+                value={form.scheduleReminderLeadTime}
+                onChange={(time) => setForm({ ...form, scheduleReminderLeadTime: time })}
+              />
+              <Text className="text-xs text-gray-500">
+                Set `0` for same-day reminders, or `1` with `20:00` to send it at 8:00 PM the night before.
+              </Text>
+            </View>
+            <View className="gap-3 rounded-lg border border-gray-200 bg-gray-50 p-3">
+              <Text className="text-sm font-medium text-gray-700">Assignment reminder</Text>
+              <View className="flex-row items-center justify-between">
+                <Text className="text-sm text-gray-600">Days before</Text>
+                <View className="flex-row items-center gap-2">
+                  <Pressable
+                    onPress={() => setForm({ ...form, assignmentReminderLeadDays: Math.max(0, form.assignmentReminderLeadDays - 1) })}
+                    className="w-8 h-8 bg-gray-100 rounded-lg items-center justify-center"
+                  >
+                    <Text className="text-base font-bold">-</Text>
+                  </Pressable>
+                  <View className="w-12 h-8 bg-white rounded-lg items-center justify-center border border-gray-200">
+                    <Text className="font-mono text-sm font-semibold">{form.assignmentReminderLeadDays}</Text>
+                  </View>
+                  <Pressable
+                    onPress={() => setForm({ ...form, assignmentReminderLeadDays: Math.min(30, form.assignmentReminderLeadDays + 1) })}
+                    className="w-8 h-8 bg-gray-100 rounded-lg items-center justify-center"
+                  >
+                    <Text className="text-base font-bold">+</Text>
+                  </Pressable>
+                </View>
+              </View>
+              <TimePicker
+                label="Send at"
+                value={form.assignmentReminderLeadTime}
+                onChange={(time) => setForm({ ...form, assignmentReminderLeadTime: time })}
+              />
+            </View>
             <TimePicker
               label="Birthday"
               value={form.birthdayReminderTime}

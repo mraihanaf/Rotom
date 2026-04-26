@@ -115,6 +115,11 @@ export type DutyType = Prisma.DutyTypeModel
  */
 export type DutySchedule = Prisma.DutyScheduleModel
 /**
+ * Model UserNameChangeRequest
+ * 
+ */
+export type UserNameChangeRequest = Prisma.UserNameChangeRequestModel
+/**
  * Model Settings
  * 
  */

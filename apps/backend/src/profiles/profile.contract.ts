@@ -1,6 +1,14 @@
 import { oc } from '@orpc/contract';
 import z from 'zod';
-import { completeProfileInputSchema, profileSchema, updateProfileInputSchema } from './profile.schema';
+import {
+  completeProfileInputSchema,
+  profileWithNameRequestSchema,
+  updateProfileInputSchema,
+  nameChangeRequestListSchema,
+  approveNameChangeInputSchema,
+  rejectNameChangeInputSchema,
+  nameChangeRequestSchema,
+} from './profile.schema';
 
 const getMe = oc
   .route({
@@ -8,7 +16,7 @@ const getMe = oc
     method: 'GET',
     tags: ['Profile'],
   })
-  .output(profileSchema);
+  .output(profileWithNameRequestSchema);
 
 const completeProfile = oc
   .route({
@@ -16,7 +24,8 @@ const completeProfile = oc
     method: 'POST',
     tags: ['Profile'],
   })
-  .input(completeProfileInputSchema);
+  .input(completeProfileInputSchema)
+  .output(z.object({ nameRequestId: z.string() }));
 
 const updateProfile = oc
   .route({
@@ -25,7 +34,7 @@ const updateProfile = oc
     tags: ['Profile'],
   })
   .input(updateProfileInputSchema)
-  .output(profileSchema);
+  .output(profileWithNameRequestSchema);
 
 const updateProfileImage = oc
   .route({
@@ -35,9 +44,43 @@ const updateProfileImage = oc
   })
   .input(z.object({ file: z.instanceof(File) }));
 
+// Admin name change request endpoints
+const getPendingNameChangeRequests = oc
+  .route({
+    path: '/admin/name-change-requests/pending',
+    method: 'GET',
+    tags: ['Admin', 'NameChangeRequests'],
+  })
+  .output(nameChangeRequestListSchema);
+
+const approveNameChangeRequest = oc
+  .route({
+    path: '/admin/name-change-requests/approve',
+    method: 'POST',
+    tags: ['Admin', 'NameChangeRequests'],
+  })
+  .input(approveNameChangeInputSchema)
+  .output(z.object({
+    request: nameChangeRequestSchema,
+    previousName: z.string(),
+    newName: z.string(),
+  }));
+
+const rejectNameChangeRequest = oc
+  .route({
+    path: '/admin/name-change-requests/reject',
+    method: 'POST',
+    tags: ['Admin', 'NameChangeRequests'],
+  })
+  .input(rejectNameChangeInputSchema)
+  .output(nameChangeRequestSchema);
+
 export const profilesContract = {
   getMe,
   completeProfile,
   updateProfile,
   updateProfileImage,
+  getPendingNameChangeRequests,
+  approveNameChangeRequest,
+  rejectNameChangeRequest,
 };

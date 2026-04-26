@@ -17,6 +17,15 @@ const getTodayDuties = oc
   })
   .output(z.array(dutyPersonSchema));
 
+const getDutiesByDate = oc
+  .route({
+    path: '/announcements/duties/by-date',
+    method: 'GET',
+    tags: ['Announcements'],
+  })
+  .input(z.object({ date: z.string() }))
+  .output(z.array(dutyPersonSchema));
+
 const getTodaySchedule = oc
   .route({
     path: '/announcements/schedule/today',
@@ -31,6 +40,7 @@ const getPendingAssignments = oc
     method: 'GET',
     tags: ['Announcements'],
   })
+  .input(z.object({ date: z.string().optional() }).optional())
   .output(z.array(assignmentSchema));
 
 const getTodayBirthdays = oc
@@ -75,8 +85,19 @@ const updateAnnouncementGroup = oc
   .input(z.object({ phoneNumber: z.string(), groupJid: z.string() }))
   .output(z.object({ success: z.boolean() }));
 
+// Target-date schedule endpoint (for lead-time reminders)
+const getScheduleByDate = oc
+  .route({
+    path: '/announcements/schedule/by-date',
+    method: 'GET',
+    tags: ['Announcements'],
+  })
+  .input(z.object({ date: z.string() })) // YYYY-MM-DD format
+  .output(z.array(scheduleItemSchema));
+
 export const announcementsContract = {
   getTodayDuties,
+  getDutiesByDate,
   getTodaySchedule,
   getPendingAssignments,
   getTodayBirthdays,
@@ -84,4 +105,5 @@ export const announcementsContract = {
   getAnnouncementSettings,
   isAdminByPhone,
   updateAnnouncementGroup,
+  getScheduleByDate,
 };

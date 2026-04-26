@@ -3,9 +3,10 @@ import { AnnouncementsService } from './announcements.service';
 import { AnnouncementsController } from './announcements.controller';
 import { PrismaModule } from '../prisma/prisma.module';
 import { SettingsModule } from '../settings/settings.module';
+import { ProfilesModule } from '../profiles/profiles.module';
 
 @Module({
-  imports: [PrismaModule, SettingsModule],
+  imports: [PrismaModule, SettingsModule, ProfilesModule],
   controllers: [AnnouncementsController],
   providers: [AnnouncementsService],
   exports: [AnnouncementsService],

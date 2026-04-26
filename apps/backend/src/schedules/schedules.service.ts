@@ -2,12 +2,16 @@ import { Injectable, Logger } from '@nestjs/common';
 import { ORPCError } from '@orpc/contract';
 import { Prisma } from 'src/@generated/prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { NotificationsService } from 'src/notifications/notifications.service';
 
 @Injectable()
 export class SchedulesService {
   private readonly logger = new Logger(SchedulesService.name);
 
-  constructor(public readonly prismaService: PrismaService) {}
+  constructor(
+    public readonly prismaService: PrismaService,
+    private readonly notificationsService: NotificationsService,
+  ) {}
 
   async getByDay(dayOfWeek: number) {
     const items = await this.prismaService.subjectSchedule.findMany({
@@ -63,6 +67,8 @@ export class SchedulesService {
         include: { subject: { select: { name: true } } },
       });
 
+      await this.notificationsService.publishSchedulerResyncAll('schedules.created');
+
       return {
         id: item.id,
         subjectId: item.subjectId,
@@ -104,6 +110,7 @@ export class SchedulesService {
           ...(input.room !== undefined && { room: input.room }),
         },
       });
+      await this.notificationsService.publishSchedulerResyncAll('schedules.updated');
     } catch (err) {
       if (
         err instanceof Prisma.PrismaClientKnownRequestError &&
@@ -118,6 +125,7 @@ export class SchedulesService {
   async deleteById(id: string) {
     try {
       await this.prismaService.subjectSchedule.delete({ where: { id } });
+      await this.notificationsService.publishSchedulerResyncAll('schedules.deleted');
     } catch (err) {
       if (
         err instanceof Prisma.PrismaClientKnownRequestError &&

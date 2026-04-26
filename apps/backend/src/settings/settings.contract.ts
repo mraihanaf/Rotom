@@ -27,9 +27,12 @@ const getPublicWhatsappSettings = oc
   })
   .output(
     z.object({
-      dutyReminderTime: z.string(),
-      scheduleReminderTime: z.string(),
-      assignmentReminderTime: z.string(),
+      dutyReminderLeadTime: z.string(),
+      dutyReminderLeadDays: z.number(),
+      scheduleReminderLeadTime: z.string(),
+      scheduleReminderLeadDays: z.number(),
+      assignmentReminderLeadTime: z.string(),
+      assignmentReminderLeadDays: z.number(),
       birthdayReminderTime: z.string(),
       fundReportDay: z.number(),
       fundReportTime: z.string(),

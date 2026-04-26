@@ -8,6 +8,7 @@ import {
   Badge,
   Calendar,
   Check,
+  Clock,
   Edit,
   LogOut,
   Mail,
@@ -214,6 +215,20 @@ export default function ProfileScreen() {
               </View>
             </View>
 
+            {profile?.nameRequestStatus?.hasPendingRequest && (
+              <View className="mb-6 rounded-xl border border-amber-200 bg-amber-50 px-4 py-4">
+                <View className="flex-row items-center gap-2">
+                  <Clock size={18} color="#d97706" />
+                  <Text className="text-sm font-semibold text-amber-800">
+                    Name Change Pending Approval
+                  </Text>
+                </View>
+                <Text className="mt-2 text-sm text-amber-700">
+                  You requested to change your name to "{profile.nameRequestStatus.pendingRequestedName}". Waiting for admin approval.
+                </Text>
+              </View>
+            )}
+
             <View className="mb-8">
               <Text className="mb-3 px-1 text-sm font-semibold uppercase tracking-wider text-gray-500">
                 Edit Profile
@@ -221,16 +236,26 @@ export default function ProfileScreen() {
               <View className="gap-4">
                 <View>
                   <Text className="mb-2 ml-1 text-sm font-medium text-foreground">Name</Text>
-                  <View className="h-14 flex-row items-center rounded-xl border border-gray-200 bg-white px-4">
+                  <View className={`h-14 flex-row items-center rounded-xl border px-4 ${profile?.nameRequestStatus?.hasPendingRequest ? 'border-amber-300 bg-amber-50/50' : 'border-gray-200 bg-white'}`}>
                     <TextInput
                       className="flex-1 text-base text-foreground"
                       value={name}
                       onChangeText={handleFieldChange(setName)}
                       placeholder="Your name"
                       placeholderTextColor="#9ca3af"
+                      editable={!profile?.nameRequestStatus?.hasPendingRequest}
                     />
-                    <Edit size={20} color="#13ec5b" />
+                    {profile?.nameRequestStatus?.hasPendingRequest ? (
+                      <Clock size={20} color="#d97706" />
+                    ) : (
+                      <Edit size={20} color="#13ec5b" />
+                    )}
                   </View>
+                  {profile?.nameRequestStatus?.hasPendingRequest && (
+                    <Text className="mt-1 text-xs text-amber-600">
+                      Name cannot be changed while a request is pending
+                    </Text>
+                  )}
                 </View>
                 <View>
                   <Text className="mb-2 ml-1 text-sm font-medium text-foreground">Birthday</Text>

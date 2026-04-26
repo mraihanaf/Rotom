@@ -2,6 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { ORPCError } from '@orpc/server';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { StorageService } from 'src/storage/storage.service';
+import { NotificationsService } from 'src/notifications/notifications.service';
 import { createId } from '@paralleldrive/cuid2';
 import { Readable } from 'stream';
 import sharp from 'sharp';
@@ -13,12 +14,86 @@ export class ProfilesService {
   constructor(
     private readonly prismaService: PrismaService,
     private readonly storageService: StorageService,
+    private readonly notificationsService: NotificationsService,
   ) {}
+
+  private async createNameChangeRequest(
+    userId: string,
+    requestedName: string,
+    source: 'COMPLETE_PROFILE' | 'PROFILE_EDIT',
+  ) {
+    // Cancel any existing pending requests for this user
+    await this.prismaService.userNameChangeRequest.updateMany({
+      where: {
+        userId,
+        status: 'PENDING',
+      },
+      data: {
+        status: 'REJECTED',
+        reviewedAt: new Date(),
+        rejectionReason: 'Superseded by new request',
+      },
+    });
+
+    // Create new pending request
+    return this.prismaService.userNameChangeRequest.create({
+      data: {
+        userId,
+        requestedName,
+        status: 'PENDING',
+        source,
+      },
+    });
+  }
+
+  private async publishNameChangeRequestCreated(requestId: string) {
+    const request = await this.prismaService.userNameChangeRequest.findUnique({
+      where: { id: requestId },
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+          },
+        },
+      },
+    });
+
+    if (!request || !request.user) {
+      this.logger.warn(`Unable to publish name change notification for missing request ${requestId}`);
+      return;
+    }
+
+    const admins = await this.prismaService.user.findMany({
+      where: {
+        role: 'ADMIN',
+        phoneNumber: {
+          not: null,
+        },
+      },
+      select: {
+        phoneNumber: true,
+      },
+    });
+
+    await this.notificationsService.publishNameChangeRequestCreated({
+      requestId: request.id,
+      userId: request.userId,
+      userName: request.user.name,
+      userEmail: request.user.email,
+      requestedName: request.requestedName,
+      requestedAt: request.requestedAt.toISOString(),
+      adminPhoneNumbers: admins
+        .map((admin) => admin.phoneNumber)
+        .filter((phoneNumber): phoneNumber is string => Boolean(phoneNumber)),
+    });
+  }
 
   async completeProfile(userId: string, input: { name: string; birthday: string }) {
     const user = await this.prismaService.user.findUnique({
       where: { id: userId },
-      select: { isProfileComplete: true },
+      select: { isProfileComplete: true, name: true },
     });
 
     if (!user) throw new ORPCError('NOT_FOUND', { message: 'User not found' });
@@ -29,16 +104,28 @@ export class ProfilesService {
       });
     }
 
+    // Create pending name change request instead of updating name directly
+    const nameRequest = await this.createNameChangeRequest(
+      userId,
+      input.name,
+      'COMPLETE_PROFILE',
+    );
+
+    // Complete profile with birthday only
     await this.prismaService.user.update({
       where: { id: userId },
       data: {
-        name: input.name,
         birthday: new Date(input.birthday),
         isProfileComplete: true,
       },
     });
 
-    this.logger.log(`Profile completed for user ${userId}`);
+    this.logger.log(`Profile completed for user ${userId}, name change request ${nameRequest.id} created`);
+
+    await this.publishNameChangeRequestCreated(nameRequest.id);
+    await this.notificationsService.publishSchedulerResyncAll('profile.completed');
+
+    return { nameRequestId: nameRequest.id };
   }
 
   async updateProfile(userId: string, input: { name: string; birthday: string | null }) {
@@ -48,16 +135,56 @@ export class ProfilesService {
 
     if (!user) throw new ORPCError('NOT_FOUND', { message: 'User not found' });
 
+    // Check if name is being changed
+    let nameRequestId: string | undefined;
+    if (input.name !== user.name) {
+      // Create pending name change request instead of updating name directly
+      const nameRequest = await this.createNameChangeRequest(
+        userId,
+        input.name,
+        'PROFILE_EDIT',
+      );
+      nameRequestId = nameRequest.id;
+      this.logger.log(`Name change request ${nameRequest.id} created for user ${userId}`);
+    }
+
+    // Update birthday directly
     const updatedUser = await this.prismaService.user.update({
       where: { id: userId },
       data: {
-        name: input.name,
         birthday: input.birthday ? new Date(input.birthday) : null,
       },
     });
 
+    if (nameRequestId) {
+      await this.publishNameChangeRequestCreated(nameRequestId);
+    }
+
+    await this.notificationsService.publishSchedulerResyncAll('profile.updated');
+
     this.logger.log(`Profile updated for user ${userId}`);
-    return updatedUser;
+    return { ...updatedUser, pendingNameRequestId: nameRequestId };
+  }
+
+  async getPendingNameRequest(userId: string) {
+    return this.prismaService.userNameChangeRequest.findFirst({
+      where: {
+        userId,
+        status: 'PENDING',
+      },
+      orderBy: {
+        requestedAt: 'desc',
+      },
+    });
+  }
+
+  async getNameRequestStatus(userId: string) {
+    const pendingRequest = await this.getPendingNameRequest(userId);
+    return {
+      hasPendingRequest: !!pendingRequest,
+      pendingRequestedName: pendingRequest?.requestedName ?? null,
+      pendingRequestId: pendingRequest?.id ?? null,
+    };
   }
 
   async updateProfileImage(userId: string, file: File) {
@@ -110,5 +237,140 @@ export class ProfilesService {
 
     this.logger.log(`Profile image updated for user ${userId}`);
     return updatedUser;
+  }
+
+  // Admin methods for name change requests
+  async getPendingNameChangeRequests() {
+    return this.prismaService.userNameChangeRequest.findMany({
+      where: {
+        status: 'PENDING',
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            phoneNumber: true,
+            image: true,
+          },
+        },
+      },
+      orderBy: {
+        requestedAt: 'asc',
+      },
+    });
+  }
+
+  async approveNameChangeRequest(requestId: string, adminUserId: string) {
+    return this.prismaService.$transaction(async (tx) => {
+      const request = await tx.userNameChangeRequest.findUnique({
+        where: { id: requestId },
+        include: {
+          user: {
+            select: {
+              id: true,
+              name: true,
+              email: true,
+              phoneNumber: true,
+              image: true,
+            },
+          },
+        },
+      });
+
+      if (!request) {
+        throw new ORPCError('NOT_FOUND', { message: 'Name change request not found' });
+      }
+
+      if (request.status !== 'PENDING') {
+        throw new ORPCError('BAD_REQUEST', { message: 'Request is not pending' });
+      }
+
+      // Update user's name
+      await tx.user.update({
+        where: { id: request.userId },
+        data: { name: request.requestedName },
+      });
+
+      // Mark request as approved
+      const updatedRequest = await tx.userNameChangeRequest.update({
+        where: { id: requestId },
+        data: {
+          status: 'APPROVED',
+          reviewedAt: new Date(),
+          reviewedById: adminUserId,
+        },
+        include: {
+          user: {
+            select: {
+              id: true,
+              name: true,
+              email: true,
+              phoneNumber: true,
+              image: true,
+            },
+          },
+        },
+      });
+
+      this.logger.log(`Name change request ${requestId} approved by admin ${adminUserId}`);
+
+      return {
+        request: updatedRequest,
+        previousName: request.user.name,
+        newName: request.requestedName,
+      };
+    });
+  }
+
+  async rejectNameChangeRequest(requestId: string, adminUserId: string, reason?: string) {
+    const request = await this.prismaService.userNameChangeRequest.findUnique({
+      where: { id: requestId },
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            phoneNumber: true,
+            image: true,
+          },
+        },
+      },
+    });
+
+    if (!request) {
+      throw new ORPCError('NOT_FOUND', { message: 'Name change request not found' });
+    }
+
+    if (request.status !== 'PENDING') {
+      throw new ORPCError('BAD_REQUEST', { message: 'Request is not pending' });
+    }
+
+    const updatedRequest = await this.prismaService.userNameChangeRequest.update({
+      where: { id: requestId },
+      data: {
+        status: 'REJECTED',
+        reviewedAt: new Date(),
+        reviewedById: adminUserId,
+        rejectionReason: reason ?? null,
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            phoneNumber: true,
+            image: true,
+          },
+        },
+      },
+    });
+
+    this.logger.log(`Name change request ${requestId} rejected by admin ${adminUserId}`);
+
+    return updatedRequest;
   }
 }

@@ -66,6 +66,7 @@ export const ModelName = {
   GalleryPostReaction: 'GalleryPostReaction',
   DutyType: 'DutyType',
   DutySchedule: 'DutySchedule',
+  UserNameChangeRequest: 'UserNameChangeRequest',
   Settings: 'Settings'
 } as const
 
@@ -279,6 +280,23 @@ export const DutyScheduleScalarFieldEnum = {
 export type DutyScheduleScalarFieldEnum = (typeof DutyScheduleScalarFieldEnum)[keyof typeof DutyScheduleScalarFieldEnum]
 
 
+export const UserNameChangeRequestScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  requestedName: 'requestedName',
+  status: 'status',
+  source: 'source',
+  requestedAt: 'requestedAt',
+  reviewedAt: 'reviewedAt',
+  reviewedById: 'reviewedById',
+  rejectionReason: 'rejectionReason',
+  adminsNotified: 'adminsNotified',
+  notifiedAt: 'notifiedAt'
+} as const
+
+export type UserNameChangeRequestScalarFieldEnum = (typeof UserNameChangeRequestScalarFieldEnum)[keyof typeof UserNameChangeRequestScalarFieldEnum]
+
+
 export const SettingsScalarFieldEnum = {
   id: 'id',
   ENABLE_WHATSAPP_BOT_FUND_REPORT: 'ENABLE_WHATSAPP_BOT_FUND_REPORT',
@@ -288,9 +306,15 @@ export const SettingsScalarFieldEnum = {
   ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER: 'ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER',
   announcementGroupJid: 'announcementGroupJid',
   dutyReminderTime: 'dutyReminderTime',
+  dutyReminderLeadTime: 'dutyReminderLeadTime',
   scheduleReminderTime: 'scheduleReminderTime',
+  scheduleReminderLeadTime: 'scheduleReminderLeadTime',
   assignmentReminderTime: 'assignmentReminderTime',
+  assignmentReminderLeadTime: 'assignmentReminderLeadTime',
   birthdayReminderTime: 'birthdayReminderTime',
+  dutyReminderLeadDays: 'dutyReminderLeadDays',
+  scheduleReminderLeadDays: 'scheduleReminderLeadDays',
+  assignmentReminderLeadDays: 'assignmentReminderLeadDays',
   fundReportDay: 'fundReportDay',
   fundReportTime: 'fundReportTime',
   dutyPersonalizedMessage: 'dutyPersonalizedMessage',

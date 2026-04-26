@@ -9,7 +9,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { orpc } from '@/lib/api';
 import { useUserRole } from '@/lib/hooks/useUserRole';
 import { authClient } from '@/lib/auth-client';
-import { ChevronLeft, Users, Shield, User, Wrench, GraduationCap, Check } from 'lucide-react-native';
+import { ChevronLeft, Users, Shield, User, Wrench, GraduationCap, Check, Clock, X } from 'lucide-react-native';
 import { Image } from 'expo-image';
 
 const ROLES = [
@@ -156,9 +156,14 @@ export default function UserManagementModal() {
   const currentUserId = session?.user?.id;
 
   const [updatingUserId, setUpdatingUserId] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<'users' | 'name-requests'>('users');
 
   const { data, isLoading, error } = useQuery(
     orpc.users.getAll.queryOptions({ input: { limit: 50 } })
+  );
+
+  const { data: nameRequests, isLoading: isLoadingNameRequests, refetch: refetchNameRequests } = useQuery(
+    orpc.profiles.getPendingNameChangeRequests.queryOptions()
   );
 
   const updateMutation = useMutation({
@@ -174,6 +179,28 @@ export default function UserManagementModal() {
     },
   });
 
+  const approveNameMutation = useMutation({
+    ...orpc.profiles.approveNameChangeRequest.mutationOptions(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: orpc.profiles.getPendingNameChangeRequests.key() });
+      Alert.alert('Success', 'Name change request approved');
+    },
+    onError: (error: any) => {
+      Alert.alert('Error', error?.message || 'Failed to approve name change');
+    },
+  });
+
+  const rejectNameMutation = useMutation({
+    ...orpc.profiles.rejectNameChangeRequest.mutationOptions(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: orpc.profiles.getPendingNameChangeRequests.key() });
+      Alert.alert('Success', 'Name change request rejected');
+    },
+    onError: (error: any) => {
+      Alert.alert('Error', error?.message || 'Failed to reject name change');
+    },
+  });
+
   const handleRoleChange = useCallback(
     (userId: string, role: RoleValue) => {
       setUpdatingUserId(userId);
@@ -181,6 +208,28 @@ export default function UserManagementModal() {
     },
     [updateMutation]
   );
+
+  const handleApproveName = (requestId: string) => {
+    Alert.alert(
+      'Approve Name Change',
+      'Are you sure you want to approve this name change request?',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        { text: 'Approve', style: 'default', onPress: () => approveNameMutation.mutate({ requestId }) },
+      ]
+    );
+  };
+
+  const handleRejectName = (requestId: string) => {
+    Alert.alert(
+      'Reject Name Change',
+      'Are you sure you want to reject this name change request?',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        { text: 'Reject', style: 'destructive', onPress: () => rejectNameMutation.mutate({ requestId }) },
+      ]
+    );
+  };
 
   if (!isAdmin) {
     return (
@@ -246,28 +295,156 @@ export default function UserManagementModal() {
         <View className="w-10" />
       </View>
 
-      <ScrollView contentContainerStyle={{ padding: 16, gap: 12 }}>
-        {/* Info Card */}
-        <View className="bg-blue-50 rounded-xl p-4 border border-blue-100">
-          <View className="flex-row items-center gap-2 mb-1">
-            <Users size={18} color="#2563eb" />
-            <Text className="font-semibold text-blue-700">Manage User Roles</Text>
-          </View>
-          <Text className="text-sm text-blue-600">
-            Click on a role to change it, then tap Save Changes. You cannot change your own role.
+      {/* Tab Switcher */}
+      <View className="flex-row bg-white border-b border-gray-200">
+        <Pressable
+          onPress={() => setActiveTab('users')}
+          className={`flex-1 py-3 ${activeTab === 'users' ? 'border-b-2 border-primary' : ''}`}
+        >
+          <Text className={`text-center font-medium ${activeTab === 'users' ? 'text-primary' : 'text-gray-500'}`}>
+            Users
           </Text>
-        </View>
+        </Pressable>
+        <Pressable
+          onPress={() => setActiveTab('name-requests')}
+          className={`flex-1 py-3 ${activeTab === 'name-requests' ? 'border-b-2 border-primary' : ''}`}
+        >
+          <View className="flex-row items-center justify-center gap-2">
+            <Text className={`text-center font-medium ${activeTab === 'name-requests' ? 'text-primary' : 'text-gray-500'}`}>
+              Name Requests
+            </Text>
+            {nameRequests && nameRequests.length > 0 && (
+              <View className="bg-red-500 rounded-full px-2 py-0.5">
+                <Text className="text-white text-xs font-bold">{nameRequests.length}</Text>
+              </View>
+            )}
+          </View>
+        </Pressable>
+      </View>
 
-        {/* User List */}
-        {users.map((user) => (
-          <UserCard
-            key={user.id}
-            user={user as UserItem}
-            currentUserId={currentUserId || ''}
-            onRoleChange={handleRoleChange}
-            isUpdating={updatingUserId === user.id}
-          />
-        ))}
+      <ScrollView contentContainerStyle={{ padding: 16, gap: 12 }}>
+        {activeTab === 'users' ? (
+          <>
+            {/* Info Card */}
+            <View className="bg-blue-50 rounded-xl p-4 border border-blue-100">
+              <View className="flex-row items-center gap-2 mb-1">
+                <Users size={18} color="#2563eb" />
+                <Text className="font-semibold text-blue-700">Manage User Roles</Text>
+              </View>
+              <Text className="text-sm text-blue-600">
+                Click on a role to change it, then tap Save Changes. You cannot change your own role.
+              </Text>
+            </View>
+
+            {/* User List */}
+            {users.map((user) => (
+              <UserCard
+                key={user.id}
+                user={user as UserItem}
+                currentUserId={currentUserId || ''}
+                onRoleChange={handleRoleChange}
+                isUpdating={updatingUserId === user.id}
+              />
+            ))}
+          </>
+        ) : (
+          <>
+            {/* Name Requests Info Card */}
+            <View className="bg-amber-50 rounded-xl p-4 border border-amber-100">
+              <View className="flex-row items-center gap-2 mb-1">
+                <Clock size={18} color="#d97706" />
+                <Text className="font-semibold text-amber-700">Pending Name Changes</Text>
+              </View>
+              <Text className="text-sm text-amber-600">
+                Review and approve or reject name change requests from users.
+              </Text>
+            </View>
+
+            {/* Name Request List */}
+            {isLoadingNameRequests ? (
+              <View className="items-center py-8">
+                <ActivityIndicator size="large" color="#0fae43" />
+                <Text className="mt-4 text-gray-600">Loading name requests...</Text>
+              </View>
+            ) : nameRequests && nameRequests.length > 0 ? (
+              nameRequests.map((request) => (
+                <View key={request.id} className="bg-white rounded-xl p-4 border border-gray-100">
+                  <View className="flex-row items-center gap-3">
+                    <View className="h-12 w-12 rounded-full bg-gray-100 overflow-hidden">
+                      {request.user.image ? (
+                        <Image
+                          source={{ uri: request.user.image }}
+                          style={{ width: '100%', height: '100%' }}
+                          contentFit="cover"
+                        />
+                      ) : (
+                        <View className="h-full w-full items-center justify-center bg-gray-200">
+                          <User size={20} color="#6b7280" />
+                        </View>
+                      )}
+                    </View>
+                    <View className="flex-1">
+                      <Text className="font-semibold text-gray-900">{request.user.name}</Text>
+                      <Text className="text-sm text-gray-500">{request.user.email}</Text>
+                      <View className="flex-row items-center gap-2 mt-1">
+                        <Text className="text-xs text-gray-400">Requested:</Text>
+                        <Text className="text-xs font-medium text-primary">{request.requestedName}</Text>
+                      </View>
+                      <Text className="text-xs text-gray-400 mt-1">
+                        {new Date(request.requestedAt).toLocaleDateString('id-ID', {
+                          day: 'numeric',
+                          month: 'long',
+                          year: 'numeric',
+                          hour: '2-digit',
+                          minute: '2-digit',
+                        })}
+                      </Text>
+                    </View>
+                  </View>
+
+                  {/* Action Buttons */}
+                  <View className="flex-row gap-2 mt-4">
+                    <Button
+                      onPress={() => handleApproveName(request.id)}
+                      disabled={approveNameMutation.isPending || rejectNameMutation.isPending}
+                      className="flex-1 bg-primary"
+                      size="sm"
+                    >
+                      {approveNameMutation.isPending ? (
+                        <ActivityIndicator size="small" color="#fff" />
+                      ) : (
+                        <>
+                          <Check size={16} color="#fff" />
+                          <Text className="text-white font-medium ml-1">Approve</Text>
+                        </>
+                      )}
+                    </Button>
+                    <Button
+                      onPress={() => handleRejectName(request.id)}
+                      disabled={approveNameMutation.isPending || rejectNameMutation.isPending}
+                      variant="outline"
+                      className="flex-1 border-red-200"
+                      size="sm"
+                    >
+                      {rejectNameMutation.isPending ? (
+                        <ActivityIndicator size="small" color="#ef4444" />
+                      ) : (
+                        <>
+                          <X size={16} color="#ef4444" />
+                          <Text className="text-red-500 font-medium ml-1">Reject</Text>
+                        </>
+                      )}
+                    </Button>
+                  </View>
+                </View>
+              ))
+            ) : (
+              <View className="items-center py-8">
+                <Text className="text-gray-500">No pending name change requests</Text>
+              </View>
+            )}
+          </>
+        )}
       </ScrollView>
     </SafeAreaView>
   );
