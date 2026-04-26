@@ -60,9 +60,12 @@ interface AnnouncementSettings {
   ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER: boolean;
   ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER: boolean;
   ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER: boolean;
-  dutyReminderTime: string;
-  scheduleReminderTime: string;
-  assignmentReminderTime: string;
+  dutyReminderLeadTime: string;
+  dutyReminderLeadDays: number;
+  scheduleReminderLeadTime: string;
+  scheduleReminderLeadDays: number;
+  assignmentReminderLeadTime: string;
+  assignmentReminderLeadDays: number;
   birthdayReminderTime: string;
   fundReportDay: number;
   fundReportTime: string;
@@ -128,12 +131,17 @@ export class ApiService {
     return this.fetch<DutyPerson[]>('/announcements/duties/today');
   }
 
+  async getDutiesByDate(date: string): Promise<DutyPerson[]> {
+    return this.fetch<DutyPerson[]>(`/announcements/duties/by-date?date=${encodeURIComponent(date)}`);
+  }
+
   async getTodaySchedule(): Promise<ScheduleItem[]> {
     return this.fetch<ScheduleItem[]>('/announcements/schedule/today');
   }
 
-  async getPendingAssignments(): Promise<Assignment[]> {
-    return this.fetch<Assignment[]>('/announcements/assignments/pending');
+  async getPendingAssignments(date?: string): Promise<Assignment[]> {
+    const query = date ? `?date=${encodeURIComponent(date)}` : '';
+    return this.fetch<Assignment[]>(`/announcements/assignments/pending${query}`);
   }
 
   async getTodayBirthdays(): Promise<BirthdayPerson[]> {
@@ -149,5 +157,9 @@ export class ApiService {
       method: 'PUT',
       body: JSON.stringify({ phoneNumber, groupJid }),
     });
+  }
+
+  async getScheduleByDate(date: string): Promise<ScheduleItem[]> {
+    return this.fetch<ScheduleItem[]>(`/announcements/schedule/by-date?date=${encodeURIComponent(date)}`);
   }
 }

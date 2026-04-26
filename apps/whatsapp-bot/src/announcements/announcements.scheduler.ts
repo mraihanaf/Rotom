@@ -1,171 +1,363 @@
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
-import { Queue } from 'bullmq';
 import { InjectQueue } from '@nestjs/bullmq';
+import { Queue } from 'bullmq';
 import * as moment from 'moment-timezone';
 import { ApiService } from '../api/api.service';
 
-interface LastTriggered {
-  duty?: string;
-  schedule?: string;
-  assignment?: string;
-  birthday?: string;
-  fund?: string;
+export type ReminderType =
+  | 'duty'
+  | 'schedule'
+  | 'assignment'
+  | 'birthday'
+  | 'fund';
+
+interface ScheduledJob {
+  type: ReminderType;
+  name:
+    | 'duty-reminder'
+    | 'schedule-reminder'
+    | 'assignment-reminder'
+    | 'birthday-check'
+    | 'fund-report';
+  jobId: string;
+  delay: number;
+  data?: Record<string, unknown>;
 }
 
 @Injectable()
 export class AnnouncementsScheduler implements OnModuleInit {
   private readonly logger = new Logger(AnnouncementsScheduler.name);
-  private lastCheckedMinute: number = -1;
-  private lastSettingsUpdatedAt: string | null = null;
-  private lastTriggered: LastTriggered = {};
 
   constructor(
     @InjectQueue('whatsapp') private readonly whatsappQueue: Queue,
+    @InjectQueue('whatsapp-control') private readonly controlQueue: Queue,
     private readonly apiService: ApiService,
   ) {}
 
-  onModuleInit() {
-    // Start the scheduler loop
-    this.logger.log('Starting announcements scheduler');
-    this.scheduleLoop();
+  async onModuleInit() {
+    this.logger.log('Starting event-driven announcements planner');
+    await this.enqueueReconcile('startup');
   }
 
-  private async scheduleLoop() {
-    // Run every minute
-    setInterval(async () => {
-      await this.checkAndScheduleJobs();
-    }, 60000);
+  /**
+   * Reschedule all reminder jobs based on current settings
+   */
+  async handleControlJob(
+    name: 'scheduler.reconcile' | 'scheduler.resync.all' | 'scheduler.plan-next',
+    data?: Record<string, unknown>,
+  ) {
+    if (name === 'scheduler.plan-next') {
+      const kind = data?.kind;
+      if (typeof kind === 'string') {
+        await this.scheduleNextOccurrence(kind as ReminderType);
+      }
+      return;
+    }
 
-    // Initial check
-    await this.checkAndScheduleJobs();
+    await this.rescheduleAllJobs();
   }
 
-  private getCurrentTimeInTimezone(timezone: string): { hour: number; minute: number; day: number; time: string; date: string } {
+  async enqueueReconcile(reason: string) {
+    await this.upsertControlJob('scheduler.reconcile', { reason }, 'scheduler.reconcile');
+  }
+
+  async enqueuePlanNext(kind: ReminderType, reason: string) {
+    await this.upsertControlJob(
+      'scheduler.plan-next',
+      { kind, reason },
+      `scheduler-plan-next-${kind}`,
+    );
+  }
+
+  private async rescheduleAllJobs() {
+    this.logger.log('Reconciling reminder jobs from current settings');
+
+    const settings = await this.apiService.getAnnouncementSettings();
+    await this.clearExecutionJobs();
+
+    const jobs: ScheduledJob[] = [];
+
+    if (settings.ENABLE_WHATSAPP_BOT_DUTY_REPORT) {
+      const job = this.calculateLeadReminderJob(
+        'duty',
+        settings.dutyReminderLeadTime,
+        settings.timezone,
+        settings.dutyReminderLeadDays ?? 0,
+      );
+      if (job) jobs.push(job);
+    }
+
+    if (settings.ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER) {
+      const job = this.calculateLeadReminderJob(
+        'schedule',
+        settings.scheduleReminderLeadTime,
+        settings.timezone,
+        settings.scheduleReminderLeadDays ?? 0,
+      );
+      if (job) jobs.push(job);
+    }
+
+    if (settings.ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER) {
+      const job = this.calculateLeadReminderJob(
+        'assignment',
+        settings.assignmentReminderLeadTime,
+        settings.timezone,
+        settings.assignmentReminderLeadDays ?? 0,
+      );
+      if (job) jobs.push(job);
+    }
+
+    if (settings.ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER) {
+      const job = this.calculateDailyJob('birthday', settings.birthdayReminderTime, settings.timezone);
+      if (job) jobs.push(job);
+    }
+
+    if (settings.ENABLE_WHATSAPP_BOT_FUND_REPORT) {
+      const job = this.calculateFundReportJob(
+        settings.fundReportDay,
+        settings.fundReportTime,
+        settings.timezone,
+      );
+      if (job) jobs.push(job);
+    }
+
+    for (const job of jobs) {
+      await this.scheduleExecutionJob(job);
+    }
+
+    this.logger.log(`Reconciled ${jobs.length} exact delayed reminder job(s)`);
+  }
+
+  /**
+   * Clear existing scheduled jobs
+   */
+  private async clearExecutionJobs() {
+    const executionNames = new Set([
+      'duty-reminder',
+      'schedule-reminder',
+      'assignment-reminder',
+      'birthday-check',
+      'fund-report',
+    ]);
+
+    const jobs = await this.whatsappQueue.getJobs(['waiting', 'delayed', 'prioritized']);
+    for (const job of jobs) {
+      if (executionNames.has(job.name)) {
+        await job.remove();
+      }
+    }
+  }
+
+  /**
+   * Calculate the next occurrence of a daily job
+   */
+  private calculateDailyJob(
+    type: Extract<ReminderType, 'birthday'>,
+    timeStr: string,
+    timezone: string,
+  ): ScheduledJob | null {
     const tz = timezone === 'system' || !timezone ? moment.tz.guess() : timezone;
+    const [hours, minutes] = timeStr.split(':').map(Number);
+
+    // Calculate next occurrence
     const now = moment.tz(tz);
+    let next = moment.tz(tz).hours(hours).minutes(minutes).seconds(0).milliseconds(0);
+
+    // If the time has already passed today, schedule for tomorrow
+    if (next.isSameOrBefore(now)) {
+      next = next.add(1, 'day');
+    }
+
+    const delay = next.diff(now);
+    const date = next.format('YYYY-MM-DD');
+    const nameMap = {
+      birthday: 'birthday-check',
+    } as const;
 
     return {
-      hour: now.hours(),
-      minute: now.minutes(),
-      day: now.date(),
-      time: now.format('HH:mm'),
-      date: now.format('YYYY-MM-DD'),
+      type,
+      name: nameMap[type],
+      jobId: `${type}-${date}`,
+      delay,
+      data: { targetDate: date },
     };
   }
 
   /**
-   * Calculate time difference in minutes between two HH:MM times
-   * Returns absolute difference (always positive)
+   * Calculate lead-time job for schedule reminders
    */
-  private getTimeDiffInMinutes(time1: string, time2: string): number {
-    const [h1, m1] = time1.split(':').map(Number);
-    const [h2, m2] = time2.split(':').map(Number);
-    const minutes1 = h1 * 60 + m1;
-    const minutes2 = h2 * 60 + m2;
-    return Math.abs(minutes1 - minutes2);
+  private calculateLeadReminderJob(
+    type: Extract<ReminderType, 'duty' | 'schedule' | 'assignment'>,
+    timeStr: string,
+    timezone: string,
+    leadDays: number,
+  ): ScheduledJob | null {
+    const tz = timezone === 'system' || !timezone ? moment.tz.guess() : timezone;
+    const [hours, minutes] = timeStr.split(':').map(Number);
+    const now = moment.tz(tz);
+    let executeAt = moment.tz(tz)
+      .hours(hours).minutes(minutes).seconds(0).milliseconds(0);
+
+    if (executeAt.isSameOrBefore(now)) {
+      executeAt = executeAt.add(1, 'day');
+    }
+
+    const delay = executeAt.diff(now);
+    const date = executeAt.clone().add(leadDays, 'days').format('YYYY-MM-DD');
+    const nameMap = {
+      duty: 'duty-reminder',
+      schedule: 'schedule-reminder',
+      assignment: 'assignment-reminder',
+    } as const;
+
+    return {
+      type,
+      name: nameMap[type],
+      jobId: `${type}-${date}`,
+      delay,
+      data: { targetDate: date },
+    };
   }
 
   /**
-   * Check if a job should trigger now
-   * - If exact match: trigger
-   * - If within grace period (2 min) and settings just changed: trigger
+   * Calculate fund report job for the specific day of month
    */
-  private shouldTrigger(
-    enabled: boolean,
-    scheduledTime: string,
-    currentTime: string,
-    currentDate: string,
-    lastTriggeredKey: keyof LastTriggered,
-    settingsJustChanged: boolean,
-  ): boolean {
-    if (!enabled) return false;
+  private calculateFundReportJob(
+    dayOfMonth: number,
+    timeStr: string,
+    timezone: string,
+  ): ScheduledJob | null {
+    const tz = timezone === 'system' || !timezone ? moment.tz.guess() : timezone;
+    const [hours, minutes] = timeStr.split(':').map(Number);
 
-    // Already triggered today
-    if (this.lastTriggered[lastTriggeredKey] === currentDate) {
-      return false;
+    const now = moment.tz(tz);
+    let target = moment.tz(tz).date(dayOfMonth).hours(hours).minutes(minutes).seconds(0).milliseconds(0);
+
+    // If the target date has passed this month, schedule for next month
+    if (target.isSameOrBefore(now)) {
+      target = target.add(1, 'month');
     }
 
-    // Exact match
-    if (scheduledTime === currentTime) {
-      return true;
-    }
+    const delay = target.diff(now);
+    const date = target.format('YYYY-MM-DD');
 
-    // Grace period: if settings just changed, allow triggering within 2 minutes
-    if (settingsJustChanged) {
-      const diff = this.getTimeDiffInMinutes(scheduledTime, currentTime);
-      if (diff <= 2) {
-        this.logger.log(`Grace period trigger: ${lastTriggeredKey} (diff: ${diff} min)`);
-        return true;
-      }
-    }
-
-    return false;
+    return {
+      type: 'fund',
+      name: 'fund-report',
+      jobId: `fund-${date}`,
+      delay,
+      data: { targetDate: date },
+    };
   }
 
-  private async checkAndScheduleJobs() {
+  /**
+   * Schedule a job with BullMQ
+   */
+  private async scheduleExecutionJob(job: ScheduledJob) {
     try {
-      const settings = await this.apiService.getAnnouncementSettings();
-
-      // Get current time in the configured timezone
-      const { hour: currentHour, minute: currentMinute, day: currentDay, time: currentTime, date: currentDate } =
-        this.getCurrentTimeInTimezone(settings.timezone);
-
-      // Prevent duplicate checks within the same minute
-      if (currentMinute === this.lastCheckedMinute) {
-        return;
-      }
-      this.lastCheckedMinute = currentMinute;
-
-      // Check if settings changed
-      const settingsJustChanged = this.lastSettingsUpdatedAt !== null &&
-        this.lastSettingsUpdatedAt !== settings.updatedAt;
-
-      if (settingsJustChanged) {
-        this.logger.log(`Settings changed (updatedAt: ${settings.updatedAt}), resetting last triggered times`);
-        this.lastTriggered = {}; // Reset all last triggered times
-      }
-      this.lastSettingsUpdatedAt = settings.updatedAt;
-
-      this.logger.log(`Checking schedules at ${currentTime} (timezone: ${settings.timezone || 'system'})${settingsJustChanged ? ' [settings changed]' : ''}`);
-
-      // Check duty reminder time
-      if (this.shouldTrigger(settings.ENABLE_WHATSAPP_BOT_DUTY_REPORT, settings.dutyReminderTime, currentTime, currentDate, 'duty', settingsJustChanged)) {
-        this.logger.log('Scheduling duty reminder job');
-        await this.whatsappQueue.add('duty-reminder', {}, { attempts: 3, backoff: 60000 });
-        this.lastTriggered.duty = currentDate;
-      }
-
-      // Check schedule reminder time
-      if (this.shouldTrigger(settings.ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER, settings.scheduleReminderTime, currentTime, currentDate, 'schedule', settingsJustChanged)) {
-        this.logger.log('Scheduling schedule reminder job');
-        await this.whatsappQueue.add('schedule-reminder', {}, { attempts: 3, backoff: 60000 });
-        this.lastTriggered.schedule = currentDate;
-      }
-
-      // Check assignment reminder time
-      if (this.shouldTrigger(settings.ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER, settings.assignmentReminderTime, currentTime, currentDate, 'assignment', settingsJustChanged)) {
-        this.logger.log('Scheduling assignment reminder job');
-        await this.whatsappQueue.add('assignment-reminder', {}, { attempts: 3, backoff: 60000 });
-        this.lastTriggered.assignment = currentDate;
-      }
-
-      // Check birthday reminder time
-      if (this.shouldTrigger(settings.ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER, settings.birthdayReminderTime, currentTime, currentDate, 'birthday', settingsJustChanged)) {
-        this.logger.log('Scheduling birthday check job');
-        await this.whatsappQueue.add('birthday-check', {}, { attempts: 3, backoff: 60000 });
-        this.lastTriggered.birthday = currentDate;
-      }
-
-      // Check fund report (specific day and time)
-      if (settings.ENABLE_WHATSAPP_BOT_FUND_REPORT && settings.fundReportDay === currentDay) {
-        if (this.shouldTrigger(true, settings.fundReportTime, currentTime, currentDate, 'fund', settingsJustChanged)) {
-          this.logger.log('Scheduling fund report job');
-          await this.whatsappQueue.add('fund-report', {}, { attempts: 3, backoff: 60000 });
-          this.lastTriggered.fund = currentDate;
+      const existingJob = await this.whatsappQueue.getJob(job.jobId);
+      if (existingJob) {
+        const scheduledAt = existingJob.timestamp + (existingJob.delay ?? 0);
+        if (scheduledAt > Date.now()) {
+          this.logger.debug(`Job ${job.jobId} already exists, skipping`);
+          return;
         }
+
+        this.logger.debug(`Job ${job.jobId} exists but is stale, removing before reapplying`);
+        await existingJob.remove();
       }
+
+      await this.whatsappQueue.add(
+        job.name,
+        job.data || {},
+        {
+          jobId: job.jobId,
+          delay: job.delay,
+          attempts: 3,
+          backoff: 60000,
+        },
+      );
+
+      const executeAt = new Date(Date.now() + job.delay);
+      this.logger.log(`Scheduled ${job.type} job (${job.jobId}) to execute at ${executeAt.toISOString()}`);
     } catch (error) {
-      this.logger.error('Error in scheduler check:', error);
+      this.logger.error(`Failed to schedule ${job.type} job:`, error);
+    }
+  }
+
+  private async upsertControlJob(
+    name: 'scheduler.reconcile' | 'scheduler.resync.all' | 'scheduler.plan-next',
+    data: Record<string, unknown>,
+    jobId: string,
+  ) {
+    const existingJob = await this.controlQueue.getJob(jobId);
+    if (existingJob) {
+      this.logger.debug(`Control job ${jobId} already queued, skipping`);
+      return;
+    }
+
+    await this.controlQueue.add(name, data, {
+      jobId,
+      attempts: 3,
+      backoff: 60000,
+      removeOnComplete: true,
+      removeOnFail: 100,
+    });
+  }
+
+  private async scheduleNextOccurrence(type: ReminderType) {
+    const settings = await this.apiService.getAnnouncementSettings();
+    let job: ScheduledJob | null = null;
+
+    switch (type) {
+      case 'duty':
+        if (settings.ENABLE_WHATSAPP_BOT_DUTY_REPORT) {
+          job = this.calculateLeadReminderJob(
+            'duty',
+            settings.dutyReminderLeadTime,
+            settings.timezone,
+            settings.dutyReminderLeadDays ?? 0,
+          );
+        }
+        break;
+      case 'schedule':
+        if (settings.ENABLE_WHATSAPP_BOT_SUBJECT_SCHEDULE_REMINDER) {
+          job = this.calculateLeadReminderJob(
+            'schedule',
+            settings.scheduleReminderLeadTime,
+            settings.timezone,
+            settings.scheduleReminderLeadDays ?? 0,
+          );
+        }
+        break;
+      case 'assignment':
+        if (settings.ENABLE_WHATSAPP_BOT_ASSIGNMENT_REMINDER) {
+          job = this.calculateLeadReminderJob(
+            'assignment',
+            settings.assignmentReminderLeadTime,
+            settings.timezone,
+            settings.assignmentReminderLeadDays ?? 0,
+          );
+        }
+        break;
+      case 'birthday':
+        if (settings.ENABLE_WHATSAPP_BOT_BIRTHDAY_REMINDER) {
+          job = this.calculateDailyJob('birthday', settings.birthdayReminderTime, settings.timezone);
+        }
+        break;
+      case 'fund':
+        if (settings.ENABLE_WHATSAPP_BOT_FUND_REPORT) {
+          job = this.calculateFundReportJob(
+            settings.fundReportDay,
+            settings.fundReportTime,
+            settings.timezone,
+          );
+        }
+        break;
+    }
+
+    if (job) {
+      await this.scheduleExecutionJob(job);
     }
   }
 }

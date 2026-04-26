@@ -5,6 +5,7 @@ import { BaileysModule } from './baileys/baileys.module';
 import { BullModule } from '@nestjs/bullmq';
 import { ConfigModule } from '@nestjs/config';
 import { AnnouncementsModule } from './announcements/announcements.module';
+import { NotificationsModule } from './notifications/notifications.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { AnnouncementsModule } from './announcements/announcements.module';
     }),
 
     AnnouncementsModule,
+    NotificationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

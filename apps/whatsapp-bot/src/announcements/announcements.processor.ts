@@ -3,6 +3,7 @@ import { Logger } from '@nestjs/common';
 import { Job } from 'bullmq';
 import { BaileysService } from '../baileys/baileys.service';
 import { ApiService } from '../api/api.service';
+import { AnnouncementsScheduler } from './announcements.scheduler';
 
 @Processor('whatsapp', {
   concurrency: 3, // Process up to 3 jobs simultaneously
@@ -13,6 +14,7 @@ export class AnnouncementsProcessor extends WorkerHost {
   constructor(
     private readonly baileysService: BaileysService,
     private readonly apiService: ApiService,
+    private readonly scheduler: AnnouncementsScheduler,
   ) {
     super();
   }
@@ -35,7 +37,9 @@ export class AnnouncementsProcessor extends WorkerHost {
           this.logger.debug('Duty reminders disabled');
           return;
         }
-        await this.sendDutyReminder(settings);
+        const targetDate = job.data?.targetDate as string | undefined;
+        await this.sendDutyReminder(settings, targetDate);
+        await this.scheduler.enqueuePlanNext('duty', 'job.completed');
         break;
       }
 
@@ -44,7 +48,9 @@ export class AnnouncementsProcessor extends WorkerHost {
           this.logger.debug('Schedule reminders disabled');
           return;
         }
-        await this.sendScheduleReminder(settings);
+        const targetDate = job.data?.targetDate as string | undefined;
+        await this.sendScheduleReminder(settings, targetDate);
+        await this.scheduler.enqueuePlanNext('schedule', 'job.completed');
         break;
       }
 
@@ -53,7 +59,9 @@ export class AnnouncementsProcessor extends WorkerHost {
           this.logger.debug('Assignment reminders disabled');
           return;
         }
-        await this.sendAssignmentReminder(settings);
+        const targetDate = job.data?.targetDate as string | undefined;
+        await this.sendAssignmentReminder(settings, targetDate);
+        await this.scheduler.enqueuePlanNext('assignment', 'job.completed');
         break;
       }
 
@@ -63,6 +71,7 @@ export class AnnouncementsProcessor extends WorkerHost {
           return;
         }
         await this.sendBirthdayMessages(settings);
+        await this.scheduler.enqueuePlanNext('birthday', 'job.completed');
         break;
       }
 
@@ -72,6 +81,7 @@ export class AnnouncementsProcessor extends WorkerHost {
           return;
         }
         await this.sendFundReport(settings);
+        await this.scheduler.enqueuePlanNext('fund', 'job.completed');
         break;
       }
 
@@ -83,21 +93,25 @@ export class AnnouncementsProcessor extends WorkerHost {
   private async sendDutyReminder(settings: {
     announcementGroupJid: string | null;
     dutyPersonalizedMessage: string;
-  }): Promise<void> {
+  }, targetDate?: string): Promise<void> {
     if (!settings.announcementGroupJid) {
       this.logger.warn('No announcement group JID configured');
       return;
     }
 
     try {
-      const duties = await this.apiService.getTodayDuties();
+      const duties = targetDate
+        ? await this.apiService.getDutiesByDate(targetDate)
+        : await this.apiService.getTodayDuties();
 
       if (duties.length === 0) {
         this.logger.debug('No duties scheduled for today');
         return;
       }
 
-      const dayName = new Date().toLocaleDateString('id-ID', { weekday: 'long' });
+      const dayName = targetDate
+        ? new Date(targetDate).toLocaleDateString('id-ID', { weekday: 'long' })
+        : new Date().toLocaleDateString('id-ID', { weekday: 'long' });
 
       // Send group announcement
       let groupMessage = `🧹 *Jadwal Piket Hari ${dayName}*\n\n`;
@@ -136,23 +150,28 @@ export class AnnouncementsProcessor extends WorkerHost {
     }
   }
 
-  private async sendScheduleReminder(settings: {
-    announcementGroupJid: string | null;
-  }): Promise<void> {
+  private async sendScheduleReminder(
+    settings: { announcementGroupJid: string | null },
+    targetDate?: string,
+  ): Promise<void> {
     if (!settings.announcementGroupJid) {
       this.logger.warn('No announcement group JID configured');
       return;
     }
 
     try {
-      const schedules = await this.apiService.getTodaySchedule();
+      const schedules = targetDate
+        ? await this.apiService.getScheduleByDate(targetDate)
+        : await this.apiService.getTodaySchedule();
 
       if (schedules.length === 0) {
-        this.logger.debug('No schedule for today');
+        this.logger.debug('No schedule for target date');
         return;
       }
 
-      const dayName = new Date().toLocaleDateString('id-ID', { weekday: 'long' });
+      const dayName = targetDate
+        ? new Date(targetDate).toLocaleDateString('id-ID', { weekday: 'long' })
+        : new Date().toLocaleDateString('id-ID', { weekday: 'long' });
       let message = `📚 *Jadwal Pelajaran Hari ${dayName}*\n\n`;
 
       schedules.forEach((s, idx) => {
@@ -177,14 +196,14 @@ export class AnnouncementsProcessor extends WorkerHost {
 
   private async sendAssignmentReminder(settings: {
     announcementGroupJid: string | null;
-  }): Promise<void> {
+  }, targetDate?: string): Promise<void> {
     if (!settings.announcementGroupJid) {
       this.logger.warn('No announcement group JID configured');
       return;
     }
 
     try {
-      const assignments = await this.apiService.getPendingAssignments();
+      const assignments = await this.apiService.getPendingAssignments(targetDate);
 
       if (assignments.length === 0) {
         this.logger.debug('No pending assignments');
